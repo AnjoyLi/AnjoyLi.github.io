@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>平衡二叉树的基本操作 | Hexo</title>
+  <meta name="keywords" content=" 树 , 平衡二叉树 ">
+  <meta name="description" content="平衡二叉树的基本操作 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="文章分类">
+<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-12T04:50:42.000Z">
+<meta property="article:modified_time" content="2020-06-12T04:53:45.435Z">
+<meta property="article:author" content="lggg">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+</div>
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>lggg</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/lgnbOVO" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/weixin_43871885" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:1589631311@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1589631311&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=504459049" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(7)</small></div></li>
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据结构">数据结构<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面向对象">面向对象<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="7">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>BF与SPFA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>c++面向对象</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dijistar</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oj作业</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>三分</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态规划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>图论</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>寒假训练</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>平衡二叉树</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件读取</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>树</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>链表</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/Bellman-Ford%E4%B8%8ESPFA/"
+           data-tag="图论,BF与SPFA"
+           data-author="" >
+            <span class="post-title" title="Bellman-Ford与SPFA">Bellman-Ford与SPFA</span>
+            <span class="post-date" title="2020-06-12 14:25:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 面向对象 "
+           href="/2020/06/12/c++%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"
+           data-tag="链表,文件读取,c++面向对象"
+           data-author="" >
+            <span class="post-title" title="学生信息管理系统">学生信息管理系统</span>
+            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
+           data-tag="树,平衡二叉树"
+           data-author="" >
+            <span class="post-title" title="平衡二叉树的基本操作">平衡二叉树的基本操作</span>
+            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
+           data-tag="寒假训练,动态规划"
+           data-author="" >
+            <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/dijstra/"
+           data-tag="图论,dijistar"
+           data-author="" >
+            <span class="post-title" title="dijistar">dijistar</span>
+            <span class="post-date" title="2020-06-12 12:58:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/11/%E4%B8%89%E5%88%86/"
+           data-tag="三分,寒假训练"
+           data-author="" >
+            <span class="post-title" title="三分">三分</span>
+            <span class="post-date" title="2020-06-11 16:44:50">2020/06/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-平衡二叉树基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">平衡二叉树的基本操作</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="数据结构">数据结构</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">树</a>
+            
+            <a class="color1">平衡二叉树</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2020-06-12 14:19:13'>2020-06-12 14:16</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                Comment:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://www.dotcpp.com/oj/problem1713.html" target="_blank" rel="noopener">题目链接</a></p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>平衡二叉树又称AVL树，它是一种具有平衡因子的特殊二叉排序树。平衡二叉树或者是一棵空树，或者是具有以下几条性质的二叉树： </p>
+<ol>
+<li><p>若它的左子树不空，则左子树上所有结点的值均小于它的根节点的值； </p>
+</li>
+<li><p>若它的右子树不空，则右子树上所有结点的值均大于它的根节点的值； </p>
+</li>
+<li><p>它的左右子树也分别为平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。 </p>
+</li>
+</ol>
+<p>若将二叉树上结点的平衡因子定义为该结点的左子树深度减去它的右子树的深度，则平衡二叉树上的所有结点的平衡因子只可能为-1、0和1。只要二叉树上有一个结点的平衡因子的绝对值大于1，则这棵二叉树就是不平衡的。 </p>
+<p>通过平衡二叉树的性质不难得知，其插入、删除、查询都操作的<strong>时间复杂度均为O(log2n)</strong>。</p>
+<p>解释一下右转<br><img src="https://img-blog.csdnimg.cn/20191209143746935.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_R</span><span class="params">(lg** root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *t=(*root)-&gt;left;</span><br><span class="line">    (*root)-&gt;left=t-&gt;right;</span><br><span class="line">    t-&gt;right=(*root);</span><br><span class="line">    (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">    t-&gt;h=lg_geth(t);</span><br><span class="line">    *root=t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>左转类似。</p>
+<p>总代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> d,h;			<span class="comment">//h为高度，用高度判断当前子树是否平衡，d为存储的数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">right</span>;</span></span><br><span class="line">&#125;lg;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>	<span class="comment">//返回最大值的函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">h</span><span class="params">(lg *tree)</span>			<span class="comment">//返回当前节点的高度</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tree==<span class="literal">NULL</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> tree-&gt;h;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lg_geth</span><span class="params">(lg *root)</span>	<span class="comment">//求当前节点的高度（左右子树的最高高度+1）</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> max(h(root-&gt;left),h(root-&gt;right))+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lg_getp</span><span class="params">(lg *root)</span>	<span class="comment">//求当前节点的平衡因子（左子树高度减去右子树高度）</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> h(root-&gt;left)-h(root-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_R</span><span class="params">(lg** root)</span>	<span class="comment">//树不平衡右转</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *t=(*root)-&gt;left;</span><br><span class="line">    (*root)-&gt;left=t-&gt;right;</span><br><span class="line">    t-&gt;right=(*root);</span><br><span class="line">    (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">    t-&gt;h=lg_geth(t);</span><br><span class="line">    *root=t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_L</span><span class="params">(lg** root)</span>	<span class="comment">//左转</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *t=(*root)-&gt;right;</span><br><span class="line">    (*root)-&gt;right=t-&gt;left;</span><br><span class="line">    t-&gt;left=(*root);</span><br><span class="line">    (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">    t-&gt;h=lg_geth(t);</span><br><span class="line">    *root=t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_insert</span><span class="params">(<span class="keyword">int</span> w,lg** root)</span>	<span class="comment">//插入节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*root==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        *root=(lg*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(lg));</span><br><span class="line">        (*root)-&gt;d=w;</span><br><span class="line">        (*root)-&gt;h=<span class="number">1</span>;</span><br><span class="line">        (*root)-&gt;left=<span class="literal">NULL</span>;</span><br><span class="line">        (*root)-&gt;right=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((*root)-&gt;d&gt;w)</span><br><span class="line">    &#123;</span><br><span class="line">        lg_insert(w,&amp;((*root)-&gt;left));</span><br><span class="line">        (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">        <span class="keyword">if</span>(lg_getp(*root)==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(lg_getp((*root)-&gt;left)==<span class="number">1</span>)lg_R(&amp;(*root));</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(lg_getp((*root)-&gt;left)==<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                lg_L(&amp;(*root)-&gt;left);</span><br><span class="line">                lg_R(&amp;(*root));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        lg_insert(w,&amp;(*root)-&gt;right);</span><br><span class="line">        (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">        <span class="keyword">if</span>(lg_getp((*root))==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(lg_getp((*root)-&gt;right)==<span class="number">1</span>)lg_L(&amp;(*root));</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(lg_getp((*root)-&gt;right)==<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                lg_R(&amp;(*root)-&gt;right);</span><br><span class="line">                lg_L(&amp;(*root));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lg_search</span><span class="params">(lg *root,<span class="keyword">int</span> num)</span>	<span class="comment">//递归查找节点是否存在</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root==<span class="literal">NULL</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;d==num)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;d&lt;num)<span class="keyword">return</span> lg_search(root-&gt;right,num);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> lg_search(root-&gt;left,num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *root=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> n,m,w,num;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        lg_insert(w,&amp;root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,lg_search(root,num));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: 'lgnbOvO.github.io',
+            owner: 'lgnbOvO',
+            admin: ['lgnbOvO'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    OvO
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
