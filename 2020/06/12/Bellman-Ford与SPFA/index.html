@@ -21,7 +21,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -426,12 +426,103 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="BF"><a href="#BF" class="headerlink" title="BF"></a>BF</h1><p>Dijkstra算法可以很好的解决无负权图，但如果出现了负权边，便会失效。<br>首先，图的任意一条最短路径既不能包含负权回路，也不会包含正权回路，因此它最多包含|v|-1条边。，如果把源点S作为一棵树的根结点，把其他结点按照最短路径的结点顺序连接，就会生成一棵最短路径树。<br>主要思路如下（伪代码）复杂度为（V*E）：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)<span class="comment">//n为顶点数</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(each edge u-&gt;v)<span class="comment">//每轮操作遍历所有边</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(d[u]+length[u-&gt;v]&lt;d[v])<span class="comment">//以u为中介点可以使的d[v]更小</span></span><br><span class="line">            &#123;</span><br><span class="line">                d[v]=d[u]+length[u-&gt;v];<span class="comment">//松弛操作</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="cpp">for(i=0;i&lt;n-1;i++)//n为顶点数
+    {
+        for(each edge u-&gt;v)//每轮操作遍历所有边
+        {
+            if(d[u]+length[u-&gt;v]&lt;d[v])//以u为中介点可以使的d[v]更小
+            {
+                d[v]=d[u]+length[u-&gt;v];//松弛操作
+            }
+        }
+    }</code></pre>
 <p>邻接表的代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v,dis; <span class="comment">//v为邻接边的目标定点，dis为邻接边的边权</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;node&gt; aj[maxx];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> d[maxx]; <span class="comment">//起点到达各点的最短路径长度</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">bellman</span><span class="params">(<span class="keyword">int</span> s)</span> <span class="comment">//s为源点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fill(d,d+maxx,INF);</span><br><span class="line">    d[s]=<span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">0</span>;u&lt;n;u++)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;aj[u].size();u++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">int</span> v=aj[u][j].v;<span class="comment">//邻接边的顶点</span></span><br><span class="line">                <span class="keyword">int</span> dis=aj[u][j].dis;<span class="comment">//邻接边的边权</span></span><br><span class="line">                <span class="keyword">if</span>(d[u]+dis&lt;d[v])   <span class="comment">//以u为中介点使d[v]更小</span></span><br><span class="line">                    d[v]=d[u]+dis; <span class="comment">//松弛</span></span><br><span class="line">            &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//判断负权的代码</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> u=<span class="number">0</span>;u&lt;n;u++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;aj[u].size();j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=aj[u][j].v;</span><br><span class="line">            <span class="keyword">int</span> dis=aj[u][j].dis;</span><br><span class="line">            <span class="keyword">if</span>(d[u]+dis&lt;d[v]) <span class="comment">//如果仍然可以被松弛</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//有负环</span></span><br><span class="line">            &#125;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="cpp">struct node
+{
+    int v,dis; //v为邻接边的目标定点，dis为邻接边的边权
+};
 
+vector&lt;node&gt; aj[maxx];
+int n;
+int d[maxx]; //起点到达各点的最短路径长度
+
+bool bellman(int s) //s为源点
+{
+    fill(d,d+maxx,INF);
+    d[s]=0; 
+    for(int i=0;i&lt;n-1;i++)
+        for(int u=0;u&lt;n;u++)
+            for(int j=0;j&lt;aj[u].size();u++)
+            {
+                int v=aj[u][j].v;//邻接边的顶点
+                int dis=aj[u][j].dis;//邻接边的边权
+                if(d[u]+dis&lt;d[v])   //以u为中介点使d[v]更小
+                    d[v]=d[u]+dis; //松弛
+            }
+
+    //判断负权的代码
+    for(int u=0;u&lt;n;u++)
+        for(int j=0;j&lt;aj[u].size();j++)
+        {
+            int v=aj[u][j].v;
+            int dis=aj[u][j].dis;
+            if(d[u]+dis&lt;d[v]) //如果仍然可以被松弛
+            {
+                return false; //有负环
+            }
+
+        }
+
+    return true；
+}
+</code></pre>
 <h1 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h1><p>Bellman-Ford算法时间复杂度过高，优化后被称为SPFA算法。<br>代码思路如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v,dis; <span class="comment">//v为邻接边的目标定点，dis为邻接边的边权</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;node&gt; aj[maxx];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> d[maxx]; <span class="comment">//起点到达各点的最短路径长度</span></span><br><span class="line"><span class="keyword">bool</span> inq[maxx]; <span class="comment">//顶点是否在队列中</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(inq,<span class="literal">false</span>,<span class="keyword">sizeof</span>(inq));</span><br><span class="line">    <span class="built_in">memset</span>(num,<span class="number">0</span>,<span class="keyword">sizeof</span>(num));</span><br><span class="line">    fill(d,d+maxx,INF);</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">    q.push(s); <span class="comment">//源点入队</span></span><br><span class="line">    inq[s]=<span class="literal">true</span>; <span class="comment">//原点已入队</span></span><br><span class="line">    num[s]++; <span class="comment">//入队次数加1</span></span><br><span class="line">    d[s]=<span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span>(!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> u=q.front();</span><br><span class="line">        q.pop();</span><br><span class="line">        inq[u]=<span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;aj[u].size();j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v=aj[u][j].v;</span><br><span class="line">            <span class="keyword">int</span> dis=aj[u][j].dis;</span><br><span class="line">            <span class="keyword">if</span>(d[u]+dis&lt;d[v])</span><br><span class="line">            &#123;</span><br><span class="line">                d[v]=d[u]+dis;</span><br><span class="line">                <span class="keyword">if</span>(!inq[v])<span class="comment">//如果v不在队列中</span></span><br><span class="line">                &#123;</span><br><span class="line">                    q.push(v);</span><br><span class="line">                    inq[v]=<span class="literal">true</span>;</span><br><span class="line">                    num[v]++;</span><br><span class="line">                    <span class="keyword">if</span>(num[v]&gt;=n)<span class="comment">//超过了n</span></span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//有可达负环</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="cpp">struct node
+{
+    int v,dis; //v为邻接边的目标定点，dis为邻接边的边权
+};
+
+vector&lt;node&gt; aj[maxx];
+int n;
+int d[maxx]; //起点到达各点的最短路径长度
+bool inq[maxx]; //顶点是否在队列中
+
+bool SPFA(int s)
+{
+    memset(inq,false,sizeof(inq));
+    memset(num,0,sizeof(num));
+    fill(d,d+maxx,INF);
+    queue&lt;int&gt; q;
+    q.push(s); //源点入队
+    inq[s]=true; //原点已入队
+    num[s]++; //入队次数加1
+    d[s]=0;  
+    while(!q.empty())
+    {
+        int u=q.front();
+        q.pop();
+        inq[u]=false;
+        for(int j=0;j&lt;aj[u].size();j++)
+        {
+            int v=aj[u][j].v;
+            int dis=aj[u][j].dis;
+            if(d[u]+dis&lt;d[v])
+            {
+                d[v]=d[u]+dis;
+                if(!inq[v])//如果v不在队列中
+                {
+                    q.push(v);
+                    inq[v]=true;
+                    num[v]++;
+                    if(num[v]&gt;=n)//超过了n
+                        return false; //有可达负环
+                }
+            }
+        }
+    }
+    return true;
+
+}</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
@@ -575,7 +666,7 @@
         border-right: 1px solid #C3CCD0;
         text-align: right;
         color: #AAA;
-        background-color: #fafafa;
+        background-color: ;
     }
     .pre-numbering.widther {
         width: 35px;

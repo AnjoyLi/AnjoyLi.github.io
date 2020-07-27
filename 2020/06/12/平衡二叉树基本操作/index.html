@@ -21,7 +21,7 @@
 
 <link href="/css/style.css?v=1.1.0" rel="stylesheet">
 
-<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
 
 <link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
 
@@ -438,11 +438,126 @@
 <p>若将二叉树上结点的平衡因子定义为该结点的左子树深度减去它的右子树的深度，则平衡二叉树上的所有结点的平衡因子只可能为-1、0和1。只要二叉树上有一个结点的平衡因子的绝对值大于1，则这棵二叉树就是不平衡的。 </p>
 <p>通过平衡二叉树的性质不难得知，其插入、删除、查询都操作的<strong>时间复杂度均为O(log2n)</strong>。</p>
 <p>解释一下右转<br><img src="https://img-blog.csdnimg.cn/20191209143746935.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_R</span><span class="params">(lg** root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *t=(*root)-&gt;left;</span><br><span class="line">    (*root)-&gt;left=t-&gt;right;</span><br><span class="line">    t-&gt;right=(*root);</span><br><span class="line">    (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">    t-&gt;h=lg_geth(t);</span><br><span class="line">    *root=t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="cpp">void lg_R(lg** root)
+{
+    lg *t=(*root)-&gt;left;
+    (*root)-&gt;left=t-&gt;right;
+    t-&gt;right=(*root);
+    (*root)-&gt;h=lg_geth((*root));
+    t-&gt;h=lg_geth(t);
+    *root=t;
+}</code></pre>
 <p>左转类似。</p>
 <p>总代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> d,h;			<span class="comment">//h为高度，用高度判断当前子树是否平衡，d为存储的数据</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">node</span> *<span class="title">right</span>;</span></span><br><span class="line">&#125;lg;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span>	<span class="comment">//返回最大值的函数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a&gt;b?a:b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">h</span><span class="params">(lg *tree)</span>			<span class="comment">//返回当前节点的高度</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tree==<span class="literal">NULL</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> tree-&gt;h;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lg_geth</span><span class="params">(lg *root)</span>	<span class="comment">//求当前节点的高度（左右子树的最高高度+1）</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> max(h(root-&gt;left),h(root-&gt;right))+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lg_getp</span><span class="params">(lg *root)</span>	<span class="comment">//求当前节点的平衡因子（左子树高度减去右子树高度）</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> h(root-&gt;left)-h(root-&gt;right);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_R</span><span class="params">(lg** root)</span>	<span class="comment">//树不平衡右转</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *t=(*root)-&gt;left;</span><br><span class="line">    (*root)-&gt;left=t-&gt;right;</span><br><span class="line">    t-&gt;right=(*root);</span><br><span class="line">    (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">    t-&gt;h=lg_geth(t);</span><br><span class="line">    *root=t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_L</span><span class="params">(lg** root)</span>	<span class="comment">//左转</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *t=(*root)-&gt;right;</span><br><span class="line">    (*root)-&gt;right=t-&gt;left;</span><br><span class="line">    t-&gt;left=(*root);</span><br><span class="line">    (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">    t-&gt;h=lg_geth(t);</span><br><span class="line">    *root=t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lg_insert</span><span class="params">(<span class="keyword">int</span> w,lg** root)</span>	<span class="comment">//插入节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(*root==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        *root=(lg*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(lg));</span><br><span class="line">        (*root)-&gt;d=w;</span><br><span class="line">        (*root)-&gt;h=<span class="number">1</span>;</span><br><span class="line">        (*root)-&gt;left=<span class="literal">NULL</span>;</span><br><span class="line">        (*root)-&gt;right=<span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((*root)-&gt;d&gt;w)</span><br><span class="line">    &#123;</span><br><span class="line">        lg_insert(w,&amp;((*root)-&gt;left));</span><br><span class="line">        (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">        <span class="keyword">if</span>(lg_getp(*root)==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(lg_getp((*root)-&gt;left)==<span class="number">1</span>)lg_R(&amp;(*root));</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(lg_getp((*root)-&gt;left)==<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                lg_L(&amp;(*root)-&gt;left);</span><br><span class="line">                lg_R(&amp;(*root));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        lg_insert(w,&amp;(*root)-&gt;right);</span><br><span class="line">        (*root)-&gt;h=lg_geth((*root));</span><br><span class="line">        <span class="keyword">if</span>(lg_getp((*root))==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(lg_getp((*root)-&gt;right)==<span class="number">1</span>)lg_L(&amp;(*root));</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(lg_getp((*root)-&gt;right)==<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                lg_R(&amp;(*root)-&gt;right);</span><br><span class="line">                lg_L(&amp;(*root));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lg_search</span><span class="params">(lg *root,<span class="keyword">int</span> num)</span>	<span class="comment">//递归查找节点是否存在</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(root==<span class="literal">NULL</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;d==num)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(root-&gt;d&lt;num)<span class="keyword">return</span> lg_search(root-&gt;right,num);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> lg_search(root-&gt;left,num);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lg *root=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">int</span> n,m,w,num;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">        lg_insert(w,&amp;root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;num);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,lg_search(root,num));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="cpp">#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+typedef struct node
+{
+    int d,h;            //h为高度，用高度判断当前子树是否平衡，d为存储的数据
+    struct node *left;
+    struct node *right;
+}lg;
+int max(int a,int b)    //返回最大值的函数
+{
+    return a&gt;b?a:b;
+}
+int h(lg *tree)            //返回当前节点的高度
+{
+    if(tree==NULL)return 0;
+    else return tree-&gt;h;
+}
+int lg_geth(lg *root)    //求当前节点的高度（左右子树的最高高度+1）
+{
+    return max(h(root-&gt;left),h(root-&gt;right))+1;
+}
+int lg_getp(lg *root)    //求当前节点的平衡因子（左子树高度减去右子树高度）
+{
+    return h(root-&gt;left)-h(root-&gt;right);
+}
+void lg_R(lg** root)    //树不平衡右转
+{
+    lg *t=(*root)-&gt;left;
+    (*root)-&gt;left=t-&gt;right;
+    t-&gt;right=(*root);
+    (*root)-&gt;h=lg_geth((*root));
+    t-&gt;h=lg_geth(t);
+    *root=t;
+}
+void lg_L(lg** root)    //左转
+{
+    lg *t=(*root)-&gt;right;
+    (*root)-&gt;right=t-&gt;left;
+    t-&gt;left=(*root);
+    (*root)-&gt;h=lg_geth((*root));
+    t-&gt;h=lg_geth(t);
+    *root=t;
+}
+void lg_insert(int w,lg** root)    //插入节点
+{
+    if(*root==NULL)
+    {
+        *root=(lg*)malloc(sizeof(lg));
+        (*root)-&gt;d=w;
+        (*root)-&gt;h=1;
+        (*root)-&gt;left=NULL;
+        (*root)-&gt;right=NULL;
+        return ;
+    }
+    if((*root)-&gt;d&gt;w)
+    {
+        lg_insert(w,&amp;((*root)-&gt;left));
+        (*root)-&gt;h=lg_geth((*root));
+        if(lg_getp(*root)==2)
+        {
+            if(lg_getp((*root)-&gt;left)==1)lg_R(&amp;(*root));
+            else if(lg_getp((*root)-&gt;left)==-1)
+            {
+                lg_L(&amp;(*root)-&gt;left);
+                lg_R(&amp;(*root));
+            }
+        }
+    }
+    else
+    {
+        lg_insert(w,&amp;(*root)-&gt;right);
+        (*root)-&gt;h=lg_geth((*root));
+        if(lg_getp((*root))==2)
+        {
+            if(lg_getp((*root)-&gt;right)==1)lg_L(&amp;(*root));
+            else if(lg_getp((*root)-&gt;right)==-1)
+            {
+                lg_R(&amp;(*root)-&gt;right);
+                lg_L(&amp;(*root));
+            }
+        }
+    }
+}
+int lg_search(lg *root,int num)    //递归查找节点是否存在
+{
+    if(root==NULL)return 0;
+    if(root-&gt;d==num)return 1;
+    if(root-&gt;d&lt;num)return lg_search(root-&gt;right,num);
+    else return lg_search(root-&gt;left,num);
+}
+int main()
+{
+    lg *root=NULL;
+    int n,m,w,num;
+    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
+    while(n--)
+    {
+        scanf(&quot;%d&quot;,&amp;w);
+        lg_insert(w,&amp;root);
+    }
+    while(m--)
+    {
+        scanf(&quot;%d&quot;,&amp;num);
+        printf(&quot;%d &quot;,lg_search(root,num));
+    }
+    puts(&quot;&quot;);
+    return 0;
+}
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
@@ -586,7 +701,7 @@
         border-right: 1px solid #C3CCD0;
         text-align: right;
         color: #AAA;
-        background-color: #fafafa;
+        background-color: ;
     }
     .pre-numbering.widther {
         width: 35px;
