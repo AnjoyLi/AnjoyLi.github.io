@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>dijistar | Hexo</title>
-  <meta name="keywords" content=" 图论 , dijistar ">
-  <meta name="description" content="dijistar | Hexo">
+  <title>CRUD操作及配置解析 | Hexo</title>
+  <meta name="keywords" content=" Mybatis ">
+  <meta name="description" content="CRUD操作及配置解析 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章分类">
@@ -366,9 +366,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-dijstra" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-CRUD操作及配置解析" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">dijistar</h1>
+        <h1 class="article-title">CRUD操作及配置解析</h1>
     
     <div class="article-meta">
         
@@ -378,7 +378,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="算法">算法</a>
+            <a  data-rel="JavaWeb">JavaWeb</a>
             
         </span>
         
@@ -386,16 +386,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">图论</a>
-            
-            <a class="color4">dijistar</a>
+            <a class="color3">Mybatis</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-06-12 14:09:53'>2020-06-12 12:58</time>
+            Created At : <time class="date" title='Updated At: 2020-07-28 17:42:17'>2020-07-28 16:56</time>
         
     </div>
     <div class="article-meta">
@@ -428,7 +426,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dijkstra算法简介"><span class="toc-text">dijkstra算法简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法特点"><span class="toc-text">算法特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#算法思路-单源点"><span class="toc-text">算法思路(单源点)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dijkstra算法例题pat-1003-Emergency-25-分"><span class="toc-text">dijkstra算法例题pat 1003 Emergency (25 分)</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CRUD（增删查改）操作"><span class="toc-text">CRUD（增删查改）操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#select"><span class="toc-text">select</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#insert"><span class="toc-text">insert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#update"><span class="toc-text">update</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#delete"><span class="toc-text">delete</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模糊查询"><span class="toc-text">模糊查询</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置解析"><span class="toc-text">配置解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心配置文件"><span class="toc-text">核心配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#environments元素"><span class="toc-text">environments元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mappers元素"><span class="toc-text">mappers元素</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Properties优化"><span class="toc-text">Properties优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#typeAliases优化"><span class="toc-text">typeAliases优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他配置浏览"><span class="toc-text">其他配置浏览</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -444,93 +442,286 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="dijkstra算法简介"><a href="#dijkstra算法简介" class="headerlink" title="dijkstra算法简介"></a>dijkstra算法简介</h1><h2 id="算法特点"><a href="#算法特点" class="headerlink" title="算法特点"></a>算法特点</h2><p>迪科斯彻算法使用了广度优先搜索解决赋权有向图或者无向图的单源最短路径问题，算法最终得到一个最短路径树。该算法常用于路由算法或者作为其他图算法的一个子模块。</p>
-<h2 id="算法思路-单源点"><a href="#算法思路-单源点" class="headerlink" title="算法思路(单源点)"></a>算法思路(单源点)</h2><p>Dijkstra算法采用的是一种贪心的策略，声明一个数组d来保存源点到各个顶点的最短距离和一个保存已经找到了最短路径的顶点的集合：d，初始时，原点 s 的路径权重被赋为 inf(比较大的一个数)；初始化，遍历源点能到的点u，更新d[u]（如果能到肯定&lt;inf）；初始化后，再次遍历能到达的点u，通过u中间点遍历其余点v，若d[u]+g[u][v]&lt;d[v],则更新d[v]，遍历结束，数组d即为最终源点到达其余点的最短距离。</p>
-<h1 id="dijkstra算法例题pat-1003-Emergency-25-分"><a href="#dijkstra算法例题pat-1003-Emergency-25-分" class="headerlink" title="dijkstra算法例题pat 1003 Emergency (25 分)"></a>dijkstra算法例题pat 1003 Emergency (25 分)</h1><p>As an emergency rescue team leader of a city, you are given a special map of your country. The map shows several scattered cities connected by some roads. Amount of rescue teams in each city and the length of each road between any pair of cities are marked on the map. When there is an emergency call to you from some other city, your job is to lead your men to the place as quickly as possible, and at the mean time, call up as many hands on the way as possible.</p>
-<p><strong>Input Specification:</strong><br>Each input file contains one test case. For each test case, the first line contains 4 positive integers: N (≤500) - the number of cities (and the cities are numbered from 0 to N−1), M - the number of roads, C​1​​ and C​2- the cities that you are currently in and that you must save, respectively. The next line contains N integers, where the i-th integer is the number of rescue teams in the i-th city. Then M lines follow, each describes a road with three integers c1​​ , c​2 and L, which are the pair of cities connected by a road and the length of that road, respectively. It is guaranteed that there exists at least one path from C1 to C​2​​ .</p>
-<p><strong>Output Specification:</strong><br>For each test case, print in one line two numbers: the number of different shortest paths between C​1 and C2, and the maximum amount of rescue teams you can possibly gather. All the numbers in a line must be separated by exactly one space, and there is no extra spaceallowed at the end of a line.</p>
-<p><strong>Sample Input:</strong><br>5 6 0 2<br>1 2 1 5 3<br>0 1 1<br>0 2 2<br>0 3 1<br>1 2 1<br>2 4 1<br>3 4 1<br><strong>Sample Output:</strong><br>2 4</p>
-<p>代码（注释）：</p>
-<pre><code class="cpp">//无向图
-#include &lt;cstdio&gt;
-#include &lt;iostream&gt;
-#include &lt;algorithm&gt;
-#include &lt;cstring&gt;
-#include &lt;vector&gt;
-#include &lt;queue&gt;
-using namespace std;
-const int maxx=510;  //最大顶点数
-const int inf =1e9;   //无连通的边
-int n,m,st,ed,g[maxx][maxx],weight[maxx]; //weight为点权
-int d[maxx],w[maxx],num[maxx]; //d记录最短距离，w记录最短路径的最大点权之和，num记录最短路径数
-bool vis[maxx]={false}; //记录该点是否访问
+        <h1 id="CRUD（增删查改）操作"><a href="#CRUD（增删查改）操作" class="headerlink" title="CRUD（增删查改）操作"></a>CRUD（增删查改）操作</h1><h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><ul>
+<li>select标签是mybatis中最常用的标签之一</li>
+<li>select语句又很多属性可以详细配置每一条SQL语句<ul>
+<li>SQL语句返回值类型。【完整的类名或者别名】</li>
+<li>传入SQL语句的参数类型 。【万能的Map，可以多尝试使用】</li>
+<li>命名空间中唯一的标识符</li>
+<li>接口中的方法名与映射文件中的SQL语句ID 一一对应</li>
+<li>id</li>
+<li>parameterType</li>
+<li>resultType   </li>
+</ul>
+</li>
+</ul>
+<p><strong>例如：根据用户名查询用户</strong></p>
+<ol>
+<li>在UserMapper中添加对应方法<pre><code class="java">public interface UserMapper {
+//查询全部用户
+List&lt;User&gt; selectUser();
+//根据id查询用户
+User selectUserByName(String username);
+}</code></pre>
+</li>
+<li>在UserMapper.xml中添加Select语句<pre><code class="xml">&lt;select id=&quot;selectUserByName&quot; resultType=&quot;com.kuang.pojo.User&quot;&gt;
+select * from user where username = #{username}
+&lt;/select&gt;</code></pre>
+</li>
+<li>测试类中测试<pre><code class="java">@Test
+public void tsetSelectUserById() {
+SqlSession session = MybatisUtils.getSession();  //获取SqlSession连接
+UserMapper mapper = session.getMapper(UserMapper.class);
+User user = mapper.selectUserByName(&quot;lg&quot;);
+System.out.println(user);
+session.close();
+}</code></pre>
+</li>
+</ol>
+<p><strong>使用万能Map</strong></p>
+<ol>
+<li>在接口方法中，参数直接传递Map；<pre><code class="java">User selectUserByNP2(Map&lt;String,Object&gt; map);</code></pre>
+</li>
+<li>编写sql语句的时候，需要传递参数类型，参数类型为map<pre><code class="xml">&lt;select id=&quot;selectUserByNP2&quot; parameterType=&quot;map&quot; resultType=&quot;com.kuang.pojo.User&quot;&gt;
+select * from user where name = #{username} and pwd = #{pwd}
+&lt;/select&gt;</code></pre>
+</li>
+<li>在使用方法的时候，Map的 key 为 sql中取的值即可，没有顺序要求！<pre><code class="java">Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+map.put(&quot;username&quot;,&quot;小明&quot;);
+map.put(&quot;pwd&quot;,&quot;123456&quot;);
+User user = mapper.selectUserByNP2(map);</code></pre>
+</li>
+</ol>
+<p><strong>总结</strong>：如果参数过多，我们可以考虑直接使用Map实现，如果参数比较少，直接传递参数即可</p>
+<h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><p><strong>例如：给数据库增加一个用户</strong></p>
+<ol>
+<li>在UserMapper接口中添加对应的方法<pre><code class="java">//添加一个用户
+int addUser(User user);</code></pre>
+</li>
+<li>在UserMapper.xml中添加insert语句<pre><code class="xml">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.kuang.pojo.User&quot;&gt;
+ insert into user (username,password) values (#{username},#{password})
+&lt;/insert&gt;</code></pre>
+</li>
+<li>测试<pre><code class="java">@Test
+public void testAddUser() {
+SqlSession session = MybatisUtils.getSession();
+UserMapper mapper = session.getMapper(UserMapper.class);
+User user = new User(&quot;王五&quot;,&quot;zxcvbn&quot;);
+int i = mapper.addUser(user);
+System.out.println(i);
+session.commit(); //提交事务,重点!不写的话不会提交到数据库
+session.close();
+}</code></pre>
+</li>
+</ol>
+<p><strong>注意点：增、删、改操作需要提交事务！</strong></p>
+<h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p><strong>例如：修改用户信息</strong></p>
+<ol>
+<li>编写接口方法<pre><code class="java">//修改一个用户
+int updateUser(User user);</code></pre>
+</li>
+<li>编写对应的配置文件SQL<pre><code>&lt;update id=&quot;updateUser&quot; parameterType=&quot;com.kuang.pojo.User&quot;&gt;
+update user set password=#{password} where username = #{username}
+&lt;/update&gt;</code></pre></li>
+<li>测试<pre><code class="java">@Test
+public void testUpdateUser() {
+SqlSession session = MybatisUtils.getSession();
+UserMapper mapper = session.getMapper(UserMapper.class);
+User user = mapper.selectUserById(1);
+user.setPwd(&quot;asdfgh&quot;);
+int i = mapper.updateUser(user);
+System.out.println(i);
+session.commit(); //提交事务,重点!不写的话不会提交到数据库
+session.close();
+}</code></pre>
+</li>
+</ol>
+<h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p><strong>例如：根据用户名删除一个用户</strong></p>
+<ol>
+<li>同理，编写接口方法<pre><code class="java">//根据id删除用户
+int deleteUser(String usernmae);</code></pre>
+</li>
+<li>编写对应的配置文件SQL<pre><code class="xml">&lt;delete id=&quot;deleteUser&quot; parameterType=&quot;String&quot;&gt;
+delete from user where username = #{username}
+&lt;/delete&gt;</code></pre>
+</li>
+<li>测试<pre><code class="java">@Test
+public void testDeleteUser() {
+SqlSession session = MybatisUtils.getSession();
+UserMapper mapper = session.getMapper(UserMapper.class);
+int i = mapper.deleteUser(&quot;lg&quot;);
+System.out.println(i);
+session.commit(); //提交事务,重点!不写的话不会提交到数据库
+session.close();
+}</code></pre>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>所有的增删改操作都需要提交事务！</li>
+<li>接口所有的普通参数，尽量都写上@Param参数，尤其是多个参数时，必须写上！</li>
+<li>有时候根据业务的需求，可以考虑使用map传递参数！</li>
+<li>为了规范操作，在SQL的配置文件中，我们尽量将Parameter参数和resultType都写上！</li>
+</ul>
+<h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><p>第1种：在Java代码中添加sql通配符</p>
+<pre><code class="java">string wildcardname = “%smi%”;
+list&lt;name&gt; names = mapper.selectlike(wildcardname);
 
-void dijkstra(int s)
-{
-    fill(d,d+maxx,inf); //初始化d
-    memset(num,0,sizeof(num)); //初始化
-    memset(w,0,sizeof(w)); //初始化
-    d[s]=0; //起始点记录为0
-    w[s]=weight[s]; //起始点权重
-    num[s]=1; 
-    for(int i=0;i&lt;n;i++) //遍历
-    {
-        int u=-1,minn=inf; //u记录最短路径下标,minn存放最小d[u]
-        for(int j=0;j&lt;n;j++) //找到未访问的顶点中d[u]最小的
-        {
-            if(vis[j]==false&amp;&amp;d[j]&lt;minn) //
-            {
-                u=j;
-                minn=d[j];
-            }
-        }
-        if(u==-1)return ; //找不到直接返回结束
-        vis[u]=true; //找到后标记
-        for(int v=0;v&lt;n;v++) //遍历
-        {
-            if(vis[v]==false&amp;&amp;g[u][v]!=inf)//找到未被标记且能到达的V点
-            {
-                if(g[u][v]+d[u]&lt;d[v])//以U为中介点更短则更新d,w,num
-                {
-                    d[v]=g[u][v]+d[u];
-                    w[v]=w[u]+weight[v];
-                    num[v]=num[u];
+&lt;select id=”selectlike”&gt;
+select * from foo where bar like #{value}
+&lt;/select&gt;</code></pre>
+<p>第2种：在sql语句中拼接通配符，会引起sql注入</p>
+<pre><code class="xml">string wildcardname = “smi”;
+list&lt;name&gt; names = mapper.selectlike(wildcardname);
 
-                }
-                else if(g[u][v]+d[u]==d[v])//如果相等，则判断权值的大小
-                {
-                    if(w[u]+weight[v]&gt;w[v])
-                        w[v]=w[u]+weight[v];
-                    num[v]+=num[u]; //更新路径数
-                }
+&lt;select id=”selectlike”&gt;
+    select * from foo where bar like &quot;%&quot;#{value}&quot;%&quot;
+&lt;/select&gt;</code></pre>
+<h1 id="配置解析"><a href="#配置解析" class="headerlink" title="配置解析"></a>配置解析</h1><h2 id="核心配置文件"><a href="#核心配置文件" class="headerlink" title="核心配置文件"></a>核心配置文件</h2><ul>
+<li>mybatis-config.xml 系统核心配置文件</li>
+<li>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。</li>
+<li>能配置的内容如下：<pre><code class="xml">  configuration（配置）
+  properties（属性）
+  settings（设置）
+  typeAliases（类型别名）
+  typeHandlers（类型处理器）
+  objectFactory（对象工厂）
+  plugins（插件）
+  environments（环境配置）
+  environment（环境变量）
+  transactionManager（事务管理器）
+  dataSource（数据源）
+  databaseIdProvider（数据库厂商标识）
+  mappers（映射器）
+  &lt;!-- 注意元素节点的顺序！顺序不对会报错 --&gt;</code></pre>
+<h2 id="environments元素"><a href="#environments元素" class="headerlink" title="environments元素"></a>environments元素</h2><pre><code class="xml">&lt;environments default=&quot;development&quot;&gt;
+&lt;environment id=&quot;development&quot;&gt;
+ &lt;transactionManager type=&quot;JDBC&quot;&gt;
+   &lt;property name=&quot;...&quot; value=&quot;...&quot;/&gt;
+ &lt;/transactionManager&gt;
+ &lt;dataSource type=&quot;POOLED&quot;&gt;
+   &lt;property name=&quot;driver&quot; value=&quot;${driver}&quot;/&gt;
+   &lt;property name=&quot;url&quot; value=&quot;${url}&quot;/&gt;
+   &lt;property name=&quot;username&quot; value=&quot;${username}&quot;/&gt;
+   &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+ &lt;/dataSource&gt;
+&lt;/environment&gt;
+&lt;/environments&gt;</code></pre>
+</li>
+<li>配置MyBatis的<strong>多套运行环境</strong>，将SQL映射到多个不同的数据库上，必须指定其中一个为默认运行环境（通过default指定）</li>
+<li>子元素节点：<strong>environment</strong><ul>
+<li>dataSource 元素使用标准的 JDBC 数据源接口来配置 JDBC 连接对象的资源。</li>
+<li>数据源是必须配置的。</li>
+<li>有三种内建的数据源类型<pre><code class="xml">  type=&quot;[UNPOOLED|POOLED|JNDI]&quot;）</code></pre>
+</li>
+<li>unpooled：这个数据源的实现只是每次被请求时打开和关闭连接。</li>
+<li><strong>pooled</strong>：这种数据源的实现利用“池”的概念将 JDBC 连接对象组织起来 , 这是一种使得并发 Web 应用快速响应请求的流行处理方式。</li>
+<li>jndi：这个数据源的实现是为了能在如 Spring 或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置一个 JNDI 上下文的引用。</li>
+<li>数据源也有很多第三方的实现，比如dbcp，c3p0，druid等等….</li>
+<li>子元素节点：transactionManager - [ 事务管理器 ]<pre><code class="xml">  &lt;!-- 语法 --&gt;
+  &lt;transactionManager type=&quot;[ JDBC | MANAGED ]&quot;/&gt;</code></pre>
+</li>
+<li>子元素节点：<strong>数据源（dataSource）</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="mappers元素"><a href="#mappers元素" class="headerlink" title="mappers元素"></a>mappers元素</h2><p><strong>mappers</strong></p>
+<ul>
+<li>映射器 : 定义映射SQL语句文件</li>
+<li>Java 在自动查找这方面没有提供一个很好的方法，所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。你可以使用相对于类路径的资源引用， 或完全限定资源定位符（包括 file:/// 的 URL），或类名和包名等。映射器是MyBatis中最核心的组件之一，在MyBatis 3之前，只支持xml映射器，即：所有的SQL语句都必须在xml文件中配置。而从MyBatis 3开始，还支持接口映射器，这种映射器方式允许以Java代码的方式注解定义SQL语句，非常简洁。   </li>
+</ul>
+<p><strong>引入资源方式</strong></p>
+<pre><code class="xml">&lt;!-- 使用相对于类路径的资源引用 --&gt;
+&lt;mappers&gt;
+ &lt;mapper resource=&quot;org/mybatis/builder/PostMapper.xml&quot;/&gt;
+&lt;/mappers&gt;</code></pre>
+<pre><code class="xml">&lt;!-- 使用完全限定资源定位符（URL） --&gt;
+&lt;mappers&gt;
+ &lt;mapper url=&quot;file:///var/mappers/AuthorMapper.xml&quot;/&gt;
+&lt;/mappers&gt;</code></pre>
+<pre><code class="xml">&lt;!--
+使用映射器接口实现类的完全限定类名
+需要配置文件名称和接口名称一致，并且位于同一目录下
+--&gt;
+&lt;mappers&gt;
+ &lt;mapper class=&quot;org.mybatis.builder.AuthorMapper&quot;/&gt;
+&lt;/mappers&gt;</code></pre>
+<pre><code class="xml">&lt;!--
+将包内的映射器接口实现全部注册为映射器
+但是需要配置文件名称和接口名称一致，并且位于同一目录下
+--&gt;
+&lt;mappers&gt;
+ &lt;package name=&quot;org.mybatis.builder&quot;/&gt;
+&lt;/mappers&gt;</code></pre>
+<p><strong>Mapper文件</strong></p>
+<pre><code class="XML">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+       PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+       &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.lg.mapper.UserMapper&quot;&gt;
 
-            }
-        }
-    }
-}
+&lt;/mapper&gt;</code></pre>
+<ul>
+<li>namespace中文意思：命名空间，作用如下：<ul>
+<li>namespace的命名必须跟某个接口同名</li>
+<li>接口中的方法与映射文件中sql语句id应该一一对应<ol>
+<li>namespace和子元素的id联合保证唯一  , 区别不同的mapper</li>
+<li>绑定DAO接口</li>
+<li>namespace命名规则 : 包名+类名</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>MyBatis 的真正强大在于它的映射语句，这是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，会立即发现省掉了将近 95% 的代码。MyBatis 为聚焦于 SQL 而构建，以尽可能地为你减少麻烦。</p>
+<h2 id="Properties优化"><a href="#Properties优化" class="headerlink" title="Properties优化"></a>Properties优化</h2><p>数据库这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。具体的官方文档</p>
+<p>我们来优化我们的配置文件</p>
+<p>第一步 ; 在资源目录下新建一个db.properties</p>
+<pre><code class="xml">driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf8
+username=root
+password=123456</code></pre>
+<p>第二步 : 将文件导入properties 配置文件</p>
+<pre><code class="xml">&lt;configuration&gt;
+   &lt;!--导入properties文件--&gt;
+   &lt;properties resource=&quot;db.properties&quot;/&gt;
 
-int main()
-{
-    cin&gt;&gt;n&gt;&gt;m&gt;&gt;st&gt;&gt;ed;
-    for(int i=0;i&lt;n;i++)
-        cin&gt;&gt;weight[i];
-    int u,v;
-    fill(g[0],g[0]+maxx*maxx,inf); //初始化图
-    for(int i=0;i&lt;m;i++)
-    {
-        cin&gt;&gt;u&gt;&gt;v;
-        cin&gt;&gt;g[u][v];
-        g[v][u]=g[u][v];  //无向图
-    }
-    dijkstra(st);
-    cout&lt;&lt;num[ed]&lt;&lt;&#39; &#39;&lt;&lt;w[ed]&lt;&lt;endl;
-    return 0;
-}
-
-
-</code></pre>
-<p>CSDN博客：<a href="https://blog.csdn.net/weixin_43871885/article/details/101639402" target="_blank" rel="noopener" title="CSDN博客">https://blog.csdn.net/weixin_43871885/article/details/101639402</a></p>
-
+   &lt;environments default=&quot;development&quot;&gt;
+       &lt;environment id=&quot;development&quot;&gt;
+           &lt;transactionManager type=&quot;JDBC&quot;/&gt;
+           &lt;dataSource type=&quot;POOLED&quot;&gt;
+               &lt;property name=&quot;driver&quot; value=&quot;${driver}&quot;/&gt;
+               &lt;property name=&quot;url&quot; value=&quot;${url}&quot;/&gt;
+               &lt;property name=&quot;username&quot; value=&quot;${username}&quot;/&gt;
+               &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+           &lt;/dataSource&gt;
+       &lt;/environment&gt;
+   &lt;/environments&gt;
+   &lt;mappers&gt;
+       &lt;mapper resource=&quot;mapper/UserMapper.xml&quot;/&gt;
+   &lt;/mappers&gt;
+&lt;/configuration&gt;</code></pre>
+<p>更多操作，可以查看官方文档！</p>
+<ul>
+<li>配置文件优先级问题</li>
+<li>新特性：使用占位符</li>
+</ul>
+<h2 id="typeAliases优化"><a href="#typeAliases优化" class="headerlink" title="typeAliases优化"></a>typeAliases优化</h2><p>类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。</p>
+<pre><code class="xml">&lt;!--配置别名,注意顺序--&gt;
+&lt;typeAliases&gt;
+   &lt;typeAlias type=&quot;com.lg.pojo.User&quot; alias=&quot;User&quot;/&gt;
+&lt;/typeAliases&gt;</code></pre>
+<p>当这样配置时，User可以用在任何使用com.lg.pojo.User的地方。</p>
+<p>也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean，比如:</p>
+<pre><code class="xml">&lt;typeAliases&gt;
+   &lt;package name=&quot;com.lg.pojo&quot;/&gt;
+&lt;/typeAliases&gt;</code></pre>
+<p>每一个在包 com.lg.pojo 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。</p>
+<p>若有注解，则别名为其注解值。见下面的例子：</p>
+<pre><code class="java">@Alias(&quot;user&quot;)
+public class User {
+  ...
+}</code></pre>
+<h2 id="其他配置浏览"><a href="#其他配置浏览" class="headerlink" title="其他配置浏览"></a>其他配置浏览</h2>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
     </div>
