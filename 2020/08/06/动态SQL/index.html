@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>合并回文子串 | Hexo</title>
-  <meta name="keywords" content=" 动态规划 , 区间dp ">
-  <meta name="description" content="合并回文子串 | Hexo">
+  <title>动态SQL | Hexo</title>
+  <meta name="keywords" content=" Mybatis ">
+  <meta name="description" content="动态SQL | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章分类">
@@ -410,9 +410,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-合并回文子串" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-动态SQL" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">合并回文子串</h1>
+        <h1 class="article-title">动态SQL</h1>
     
     <div class="article-meta">
         
@@ -422,7 +422,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="算法">算法</a>
+            <a  data-rel="SSM框架">SSM框架</a> > 
+            
+            <a  data-rel="SSM框架&lt;---&gt;Mybatis">Mybatis</a>
             
         </span>
         
@@ -430,16 +432,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color5">动态规划</a>
-            
-            <a class="color5">区间dp</a>
+            <a class="color3">Mybatis</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-07-29 18:39:59'>2020-06-25 18:39</time>
+            Created At : <time class="date" title='Updated At: 2020-08-07 18:05:19'>2020-08-06 19:10</time>
         
     </div>
     <div class="article-meta">
@@ -472,7 +472,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目"><span class="toc-text">题目</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#涉及的知识点"><span class="toc-text">涉及的知识点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解题思路"><span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ac代码"><span class="toc-text">ac代码</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#动态SQL"><span class="toc-text">动态SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#介绍"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建环境"><span class="toc-text">搭建环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#if语句"><span class="toc-text">if语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Where"><span class="toc-text">Where</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Choose语句"><span class="toc-text">Choose语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL片段"><span class="toc-text">SQL片段</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Foreach"><span class="toc-text">Foreach</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -488,63 +488,287 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="%E5%90%88%E5%B9%B6%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2.jpg" alt="题目描述"></p>
-<h2 id="涉及的知识点"><a href="#涉及的知识点" class="headerlink" title="涉及的知识点"></a>涉及的知识点</h2><p>区间dp: <strong>在区间上进行动态规划，求解一段区间上的最优解。主要是通过合并小区间的最优解从而得出整个大区间上最优解的dp算法。</strong></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p><strong>第一步</strong>，数据不大，故建四维数组，设dp[l1][r1][l2][r2]表示a[l1…r1]和b[l2…r2]合并是否能组成回文串<br><strong>第二步</strong>，当(r1-l1)+(r2-l2)&lt;=1，dp[l1][r1][l2][r2]=1(即true)<br><strong>第三步</strong>，转移方程：</p>
-<pre><code class="cpp">//回文串最左边的字符a[l1]和最右边的字符a[r1]相等
-dp[l1][r1][l2][r2] |= dp[l1+1][r1-1][l2][r2];
-//回文串最左边的字符b[l2]和最右边的字符b[r2]相等
-dp[l1][r1][l2][r2] |= dp[l1][r1][l2+1][r2-1];
-//回文串最左边的字符a[l1]和最右边的字符b[r2]相等
-dp[l1][r1][l2][r2] |= dp[l1+1][r1][l2][r2-1];
-//回文串最左边的字符b[l2]和最右边的字符a[r1]相等
-dp[l1][r1][l2][r2] |= dp[l1+1][r1-1][l2+1][r2];</code></pre>
-<h2 id="ac代码"><a href="#ac代码" class="headerlink" title="ac代码"></a>ac代码</h2><pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long LL;
-const double pi=acos(-1),eps=1e-10;
-const int inf=0x3f3f3f3f;
-const int mod=1e9+7;
+        <h1 id="动态SQL"><a href="#动态SQL" class="headerlink" title="动态SQL"></a>动态SQL</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>什么是动态SQL：<strong>动态SQL指的是根据不同的查询条件 , 生成不同的Sql语句.</strong></p>
+<pre><code>官网描述：
+MyBatis 的强大特性之一便是它的动态 SQL。如果你有使用 JDBC 或其它类似框架的经验，你就能体会到根据不同条件拼接 SQL 语句的痛苦。例如拼接时要确保不能忘记添加必要的空格，还要注意去掉列表最后一个列名的逗号。利用动态 SQL 这一特性可以彻底摆脱这种痛苦。
+虽然在以前使用动态 SQL 并非一件易事，但正是 MyBatis 提供了可以被用在任意 SQL 映射语句中的强大的动态 SQL 语言得以改进这种情形。
+动态 SQL 元素和 JSTL 或基于类似 XML 的文本处理器相似。在 MyBatis 之前的版本中，有很多元素需要花时间了解。MyBatis 3 大大精简了元素种类，现在只需学习原来一半的元素便可。MyBatis 采用功能强大的基于 OGNL 的表达式来淘汰其它大部分元素。
 
-bool dp[55][55][55][55];
+  -------------------------------
+  - if
+  - choose (when, otherwise)
+  - trim (where, set)
+  - foreach
+  -------------------------------</code></pre><p>之前写的 SQL 语句都比较简单，如果有比较复杂的业务，我们需要写复杂的 SQL 语句，往往需要拼接，而拼接 SQL ，稍微不注意，由于引号，空格等缺失可能都会导致错误。</p>
+<p>那么怎么去解决这个问题呢？这就要使用 mybatis 动态SQL，通过 if, choose, when, otherwise, trim, where, set, foreach等标签，可组合成非常灵活的SQL语句，从而在提高 SQL 语句的准确性的同时，也大大提高了开发人员的效率。</p>
+<h2 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h2><p>字段：id，title，author，create_time，views</p>
+<pre><code class="sql">CREATE TABLE `blog` (
+`id` varchar(50) NOT NULL COMMENT &#39;博客id&#39;,
+`title` varchar(100) NOT NULL COMMENT &#39;博客标题&#39;,
+`author` varchar(30) NOT NULL COMMENT &#39;博客作者&#39;,
+`create_time` datetime NOT NULL COMMENT &#39;创建时间&#39;,
+`views` int(30) NOT NULL COMMENT &#39;浏览量&#39;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8</code></pre>
+<p>1、创建Mybatis基础工程</p>
+<p><img src="%E5%88%9B%E5%BB%BA.png" alt="创建基础工程"></p>
+<p>2、IDutil工具类</p>
+<pre><code class="java">public class IDUtil {
 
-int main()
-{
-    int t;
-    string a,b;
-    cin&gt;&gt;t;
-    while(t--){
-        memset(dp,0,sizeof(dp));
-        cin&gt;&gt;a&gt;&gt;b;
-        a=&quot; &quot;+a,b=&quot; &quot;+b;
-        int ans=0;
-        int la=a.length()-1,lb=b.length()-1;
-        for(int len1=0; len1&lt;=la; len1++){
-            for(int len2=0; len2&lt;=lb; len2++){
-                for(int l1=1,r1=l1+len1-1; r1&lt;=la; l1++,r1++){
-                    for(int l2=1,r2=l2+len2-1; r2&lt;=lb; l2++,r2++){
-                        if(len1+len2&lt;=1)dp[l1][r1][l2][r2]=1;
-                        else{
-                            if(a[l1]==a[r1]&amp;&amp;r1&gt;0)dp[l1][r1][l2][r2]|=dp[l1+1][r1-1][l2][r2];
-                            if(a[l1]==b[r2]&amp;&amp;r2&gt;0)dp[l1][r1][l2][r2]|=dp[l1+1][r1][l2][r2-1];
-                            if(b[l2]==a[r1]&amp;&amp;r1&gt;0)dp[l1][r1][l2][r2]|=dp[l1][r1-1][l2+1][r2];
-                            if(b[l2]==b[r2]&amp;&amp;r2&gt;0)dp[l1][r1][l2][r2]|=dp[l1][r1][l2+1][r2-1];
-                        }
-                        if(dp[l1][r1][l2][r2]){
-                            ans=max(ans,r1-l1+r2-l2+2);
-                        }
-                    }}}}
-        cout&lt;&lt;ans&lt;&lt;endl;
+   public static String genId(){
+       return UUID.randomUUID().toString().replaceAll(&quot;-&quot;,&quot;&quot;);
+  }
 
-    }
+}</code></pre>
+<p>3、实体类编写  【注意set方法作用】</p>
+<pre><code class="java">import java.util.Date;
 
-    return 0;
+public class Blog {
+
+   private String id;
+   private String title;
+   private String author;
+   private Date createTime;
+   private int views;
+   //set，get....
+}</code></pre>
+<p>4、编写Mapper接口及xml文件</p>
+<pre><code class="xml">public interface BlogMapper {
 }
-/*
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+       PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+       &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.lg.mapper.BlogMapper&quot;&gt;
+
+&lt;/mapper&gt;</code></pre>
+<p>5、mybatis核心配置文件，下划线驼峰自动转换</p>
+<pre><code class="xml">&lt;settings&gt;
+   &lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+   &lt;setting name=&quot;logImpl&quot; value=&quot;STDOUT_LOGGING&quot;/&gt;
+&lt;/settings&gt;
+&lt;!--注册Mapper.xml--&gt;
+&lt;mappers&gt;
+ &lt;mapper resource=&quot;mapper/BlogMapper.xml&quot;/&gt;
+&lt;/mappers&gt;</code></pre>
+<p>6、插入初始数据</p>
+<p>编写接口</p>
+<pre><code class="java">//新增一个博客
+int addBlog(Blog blog);</code></pre>
+<p>sql配置文件</p>
+<pre><code class="xml">&lt;insert id=&quot;addBlog&quot; parameterType=&quot;blog&quot;&gt;
+  insert into blog (id, title, author, create_time, views)
+  values (#{id},#{title},#{author},#{createTime},#{views});
+&lt;/insert&gt;</code></pre>
+<p>初始化博客方法</p>
+<pre><code class="java">@Test
+public void addInitBlog(){
+   SqlSession session = MybatisUtils.getSession();
+   BlogMapper mapper = session.getMapper(BlogMapper.class);
+
+   Blog blog = new Blog();
+   blog.setId(IDUtil.genId());
+   blog.setTitle(&quot;Mybatis如此简单&quot;);
+   blog.setAuthor(&quot;lg&quot;);
+   blog.setCreateTime(new Date());
+   blog.setViews(9999);
+
+   mapper.addBlog(blog);
+
+   blog.setId(IDUtil.genId());
+   blog.setTitle(&quot;Java如此简单&quot;);
+   mapper.addBlog(blog);
+
+   blog.setId(IDUtil.genId());
+   blog.setTitle(&quot;Spring如此简单&quot;);
+   mapper.addBlog(blog);
+
+   blog.setId(IDUtil.genId());
+   blog.setTitle(&quot;微服务如此简单&quot;);
+   mapper.addBlog(blog);
+   session.commit();
+   session.close();
+}</code></pre>
+<p>初始化数据完毕！</p>
+<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><p><strong>需求：根据作者名字和博客名字来查询博客！如果作者名字为空，那么只根据博客名字查询，反之，则根据作者名来查询</strong></p>
+<p>1、编写接口类</p>
+<pre><code class="java">//需求1
+List&lt;Blog&gt; queryBlogIf(Map map);</code></pre>
+<p>2、编写SQL语句</p>
+<pre><code class="xml">&lt;!--需求1：
+根据作者名字和博客名字来查询博客！
+如果作者名字为空，那么只根据博客名字查询，反之，则根据作者名来查询
+select * from blog where title = #{title} and author = #{author}
+--&gt;
+&lt;select id=&quot;queryBlogIf&quot; parameterType=&quot;map&quot; resultType=&quot;blog&quot;&gt;
+  select * from blog where
+   &lt;if test=&quot;title != null&quot;&gt;
+      title = #{title}
+   &lt;/if&gt;
+   &lt;if test=&quot;author != null&quot;&gt;
+      and author = #{author}
+   &lt;/if&gt;
+&lt;/select&gt;</code></pre>
+<p>3、测试</p>
+<pre><code class="java">@Test
+public void testQueryBlogIf(){
+   SqlSession session = MybatisUtils.getSession();
+   BlogMapper mapper = session.getMapper(BlogMapper.class);
+
+   HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+   map.put(&quot;title&quot;,&quot;Mybatis如此简单&quot;);
+   map.put(&quot;author&quot;,&quot;lg&quot;);
+   List&lt;Blog&gt; blogs = mapper.queryBlogIf(map);
+
+   System.out.println(blogs);
+
+   session.close();
+}</code></pre>
+<p>这样写可以看到，如果 author 等于 null，那么查询语句为 select * from user where title=#{title},但是如果title为空呢？那么查询语句为 select * from user where and author=#{author}，这是错误的 SQL 语句，如何解决呢？请看下面的 where 语句！</p>
+<h2 id="Where"><a href="#Where" class="headerlink" title="Where"></a>Where</h2><p>修改上面的SQL语句；</p>
+<pre><code class="xml">&lt;select id=&quot;queryBlogIf&quot; parameterType=&quot;map&quot; resultType=&quot;blog&quot;&gt;
+  select * from blog
+   &lt;where&gt;
+       &lt;if test=&quot;title != null&quot;&gt;
+          title = #{title}
+       &lt;/if&gt;
+       &lt;if test=&quot;author != null&quot;&gt;
+          and author = #{author}
+       &lt;/if&gt;
+   &lt;/where&gt;
+&lt;/select&gt;</code></pre>
+<p>这个“where”标签会知道如果它包含的标签中有返回值的话，它就插入一个‘where’。此外，如果标签返回的内容是以AND 或OR 开头的，则它会剔除掉。</p>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>同理，上面的对于查询 SQL 语句包含 where 关键字，如果在进行更新操作的时候，含有 set 关键词，我们怎么处理呢？</p>
+<p>1、编写接口方法</p>
+<pre><code class="java">int updateBlog(Map map);</code></pre>
+<p>2、sql配置文件</p>
+<pre><code class="xml">&lt;!--注意set是用的逗号隔开--&gt;
+&lt;update id=&quot;updateBlog&quot; parameterType=&quot;map&quot;&gt;
+  update blog
+     &lt;set&gt;
+         &lt;if test=&quot;title != null&quot;&gt;
+            title = #{title},
+         &lt;/if&gt;
+         &lt;if test=&quot;author != null&quot;&gt;
+            author = #{author}
+         &lt;/if&gt;
+     &lt;/set&gt;
+  where id = #{id};
+&lt;/update&gt;</code></pre>
+<p>3、测试</p>
+<pre><code class="java">@Test
+public void testUpdateBlog(){
+   SqlSession session = MybatisUtils.getSession();
+   BlogMapper mapper = session.getMapper(BlogMapper.class);
+
+   HashMap&lt;String, String&gt; map = new HashMap&lt;String, String&gt;();
+   map.put(&quot;title&quot;,&quot;动态SQL&quot;);
+   map.put(&quot;author&quot;,&quot;lg&quot;);
+   map.put(&quot;id&quot;,&quot;9d6a763f5e1347cebda43e2a32687a77&quot;);
+
+   mapper.updateBlog(map);
 
 
-*/
-</code></pre>
+   session.close();
+}</code></pre>
+<h2 id="Choose语句"><a href="#Choose语句" class="headerlink" title="Choose语句"></a>Choose语句</h2><p>有时候，我们不想用到所有的查询条件，只想选择其中的一个，查询条件有一个满足即可，使用 choose 标签可以解决此类问题，类似于 Java 的 switch 语句</p>
+<p>1、编写接口方法</p>
+<pre><code class="java">List&lt;Blog&gt; queryBlogChoose(Map map);</code></pre>
+<p>2、sql配置文件</p>
+<pre><code class="xml">&lt;select id=&quot;queryBlogChoose&quot; parameterType=&quot;map&quot; resultType=&quot;blog&quot;&gt;
+  select * from blog
+   &lt;where&gt;
+       &lt;choose&gt;
+           &lt;when test=&quot;title != null&quot;&gt;
+                title = #{title}
+           &lt;/when&gt;
+           &lt;when test=&quot;author != null&quot;&gt;
+              and author = #{author}
+           &lt;/when&gt;
+           &lt;otherwise&gt;
+              and views = #{views}
+           &lt;/otherwise&gt;
+       &lt;/choose&gt;
+   &lt;/where&gt;
+&lt;/select&gt;</code></pre>
+<p>3、测试类</p>
+<pre><code class="java">@Test
+public void testQueryBlogChoose(){
+   SqlSession session = MybatisUtils.getSession();
+   BlogMapper mapper = session.getMapper(BlogMapper.class);
+
+   HashMap&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+   map.put(&quot;title&quot;,&quot;Java如此简单&quot;);
+   map.put(&quot;author&quot;,&quot;狂神说&quot;);
+   map.put(&quot;views&quot;,9999);
+   List&lt;Blog&gt; blogs = mapper.queryBlogChoose(map);
+
+   System.out.println(blogs);
+
+   session.close();
+}</code></pre>
+<h2 id="SQL片段"><a href="#SQL片段" class="headerlink" title="SQL片段"></a>SQL片段</h2><p>有时候可能某个 sql 语句我们用的特别多，为了增加代码的重用性，简化代码，我们需要将这些代码抽取出来，然后使用时直接调用。</p>
+<p><strong>提取SQL片段：</strong></p>
+<pre><code class="xml">&lt;sql id=&quot;if-title-author&quot;&gt;
+   &lt;if test=&quot;title != null&quot;&gt;
+      title = #{title}
+   &lt;/if&gt;
+   &lt;if test=&quot;author != null&quot;&gt;
+      and author = #{author}
+   &lt;/if&gt;
+&lt;/sql&gt;</code></pre>
+<p><strong>引用SQL片段：</strong></p>
+<pre><code class="xml">&lt;select id=&quot;queryBlogIf&quot; parameterType=&quot;map&quot; resultType=&quot;blog&quot;&gt;
+  select * from blog
+   &lt;where&gt;
+       &lt;!-- 引用 sql 片段，如果refid 指定的不在本文件中，那么需要在前面加上 namespace --&gt;
+       &lt;include refid=&quot;if-title-author&quot;&gt;&lt;/include&gt;
+       &lt;!-- 在这里还可以引用其他的 sql 片段 --&gt;
+   &lt;/where&gt;
+&lt;/select&gt;</code></pre>
+<p>注意：</p>
+<p>①、最好基于 单表来定义 sql 片段，提高片段的可重用性</p>
+<p>②、在 sql 片段中不要包括 where</p>
+<h2 id="Foreach"><a href="#Foreach" class="headerlink" title="Foreach"></a>Foreach</h2><p>将数据库中前三个数据的id修改为1,2,3；</p>
+<p>需求：我们需要查询 blog 表中 id 分别为1,2,3的博客信息</p>
+<p>1、编写接口</p>
+<pre><code class="java">List&lt;Blog&gt; queryBlogForeach(Map map);</code></pre>
+<p>2、编写SQL语句</p>
+<pre><code class="xml">&lt;select id=&quot;queryBlogForeach&quot; parameterType=&quot;map&quot; resultType=&quot;blog&quot;&gt;
+  select * from blog
+   &lt;where&gt;
+       &lt;!--
+       collection:指定输入对象中的集合属性
+       item:每次遍历生成的对象
+       open:开始遍历时的拼接字符串
+       close:结束时拼接的字符串
+       separator:遍历对象之间需要拼接的字符串
+       select * from blog where 1=1 and (id=1 or id=2 or id=3)
+     --&gt;
+       &lt;foreach collection=&quot;ids&quot;  item=&quot;id&quot; open=&quot;and (&quot; close=&quot;)&quot; separator=&quot;or&quot;&gt;
+          id=#{id}
+       &lt;/foreach&gt;
+   &lt;/where&gt;
+&lt;/select&gt;</code></pre>
+<p>3、测试</p>
+<pre><code class="java">@Test
+public void testQueryBlogForeach(){
+   SqlSession session = MybatisUtils.getSession();
+   BlogMapper mapper = session.getMapper(BlogMapper.class);
+
+   HashMap map = new HashMap();
+   List&lt;Integer&gt; ids = new ArrayList&lt;Integer&gt;();
+   ids.add(1);
+   ids.add(2);
+   ids.add(3);
+   map.put(&quot;ids&quot;,ids);
+
+   List&lt;Blog&gt; blogs = mapper.queryBlogForeach(map);
+
+   System.out.println(blogs);
+
+   session.close();
+}</code></pre>
+<p>小结：其实动态 sql 语句的编写往往就是一个拼接的问题，为了保证拼接准确，我们最好首先要写原生的 sql 语句出来，然后在通过 mybatis 动态sql 对照着改，防止出错。多在实践中使用才是熟练掌握它的技巧。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
