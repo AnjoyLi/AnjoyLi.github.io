@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>标签 | Hexo</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="标签 | Hexo">
+  <title>斐波那契 | Hexo</title>
+  <meta name="keywords" content=" 斐波那契 ">
+  <meta name="description" content="斐波那契 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章分类">
@@ -466,19 +466,34 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+        <article id="post-斐波那契" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">标签</h1>
+        <h1 class="article-title">斐波那契</h1>
     
     <div class="article-meta">
         
         
         
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="数论">数论</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">斐波那契</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-06-12 12:56:50'>2020-06-12 12:55</time>
+            Created At : <time class="date" title='Updated At: 2020-08-13 20:32:25'>2020-08-13 17:35</time>
         
     </div>
     <div class="article-meta">
@@ -511,7 +526,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#矩阵快速幂求斐波那契"><span class="toc-text">矩阵快速幂求斐波那契</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本形式"><span class="toc-text">基本形式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用矩阵分析"><span class="toc-text">用矩阵分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速幂优化"><span class="toc-text">快速幂优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#矩阵（结构体构造）"><span class="toc-text">矩阵（结构体构造）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#矩阵乘法"><span class="toc-text">矩阵乘法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#求斐波那契第n个数"><span class="toc-text">求斐波那契第n个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全部代码"><span class="toc-text">全部代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#斐波那契数列前n项求和"><span class="toc-text">斐波那契数列前n项求和</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#斐波那契数列前n项平方求和"><span class="toc-text">斐波那契数列前n项平方求和</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用几何证明"><span class="toc-text">用几何证明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码-1"><span class="toc-text">代码</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -527,7 +542,193 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="矩阵快速幂求斐波那契"><a href="#矩阵快速幂求斐波那契" class="headerlink" title="矩阵快速幂求斐波那契"></a>矩阵快速幂求斐波那契</h1><h2 id="基本形式"><a href="#基本形式" class="headerlink" title="基本形式"></a>基本形式</h2><p><img src="基本形式.jpg" alt=""></p>
+<h2 id="用矩阵分析"><a href="#用矩阵分析" class="headerlink" title="用矩阵分析"></a>用矩阵分析</h2><script type="math/tex; mode=display">
+\left[
+ \begin{matrix}
+   F_n\\
+   F_n-1
+  \end{matrix}
+  \right]</script><script type="math/tex; mode=display">
+=\left[
+ \begin{matrix}
+   F_n-1+F_n-2\\
+   F_n-1
+  \end{matrix}
+  \right]</script><script type="math/tex; mode=display">
+=\left[
+ \begin{matrix}
+   1*F_n-1+1*F_n-2\\
+   1*F_n-1+0*F_n-2
+  \end{matrix}
+  \right]</script><script type="math/tex; mode=display">
+=\left[
+ \begin{matrix}
+   1&1\\
+   1&0\\
+  \end{matrix}
+  \right] *
+  \left[
+ \begin{matrix}
+   F_{n-1}\\
+   F_{n-2}
+  \end{matrix}
+  \right]</script><script type="math/tex; mode=display">
+=\left[ \begin{matrix}   1&1\\   1&0\\  \end{matrix}  \right]^{n-1}
+ * \left[ \begin{matrix}   F_1\\   F_0  \end{matrix}  \right]</script><p>由上式分析可得：<strong>求F(n)等于求二阶矩阵的n - 1次方，结果取矩阵第一行第一列的元素。</strong></p>
+<h2 id="快速幂优化"><a href="#快速幂优化" class="headerlink" title="快速幂优化"></a>快速幂优化</h2><p>二阶矩阵的乘法满足结合律<br>设A,B,C都是任意的二阶矩阵<br>A(BC)=(AB)C</p>
+<p>设n=N/2 结果向下取整</p>
+<script type="math/tex; mode=display">
+A^N=A^n∗A^n    当n为偶数\\
+A^N=A^n∗A^n∗A 当n为奇数</script><p>相当于</p>
+<script type="math/tex; mode=display">
+A^6=A^3*A^3\\
+A^7=A^3*A^3*A</script><p>由上式可得：<strong>通过快速幂来减少运算次数</strong></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="矩阵（结构体构造）"><a href="#矩阵（结构体构造）" class="headerlink" title="矩阵（结构体构造）"></a>矩阵（结构体构造）</h3><pre><code class="lang-cpp">struct node
+{
+    LL a[2][2];//LL即long long
+};
+</code></pre>
+<h3 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h3><pre><code class="lang-cpp">node mul(node x,node y)
+{
+    node z;
+    memset(z.a,0,sizeof(z.a));
+    for(int i=0;i&lt;2;i++)
+        for(int j=0;j&lt;2;j++)
+            for(int k=0;k&lt;2;k++)
+                z.a[i][j]=(z.a[i][j]+x.a[i][k]*y.a[k][j])%mod;
+    return z;
+}
+</code></pre>
+<h3 id="求斐波那契第n个数"><a href="#求斐波那契第n个数" class="headerlink" title="求斐波那契第n个数"></a>求斐波那契第n个数</h3><pre><code class="lang-cpp">void quick(LL n)
+{
+    node c,res;
+    c.a[0][0]=1,c.a[0][1]=1,c.a[1][0]=1,c.a[1][1]=0;
+    res.a[0][0]=1,res.a[0][1]=0,res.a[1][0]=0,res.a[1][1]=1;
+    while(n){
+        if(n&amp;1)res=mul(res,c);
+        c=mul(c,c);
+        n=n&gt;&gt;1;
+    }
+    //cout&lt;&lt;res.a[0][0]&lt;&lt;&quot; &quot;&lt;&lt;res.a[0][1]&lt;&lt;&quot; &quot;&lt;&lt;res.a[1][0]&lt;&lt;&quot; &quot;&lt;&lt;res.a[1][1]&lt;&lt;endl;
+    cout&lt;&lt;res.a[0][1]&lt;&lt;endl;
+}
+</code></pre>
+<p>即所求res矩阵中的a[0][1]</p>
+<h3 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h3><pre><code class="lang-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long LL;
+const double pi=acos(-1),eps=1e-10;
+const int inf=0x3f3f3f3f;
+const int mod=1e9+7;
+const int m=10007;
+
+struct node
+{
+    LL a[2][2];
+};
+LL n,sum;
+
+node mul(node x,node y)
+{
+    node z;
+    memset(z.a,0,sizeof(z.a));
+    for(int i=0;i&lt;2;i++)
+        for(int j=0;j&lt;2;j++)
+            for(int k=0;k&lt;2;k++)
+                z.a[i][j]=(z.a[i][j]+x.a[i][k]*y.a[k][j])%mod;
+    return z;
+}
+
+void quick(LL n)
+{
+    node c,res;
+    c.a[0][0]=1,c.a[0][1]=1,c.a[1][0]=1,c.a[1][1]=0;
+    res.a[0][0]=1,res.a[0][1]=0,res.a[1][0]=0,res.a[1][1]=1;
+    while(n){
+        if(n&amp;1)res=mul(res,c);
+        c=mul(c,c);
+        n=n&gt;&gt;1;
+    }
+    //cout&lt;&lt;res.a[0][0]&lt;&lt;&quot; &quot;&lt;&lt;res.a[0][1]&lt;&lt;&quot; &quot;&lt;&lt;res.a[1][0]&lt;&lt;&quot; &quot;&lt;&lt;res.a[1][1]&lt;&lt;endl;
+    cout&lt;&lt;res.a[0][1]&lt;&lt;endl;
+}
+
+int main()
+{
+    cin&gt;&gt;n;
+    quick(n);
+
+    return 0;
+}
+</code></pre>
+<h1 id="斐波那契数列前n项求和"><a href="#斐波那契数列前n项求和" class="headerlink" title="斐波那契数列前n项求和"></a>斐波那契数列前n项求和</h1><script type="math/tex; mode=display">
+求和S_n=a_1+a_2+a_3+\ldots+a_n\\
+S_n=\underline1+a_1+a_2+a_3+\ldots+a_n-\underline1\\
+由a_2=1得S_n=\underline a_2+a_1+a_2+a_3+\ldots+a_n-\underline1\\
+即S_n=\underline{a_2+a_1}+a_2+a_3+\ldots+a_n-\underline1\\
+S_n=\underline a_3+a_2+a_3+\ldots+a_n-\underline1\\
+即S_n=\underline{a_3+a_2}+a_3+\ldots+a_n-\underline1\\
+S_n=\underline a_4+a_3+\ldots+a_n-\underline1\\
+\ldots\\
+S_n=a_n+a_{n-1}+a_n-1\\
+即S_n=2*a_n+a_{n-1}-1</script><h1 id="斐波那契数列前n项平方求和"><a href="#斐波那契数列前n项平方求和" class="headerlink" title="斐波那契数列前n项平方求和"></a>斐波那契数列前n项平方求和</h1><h2 id="用几何证明"><a href="#用几何证明" class="headerlink" title="用几何证明"></a>用几何证明</h2><p><img src="几何.jpg" alt=""></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><script type="math/tex; mode=display">
+a_1^2+a_2^2=a_3*a_2\\
+a_1^2+a_2^2+a_3^2=a_3*a_2+a_3^2\\
+a_1^2+a_2^2+a_3^2=a_3*(a_2+a_3)\\
+a_1^2+a_2^2+a_3^2=a_3*a_4\\
+\ldots\\
+推导可得\\
+\sum a_n=1^2+1^2+2^2+3^2+\ldots+a_n^2=a_n*a_{n+1}</script><h2 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h2><pre><code class="lang-cpp">#include&lt;bits/stdc++.h&gt;
+using namespace std;
+typedef long long LL;
+const double pi=acos(-1),eps=1e-10;
+const int inf=0x3f3f3f3f;
+const int mod=1e9+7;
+const int m=10007;
+
+struct node
+{
+    LL a[2][2];
+};
+LL n,sum;
+
+node mul(node x,node y)
+{
+    node z;
+    memset(z.a,0,sizeof(z.a));
+    for(int i=0;i&lt;2;i++)
+        for(int j=0;j&lt;2;j++)
+            for(int k=0;k&lt;2;k++)
+                z.a[i][j]=(z.a[i][j]+x.a[i][k]*y.a[k][j])%mod;
+    return z;
+}
+
+void quick(LL n)
+{
+    node c,res;
+    c.a[0][0]=1,c.a[0][1]=1,c.a[1][0]=1,c.a[1][1]=0;
+    res.a[0][0]=1,res.a[0][1]=0,res.a[1][0]=0,res.a[1][1]=1;
+    while(n){
+        if(n&amp;1)res=mul(res,c);
+        c=mul(c,c);
+        n=n&gt;&gt;1;
+    }
+    //cout&lt;&lt;res.a[0][0]&lt;&lt;&quot; &quot;&lt;&lt;res.a[0][1]&lt;&lt;&quot; &quot;&lt;&lt;res.a[1][0]&lt;&lt;&quot; &quot;&lt;&lt;res.a[1][1]&lt;&lt;endl;
+    cout&lt;&lt;(res.a[0][0]%mod*res.a[0][1]%mod)%mod&lt;&lt;endl;
+}
+
+int main()
+{
+    cin&gt;&gt;n;
+    quick(n);
+
+    return 0;
+}
+</code></pre>
+<p>即res矩阵的a[0][0]与a[0][1]相乘(注意取模)</p>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
     </div>
@@ -564,6 +765,46 @@
 
 
 
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
     
 
 

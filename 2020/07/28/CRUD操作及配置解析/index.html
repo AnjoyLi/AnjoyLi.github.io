@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -533,58 +553,61 @@
 <li>接口中的方法名与映射文件中的SQL语句ID 一一对应</li>
 <li>id</li>
 <li>parameterType</li>
-<li>resultType   </li>
+<li>resultType<br><strong>例如：根据用户名查询用户</strong></li>
 </ul>
 </li>
 </ul>
-<p><strong>例如：根据用户名查询用户</strong></p>
 <ol>
-<li>在UserMapper中添加对应方法<pre><code class="java">public interface UserMapper {
+<li>在UserMapper中添加对应方法<pre><code class="lang-java">public interface UserMapper {
 //查询全部用户
 List&lt;User&gt; selectUser();
 //根据id查询用户
 User selectUserByName(String username);
-}</code></pre>
+}
+</code></pre>
 </li>
-<li>在UserMapper.xml中添加Select语句<pre><code class="xml">&lt;select id=&quot;selectUserByName&quot; resultType=&quot;com.kuang.pojo.User&quot;&gt;
+<li>在UserMapper.xml中添加Select语句<pre><code class="lang-xml">&lt;select id=&quot;selectUserByName&quot; resultType=&quot;com.kuang.pojo.User&quot;&gt;
 select * from user where username = #{username}
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 </li>
-<li>测试类中测试<pre><code class="java">@Test
+<li>测试类中测试<pre><code class="lang-java">@Test
 public void tsetSelectUserById() {
 SqlSession session = MybatisUtils.getSession();  //获取SqlSession连接
 UserMapper mapper = session.getMapper(UserMapper.class);
 User user = mapper.selectUserByName(&quot;lg&quot;);
 System.out.println(user);
 session.close();
-}</code></pre>
+}
+</code></pre>
+<strong>使用万能Map</strong></li>
+<li>在接口方法中，参数直接传递Map；<pre><code class="lang-java">User selectUserByNP2(Map&lt;String,Object&gt; map);
+</code></pre>
 </li>
-</ol>
-<p><strong>使用万能Map</strong></p>
-<ol>
-<li>在接口方法中，参数直接传递Map；<pre><code class="java">User selectUserByNP2(Map&lt;String,Object&gt; map);</code></pre>
-</li>
-<li>编写sql语句的时候，需要传递参数类型，参数类型为map<pre><code class="xml">&lt;select id=&quot;selectUserByNP2&quot; parameterType=&quot;map&quot; resultType=&quot;com.kuang.pojo.User&quot;&gt;
+<li>编写sql语句的时候，需要传递参数类型，参数类型为map<pre><code class="lang-xml">&lt;select id=&quot;selectUserByNP2&quot; parameterType=&quot;map&quot; resultType=&quot;com.kuang.pojo.User&quot;&gt;
 select * from user where name = #{username} and pwd = #{pwd}
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 </li>
-<li>在使用方法的时候，Map的 key 为 sql中取的值即可，没有顺序要求！<pre><code class="java">Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
+<li>在使用方法的时候，Map的 key 为 sql中取的值即可，没有顺序要求！<pre><code class="lang-java">Map&lt;String, Object&gt; map = new HashMap&lt;String, Object&gt;();
 map.put(&quot;username&quot;,&quot;小明&quot;);
 map.put(&quot;pwd&quot;,&quot;123456&quot;);
-User user = mapper.selectUserByNP2(map);</code></pre>
-</li>
+User user = mapper.selectUserByNP2(map);
+</code></pre>
+<strong>总结</strong>：如果参数过多，我们可以考虑直接使用Map实现，如果参数比较少，直接传递参数即可</li>
 </ol>
-<p><strong>总结</strong>：如果参数过多，我们可以考虑直接使用Map实现，如果参数比较少，直接传递参数即可</p>
 <h2 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h2><p><strong>例如：给数据库增加一个用户</strong></p>
 <ol>
-<li>在UserMapper接口中添加对应的方法<pre><code class="java">//添加一个用户
-int addUser(User user);</code></pre>
+<li>在UserMapper接口中添加对应的方法<pre><code class="lang-java">//添加一个用户
+int addUser(User user);
+</code></pre>
 </li>
-<li>在UserMapper.xml中添加insert语句<pre><code class="xml">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.kuang.pojo.User&quot;&gt;
+<li>在UserMapper.xml中添加insert语句<pre><code class="lang-xml">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.kuang.pojo.User&quot;&gt;
  insert into user (username,password) values (#{username},#{password})
-&lt;/insert&gt;</code></pre>
+&lt;/insert&gt;
+</code></pre>
 </li>
-<li>测试<pre><code class="java">@Test
+<li>测试<pre><code class="lang-java">@Test
 public void testAddUser() {
 SqlSession session = MybatisUtils.getSession();
 UserMapper mapper = session.getMapper(UserMapper.class);
@@ -593,20 +616,22 @@ int i = mapper.addUser(user);
 System.out.println(i);
 session.commit(); //提交事务,重点!不写的话不会提交到数据库
 session.close();
-}</code></pre>
-</li>
+}
+</code></pre>
+<strong>注意点：增、删、改操作需要提交事务！</strong></li>
 </ol>
-<p><strong>注意点：增、删、改操作需要提交事务！</strong></p>
 <h2 id="update"><a href="#update" class="headerlink" title="update"></a>update</h2><p><strong>例如：修改用户信息</strong></p>
 <ol>
-<li>编写接口方法<pre><code class="java">//修改一个用户
-int updateUser(User user);</code></pre>
+<li>编写接口方法<pre><code class="lang-java">//修改一个用户
+int updateUser(User user);
+</code></pre>
 </li>
-<li>编写对应的配置文件SQL<pre><code class="xml">&lt;update id=&quot;updateUser&quot; parameterType=&quot;com.kuang.pojo.User&quot;&gt;
+<li>编写对应的配置文件SQL<pre><code class="lang-xml">&lt;update id=&quot;updateUser&quot; parameterType=&quot;com.kuang.pojo.User&quot;&gt;
 update user set password=#{password} where username = #{username}
-&lt;/update&gt;</code></pre>
+&lt;/update&gt;
+</code></pre>
 </li>
-<li>测试<pre><code class="java">@Test
+<li>测试<pre><code class="lang-java">@Test
 public void testUpdateUser() {
 SqlSession session = MybatisUtils.getSession();
 UserMapper mapper = session.getMapper(UserMapper.class);
@@ -616,19 +641,22 @@ int i = mapper.updateUser(user);
 System.out.println(i);
 session.commit(); //提交事务,重点!不写的话不会提交到数据库
 session.close();
-}</code></pre>
+}
+</code></pre>
 </li>
 </ol>
 <h2 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h2><p><strong>例如：根据用户名删除一个用户</strong></p>
 <ol>
-<li>同理，编写接口方法<pre><code class="java">//根据id删除用户
-int deleteUser(String usernmae);</code></pre>
+<li>同理，编写接口方法<pre><code class="lang-java">//根据id删除用户
+int deleteUser(String usernmae);
+</code></pre>
 </li>
-<li>编写对应的配置文件SQL<pre><code class="xml">&lt;delete id=&quot;deleteUser&quot; parameterType=&quot;String&quot;&gt;
+<li>编写对应的配置文件SQL<pre><code class="lang-xml">&lt;delete id=&quot;deleteUser&quot; parameterType=&quot;String&quot;&gt;
 delete from user where username = #{username}
-&lt;/delete&gt;</code></pre>
+&lt;/delete&gt;
+</code></pre>
 </li>
-<li>测试<pre><code class="java">@Test
+<li>测试<pre><code class="lang-java">@Test
 public void testDeleteUser() {
 SqlSession session = MybatisUtils.getSession();
 UserMapper mapper = session.getMapper(UserMapper.class);
@@ -636,7 +664,8 @@ int i = mapper.deleteUser(&quot;lg&quot;);
 System.out.println(i);
 session.commit(); //提交事务,重点!不写的话不会提交到数据库
 session.close();
-}</code></pre>
+}
+</code></pre>
 </li>
 </ol>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
@@ -646,23 +675,25 @@ session.close();
 <li>为了规范操作，在SQL的配置文件中，我们尽量将Parameter参数和resultType都写上！</li>
 </ul>
 <h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><p>第1种：在Java代码中添加sql通配符</p>
-<pre><code class="java">string wildcardname = “%smi%”;
+<pre><code class="lang-java">string wildcardname = “%smi%”;
 list&lt;name&gt; names = mapper.selectlike(wildcardname);
 
 &lt;select id=”selectlike”&gt;
 select * from foo where bar like #{value}
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 <p>第2种：在sql语句中拼接通配符，会引起sql注入</p>
-<pre><code class="xml">string wildcardname = “smi”;
+<pre><code class="lang-xml">string wildcardname = “smi”;
 list&lt;name&gt; names = mapper.selectlike(wildcardname);
 
 &lt;select id=”selectlike”&gt;
     select * from foo where bar like &quot;%&quot;#{value}&quot;%&quot;
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 <h1 id="配置解析"><a href="#配置解析" class="headerlink" title="配置解析"></a>配置解析</h1><h2 id="核心配置文件"><a href="#核心配置文件" class="headerlink" title="核心配置文件"></a>核心配置文件</h2><ul>
 <li>mybatis-config.xml 系统核心配置文件</li>
 <li>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。</li>
-<li>能配置的内容如下：<pre><code class="xml">  configuration（配置）
+<li>能配置的内容如下：<pre><code class="lang-xml">  configuration（配置）
   properties（属性）
   settings（设置）
   typeAliases（类型别名）
@@ -675,8 +706,9 @@ list&lt;name&gt; names = mapper.selectlike(wildcardname);
   dataSource（数据源）
   databaseIdProvider（数据库厂商标识）
   mappers（映射器）
-  &lt;!-- 注意元素节点的顺序！顺序不对会报错 --&gt;</code></pre>
-<h2 id="environments元素"><a href="#environments元素" class="headerlink" title="environments元素"></a>environments元素</h2><pre><code class="xml">&lt;environments default=&quot;development&quot;&gt;
+  &lt;!-- 注意元素节点的顺序！顺序不对会报错 --&gt;
+</code></pre>
+<h2 id="environments元素"><a href="#environments元素" class="headerlink" title="environments元素"></a>environments元素</h2><pre><code class="lang-xml">&lt;environments default=&quot;development&quot;&gt;
 &lt;environment id=&quot;development&quot;&gt;
  &lt;transactionManager type=&quot;JDBC&quot;&gt;
    &lt;property name=&quot;...&quot; value=&quot;...&quot;/&gt;
@@ -688,20 +720,23 @@ list&lt;name&gt; names = mapper.selectlike(wildcardname);
    &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
  &lt;/dataSource&gt;
 &lt;/environment&gt;
-&lt;/environments&gt;</code></pre>
+&lt;/environments&gt;
+</code></pre>
 </li>
 <li>配置MyBatis的<strong>多套运行环境</strong>，将SQL映射到多个不同的数据库上，必须指定其中一个为默认运行环境（通过default指定）</li>
 <li>子元素节点：<strong>environment</strong><ul>
 <li>dataSource 元素使用标准的 JDBC 数据源接口来配置 JDBC 连接对象的资源。</li>
 <li>数据源是必须配置的。</li>
-<li>有三种内建的数据源类型<pre><code class="xml">  type=&quot;[UNPOOLED|POOLED|JNDI]&quot;）</code></pre>
+<li>有三种内建的数据源类型<pre><code class="lang-xml">  type=&quot;[UNPOOLED|POOLED|JNDI]&quot;）
+</code></pre>
 </li>
 <li>unpooled：这个数据源的实现只是每次被请求时打开和关闭连接。</li>
 <li><strong>pooled</strong>：这种数据源的实现利用“池”的概念将 JDBC 连接对象组织起来 , 这是一种使得并发 Web 应用快速响应请求的流行处理方式。</li>
 <li>jndi：这个数据源的实现是为了能在如 Spring 或应用服务器这类容器中使用，容器可以集中或在外部配置数据源，然后放置一个 JNDI 上下文的引用。</li>
 <li>数据源也有很多第三方的实现，比如dbcp，c3p0，druid等等….</li>
-<li>子元素节点：transactionManager - [ 事务管理器 ]<pre><code class="xml">  &lt;!-- 语法 --&gt;
-  &lt;transactionManager type=&quot;[ JDBC | MANAGED ]&quot;/&gt;</code></pre>
+<li>子元素节点：transactionManager - [ 事务管理器 ]<pre><code class="lang-xml">  &lt;!-- 语法 --&gt;
+  &lt;transactionManager type=&quot;[ JDBC | MANAGED ]&quot;/&gt;
+</code></pre>
 </li>
 <li>子元素节点：<strong>数据源（dataSource）</strong></li>
 </ul>
@@ -713,36 +748,41 @@ list&lt;name&gt; names = mapper.selectlike(wildcardname);
 <li>Java 在自动查找这方面没有提供一个很好的方法，所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。你可以使用相对于类路径的资源引用， 或完全限定资源定位符（包括 file:/// 的 URL），或类名和包名等。映射器是MyBatis中最核心的组件之一，在MyBatis 3之前，只支持xml映射器，即：所有的SQL语句都必须在xml文件中配置。而从MyBatis 3开始，还支持接口映射器，这种映射器方式允许以Java代码的方式注解定义SQL语句，非常简洁。   </li>
 </ul>
 <p><strong>引入资源方式</strong></p>
-<pre><code class="xml">&lt;!-- 使用相对于类路径的资源引用 --&gt;
+<pre><code class="lang-xml">&lt;!-- 使用相对于类路径的资源引用 --&gt;
 &lt;mappers&gt;
  &lt;mapper resource=&quot;org/mybatis/builder/PostMapper.xml&quot;/&gt;
-&lt;/mappers&gt;</code></pre>
-<pre><code class="xml">&lt;!-- 使用完全限定资源定位符（URL） --&gt;
+&lt;/mappers&gt;
+</code></pre>
+<pre><code class="lang-xml">&lt;!-- 使用完全限定资源定位符（URL） --&gt;
 &lt;mappers&gt;
  &lt;mapper url=&quot;file:///var/mappers/AuthorMapper.xml&quot;/&gt;
-&lt;/mappers&gt;</code></pre>
-<pre><code class="xml">&lt;!--
+&lt;/mappers&gt;
+</code></pre>
+<pre><code class="lang-xml">&lt;!--
 使用映射器接口实现类的完全限定类名
 需要配置文件名称和接口名称一致，并且位于同一目录下
 --&gt;
 &lt;mappers&gt;
  &lt;mapper class=&quot;org.mybatis.builder.AuthorMapper&quot;/&gt;
-&lt;/mappers&gt;</code></pre>
-<pre><code class="xml">&lt;!--
+&lt;/mappers&gt;
+</code></pre>
+<pre><code class="lang-xml">&lt;!--
 将包内的映射器接口实现全部注册为映射器
 但是需要配置文件名称和接口名称一致，并且位于同一目录下
 --&gt;
 &lt;mappers&gt;
  &lt;package name=&quot;org.mybatis.builder&quot;/&gt;
-&lt;/mappers&gt;</code></pre>
+&lt;/mappers&gt;
+</code></pre>
 <p><strong>Mapper文件</strong></p>
-<pre><code class="XML">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+<pre><code class="lang-XML">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;!DOCTYPE mapper
        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
 &lt;mapper namespace=&quot;com.lg.mapper.UserMapper&quot;&gt;
 
-&lt;/mapper&gt;</code></pre>
+&lt;/mapper&gt;
+</code></pre>
 <ul>
 <li>namespace中文意思：命名空间，作用如下：<ul>
 <li>namespace的命名必须跟某个接口同名</li>
@@ -759,12 +799,13 @@ list&lt;name&gt; names = mapper.selectlike(wildcardname);
 <h2 id="Properties优化"><a href="#Properties优化" class="headerlink" title="Properties优化"></a>Properties优化</h2><p>数据库这些属性都是可外部配置且可动态替换的，既可以在典型的 Java 属性文件中配置，亦可通过 properties 元素的子元素来传递。具体的官方文档</p>
 <p>我们来优化我们的配置文件</p>
 <p>第一步 ; 在资源目录下新建一个db.properties</p>
-<pre><code class="xml">driver=com.mysql.jdbc.Driver
+<pre><code class="lang-xml">driver=com.mysql.jdbc.Driver
 url=jdbc:mysql://localhost:3306/mybatis?useSSL=true&amp;useUnicode=true&amp;characterEncoding=utf8
 username=root
-password=123456</code></pre>
+password=123456
+</code></pre>
 <p>第二步 : 将文件导入properties 配置文件</p>
-<pre><code class="xml">&lt;configuration&gt;
+<pre><code class="lang-xml">&lt;configuration&gt;
    &lt;!--导入properties文件--&gt;
    &lt;properties resource=&quot;db.properties&quot;/&gt;
 
@@ -782,28 +823,32 @@ password=123456</code></pre>
    &lt;mappers&gt;
        &lt;mapper resource=&quot;mapper/UserMapper.xml&quot;/&gt;
    &lt;/mappers&gt;
-&lt;/configuration&gt;</code></pre>
+&lt;/configuration&gt;
+</code></pre>
 <p>更多操作，可以查看官方文档！</p>
 <ul>
 <li>配置文件优先级问题</li>
 <li>新特性：使用占位符</li>
 </ul>
 <h2 id="typeAliases优化"><a href="#typeAliases优化" class="headerlink" title="typeAliases优化"></a>typeAliases优化</h2><p>类型别名是为 Java 类型设置一个短的名字。它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。</p>
-<pre><code class="xml">&lt;!--配置别名,注意顺序--&gt;
+<pre><code class="lang-xml">&lt;!--配置别名,注意顺序--&gt;
 &lt;typeAliases&gt;
    &lt;typeAlias type=&quot;com.lg.pojo.User&quot; alias=&quot;User&quot;/&gt;
-&lt;/typeAliases&gt;</code></pre>
+&lt;/typeAliases&gt;
+</code></pre>
 <p>当这样配置时，User可以用在任何使用com.lg.pojo.User的地方。</p>
 <p>也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean，比如:</p>
-<pre><code class="xml">&lt;typeAliases&gt;
+<pre><code class="lang-xml">&lt;typeAliases&gt;
    &lt;package name=&quot;com.lg.pojo&quot;/&gt;
-&lt;/typeAliases&gt;</code></pre>
+&lt;/typeAliases&gt;
+</code></pre>
 <p>每一个在包 com.lg.pojo 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。</p>
 <p>若有注解，则别名为其注解值。见下面的例子：</p>
-<pre><code class="java">@Alias(&quot;user&quot;)
+<pre><code class="lang-java">@Alias(&quot;user&quot;)
 public class User {
   ...
-}</code></pre>
+}
+</code></pre>
 <h2 id="其他配置浏览"><a href="#其他配置浏览" class="headerlink" title="其他配置浏览"></a>其他配置浏览</h2><p><strong>设置</strong></p>
 <ul>
 <li><p>设置（settinjgs）相关 =&gt; 查看帮助文档</p>
@@ -814,7 +859,7 @@ public class User {
 </ul>
 </li>
 <li><p>一个配置完整的settings元素的示例如下：</p>
-<pre><code class="xml">&lt;settings&gt;
+<pre><code class="lang-xml">&lt;settings&gt;
  &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
  &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;
  &lt;setting name=&quot;multipleResultSetsEnabled&quot; value=&quot;true&quot;/&gt;
@@ -830,7 +875,8 @@ public class User {
  &lt;setting name=&quot;localCacheScope&quot; value=&quot;SESSION&quot;/&gt;
  &lt;setting name=&quot;jdbcTypeForNull&quot; value=&quot;OTHER&quot;/&gt;
  &lt;setting name=&quot;lazyLoadTriggerMethods&quot; value=&quot;equals,clone,hashCode,toString&quot;/&gt;
-&lt;/settings&gt;</code></pre>
+&lt;/settings&gt;
+</code></pre>
 </li>
 </ul>
 <p><strong>类型处理器</strong></p>
@@ -847,7 +893,7 @@ public class User {
 <h2 id="生命周期和作用域"><a href="#生命周期和作用域" class="headerlink" title="生命周期和作用域"></a>生命周期和作用域</h2><p><strong>作用域（Scope）和生命周期</strong></p>
 <p>理解我们目前已经讨论过的不同作用域和生命周期类是至关重要的，因为错误的使用会导致非常严重的并发问题。</p>
 <p>画一个流程图，分析一下！</p>
-<p><img src="Mybatis%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="Mybatis执行过程流程图"></p>
+<p><img src="Mybatis执行过程流程图.png" alt="Mybatis执行过程流程图"></p>
 <p><strong>作用域理解</strong></p>
 <ul>
 <li><p>SqlSessionFactoryBuilder 的作用在于创建 SqlSessionFactory，创建成功后，SqlSessionFactoryBuilder 就失去了作用，所以它只能存在于创建 SqlSessionFactory 的方法中，而不要让其长期存在。因此 <strong>SqlSessionFactoryBuilder 实例的最佳作用域是方法作用域</strong>（也就是局部方法变量）。</p>
@@ -939,7 +985,7 @@ public class User {
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>

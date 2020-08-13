@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -525,7 +545,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="BF"><a href="#BF" class="headerlink" title="BF"></a>BF</h1><p>Dijkstra算法可以很好的解决无负权图，但如果出现了负权边，便会失效。<br>首先，图的任意一条最短路径既不能包含负权回路，也不会包含正权回路，因此它最多包含|v|-1条边。，如果把源点S作为一棵树的根结点，把其他结点按照最短路径的结点顺序连接，就会生成一棵最短路径树。<br>主要思路如下（伪代码）复杂度为（V*E）：</p>
-<pre><code class="cpp">for(i=0;i&lt;n-1;i++)//n为顶点数
+<pre><code class="lang-cpp">for(i=0;i&lt;n-1;i++)//n为顶点数
     {
         for(each edge u-&gt;v)//每轮操作遍历所有边
         {
@@ -534,9 +554,10 @@
                 d[v]=d[u]+length[u-&gt;v];//松弛操作
             }
         }
-    }</code></pre>
+    }
+</code></pre>
 <p>邻接表的代码：</p>
-<pre><code class="cpp">struct node
+<pre><code class="lang-cpp">struct node
 {
     int v,dis; //v为邻接边的目标定点，dis为邻接边的边权
 };
@@ -576,7 +597,7 @@ bool bellman(int s) //s为源点
 }
 </code></pre>
 <h1 id="SPFA"><a href="#SPFA" class="headerlink" title="SPFA"></a>SPFA</h1><p>Bellman-Ford算法时间复杂度过高，优化后被称为SPFA算法。<br>代码思路如下：</p>
-<pre><code class="cpp">struct node
+<pre><code class="lang-cpp">struct node
 {
     int v,dis; //v为邻接边的目标定点，dis为邻接边的边权
 };
@@ -621,7 +642,8 @@ bool SPFA(int s)
     }
     return true;
 
-}</code></pre>
+}
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
@@ -697,7 +719,7 @@ bool SPFA(int s)
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>

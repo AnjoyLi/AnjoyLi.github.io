@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -556,14 +576,16 @@
 </ul>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>1、在mybatis中加入日志，方便测试结果</p>
 <p>2、编写接口方法</p>
-<pre><code class="java">//根据id查询用户
-User queryUserById(@Param(&quot;id&quot;) int id);</code></pre>
+<pre><code class="lang-java">//根据id查询用户
+User queryUserById(@Param(&quot;id&quot;) int id);
+</code></pre>
 <p>3、接口对应的Mapper文件</p>
-<pre><code class="xml">&lt;select id=&quot;queryUserById&quot; resultType=&quot;user&quot;&gt;
+<pre><code class="lang-xml">&lt;select id=&quot;queryUserById&quot; resultType=&quot;user&quot;&gt;
   select * from user where id = #{id}
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 <p>4、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testQueryUserById(){
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -575,13 +597,14 @@ public void testQueryUserById(){
    System.out.println(user==user2);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p>5、结果分析</p>
-<p><img src="%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90.jpg" alt="结果分析"></p>
+<p><img src="结果分析.jpg" alt="结果分析"></p>
 <h3 id="一级缓存失效的四种情况"><a href="#一级缓存失效的四种情况" class="headerlink" title="一级缓存失效的四种情况"></a>一级缓存失效的四种情况</h3><p>一级缓存是SqlSession级别的缓存，是一直开启的，我们关闭不了它；</p>
 <p>一级缓存失效情况：没有使用到当前的一级缓存，效果就是，还需要再向数据库中发起一次查询请求！</p>
 <p>1、sqlSession不同</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testQueryUserById(){
    SqlSession session = MybatisUtils.getSession();
    SqlSession session2 = MybatisUtils.getSession();
@@ -596,11 +619,12 @@ public void testQueryUserById(){
 
    session.close();
    session2.close();
-}</code></pre>
+}
+</code></pre>
 <p>观察结果：发现发送了两条SQL语句！</p>
 <p>结论：<strong>每个sqlSession中的缓存相互独立</strong></p>
 <p>2、sqlSession相同，查询条件不同</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testQueryUserById(){
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -613,19 +637,22 @@ public void testQueryUserById(){
    System.out.println(user==user2);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p>观察结果：发现发送了两条SQL语句！很正常的理解</p>
 <p>结论：<strong>当前缓存中，不存在这个数据</strong></p>
 <p>3、sqlSession相同，两次查询之间执行了增删改操作！</p>
 <p>增加方法</p>
-<pre><code class="java">//修改用户
-int updateUser(Map map);</code></pre>
+<pre><code class="lang-java">//修改用户
+int updateUser(Map map);
+</code></pre>
 <p>编写SQL</p>
-<pre><code class="xml">&lt;update id=&quot;updateUser&quot; parameterType=&quot;map&quot;&gt;
+<pre><code class="lang-xml">&lt;update id=&quot;updateUser&quot; parameterType=&quot;map&quot;&gt;
   update user set name = #{name} where id = #{id}
-&lt;/update&gt;</code></pre>
+&lt;/update&gt;
+</code></pre>
 <p>测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testQueryUserById(){
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -644,11 +671,12 @@ public void testQueryUserById(){
    System.out.println(user==user2);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p>观察结果：查询在中间执行了增删改操作后，重新执行了</p>
 <p>结论：<strong>因为增删改操作可能会对当前数据产生影响</strong></p>
 <p>4、sqlSession相同，手动清除一级缓存</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testQueryUserById(){
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -664,7 +692,8 @@ public void testQueryUserById(){
    System.out.println(user==user2);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p>一级缓存就是一个map</p>
 <h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><ul>
 <li><p>二级缓存也叫全局缓存，一级缓存作用域太低了，所以诞生了二级缓存</p>
@@ -682,9 +711,10 @@ public void testQueryUserById(){
 </li>
 </ul>
 <h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><p>1、开启全局缓存 【mybatis-config.xml】</p>
-<pre><code class="xml">&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</code></pre>
+<pre><code class="lang-xml">&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
+</code></pre>
 <p>2、去每个mapper.xml中配置使用二级缓存，这个配置非常简单；【xxxMapper.xml】</p>
-<pre><code class="xml">&lt;cache/&gt;
+<pre><code class="lang-xml">&lt;cache/&gt;
 
 官方示例=====&gt;查看官方文档
 &lt;cache
@@ -692,13 +722,14 @@ public void testQueryUserById(){
  flushInterval=&quot;60000&quot;
  size=&quot;512&quot;
  readOnly=&quot;true&quot;/&gt;
-这个更高级的配置创建了一个 FIFO 缓存，每隔 60 秒刷新，最多可以存储结果对象或列表的 512 个引用，而且返回的对象被认为是只读的，因此对它们进行修改可能会在不同线程中的调用者产生冲突。</code></pre>
+这个更高级的配置创建了一个 FIFO 缓存，每隔 60 秒刷新，最多可以存储结果对象或列表的 512 个引用，而且返回的对象被认为是只读的，因此对它们进行修改可能会在不同线程中的调用者产生冲突。
+</code></pre>
 <p>3、代码测试</p>
 <ul>
 <li>所有的实体类先实现序列化接口</li>
 <li>测试代码</li>
 </ul>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testQueryUserById(){
    SqlSession session = MybatisUtils.getSession();
    SqlSession session2 = MybatisUtils.getSession();
@@ -715,29 +746,32 @@ public void testQueryUserById(){
    System.out.println(user==user2);
 
    session2.close();
-}</code></pre>
+}
+</code></pre>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ul>
 <li>只要开启了二级缓存，我们在同一个Mapper中的查询，可以在二级缓存中拿到数据</li>
 <li>查出的数据都会被默认先放在一级缓存中</li>
 <li>只有会话提交或者关闭以后，一级缓存中的数据才会转到二级缓存中</li>
 </ul>
-<h2 id="缓存原理图"><a href="#缓存原理图" class="headerlink" title="缓存原理图"></a>缓存原理图</h2><p><img src="%E7%BC%93%E5%AD%98%E5%8E%9F%E7%90%86%E5%9B%BE.jpg" alt="缓存原理图"></p>
+<h2 id="缓存原理图"><a href="#缓存原理图" class="headerlink" title="缓存原理图"></a>缓存原理图</h2><p><img src="缓存原理图.jpg" alt="缓存原理图"></p>
 <h2 id="EhCache"><a href="#EhCache" class="headerlink" title="EhCache"></a>EhCache</h2><p><img src="EnCache.jpg" alt="EnCache"></p>
-<p>第三方缓存实现–<strong>EhCache</strong></p>
+<p>第三方缓存实现—<strong>EhCache</strong></p>
 <p>Ehcache是一种广泛使用的java分布式缓存，用于通用缓存；</p>
 <p>要在应用程序中使用Ehcache，需要引入依赖的jar包</p>
-<pre><code class="xml">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache --&gt;
+<pre><code class="lang-xml">&lt;!-- https://mvnrepository.com/artifact/org.mybatis.caches/mybatis-ehcache --&gt;
 &lt;dependency&gt;
    &lt;groupId&gt;org.mybatis.caches&lt;/groupId&gt;
    &lt;artifactId&gt;mybatis-ehcache&lt;/artifactId&gt;
    &lt;version&gt;1.1.0&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <p>在mapper.xml中使用对应的缓存即可</p>
-<pre><code class="xml">&lt;mapper namespace = “org.acme.FooMapper” &gt;
+<pre><code class="lang-xml">&lt;mapper namespace = “org.acme.FooMapper” &gt;
    &lt;cache type = “org.mybatis.caches.ehcache.EhcacheCache” /&gt;
-&lt;/mapper&gt;</code></pre>
+&lt;/mapper&gt;
+</code></pre>
 <p>编写ehcache.xml文件，如果在加载时未找到/ehcache.xml资源或出现问题，则将使用默认配置。</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;ehcache xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
         xsi:noNamespaceSchemaLocation=&quot;http://ehcache.org/ehcache.xsd&quot;
         updateCheck=&quot;false&quot;&gt;
@@ -789,7 +823,8 @@ public void testQueryUserById(){
      LRU，Least Recently Used，最近最少使用的，缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。
   --&gt;
 
-&lt;/ehcache&gt;</code></pre>
+&lt;/ehcache&gt;
+</code></pre>
 <p>合理的使用缓存，可以让我们程序的性能大大提升！</p>
 
       
@@ -866,7 +901,7 @@ public void testQueryUserById(){
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>

@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -526,14 +546,17 @@
       
         <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="https://img-blog.csdnimg.cn/20200208001523689.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>他要我们求的是在n道题目中，有0，1，2，3….n道题目做对的概率，然后分别按隔一个空格输出对1e9+7求模后的结果，首先，我来解释一下下面几个代码的含义：<br>在代码中，我们先定义一个二维数组，f[2020][2020],对于f[i][j]的含义是在当前的i道题目中，恰好有j道题目做对的概率（以下所说的概率都是求模后的结果）。</p>
-<pre><code class="cpp">const int mod=1e9+7;
-(mod+1-p[i])%mod</code></pre>
+<pre><code class="lang-cpp">const int mod=1e9+7;
+(mod+1-p[i])%mod
+</code></pre>
 <p>该式的意义是第i题做错的概率。为了方便计算，我们都是假设分式a/b当中分母b的值为1，即b=1,（因为任何分式都可以化为分母为1的式子，当然，分子a可以为小数。所以由b*q%(1e9+7)=a;这里b=1，q就是我们输入的p[i],可得p[i]=kmod+a;即a=p[i]-kmod;那么求对应的错误的概率就是用1-a，即1-a=（kmod+1-p[i]）%mod=(mod+1-p[i])%mod,因为分母b为1；</p>
-<pre><code class="cpp">f[i][0]=f[i-1][0]*(mod+1-p[i])%mod;</code></pre>
+<pre><code class="lang-cpp">f[i][0]=f[i-1][0]*(mod+1-p[i])%mod;
+</code></pre>
 <p>那么，该行代码的意思就是当前有i道题目，有0道做对的概率等于i-1道题目中有0道题目做对的概率再乘以第i道题目做错的概率。</p>
-<pre><code class="cpp">f[i][j]=(f[i-1][j]*(mod+1-p[i])%mod+f[i-1][j-1]*p[i])%mod;</code></pre>
+<pre><code class="lang-cpp">f[i][j]=(f[i-1][j]*(mod+1-p[i])%mod+f[i-1][j-1]*p[i])%mod;
+</code></pre>
 <p>所以，这个代码就不难理解了。即要求i道题目中，j道题目做对的概率，就是相当于求i-1道题目中j道题目做对的概率乘以第i道题目做错的概率，再加上i-1道题目中j-1道题目做对的概率乘以第i道题目做对的概率</p>
-<h1 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h1><pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<h1 id="全部代码"><a href="#全部代码" class="headerlink" title="全部代码"></a>全部代码</h1><pre><code class="lang-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 
 typedef long long ll;
@@ -558,7 +581,8 @@ int main()
     }
 
     return 0;
-}</code></pre>
+}
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
@@ -634,7 +658,7 @@ int main()
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>

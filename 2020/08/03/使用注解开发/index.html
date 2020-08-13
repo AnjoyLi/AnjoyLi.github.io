@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -570,16 +590,18 @@
 </ul>
 <p><strong>注意：</strong>利用注解开发就不需要mapper.xml映射文件了 .</p>
 <p>1、我们在我们的接口中添加注解</p>
-<pre><code class="java">//查询全部用户
+<pre><code class="lang-java">//查询全部用户
 @Select(&quot;select id,name,pwd password from user&quot;)
-public List&lt;User&gt; getAllUser();</code></pre>
+public List&lt;User&gt; getAllUser();
+</code></pre>
 <p>2、在mybatis的核心配置文件中注入</p>
-<pre><code class="xml">&lt;!--使用class绑定接口--&gt;
+<pre><code class="lang-xml">&lt;!--使用class绑定接口--&gt;
 &lt;mappers&gt;
    &lt;mapper class=&quot;com.lg.mapper.UserMapper&quot;/&gt;
-&lt;/mappers&gt;</code></pre>
+&lt;/mappers&gt;
+</code></pre>
 <p>3、我们去进行测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testGetAllUser() {
    SqlSession session = MybatisUtils.getSession();
    //本质上利用了jvm的动态代理机制
@@ -591,30 +613,33 @@ public void testGetAllUser() {
   }
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p>4、利用Debug查看本质</p>
 <p><img src="Debug.jpg" alt="Debug示例"></p>
 <p>5、本质上利用了jvm的动态代理机制</p>
-<p><img src="jvm%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E6%9C%BA%E5%88%B6.jpg" alt="jvm动态代理机制"></p>
+<p><img src="jvm动态代理机制.jpg" alt="jvm动态代理机制"></p>
 <p>6、Mybatis详细的执行流程</p>
-<p><img src="Mybatis%E8%AF%A6%E7%BB%86%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.jpg" alt="Mybatis详细执行流程"></p>
+<p><img src="Mybatis详细执行流程.jpg" alt="Mybatis详细执行流程"></p>
 <h2 id="注解增删改"><a href="#注解增删改" class="headerlink" title="注解增删改"></a>注解增删改</h2><p>改造MybatisUtils工具类的getSession( ) 方法，重载实现。</p>
-<pre><code class="java">  //获取SqlSession连接
+<pre><code class="lang-java">  //获取SqlSession连接
   public static SqlSession getSession(){
       return getSession(true); //事务自动提交
   }
 
   public static SqlSession getSession(boolean flag){
       return sqlSessionFactory.openSession(flag);
-  }</code></pre>
+  }
+</code></pre>
 <p>【注意】确保实体类和数据库字段对应</p>
 <p><strong>查询：</strong></p>
 <p>1、编写接口方法注解</p>
-<pre><code class="java">//根据id查询用户
+<pre><code class="lang-java">//根据id查询用户
 @Select(&quot;select * from user where id = #{id}&quot;)
-User selectUserById(@Param(&quot;id&quot;) int id);</code></pre>
+User selectUserById(@Param(&quot;id&quot;) int id);
+</code></pre>
 <p>2、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testSelectUserById() {
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -623,14 +648,16 @@ public void testSelectUserById() {
    System.out.println(user);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p><strong>新增：</strong></p>
 <p>1、编写接口方法注解</p>
-<pre><code class="java">//添加一个用户
+<pre><code class="lang-java">//添加一个用户
 @Insert(&quot;insert into user (id,name,pwd) values (#{id},#{name},#{pwd})&quot;)
-int addUser(User user);</code></pre>
+int addUser(User user);
+</code></pre>
 <p>2、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testAddUser() {
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -639,14 +666,16 @@ public void testAddUser() {
    mapper.addUser(user);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p><strong>修改：</strong></p>
 <p>1、编写接口方法注解</p>
-<pre><code class="java">//修改一个用户
+<pre><code class="lang-java">//修改一个用户
 @Update(&quot;update user set name=#{name},pwd=#{pwd} where id = #{id}&quot;)
-int updateUser(User user);</code></pre>
+int updateUser(User user);
+</code></pre>
 <p>2、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testUpdateUser() {
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -655,14 +684,16 @@ public void testUpdateUser() {
    mapper.updateUser(user);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p><strong>删除：</strong></p>
 <p>1、编写接口方法注解</p>
-<pre><code class="java">//根据id删除用
+<pre><code class="lang-java">//根据id删除用
 @Delete(&quot;delete from user where id = #{id}&quot;)
-int deleteUser(@Param(&quot;id&quot;)int id);</code></pre>
+int deleteUser(@Param(&quot;id&quot;)int id);
+</code></pre>
 <p>2、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testDeleteUser() {
    SqlSession session = MybatisUtils.getSession();
    UserMapper mapper = session.getMapper(UserMapper.class);
@@ -670,7 +701,8 @@ public void testDeleteUser() {
    mapper.deleteUser(6);
 
    session.close();
-}</code></pre>
+}
+</code></pre>
 <p>【注意点：增删改一定记得对事务的处理】</p>
 <h2 id="关于-Param"><a href="#关于-Param" class="headerlink" title="关于@Param"></a>关于@Param</h2><p>@Param注解用于给方法参数起一个名字。以下是总结的使用原则：</p>
 <ul>
@@ -681,12 +713,14 @@ public void testDeleteUser() {
 </ul>
 <h2 id="与-的区别"><a href="#与-的区别" class="headerlink" title="#与$的区别"></a>#与$的区别</h2><ul>
 <li><p>#{} 的作用主要是替换预编译语句(PrepareStatement)中的占位符? 【推荐使用】</p>
-<pre><code class="sql">INSERT INTO user (name) VALUES (#{name});
-INSERT INTO user (name) VALUES (?);</code></pre>
+<pre><code class="lang-sql">INSERT INTO user (name) VALUES (#{name});
+INSERT INTO user (name) VALUES (?);
+</code></pre>
 </li>
 <li><p>${} 的作用是直接进行字符串替换</p>
-<pre><code class="sql">INSERT INTO user (name) VALUES (&#39;${name}&#39;);
-INSERT INTO user (name) VALUES (&#39;kuangshen&#39;);</code></pre>
+<pre><code class="lang-sql">INSERT INTO user (name) VALUES (&#39;${name}&#39;);
+INSERT INTO user (name) VALUES (&#39;kuangshen&#39;);
+</code></pre>
 </li>
 </ul>
 <p>使用注解开发可以提高我们的开发效率，可以合理使用！</p>
@@ -765,7 +799,7 @@ INSERT INTO user (name) VALUES (&#39;kuangshen&#39;);</code></pre>
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>

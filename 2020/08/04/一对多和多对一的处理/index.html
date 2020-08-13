@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -529,8 +549,8 @@
 <li>多个学生对应一个老师</li>
 <li>如果对于学生这边，就是一个多对一的现象，即从学生这边关联一个老师！</li>
 </ul>
-<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p><img src="%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1_%E5%A4%9A%E5%AF%B9%E4%B8%80.jpg" alt="数据库设计"></p>
-<pre><code class="sql">CREATE TABLE `teacher` (
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p><img src="数据库设计_多对一.jpg" alt="数据库设计"></p>
+<pre><code class="lang-sql">CREATE TABLE `teacher` (
 `id` INT(10) NOT NULL,
 `name` VARCHAR(30) DEFAULT NULL,
 PRIMARY KEY (`id`)
@@ -552,17 +572,19 @@ INSERT INTO `student` (`id`, `name`, `tid`) VALUES (&#39;1&#39;, &#39;小明&#39
 INSERT INTO `student` (`id`, `name`, `tid`) VALUES (&#39;2&#39;, &#39;小红&#39;, &#39;1&#39;);
 INSERT INTO `student` (`id`, `name`, `tid`) VALUES (&#39;3&#39;, &#39;小张&#39;, &#39;1&#39;);
 INSERT INTO `student` (`id`, `name`, `tid`) VALUES (&#39;4&#39;, &#39;小李&#39;, &#39;1&#39;);
-INSERT INTO `student` (`id`, `name`, `tid`) VALUES (&#39;5&#39;, &#39;小王&#39;, &#39;1&#39;);</code></pre>
+INSERT INTO `student` (`id`, `name`, `tid`) VALUES (&#39;5&#39;, &#39;小王&#39;, &#39;1&#39;);
+</code></pre>
 <h2 id="搭建测试环境"><a href="#搭建测试环境" class="headerlink" title="搭建测试环境"></a>搭建测试环境</h2><p>1、IDEA安装Lombok插件</p>
 <p>2、引入Maven依赖</p>
-<pre><code class="xml">&lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&gt;
+<pre><code class="lang-xml">&lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&gt;
 &lt;dependency&gt;
  &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
  &lt;artifactId&gt;lombok&lt;/artifactId&gt;
  &lt;version&gt;1.16.10&lt;/version&gt;
-&lt;/dependency&gt;</code></pre>
+&lt;/dependency&gt;
+</code></pre>
 <p>3、在代码中增加注解</p>
-<pre><code class="java">@Data //GET,SET,ToString，有参，无参构造
+<pre><code class="lang-java">@Data //GET,SET,ToString，有参，无参构造
 public class Teacher {
    private int id;
    private String name;
@@ -573,20 +595,23 @@ public class Student {
    private String name;
    //多个学生可以是同一个老师，即多对一
    private Teacher teacher;
-}</code></pre>
+}
+</code></pre>
 <p>4、编写实体类对应的Mapper接口 【两个】</p>
 <ul>
 <li><strong>无论有没有需求，都应该写上，以备后来之需！</strong></li>
 </ul>
-<pre><code class="java">public interface StudentMapper {
-}</code></pre>
-<pre><code class="java">public interface TeacherMapper {
-}</code></pre>
+<pre><code class="lang-java">public interface StudentMapper {
+}
+</code></pre>
+<pre><code class="lang-java">public interface TeacherMapper {
+}
+</code></pre>
 <p>5、编写Mapper接口对应的 mapper.xml配置文件 【两个】</p>
 <ul>
 <li><strong>无论有没有需求，都应该写上，以备后来之需！</strong></li>
 </ul>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;!DOCTYPE mapper
        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
@@ -599,12 +624,14 @@ public class Student {
        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
 &lt;mapper namespace=&quot;com.kuang.mapper.TeacherMapper&quot;&gt;
 
-&lt;/mapper&gt;</code></pre>
+&lt;/mapper&gt;
+</code></pre>
 <h2 id="按查询嵌套处理"><a href="#按查询嵌套处理" class="headerlink" title="按查询嵌套处理"></a>按查询嵌套处理</h2><p>1、给StudentMapper接口增加方法</p>
-<pre><code class="java">//获取所有学生及对应老师的信息
-public List&lt;Student&gt; getStudents();</code></pre>
+<pre><code class="lang-java">//获取所有学生及对应老师的信息
+public List&lt;Student&gt; getStudents();
+</code></pre>
 <p>2、编写对应的Mapper文件</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;!DOCTYPE mapper
        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
@@ -639,10 +666,11 @@ public List&lt;Student&gt; getStudents();</code></pre>
       select * from teacher where id = #{id}
    &lt;/select&gt;
 
-&lt;/mapper&gt;</code></pre>
+&lt;/mapper&gt;
+</code></pre>
 <p>3、编写完毕去Mybatis配置文件中，注册Mapper！</p>
 <p>4、注意点说明：</p>
-<pre><code class="xml">&lt;resultMap id=&quot;StudentTeacher&quot; type=&quot;Student&quot;&gt;
+<pre><code class="lang-xml">&lt;resultMap id=&quot;StudentTeacher&quot; type=&quot;Student&quot;&gt;
    &lt;!--association关联属性 property属性名 javaType属性类型 column在多的一方的表中的列名--&gt;
    &lt;association property=&quot;teacher&quot;  column=&quot;{id=tid,name=tid}&quot; javaType=&quot;Teacher&quot; select=&quot;getTeacher&quot;/&gt;
 &lt;/resultMap&gt;
@@ -654,9 +682,10 @@ association中column多参数配置：
 --&gt;
 &lt;select id=&quot;getTeacher&quot; resultType=&quot;teacher&quot;&gt;
   select * from teacher where id = #{id} and name = #{name}
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 <p>5、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testGetStudents(){
    SqlSession session = MybatisUtils.getSession();
    StudentMapper mapper = session.getMapper(StudentMapper.class);
@@ -668,12 +697,14 @@ public void testGetStudents(){
                &quot;学生名:&quot;+ student.getName()
                        +&quot;\t老师:&quot;+student.getTeacher().getName());
   }
-}</code></pre>
+}
+</code></pre>
 <h2 id="按结果嵌套查询"><a href="#按结果嵌套查询" class="headerlink" title="按结果嵌套查询"></a>按结果嵌套查询</h2><p>我们还可以按照结果进行嵌套处理；</p>
 <p>1、接口方法编写</p>
-<pre><code class="java">public List&lt;Student&gt; getStudents2();</code></pre>
+<pre><code class="lang-java">public List&lt;Student&gt; getStudents2();
+</code></pre>
 <p>2、编写对应的mapper文件</p>
-<pre><code class="xml">&lt;!--
+<pre><code class="lang-xml">&lt;!--
 按查询结果嵌套处理
 思路：
    1. 直接查询出结果，进行结果集的映射
@@ -691,10 +722,11 @@ public void testGetStudents(){
    &lt;association property=&quot;teacher&quot; javaType=&quot;Teacher&quot;&gt;
        &lt;result property=&quot;name&quot; column=&quot;tname&quot;/&gt;
    &lt;/association&gt;
-&lt;/resultMap&gt;</code></pre>
+&lt;/resultMap&gt;
+</code></pre>
 <p>3、去mybatis-config文件中注入【此处应该处理过了】</p>
 <p>4、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testGetStudents2(){
    SqlSession session = MybatisUtils.getSession();
    StudentMapper mapper = session.getMapper(StudentMapper.class);
@@ -706,7 +738,8 @@ public void testGetStudents2(){
                &quot;学生名:&quot;+ student.getName()
                        +&quot;\t老师:&quot;+student.getTeacher().getName());
   }
-}</code></pre>
+}
+</code></pre>
 <blockquote>
 <p>小结</p>
 </blockquote>
@@ -717,24 +750,27 @@ public void testGetStudents2(){
 <li>一个老师拥有多个学生</li>
 <li>如果对于老师这边，就是一个一对多的现象，即从一个老师下面拥有一群学生（集合）！</li>
 </ul>
-<h2 id="实体类编写"><a href="#实体类编写" class="headerlink" title="实体类编写"></a>实体类编写</h2><pre><code class="java">@Data
+<h2 id="实体类编写"><a href="#实体类编写" class="headerlink" title="实体类编写"></a>实体类编写</h2><pre><code class="lang-java">@Data
 public class Student {
    private int id;
    private String name;
    private int tid;
-}</code></pre>
-<pre><code class="java">@Data
+}
+</code></pre>
+<pre><code class="lang-java">@Data
 public class Teacher {
    private int id;
    private String name;
    //一个老师多个学生
    private List&lt;Student&gt; students;
-}</code></pre>
+}
+</code></pre>
 <h2 id="按结果嵌套查询-1"><a href="#按结果嵌套查询-1" class="headerlink" title="按结果嵌套查询"></a>按结果嵌套查询</h2><p>1、TeacherMapper接口编写方法</p>
-<pre><code class="java">//获取指定老师，及老师下的所有学生
-public Teacher getTeacher(int id);</code></pre>
+<pre><code class="lang-java">//获取指定老师，及老师下的所有学生
+public Teacher getTeacher(int id);
+</code></pre>
 <p>2、编写接口对应的Mapper配置文件</p>
-<pre><code class="xml">&lt;mapper namespace=&quot;com.kuang.mapper.TeacherMapper&quot;&gt;
+<pre><code class="lang-xml">&lt;mapper namespace=&quot;com.kuang.mapper.TeacherMapper&quot;&gt;
 
    &lt;!--
    思路:
@@ -759,24 +795,28 @@ public Teacher getTeacher(int id);</code></pre>
            &lt;result property=&quot;tid&quot; column=&quot;tid&quot; /&gt;
        &lt;/collection&gt;
    &lt;/resultMap&gt;
-&lt;/mapper&gt;</code></pre>
+&lt;/mapper&gt;
+</code></pre>
 <p>3、将Mapper文件注册到MyBatis-config文件中</p>
-<pre><code class="xml">&lt;mappers&gt;
+<pre><code class="lang-xml">&lt;mappers&gt;
    &lt;mapper resource=&quot;mapper/TeacherMapper.xml&quot;/&gt;
-&lt;/mappers&gt;</code></pre>
+&lt;/mappers&gt;
+</code></pre>
 <p>4、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testGetTeacher(){
    SqlSession session = MybatisUtils.getSession();
    TeacherMapper mapper = session.getMapper(TeacherMapper.class);
    Teacher teacher = mapper.getTeacher(1);
    System.out.println(teacher.getName());
    System.out.println(teacher.getStudents());
-}</code></pre>
+}
+</code></pre>
 <h2 id="按查询嵌套处理-1"><a href="#按查询嵌套处理-1" class="headerlink" title="按查询嵌套处理"></a>按查询嵌套处理</h2><p>1、TeacherMapper接口编写方法</p>
-<pre><code class="java">public Teacher getTeacher2(int id);</code></pre>
+<pre><code class="lang-java">public Teacher getTeacher2(int id);
+</code></pre>
 <p>2、编写接口对应的Mapper配置文件</p>
-<pre><code class="xml">&lt;select id=&quot;getTeacher2&quot; resultMap=&quot;TeacherStudent2&quot;&gt;
+<pre><code class="lang-xml">&lt;select id=&quot;getTeacher2&quot; resultMap=&quot;TeacherStudent2&quot;&gt;
 select * from teacher where id = #{id}
 &lt;/select&gt;
 &lt;resultMap id=&quot;TeacherStudent2&quot; type=&quot;Teacher&quot;&gt;
@@ -785,17 +825,19 @@ select * from teacher where id = #{id}
 &lt;/resultMap&gt;
 &lt;select id=&quot;getStudentByTeacherId&quot; resultType=&quot;Student&quot;&gt;
   select * from student where tid = #{id}
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 <p>3、将Mapper文件注册到MyBatis-config文件中</p>
 <p>4、测试</p>
-<pre><code class="java">@Test
+<pre><code class="lang-java">@Test
 public void testGetTeacher2(){
    SqlSession session = MybatisUtils.getSession();
    TeacherMapper mapper = session.getMapper(TeacherMapper.class);
    Teacher teacher = mapper.getTeacher2(1);
    System.out.println(teacher.getName());
    System.out.println(teacher.getStudents());
-}</code></pre>
+}
+</code></pre>
 <h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>1、关联-association</p>
 <p>2、集合-collection</p>
 <p>3、所以association是用于一对一和多对一，而collection是用于一对多的关系</p>
@@ -885,7 +927,7 @@ public void testGetTeacher2(){
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>

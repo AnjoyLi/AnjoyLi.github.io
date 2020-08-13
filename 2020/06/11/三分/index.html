@@ -118,7 +118,7 @@
 
 
 <ul>
-    <li><div class="all active" data-rel="All">All<small>(17)</small></div></li>
+    <li><div class="all active" data-rel="All">All<small>(18)</small></div></li>
     
         
             
@@ -172,6 +172,14 @@
             
         
     
+        
+            
+            <li><div data-rel="数论">数论<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
 </ul>
 <div class="left-bottom">
     <div class="menus">
@@ -182,7 +190,7 @@
     </div>
     <div></div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_posts_number" value="18">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -279,6 +287,10 @@
             </li>
         
             <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>树</a>
             </li>
         
@@ -292,6 +304,14 @@
 
     
     <nav id="title-list-nav">
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
         
         <a  class="All SSM框架 Spring "
            href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
@@ -397,19 +417,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 算法 "
            href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
            data-tag="寒假训练,动态规划"
            data-author="" >
             <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -526,16 +546,17 @@
       
         <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="https://img-blog.csdnimg.cn/20200216164530774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>根据题目，在一个二维坐标中，我们要输入N个点坐标，而在x轴（-10000，10000）这个区间存在无数个点，我们假设它为x1,x2,x3…这些点中，每个点到我们输入的N个点的距离存在一个最大值，我们要在这些最大值中找到最小的那一个然后输出。<br>那么，思路是什么呢？<br>既然存在这样一个点，那么我们就要找到它所在的那个区间。<strong>但是，这里要注意了，是最小值，有最值，而且是最小值，那么就可以用三分法</strong>，那为什么不用二分法呢？<strong>因为二分法是对与单调区间的</strong>，（这在高中大家接触二分法的时候举得例子就是单调函数吧，我记得好像是单调且端点异号。）<strong>而三分法是针对有峰值的函数的</strong>。显然，在本题中，用三分法是更加方便快捷的。其实，二分法也可以用，就是对分下来的每一个区间进行再次二分。我觉得要用到递归好像。二分法比较复杂一点。后面我掌握后一定会及时向大家分享的。<br>下面，我们就来介绍一下三分法的解题步骤：<br>1.首先，我们要将先分为两半，然后在对其中的一变进行再分两半，总体就是2：1：1的形式。这里，我们用mid表示一半，用midmid表示一半的一半。</p>
-<pre><code class="cpp">double check(double x){
+<pre><code class="lang-cpp">double check(double x){
     double max=0;
     for(int i=0;i&lt;n;i++){
         double temp=sqrt(a[i].y*a[i].y+(a[i].x-x)*(a[i].x-x));
         if(temp&gt;max)  max=temp;
     }
     return max;
-}</code></pre>
+}
+</code></pre>
 <p>我们就是将在x轴坐标的某个点，到所有的N个点的最大值求出并且返回。</p>
-<pre><code class="cpp">double thsearch(double l,double r)
+<pre><code class="lang-cpp">double thsearch(double l,double r)
 {
     double mid,midmid;
     for(int i=0;i&lt;100;i++){
@@ -545,9 +566,10 @@
         else r=midmid;
     }
     return mid;
-}</code></pre>
+}
+</code></pre>
 <p>我们先搞清楚这个循环，对于这个循环有人可能会问了？<strong>为什么是100</strong>，其他可不可以，答案是：可以，我们先讲讲这个原理，每一次循环，都将剩余的区间进行了又一次的三分，这都是2的负次幂级的下降。所以，大家可以想想，<strong>2的-100次幂再乘以区间长度的值应该是足够精确的了</strong>。其实也可以50，30等。但博主试了一下，好像3也是可以过的，emmm，这就要看测试数据本身了，我们为了保险起见，还是将值设大一点。<br>然后，对于循环语句块，首先，<strong>mid我们代表的是区间中点，而midmid有代表的是区间中点的中点</strong>。那这里可能又有人要问了，为什么将midmid放在中点左边呢？其实，你要想，也可以放在中点的右边，只是将代码进行一些细微的修改罢了，更有甚者，还可以两边都来个for循环，emmm，只是，没有必要！</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="cpp">#include&lt;bits/stdc++.h&gt;
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="lang-cpp">#include&lt;bits/stdc++.h&gt;
 using namespace std;
 typedef long long ll;
 const double pi=acos(-1),eps=1e-10;
@@ -672,7 +694,7 @@ int main()
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>
