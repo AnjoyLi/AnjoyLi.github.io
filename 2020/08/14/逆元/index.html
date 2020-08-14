@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Hexo">
+  <title>逆元 | Hexo</title>
+  <meta name="keywords" content=" 扩展欧几里得 , 逆元 , 费马小定理 ">
+  <meta name="description" content="逆元 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="标签">
@@ -51,7 +51,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -484,12 +484,73 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-逆元" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol>
+        <h1 class="article-title">逆元</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="数论">数论</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">扩展欧几里得</a>
+            
+            <a class="color3">逆元</a>
+            
+            <a class="color1">费马小定理</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2020-08-14 22:28:34'>2020-08-14 21:04</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                Comment:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#逆元"><span class="toc-text">逆元</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题引入"><span class="toc-text">问题引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逆元的性质"><span class="toc-text">逆元的性质</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逆元的求解"><span class="toc-text">逆元的求解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展欧几里得算法"><span class="toc-text">扩展欧几里得算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#费马小定理"><span class="toc-text">费马小定理</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -502,15 +563,97 @@
     }
 </style>
 </div>
-            <h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h1><h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>对于取余运算，有以下一些性质：</p>
+<script type="math/tex; mode=display">
+(a+b)\%p=(a\%p+b\%p)\%p \\
+(a-b)\%p=(a\%p-b\%p)\%p \\
+(a\times b)\%p=(a\%p\times b\%p)\%p \\
+a^b\%p=((a\%p)^b)\%p</script><p>唯独<strong>除法</strong>是不满足的：</p>
+<script type="math/tex; mode=display">
+(\frac{a}{b})\%p \neq (\frac{a\%p}{b\%p})\%p</script><p>证明：</p>
+<script type="math/tex; mode=display">
+设a=k_0p+a',b=k_1p+b',k_0,k_1\in Z \\
+(\frac{a\%p}{b\%p})=(\frac{a'}{b'})= \frac{(a-k_0p)}{(b-k_1p)} \\
+\frac{(a-k_0p)}{(b-k_1p)} \neq \frac{a}{b}</script><p>而对于一些题目，我们必须在中间过程中进行求余，否则数字太大，电脑存不下，那如果这个算式中出现除法，我们就需要<strong>逆元</strong>了，<strong>将除法运算转换为乘法运算</strong>。</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><script type="math/tex; mode=display">
+若a \cdot c≡1(mod \ b),且a与b互质，就定义c为a的逆元，记作a^{-1}。也可以叫做c为a在mod\ p意义下的倒数。 \\
+所以\frac{a}{b}(mod\ p),就可以求出b(mod\ p)下的逆元，然后乘上a ，再mod\ p,就是这个分数的值了</script><p>除法取余的情况下，就是乘上这个数的逆元。即：</p>
+<script type="math/tex; mode=display">
+(\frac{a}{b})\% p=(a\times b^{-1})\% p=((a\% p)\times(b^{-1}\% p))\%p</script><p>这样就把除法取余，装换成了乘法取余。</p>
+<h2 id="逆元的性质"><a href="#逆元的性质" class="headerlink" title="逆元的性质"></a>逆元的性质</h2><ul>
+<li><p>唯一性</p>
+<p>给定一个数a，若存在模p下的逆元c，c一定唯一。</p>
+</li>
+<li><p>自反性</p>
+<p>c是a的逆元，a也是c的逆元。</p>
+</li>
+</ul>
+<h1 id="逆元的求解"><a href="#逆元的求解" class="headerlink" title="逆元的求解"></a>逆元的求解</h1><h2 id="扩展欧几里得算法"><a href="#扩展欧几里得算法" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h2><script type="math/tex; mode=display">
+a\cdot a^{-1} ≡ 1(mod\ b)</script><p><strong>模数可以不为质数，满足gcd（a,b)=1即可</strong></p>
+<ul>
+<li><p>定义</p>
+<script type="math/tex; mode=display">
+给定两个整数a与b，必存在有整数x与y使得ax+by=gcd(a,b)</script></li>
+<li><p>代码模板</p>
+<pre><code class="lang-cpp">ll exgcd(ll a,ll b,ll &amp;x,ll &amp;y)
+{
+    if(!b){
+        x=1;y=0;
+        return a;
+    }
+    ll d=exgcd(b,a%b,x,y);
+    ll t=x;
+    x=y;
+    y=t-(a/b)*y;
+    return d;
+}
+</code></pre>
+<p>即（取非负——a&lt;b）逆元为x：</p>
+<pre><code class="lang-cpp">cout&lt;&lt;(x%b+b)%b&lt;&lt;endl;
+</code></pre>
+</li>
+</ul>
+<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p><strong>只适用于模数为质数的情况，如果模数不是质数，可以变换一下，用欧拉定理。</strong></p>
+<p>如果p是一个质数（一般为1e9+7），且a不是p的倍数则有：</p>
+<script type="math/tex; mode=display">
+a^{p-1}≡1(mod\ p)</script><p>根据同余除法定理，两边同除以a：</p>
+<script type="math/tex; mode=display">
+a^{p-2}≡a^{-1}(mod\ p)</script><p>所以：</p>
+<script type="math/tex; mode=display">
+a^{-1}=a^{p-2}(mod\ p)</script><p>p是素数,所以a肯定就无法被p整除啊，所以最后就得出a^(p-2)为x的逆元。</p>
+<ul>
+<li><p>代码模板：</p>
+<pre><code class="lang-cpp">ll quickpow(ll a,ll b){
+    ll res=1;
+    while(b){
+        if(b&amp;1)
+            res=res*a%p;
+        a=a*a%p;
+        b&gt;&gt;=1;
+    }
+    return res;
+}
+</code></pre>
+<p>res即为所求逆元。</p>
+</li>
+</ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
     <div id="comments"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
@@ -532,6 +675,53 @@
 </script>
 
 
+
+
+    
+        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<input type="hidden" id="MathJax-js"
+        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
+</input>
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -540,11 +730,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>
