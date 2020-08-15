@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>平衡二叉树的基本操作 | Hexo</title>
-  <meta name="keywords" content=" 树 , 平衡二叉树 ">
-  <meta name="description" content="平衡二叉树的基本操作 | Hexo">
+  <title>依赖注入（DI） | Hexo</title>
+  <meta name="keywords" content=" Spring ">
+  <meta name="description" content="依赖注入（DI） | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章分类">
@@ -494,9 +494,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-平衡二叉树基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-依赖注入（DI）" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">平衡二叉树的基本操作</h1>
+        <h1 class="article-title">依赖注入（DI）</h1>
     
     <div class="article-meta">
         
@@ -506,7 +506,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="数据结构">数据结构</a>
+            <a  data-rel="SSM框架">SSM框架</a> > 
+            
+            <a  data-rel="SSM框架&lt;---&gt;Spring">Spring</a>
             
         </span>
         
@@ -514,16 +516,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">树</a>
-            
-            <a class="color1">平衡二叉树</a>
+            <a class="color2">Spring</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-06-12 14:19:13'>2020-06-12 14:16</time>
+            Created At : <time class="date" title='Updated At: 2020-08-15 18:19:07'>2020-08-15 17:41</time>
         
     </div>
     <div class="article-meta">
@@ -556,7 +556,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dependency-injection"><span class="toc-text">Dependency injection</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set注入（重点）"><span class="toc-text">Set注入（重点）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#p命名和c命名注入"><span class="toc-text">p命名和c命名注入</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -572,139 +572,215 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://www.dotcpp.com/oj/problem1713.html" target="_blank" rel="noopener">题目链接</a></p>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>平衡二叉树又称AVL树，它是一种具有平衡因子的特殊二叉排序树。平衡二叉树或者是一棵空树，或者是具有以下几条性质的二叉树： </p>
-<ol>
-<li><p>若它的左子树不空，则左子树上所有结点的值均小于它的根节点的值； </p>
-</li>
-<li><p>若它的右子树不空，则右子树上所有结点的值均大于它的根节点的值； </p>
-</li>
-<li><p>它的左右子树也分别为平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。 </p>
-</li>
-</ol>
-<p>若将二叉树上结点的平衡因子定义为该结点的左子树深度减去它的右子树的深度，则平衡二叉树上的所有结点的平衡因子只可能为-1、0和1。只要二叉树上有一个结点的平衡因子的绝对值大于1，则这棵二叉树就是不平衡的。 </p>
-<p>通过平衡二叉树的性质不难得知，其插入、删除、查询都操作的<strong>时间复杂度均为O(log2n)</strong>。</p>
-<p>解释一下右转<br><img src="https://img-blog.csdnimg.cn/20191209143746935.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>代码如下：</p>
-<pre><code class="lang-cpp">void lg_R(lg** root)
-{
-    lg *t=(*root)-&gt;left;
-    (*root)-&gt;left=t-&gt;right;
-    t-&gt;right=(*root);
-    (*root)-&gt;h=lg_geth((*root));
-    t-&gt;h=lg_geth(t);
-    *root=t;
-}
+        <h1 id="Dependency-injection"><a href="#Dependency-injection" class="headerlink" title="Dependency injection"></a>Dependency injection</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>依赖注入（Dependency Injection,DI）。</li>
+<li>依赖 : 指Bean对象的创建依赖于容器 . Bean对象的依赖资源 .</li>
+<li>注入 : 指Bean对象所依赖的资源 , 由容器来设置和装配 .</li>
+</ul>
+<h2 id="Set注入（重点）"><a href="#Set注入（重点）" class="headerlink" title="Set注入（重点）"></a>Set注入（重点）</h2><p>要求被注入的属性 , 必须有set方法 , set方法的方法名由set + 属性首字母大写 , 如果属性是boolean类型 , 没有set方法 , 是 is .</p>
+<p>测试pojo类 :</p>
+<p>Address.java</p>
+<pre><code class="lang-java">public class Address {
+
+     private String address;
+
+     public String getAddress() {
+         return address;
+    }
+
+     public void setAddress(String address) {
+         this.address = address;
+    }
+ }
 </code></pre>
-<p>左转类似。</p>
-<p>总代码如下：</p>
-<pre><code class="lang-cpp">#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-typedef struct node
-{
-    int d,h;            //h为高度，用高度判断当前子树是否平衡，d为存储的数据
-    struct node *left;
-    struct node *right;
-}lg;
-int max(int a,int b)    //返回最大值的函数
-{
-    return a&gt;b?a:b;
-}
-int h(lg *tree)            //返回当前节点的高度
-{
-    if(tree==NULL)return 0;
-    else return tree-&gt;h;
-}
-int lg_geth(lg *root)    //求当前节点的高度（左右子树的最高高度+1）
-{
-    return max(h(root-&gt;left),h(root-&gt;right))+1;
-}
-int lg_getp(lg *root)    //求当前节点的平衡因子（左子树高度减去右子树高度）
-{
-    return h(root-&gt;left)-h(root-&gt;right);
-}
-void lg_R(lg** root)    //树不平衡右转
-{
-    lg *t=(*root)-&gt;left;
-    (*root)-&gt;left=t-&gt;right;
-    t-&gt;right=(*root);
-    (*root)-&gt;h=lg_geth((*root));
-    t-&gt;h=lg_geth(t);
-    *root=t;
-}
-void lg_L(lg** root)    //左转
-{
-    lg *t=(*root)-&gt;right;
-    (*root)-&gt;right=t-&gt;left;
-    t-&gt;left=(*root);
-    (*root)-&gt;h=lg_geth((*root));
-    t-&gt;h=lg_geth(t);
-    *root=t;
-}
-void lg_insert(int w,lg** root)    //插入节点
-{
-    if(*root==NULL)
-    {
-        *root=(lg*)malloc(sizeof(lg));
-        (*root)-&gt;d=w;
-        (*root)-&gt;h=1;
-        (*root)-&gt;left=NULL;
-        (*root)-&gt;right=NULL;
-        return ;
+<p>Student.java</p>
+<pre><code class="lang-java"> import java.util.List;
+ import java.util.Map;
+ import java.util.Properties;
+ import java.util.Set;
+
+ public class Student {
+
+     private String name;
+     private Address address;
+     private String[] books;
+     private List&lt;String&gt; hobbys;
+     private Map&lt;String,String&gt; card;
+     private Set&lt;String&gt; games;
+     private String wife;
+     private Properties info;
+
+     public void setName(String name) {
+         this.name = name;
     }
-    if((*root)-&gt;d&gt;w)
-    {
-        lg_insert(w,&amp;((*root)-&gt;left));
-        (*root)-&gt;h=lg_geth((*root));
-        if(lg_getp(*root)==2)
-        {
-            if(lg_getp((*root)-&gt;left)==1)lg_R(&amp;(*root));
-            else if(lg_getp((*root)-&gt;left)==-1)
-            {
-                lg_L(&amp;(*root)-&gt;left);
-                lg_R(&amp;(*root));
-            }
+
+     public void setAddress(Address address) {
+         this.address = address;
+    }
+
+     public void setBooks(String[] books) {
+         this.books = books;
+    }
+
+     public void setHobbys(List&lt;String&gt; hobbys) {
+         this.hobbys = hobbys;
+    }
+
+     public void setCard(Map&lt;String, String&gt; card) {
+         this.card = card;
+    }
+
+     public void setGames(Set&lt;String&gt; games) {
+         this.games = games;
+    }
+
+     public void setWife(String wife) {
+         this.wife = wife;
+    }
+
+     public void setInfo(Properties info) {
+         this.info = info;
+    }
+
+     public void show(){
+         System.out.println(&quot;name=&quot;+ name
+                 + &quot;,address=&quot;+ address.getAddress()
+                 + &quot;,books=&quot;
+        );
+         for (String book:books){
+             System.out.print(&quot;&lt;&lt;&quot;+book+&quot;&gt;&gt;\t&quot;);
         }
+         System.out.println(&quot;\n爱好:&quot;+hobbys);
+
+         System.out.println(&quot;card:&quot;+card);
+
+         System.out.println(&quot;games:&quot;+games);
+
+         System.out.println(&quot;wife:&quot;+wife);
+
+         System.out.println(&quot;info:&quot;+info);
+
     }
-    else
-    {
-        lg_insert(w,&amp;(*root)-&gt;right);
-        (*root)-&gt;h=lg_geth((*root));
-        if(lg_getp((*root))==2)
-        {
-            if(lg_getp((*root)-&gt;right)==1)lg_L(&amp;(*root));
-            else if(lg_getp((*root)-&gt;right)==-1)
-            {
-                lg_R(&amp;(*root)-&gt;right);
-                lg_L(&amp;(*root));
-            }
-        }
+ }
+</code></pre>
+<p>1、<strong>常量注入</strong></p>
+<pre><code class="lang-xml"> &lt;bean id=&quot;student&quot; class=&quot;com.lg.pojo.Student&quot;&gt;
+     &lt;property name=&quot;name&quot; value=&quot;小明&quot;/&gt;
+ &lt;/bean&gt;
+</code></pre>
+<p>测试：</p>
+<pre><code class="lang-java"> @Test
+ public void test01(){
+     ApplicationContext context = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+
+     Student student = (Student) context.getBean(&quot;student&quot;);
+
+     System.out.println(student.getName());
+
+ }
+</code></pre>
+<p>2、<strong>Bean注入</strong> </p>
+<p>注意点：这里的值是一个引用，ref</p>
+<pre><code class="lang-xml"> &lt;bean id=&quot;addr&quot; class=&quot;com.kuang.pojo.Address&quot;&gt;
+     &lt;property name=&quot;address&quot; value=&quot;湖北&quot;/&gt;
+ &lt;/bean&gt;
+
+ &lt;bean id=&quot;student&quot; class=&quot;com.lg.pojo.Student&quot;&gt;
+     &lt;property name=&quot;name&quot; value=&quot;lg&quot;/&gt;
+     &lt;property name=&quot;address&quot; ref=&quot;addr&quot;/&gt;
+ &lt;/bean&gt;
+</code></pre>
+<p>3、<strong>数组注入</strong></p>
+<pre><code class="lang-xml"> &lt;property name=&quot;books&quot;&gt;
+      &lt;array&gt;
+           &lt;value&gt;西游记&lt;/value&gt;
+           &lt;value&gt;红楼梦&lt;/value&gt;
+           &lt;value&gt;水浒传&lt;/value&gt;
+      &lt;/array&gt;
+ &lt;/property&gt;
+</code></pre>
+<p>4、<strong>List注入</strong></p>
+<pre><code class="lang-xml"> &lt;property name=&quot;hobbys&quot;&gt;
+     &lt;list&gt;
+         &lt;value&gt;听歌&lt;/value&gt;
+         &lt;value&gt;看电影&lt;/value&gt;
+         &lt;value&gt;打游戏&lt;/value&gt;
+     &lt;/list&gt;
+ &lt;/property&gt;
+</code></pre>
+<p>5、<strong>Map注入</strong></p>
+<pre><code class="lang-xml"> &lt;property name=&quot;card&quot;&gt;
+     &lt;map&gt;
+         &lt;entry key=&quot;银行卡&quot; value=&quot;456456456465456&quot;/&gt;
+         &lt;entry key=&quot;校园卡&quot; value=&quot;1456682255511&quot;/&gt;
+     &lt;/map&gt;
+ &lt;/property&gt;
+</code></pre>
+<p>6、<strong>set注入</strong></p>
+<pre><code class="lang-xml"> &lt;property name=&quot;games&quot;&gt;
+     &lt;set&gt;
+         &lt;value&gt;LOL&lt;/value&gt;
+         &lt;value&gt;BOB&lt;/value&gt;
+         &lt;value&gt;COC&lt;/value&gt;
+     &lt;/set&gt;
+ &lt;/property&gt;
+</code></pre>
+<p>7、<strong>Null注入</strong></p>
+<pre><code class="lang-xml"> &lt;property name=&quot;wife&quot;&gt;&lt;null/&gt;&lt;/property&gt;
+</code></pre>
+<p>8、<strong>Properties注入</strong></p>
+<pre><code class="lang-xml"> &lt;property name=&quot;info&quot;&gt;
+     &lt;props&gt;
+         &lt;prop key=&quot;学号&quot;&gt;202008015&lt;/prop&gt;
+         &lt;prop key=&quot;性别&quot;&gt;男&lt;/prop&gt;
+         &lt;prop key=&quot;姓名&quot;&gt;lg&lt;/prop&gt;
+     &lt;/props&gt;
+ &lt;/property&gt;
+</code></pre>
+<p>测试结果：</p>
+<p><img src="结果测试.jpg" alt=""></p>
+<h2 id="p命名和c命名注入"><a href="#p命名和c命名注入" class="headerlink" title="p命名和c命名注入"></a>p命名和c命名注入</h2><p>User.java ：【注意：这里没有有参构造器！】</p>
+<pre><code class="lang-java"> public class User {
+     private String name;
+     private int age;
+
+     public void setName(String name) {
+         this.name = name;
     }
-}
-int lg_search(lg *root,int num)    //递归查找节点是否存在
-{
-    if(root==NULL)return 0;
-    if(root-&gt;d==num)return 1;
-    if(root-&gt;d&lt;num)return lg_search(root-&gt;right,num);
-    else return lg_search(root-&gt;left,num);
-}
-int main()
-{
-    lg *root=NULL;
-    int n,m,w,num;
-    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-    while(n--)
-    {
-        scanf(&quot;%d&quot;,&amp;w);
-        lg_insert(w,&amp;root);
+
+     public void setAge(int age) {
+         this.age = age;
     }
-    while(m--)
-    {
-        scanf(&quot;%d&quot;,&amp;num);
-        printf(&quot;%d &quot;,lg_search(root,num));
+
+     @Override
+     public String toString() {
+         return &quot;User{&quot; +
+                 &quot;name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                 &quot;, age=&quot; + age +
+                 &#39;}&#39;;
     }
-    puts(&quot;&quot;);
-    return 0;
-}
+ }
+</code></pre>
+<p>1、P命名空间注入 : 需要在头文件中加入约束文件</p>
+<pre><code class="lang-xml"> 导入约束 : xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+
+ &lt;!--P(属性: properties)命名空间 , 属性依然要设置set方法--&gt;
+ &lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot; p:name=&quot;lg&quot; p:age=&quot;18&quot;/&gt;
+</code></pre>
+<p>2、c 命名空间注入 : 需要在头文件中加入约束文件</p>
+<pre><code class="lang-xml"> 导入约束 : xmlns:c=&quot;http://www.springframework.org/schema/c&quot;
+ &lt;!--C(构造: Constructor)命名空间 , 属性依然要设置set方法--&gt;
+ &lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot; c:name=&quot;lg&quot; c:age=&quot;18&quot;/&gt;
+</code></pre>
+<p>发现问题：爆红了，刚才我们没有写有参构造！</p>
+<p>解决：把有参构造器加上，这里也能知道，c 就是所谓的构造器注入！</p>
+<p>测试代码：</p>
+<pre><code class="lang-java">@Test
+ public void test02(){
+     ApplicationContext context = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+     User user = (User) context.getBean(&quot;user&quot;);
+     System.out.println(user);
+ }
 </code></pre>
 
       
