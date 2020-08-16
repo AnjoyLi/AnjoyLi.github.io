@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>平衡二叉树的基本操作 | Hexo</title>
-  <meta name="keywords" content=" 树 , 平衡二叉树 ">
-  <meta name="description" content="平衡二叉树的基本操作 | Hexo">
+  <title>自动装配 | Hexo</title>
+  <meta name="keywords" content=" Spring ">
+  <meta name="description" content="自动装配 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="标签">
@@ -502,9 +502,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-平衡二叉树基本操作" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-自动装配" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">平衡二叉树的基本操作</h1>
+        <h1 class="article-title">自动装配</h1>
     
     <div class="article-meta">
         
@@ -514,7 +514,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="数据结构">数据结构</a>
+            <a  data-rel="SSM框架">SSM框架</a> > 
+            
+            <a  data-rel="SSM框架&lt;---&gt;Spring">Spring</a>
             
         </span>
         
@@ -522,16 +524,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">树</a>
-            
-            <a class="color1">平衡二叉树</a>
+            <a class="color2">Spring</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-06-12 14:19:13'>2020-06-12 14:16</time>
+            Created At : <time class="date" title='Updated At: 2020-08-16 18:01:35'>2020-08-16 17:44</time>
         
     </div>
     <div class="article-meta">
@@ -564,7 +564,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自动装配"><span class="toc-text">自动装配</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#自动装配说明"><span class="toc-text">自动装配说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试环境搭建"><span class="toc-text">测试环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#byName"><span class="toc-text">byName</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#byType"><span class="toc-text">byType</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用注解"><span class="toc-text">使用注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用注解-1"><span class="toc-text">使用注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Qualifier"><span class="toc-text">@Qualifier</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Resource"><span class="toc-text">@Resource</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -580,140 +580,249 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><a href="https://www.dotcpp.com/oj/problem1713.html" target="_blank" rel="noopener">题目链接</a></p>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>平衡二叉树又称AVL树，它是一种具有平衡因子的特殊二叉排序树。平衡二叉树或者是一棵空树，或者是具有以下几条性质的二叉树： </p>
+        <h1 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h1><h2 id="自动装配说明"><a href="#自动装配说明" class="headerlink" title="自动装配说明"></a>自动装配说明</h2><ul>
+<li>自动装配是使用spring满足bean依赖的一种方法</li>
+<li>spring会在应用上下文中为某个bean寻找其依赖的bean。</li>
+</ul>
+<p>Spring中bean有三种装配机制，分别是：</p>
 <ol>
-<li><p>若它的左子树不空，则左子树上所有结点的值均小于它的根节点的值； </p>
+<li>在xml中显式配置；</li>
+<li>在java中显式配置；</li>
+<li>隐式的bean发现机制和自动装配。</li>
+</ol>
+<p>Spring的自动装配需要从两个角度来实现，或者说是两个操作：</p>
+<ol>
+<li>组件扫描(component scanning)：spring会自动发现应用上下文中所创建的bean；</li>
+<li>自动装配(autowiring)：spring自动满足bean之间的依赖，也就是我们说的IoC/DI；</li>
+</ol>
+<p>组件扫描和自动装配组合发挥巨大威力，使得显示的配置降低到最少。</p>
+<p><strong>推荐不使用自动装配xml配置 , 而使用注解 .</strong></p>
+<h2 id="测试环境搭建"><a href="#测试环境搭建" class="headerlink" title="测试环境搭建"></a>测试环境搭建</h2><p>1、新建一个项目</p>
+<p>2、新建两个实体类，Cat  Dog  都有一个叫的方法</p>
+<pre><code class="lang-java">public class Cat {
+   public void shout() {
+       System.out.println(&quot;miao~&quot;);
+  }
+}
+public class Dog {
+   public void shout() {
+       System.out.println(&quot;wang~&quot;);
+  }
+}
+</code></pre>
+<p>3、新建一个用户类 User</p>
+<pre><code class="lang-java">public class User {
+   private Cat cat;
+   private Dog dog;
+   private String str;
+}
+</code></pre>
+<p>4、编写Spring配置文件</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+   &lt;bean id=&quot;dog&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+   &lt;bean id=&quot;cat&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+
+   &lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot;&gt;
+       &lt;property name=&quot;cat&quot; ref=&quot;cat&quot;/&gt;
+       &lt;property name=&quot;dog&quot; ref=&quot;dog&quot;/&gt;
+       &lt;property name=&quot;str&quot; value=&quot;lg&quot;/&gt;
+   &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>5、测试</p>
+<pre><code class="lang-java">public class MyTest {
+   @Test
+   public void testMethodAutowire() {
+       ApplicationContext context = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+       User user = (User) context.getBean(&quot;user&quot;);
+       user.getCat().shout();
+       user.getDog().shout();
+  }
+}
+</code></pre>
+<p>结果正常输出，环境OK</p>
+<h2 id="byName"><a href="#byName" class="headerlink" title="byName"></a>byName</h2><p><strong>autowire byName (按名称自动装配)</strong></p>
+<p>由于在手动配置xml过程中，常常发生字母缺漏和大小写等错误，而无法对其进行检查，使得开发效率降低。</p>
+<p>采用自动装配将避免这些错误，并且使配置简单化。</p>
+<p>测试：</p>
+<ol>
+<li><p>修改bean配置，增加一个属性  autowire=”byName”</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot; autowire=&quot;byName&quot;&gt;
+   &lt;property name=&quot;str&quot; value=&quot;lg&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
 </li>
-<li><p>若它的右子树不空，则右子树上所有结点的值均大于它的根节点的值； </p>
+<li><p>再次测试，结果依旧成功输出！</p>
 </li>
-<li><p>它的左右子树也分别为平衡二叉树，且左子树和右子树的深度之差的绝对值不超过1。 </p>
+<li><p>将 cat 的bean id修改为 catXXX</p>
+</li>
+<li><p>再次测试， 执行时报空指针</p>
 </li>
 </ol>
-<p>若将二叉树上结点的平衡因子定义为该结点的左子树深度减去它的右子树的深度，则平衡二叉树上的所有结点的平衡因子只可能为-1、0和1。只要二叉树上有一个结点的平衡因子的绝对值大于1，则这棵二叉树就是不平衡的。 </p>
-<p>通过平衡二叉树的性质不难得知，其插入、删除、查询都操作的<strong>时间复杂度均为O(log2n)</strong>。</p>
-<p>解释一下右转<br><img src="https://img-blog.csdnimg.cn/20191209143746935.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>代码如下：</p>
-<pre><code class="lang-cpp">void lg_R(lg** root)
-{
-    lg *t=(*root)-&gt;left;
-    (*root)-&gt;left=t-&gt;right;
-    t-&gt;right=(*root);
-    (*root)-&gt;h=lg_geth((*root));
-    t-&gt;h=lg_geth(t);
-    *root=t;
+<p>java.lang.NullPointerException。因为按byName规则找不对应set方法，真正的setCat就没执行，对象就没有初始化，所以调用时就会报空指针错误。</p>
+<p><strong>小结：</strong></p>
+<p>当一个bean节点带有 autowire byName的属性时。</p>
+<ol>
+<li>将查找其类中所有的set方法名，例如setCat，获得将set去掉并且首字母小写的字符串，即cat。</li>
+<li>去spring容器中寻找是否有此字符串名称id的对象。</li>
+<li>如果有，就取出注入；如果没有，就报空指针异常。</li>
+</ol>
+<h2 id="byType"><a href="#byType" class="headerlink" title="byType"></a>byType</h2><p><strong>autowire byType (按类型自动装配)</strong></p>
+<p>使用autowire byType首先需要保证：同一类型的对象，在spring容器中唯一。如果不唯一，会报不唯一的异常。</p>
+<pre><code class="lang-java">NoUniqueBeanDefinitionException
+</code></pre>
+<p>测试：</p>
+<ol>
+<li><p>将user的bean配置修改一下 ： autowire=”byType”</p>
+</li>
+<li><p>测试，正常输出</p>
+</li>
+<li><p>在注册一个cat 的bean对象！</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;dog&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+&lt;bean id=&quot;cat&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+&lt;bean id=&quot;cat2&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+
+&lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot; autowire=&quot;byType&quot;&gt;
+   &lt;property name=&quot;str&quot; value=&quot;qinjiang&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+</li>
+<li><p>测试，报错：NoUniqueBeanDefinitionException</p>
+</li>
+<li><p>删掉cat2，将cat的bean名称改掉！测试！因为是按类型装配，所以并不会报异常，也不影响最后的结果。甚至将id属性去掉，也不影响结果。</p>
+</li>
+</ol>
+<p>这就是按照类型自动装配！</p>
+<h1 id="使用注解"><a href="#使用注解" class="headerlink" title="使用注解"></a>使用注解</h1><h2 id="使用注解-1"><a href="#使用注解-1" class="headerlink" title="使用注解"></a>使用注解</h2><p>jdk1.5开始支持注解，spring2.5开始全面支持注解。</p>
+<p>准备工作：利用注解的方式注入属性。</p>
+<p>1、在spring配置文件中引入context文件头</p>
+<pre><code class="lang-xml">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+</code></pre>
+<p>2、开启属性注解支持！</p>
+<pre><code class="lang-xml">&lt;context:annotation-config/&gt;
+</code></pre>
+<h3 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h3><ul>
+<li>@Autowired是按类型自动转配的，不支持id匹配。</li>
+<li>需要导入 spring-aop的包！</li>
+</ul>
+<p>测试：</p>
+<ol>
+<li><p>将User类中的set方法去掉，使用@Autowired注解</p>
+<pre><code class="lang-java">public class User {
+   @Autowired
+   private Cat cat;
+   @Autowired
+   private Dog dog;
+   private String str;
+
+   public Cat getCat() {
+       return cat;
+  }
+   public Dog getDog() {
+       return dog;
+  }
+   public String getStr() {
+       return str;
+  }
 }
 </code></pre>
-<p>左转类似。</p>
-<p>总代码如下：</p>
-<pre><code class="lang-cpp">#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-typedef struct node
-{
-    int d,h;            //h为高度，用高度判断当前子树是否平衡，d为存储的数据
-    struct node *left;
-    struct node *right;
-}lg;
-int max(int a,int b)    //返回最大值的函数
-{
-    return a&gt;b?a:b;
-}
-int h(lg *tree)            //返回当前节点的高度
-{
-    if(tree==NULL)return 0;
-    else return tree-&gt;h;
-}
-int lg_geth(lg *root)    //求当前节点的高度（左右子树的最高高度+1）
-{
-    return max(h(root-&gt;left),h(root-&gt;right))+1;
-}
-int lg_getp(lg *root)    //求当前节点的平衡因子（左子树高度减去右子树高度）
-{
-    return h(root-&gt;left)-h(root-&gt;right);
-}
-void lg_R(lg** root)    //树不平衡右转
-{
-    lg *t=(*root)-&gt;left;
-    (*root)-&gt;left=t-&gt;right;
-    t-&gt;right=(*root);
-    (*root)-&gt;h=lg_geth((*root));
-    t-&gt;h=lg_geth(t);
-    *root=t;
-}
-void lg_L(lg** root)    //左转
-{
-    lg *t=(*root)-&gt;right;
-    (*root)-&gt;right=t-&gt;left;
-    t-&gt;left=(*root);
-    (*root)-&gt;h=lg_geth((*root));
-    t-&gt;h=lg_geth(t);
-    *root=t;
-}
-void lg_insert(int w,lg** root)    //插入节点
-{
-    if(*root==NULL)
-    {
-        *root=(lg*)malloc(sizeof(lg));
-        (*root)-&gt;d=w;
-        (*root)-&gt;h=1;
-        (*root)-&gt;left=NULL;
-        (*root)-&gt;right=NULL;
-        return ;
-    }
-    if((*root)-&gt;d&gt;w)
-    {
-        lg_insert(w,&amp;((*root)-&gt;left));
-        (*root)-&gt;h=lg_geth((*root));
-        if(lg_getp(*root)==2)
-        {
-            if(lg_getp((*root)-&gt;left)==1)lg_R(&amp;(*root));
-            else if(lg_getp((*root)-&gt;left)==-1)
-            {
-                lg_L(&amp;(*root)-&gt;left);
-                lg_R(&amp;(*root));
-            }
-        }
-    }
-    else
-    {
-        lg_insert(w,&amp;(*root)-&gt;right);
-        (*root)-&gt;h=lg_geth((*root));
-        if(lg_getp((*root))==2)
-        {
-            if(lg_getp((*root)-&gt;right)==1)lg_L(&amp;(*root));
-            else if(lg_getp((*root)-&gt;right)==-1)
-            {
-                lg_R(&amp;(*root)-&gt;right);
-                lg_L(&amp;(*root));
-            }
-        }
-    }
-}
-int lg_search(lg *root,int num)    //递归查找节点是否存在
-{
-    if(root==NULL)return 0;
-    if(root-&gt;d==num)return 1;
-    if(root-&gt;d&lt;num)return lg_search(root-&gt;right,num);
-    else return lg_search(root-&gt;left,num);
-}
-int main()
-{
-    lg *root=NULL;
-    int n,m,w,num;
-    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);
-    while(n--)
-    {
-        scanf(&quot;%d&quot;,&amp;w);
-        lg_insert(w,&amp;root);
-    }
-    while(m--)
-    {
-        scanf(&quot;%d&quot;,&amp;num);
-        printf(&quot;%d &quot;,lg_search(root,num));
-    }
-    puts(&quot;&quot;);
-    return 0;
+</li>
+<li><p>此时配置文件内容</p>
+<pre><code class="lang-xml">&lt;context:annotation-config/&gt;
+
+&lt;bean id=&quot;dog&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+&lt;bean id=&quot;cat&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+&lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot;/&gt;
+</code></pre>
+</li>
+<li><p>测试，成功输出结果！</p>
+<p>@Autowired(required=false)  说明：false，对象可以为null；true，对象必须存对象，不能为null。</p>
+<pre><code class="lang-java">//如果允许对象为null，设置required = false,默认为true
+@Autowired(required = false)
+private Cat cat;
+</code></pre>
+</li>
+</ol>
+<h3 id="Qualifier"><a href="#Qualifier" class="headerlink" title="@Qualifier"></a>@Qualifier</h3><ul>
+<li>@Autowired是根据类型自动装配的，加上@Qualifier则可以根据byName的方式自动装配</li>
+<li>@Qualifier不能单独使用。</li>
+</ul>
+<p>测试实验步骤：</p>
+<ol>
+<li><p>配置文件修改内容，保证类型存在对象。且名字不为类的默认名字！</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;dog1&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+&lt;bean id=&quot;dog2&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+&lt;bean id=&quot;cat1&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+&lt;bean id=&quot;cat2&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+</code></pre>
+</li>
+<li><p>没有加Qualifier测试，直接报错</p>
+</li>
+<li><p>在属性上添加Qualifier注解</p>
+<pre><code class="lang-java">@Autowired
+@Qualifier(value = &quot;cat2&quot;)
+private Cat cat;
+@Autowired
+@Qualifier(value = &quot;dog2&quot;)
+private Dog dog;
+</code></pre>
+<p>测试，成功输出！</p>
+</li>
+</ol>
+<h3 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h3><ul>
+<li>@Resource如有指定的name属性，先按该属性进行byName方式查找装配；</li>
+<li>其次再进行默认的byName方式进行装配；</li>
+<li>如果以上都不成功，则按byType的方式自动装配。</li>
+<li>都不成功，则报异常。</li>
+</ul>
+<p>实体类：</p>
+<pre><code class="lang-java">public class User {
+   //如果允许对象为null，设置required = false,默认为true
+   @Resource(name = &quot;cat2&quot;)
+   private Cat cat;
+   @Resource
+   private Dog dog;
+   private String str;
 }
 </code></pre>
+<p>beans.xml</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;dog&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+&lt;bean id=&quot;cat1&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+&lt;bean id=&quot;cat2&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+
+&lt;bean id=&quot;user&quot; class=&quot;com.lg.pojo.User&quot;/&gt;
+</code></pre>
+<p>测试：结果OK</p>
+<p>配置文件2：beans.xml ， 删掉cat2</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;dog&quot; class=&quot;com.lg.pojo.Dog&quot;/&gt;
+&lt;bean id=&quot;cat1&quot; class=&quot;com.lg.pojo.Cat&quot;/&gt;
+</code></pre>
+<p>实体类上只保留注解</p>
+<pre><code class="lang-java">@Resource
+private Cat cat;
+@Resource
+private Dog dog;
+</code></pre>
+<p>结果：OK</p>
+<p>结论：先进行byName查找，失败；再进行byType查找，成功。</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>@Autowired与@Resource<strong>异同</strong>：</p>
+<ol>
+<li><p>@Autowired与@Resource都可以用来装配bean。都可以写在字段上，或写在setter方法上。</p>
+</li>
+<li><p>@Autowired默认按类型装配（属于spring规范），默认情况下必须要求依赖对象必须存在，如果要允许null 值，可以设置它的required属性为false，如：@Autowired(required=false) ，如果我们想使用名称装配可以结合@Qualifier注解进行使用</p>
+</li>
+<li><p>@Resource（属于J2EE复返），默认按照名称进行装配，名称可以通过name属性进行指定。如果没有指定name属性，当注解写在字段上时，默认取字段名进行按照名称查找，如果注解写在setter方法上默认取属性名进行装配。当找不到与名称匹配的bean时才按照类型进行装配。但是需要注意的是，如果name属性一旦指定，就只会按照名称进行装配。</p>
+<p>它们的作用相同都是用注解方式注入对象，但执行顺序不同。@Autowired先byType，@Resource先byName。</p>
+</li>
+</ol>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
