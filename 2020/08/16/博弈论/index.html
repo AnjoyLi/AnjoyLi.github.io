@@ -505,19 +505,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 算法 "
-           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
-           data-tag="寒假训练,动态规划"
-           data-author="" >
-            <span class="post-title" title="算概率">算概率</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 数据结构 "
            href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
            data-tag="树,oj作业"
            data-author="" >
             <span class="post-title" title="目录树">目录树</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
+           data-tag="寒假训练,动态规划"
+           data-author="" >
+            <span class="post-title" title="算概率">算概率</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -581,7 +581,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-16 23:39:56'>2020-08-16 23:18</time>
+            Created At : <time class="date" title='Updated At: 2020-08-18 23:20:57'>2020-08-16 23:18</time>
         
     </div>
     <div class="article-meta">
@@ -614,7 +614,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#博弈论"><span class="toc-text">博弈论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#巴什博弈"><span class="toc-text">巴什博弈</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#博弈论"><span class="toc-text">博弈论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bash-Game"><span class="toc-text">Bash Game</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NIm-Game"><span class="toc-text">NIm Game</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析-1"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-1"><span class="toc-text">例子</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -630,14 +630,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h2 id="巴什博弈"><a href="#巴什博弈" class="headerlink" title="巴什博弈"></a>巴什博弈</h2><p><strong>巴什博弈</strong>：只有一堆n个物品，两个人轮流从这堆物品中取物，规定每次至少取一个，最多取m个。最后取光者得胜。</p>
-<p><strong>证明：</strong></p>
-<p>先剖析题意——每次可以取1~m个，那存在如下几种情况：</p>
+        <h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h2 id="Bash-Game"><a href="#Bash-Game" class="headerlink" title="Bash Game"></a>Bash Game</h2><p><strong>巴什博弈</strong>：只有一堆n个物品，两个人轮流从这堆物品中取物，规定每次至少取一个，最多取m个。最后取光者得胜。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>先剖析题意——每次可以取1~m个，那存在如下几种情况：</p>
 <ol>
 <li>n%（m+1）==0，此时，无论先手取几个，后手都可以取i个使每轮是m+1个，最终先手必输。</li>
 <li>n%（m+1）!=0，此时先手先取n%（m+1）个，后手取k个，先手再取l个使k+l=m+1，最后一次即为先手取得。</li>
 </ol>
-<p>例子：<a href="https://lgnbovo.github.io/2020/08/16/Bash游戏">51Nod—1066 Bash游戏</a></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><a href="https://lgnbovo.github.io/2020/08/16/Bash游戏">51Nod—1066 Bash游戏</a></p>
+<h2 id="NIm-Game"><a href="#NIm-Game" class="headerlink" title="NIm Game"></a>NIm Game</h2><p><strong>Nim Game</strong>：m堆n个物品，两人轮流取，每次取某堆中不少于1个，最后取完者胜</p>
+<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><font face='黑体'>所有物品数目二进制异或   为0，则先手必输<br> 所有物品数目二进制异或不为0，则后手必输<br>
+从另一个角度思考这个问题，如果物品数量随机，那么每个数目的每一位上1或0概率相同，<br>
+如果有奇数个堆，那么1的个数为偶数或者奇数的概率相同，<br>
+如果有偶数个堆，那么1的个数为偶数的概率略大1/(m+1)，<br>
+也就是说异或结果的每一位为0或1的概率几乎差不多，而先手必输要求异或结果每一位都为0，其实输的概率很小</font>
+
+<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><p><a href="https://lgnbovo.github.io/2020/08/18/Nim游戏/">51Nod—1069 Nim游戏</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
