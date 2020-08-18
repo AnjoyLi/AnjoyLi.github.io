@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>使用注解开发Myabatis | Hexo</title>
-  <meta name="keywords" content=" Mybatis ">
-  <meta name="description" content="使用注解开发Myabatis | Hexo">
+  <title>Nim游戏 | Hexo</title>
+  <meta name="keywords" content=" 博弈论 ">
+  <meta name="description" content="Nim游戏 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="标签">
@@ -554,9 +554,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-使用注解开发Mybatis" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Nim游戏" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">使用注解开发Myabatis</h1>
+        <h1 class="article-title">Nim游戏</h1>
     
     <div class="article-meta">
         
@@ -566,9 +566,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="SSM框架">SSM框架</a> > 
-            
-            <a  data-rel="SSM框架&lt;---&gt;Mybatis">Mybatis</a>
+            <a  data-rel="题目">题目</a>
             
         </span>
         
@@ -576,14 +574,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">Mybatis</a>
+            <a class="color4">博弈论</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-17 18:46:26'>2020-08-03 18:01</time>
+            Created At : <time class="date" title='Updated At: 2020-08-18 22:46:29'>2020-08-18 22:39</time>
         
     </div>
     <div class="article-meta">
@@ -616,7 +614,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用注解开发"><span class="toc-text">使用注解开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向接口编程"><span class="toc-text">面向接口编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#利用注解开发"><span class="toc-text">利用注解开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解增删改"><span class="toc-text">注解增删改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于-Param"><span class="toc-text">关于@Param</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与-的区别"><span class="toc-text">#与$的区别</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目-Nim游戏"><span class="toc-text">题目-Nim游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ac代码"><span class="toc-text">ac代码</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -632,186 +630,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用注解开发"><a href="#使用注解开发" class="headerlink" title="使用注解开发"></a>使用注解开发</h1><h2 id="面向接口编程"><a href="#面向接口编程" class="headerlink" title="面向接口编程"></a>面向接口编程</h2><ul>
-<li>在真正的开发中，很多时候我们会选择面向接口编程</li>
-<li><strong>根本原因 :  解耦 , 可拓展 , 提高复用 , 分层开发中 , 上层不用管具体的实现 , 大家都遵守共同的标准 , 使得开发变得容易 , 规范性更好</strong></li>
-<li>在一个面向对象的系统中，系统的各种功能是由许许多多的不同对象协作完成的。在这种情况下，各个对象内部是如何实现自己的,对系统设计人员来讲就不那么重要了；</li>
-<li>而各个对象之间的协作关系则成为系统设计的关键。小到不同类之间的通信，大到各模块之间的交互，在系统设计之初都是要着重考虑的，这也是系统设计的主要工作内容。面向接口编程就是指按照这种思想来编程。</li>
-</ul>
-<p><strong>关于接口的理解</strong></p>
-<ul>
-<li><p>接口从更深层次的理解，应是定义（规范，约束）与实现（名实分离的原则）的分离。</p>
-</li>
-<li><p>接口的本身反映了系统设计人员对系统的抽象理解。</p>
-</li>
-<li><p>接口应有两类：</p>
-</li>
-<li><ul>
-<li>第一类是对一个个体的抽象，它可对应为一个抽象体(abstract class)；</li>
-<li>第二类是对一个个体某一方面的抽象，即形成一个抽象面（interface）；</li>
-</ul>
-</li>
-<li><p>一个体有可能有多个抽象面。抽象体与抽象面是有区别的。</p>
-</li>
-</ul>
-<p><strong>三个面向区别</strong></p>
-<ul>
-<li><p>面向对象是指，我们考虑问题时，以对象为单位，考虑它的属性及方法 .</p>
-</li>
-<li><p>面向过程是指，我们考虑问题时，以一个具体的流程（事务过程）为单位，考虑它的实现 .</p>
-</li>
-<li><p>接口设计与非接口设计是针对复用技术而言的，与面向对象（过程）不是一个问题.更多的体现就是对系统整体的架构</p>
-</li>
-</ul>
-<h2 id="利用注解开发"><a href="#利用注解开发" class="headerlink" title="利用注解开发"></a>利用注解开发</h2><ul>
-<li><p><strong>mybatis最初配置信息是基于 XML ,映射语句(SQL)也是定义在 XML 中的。而到MyBatis 3提供了新的基于注解的配置。不幸的是，Java 注解的的表达力和灵活性十分有限。最强大的 MyBatis 映射并不能用注解来构建</strong></p>
-</li>
-<li><p>sql 类型主要分成 :</p>
-</li>
-<li><ul>
-<li>@select ()</li>
-<li>@update ()</li>
-<li>@Insert ()</li>
-<li>@delete ()</li>
-</ul>
-</li>
-</ul>
-<p><strong>注意：</strong>利用注解开发就不需要mapper.xml映射文件了 .</p>
-<p>1、我们在我们的接口中添加注解</p>
-<pre><code class="lang-java">//查询全部用户
-@Select(&quot;select id,name,pwd password from user&quot;)
-public List&lt;User&gt; getAllUser();
-</code></pre>
-<p>2、在mybatis的核心配置文件中注入</p>
-<pre><code class="lang-xml">&lt;!--使用class绑定接口--&gt;
-&lt;mappers&gt;
-   &lt;mapper class=&quot;com.lg.mapper.UserMapper&quot;/&gt;
-&lt;/mappers&gt;
-</code></pre>
-<p>3、我们去进行测试</p>
-<pre><code class="lang-java">@Test
-public void testGetAllUser() {
-   SqlSession session = MybatisUtils.getSession();
-   //本质上利用了jvm的动态代理机制
-   UserMapper mapper = session.getMapper(UserMapper.class);
+        <h1 id="题目-Nim游戏"><a href="#题目-Nim游戏" class="headerlink" title="题目-Nim游戏"></a>题目-Nim游戏</h1><p>题目链接：<a href="http://www.51nod.com/Challenge/Problem.html#problemId=1069" target="_blank" rel="noopener">51Nod—1069 Nim游戏</a></p>
+<p><img src="Nim游戏.png" alt=""></p>
+<h2 id="ac代码"><a href="#ac代码" class="headerlink" title="ac代码"></a>ac代码</h2><pre><code class="lang-cpp">#include &lt;stdio.h&gt;
+#define _MAX 1001
 
-   List&lt;User&gt; users = mapper.getAllUser();
-   for (User user : users){
-       System.out.println(user);
-  }
-
-   session.close();
+int main()
+{
+    int N, stone, tag = 0;
+    scanf(&quot;%d&quot;, &amp;N);
+    while (N--){
+        scanf(&quot;%d&quot;, &amp;stone);
+        tag ^= stone;
+    }
+    //tag为0则为后手赢，否则为先手赢
+    printf(&quot;%c\n&quot;, tag == 0 ? &#39;B&#39; : &#39;A&#39;);
+    return 0;
 }
 </code></pre>
-<p>4、利用Debug查看本质</p>
-<p><img src="Debug.jpg" alt="Debug示例"></p>
-<p>5、本质上利用了jvm的动态代理机制</p>
-<p><img src="jvm动态代理机制.jpg" alt="jvm动态代理机制"></p>
-<p>6、Mybatis详细的执行流程</p>
-<p><img src="Mybatis详细执行流程.jpg" alt="Mybatis详细执行流程"></p>
-<h2 id="注解增删改"><a href="#注解增删改" class="headerlink" title="注解增删改"></a>注解增删改</h2><p>改造MybatisUtils工具类的getSession( ) 方法，重载实现。</p>
-<pre><code class="lang-java">  //获取SqlSession连接
-  public static SqlSession getSession(){
-      return getSession(true); //事务自动提交
-  }
-
-  public static SqlSession getSession(boolean flag){
-      return sqlSessionFactory.openSession(flag);
-  }
-</code></pre>
-<p>【注意】确保实体类和数据库字段对应</p>
-<p><strong>查询：</strong></p>
-<p>1、编写接口方法注解</p>
-<pre><code class="lang-java">//根据id查询用户
-@Select(&quot;select * from user where id = #{id}&quot;)
-User selectUserById(@Param(&quot;id&quot;) int id);
-</code></pre>
-<p>2、测试</p>
-<pre><code class="lang-java">@Test
-public void testSelectUserById() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-
-   User user = mapper.selectUserById(1);
-   System.out.println(user);
-
-   session.close();
-}
-</code></pre>
-<p><strong>新增：</strong></p>
-<p>1、编写接口方法注解</p>
-<pre><code class="lang-java">//添加一个用户
-@Insert(&quot;insert into user (id,name,pwd) values (#{id},#{name},#{pwd})&quot;)
-int addUser(User user);
-</code></pre>
-<p>2、测试</p>
-<pre><code class="lang-java">@Test
-public void testAddUser() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-
-   User user = new User(6, &quot;秦疆&quot;, &quot;123456&quot;);
-   mapper.addUser(user);
-
-   session.close();
-}
-</code></pre>
-<p><strong>修改：</strong></p>
-<p>1、编写接口方法注解</p>
-<pre><code class="lang-java">//修改一个用户
-@Update(&quot;update user set name=#{name},pwd=#{pwd} where id = #{id}&quot;)
-int updateUser(User user);
-</code></pre>
-<p>2、测试</p>
-<pre><code class="lang-java">@Test
-public void testUpdateUser() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-
-   User user = new User(6, &quot;秦疆&quot;, &quot;zxcvbn&quot;);
-   mapper.updateUser(user);
-
-   session.close();
-}
-</code></pre>
-<p><strong>删除：</strong></p>
-<p>1、编写接口方法注解</p>
-<pre><code class="lang-java">//根据id删除用
-@Delete(&quot;delete from user where id = #{id}&quot;)
-int deleteUser(@Param(&quot;id&quot;)int id);
-</code></pre>
-<p>2、测试</p>
-<pre><code class="lang-java">@Test
-public void testDeleteUser() {
-   SqlSession session = MybatisUtils.getSession();
-   UserMapper mapper = session.getMapper(UserMapper.class);
-
-   mapper.deleteUser(6);
-
-   session.close();
-}
-</code></pre>
-<p>【注意点：增删改一定记得对事务的处理】</p>
-<h2 id="关于-Param"><a href="#关于-Param" class="headerlink" title="关于@Param"></a>关于@Param</h2><p>@Param注解用于给方法参数起一个名字。以下是总结的使用原则：</p>
-<ul>
-<li>在方法只接受一个参数的情况下，可以不使用@Param。</li>
-<li>在方法接受多个参数的情况下，建议一定要使用@Param注解给参数命名。</li>
-<li>如果参数是 JavaBean ， 则不能使用@Param。</li>
-<li>不使用@Param注解时，参数只能有一个，并且是Javabean。</li>
-</ul>
-<h2 id="与-的区别"><a href="#与-的区别" class="headerlink" title="#与$的区别"></a>#与$的区别</h2><ul>
-<li><p>#{} 的作用主要是替换预编译语句(PrepareStatement)中的占位符? 【推荐使用】</p>
-<pre><code class="lang-sql">INSERT INTO user (name) VALUES (#{name});
-INSERT INTO user (name) VALUES (?);
-</code></pre>
-</li>
-<li><p>${} 的作用是直接进行字符串替换</p>
-<pre><code class="lang-sql">INSERT INTO user (name) VALUES (&#39;${name}&#39;);
-INSERT INTO user (name) VALUES (&#39;kuangshen&#39;);
-</code></pre>
-</li>
-</ul>
-<p>使用注解开发可以提高我们的开发效率，可以合理使用！</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
