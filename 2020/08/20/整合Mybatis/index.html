@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>目录树 | Hexo</title>
-  <meta name="keywords" content=" 树 , oj作业 ">
-  <meta name="description" content="目录树 | Hexo">
+  <title>整合Mybatis | Hexo</title>
+  <meta name="keywords" content=" Spring ">
+  <meta name="description" content="整合Mybatis | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="标签">
@@ -570,9 +570,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-目录树" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-整合Mybatis" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">目录树</h1>
+        <h1 class="article-title">整合Mybatis</h1>
     
     <div class="article-meta">
         
@@ -582,7 +582,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="数据结构">数据结构</a>
+            <a  data-rel="SSM框架">SSM框架</a> > 
+            
+            <a  data-rel="SSM框架&lt;---&gt;Spring">Spring</a>
             
         </span>
         
@@ -590,16 +592,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">树</a>
-            
-            <a class="color5">oj作业</a>
+            <a class="color2">Spring</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-06-12 14:14:49'>2020-06-12 14:08</time>
+            Created At : <time class="date" title='Updated At: 2020-08-20 22:27:09'>2020-08-20 18:45</time>
         
     </div>
     <div class="article-meta">
@@ -632,7 +632,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目描述"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#构建树的思路"><span class="toc-text">构建树的思路</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#整合Mybatis"><span class="toc-text">整合Mybatis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#步骤"><span class="toc-text">步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#回忆Mybatis"><span class="toc-text">回忆Mybatis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mybatis-Spring学习"><span class="toc-text">Mybatis-Spring学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合实现一"><span class="toc-text">整合实现一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整合实现二"><span class="toc-text">整合实现二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -648,209 +648,332 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h1><p>Problem B: 目录树<br>Time Limit: 1 Sec    Memory Limit: 128 MB<br>Total Submissions: 276    Accepted: 198    Creator: admin </p>
-<p>Problem Description</p>
-<p>在ZIP归档文件中，保留着所有压缩文件和目录的相对路径和名称。当使用WinZIP等GUI软件打开ZIP归档文件时，可以从这些信息中重建目录的树状结构。请编写程序实现目录的树状结构的重建工作。 </p>
-<p>Input Description</p>
-<p>输入首先给出正整数N（≤10^4），表示ZIP归档文件中的文件和目录的数量。随后N行，每行有如下格式的文件或目录的相对路径和名称（每行不超过260个字符）：<br>•路径和名称中的字符仅包括英文字母（区分大小写）；<br>•符号“\”仅作为路径分隔符出现；<br>•目录以符号“\”结束；<br>•不存在重复的输入项目；<br>•整个输入大小不超过2MB。 </p>
-<p>Output Description</p>
-<p>假设所有的路径都相对于root目录。从root目录开始，在输出时每个目录首先输出自己的名字，然后以字典序输出所有子目录，然后以字典序输出所有文件。注意，在输出时，应根据目录的相对关系使用空格进行缩进，每级目录或文件比上一级多缩进2个空格。 </p>
-<p>Sample Input</p>
-<p>7<br>b<br>c\<br>ab\cd<br>a\bc<br>ab\d<br>a\d\a<br>a\d\z\</p>
-<p>Sample Output</p>
-<p>root<br>  a<br>    d<br>      z<br>      a<br>    bc<br>  ab<br>    cd<br>    d<br>  c<br>  b</p>
-<p>Hint</p>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="构建树的思路"><a href="#构建树的思路" class="headerlink" title="构建树的思路"></a>构建树的思路</h2><p><img src="https://img-blog.csdnimg.cn/20191209145917122.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>ac代码：</p>
-<pre><code class="lang-cpp">#include&lt;stdio.h&gt;
-#include&lt;stdlib.h&gt;
-#include&lt;string.h&gt;
-typedef struct node
-{
-    char name[300];
-    struct node *child_head;
-    struct node *child_file;
-    struct node *next;
-}lg;
-int zd_strcmp(char *s1,char *s2)    //排序
-{
-    int len1=strlen(s1);
-    int len2=strlen(s2);
-    int len;
-    if(len1&lt;=len2)len=len1;
-    else if(len1&gt;len2)len=len2;
-    for(int i=0;i&lt;len;i++)
-    {
-        if(s1[i]&lt;s2[i])return -1;
-        else if(s1[i]&gt;s2[i])return 1;
-    }
-    if(len1==len2)return 0;
-    else if(len1&lt;len2)return -1;
-    else return 1;
-}
-void get_name(char *str,int s,int e,char *ss)    //取字符名字函数
-{
-    for(int i=0;i&lt;e-s+1;i++)
-    {
-        str[i]=ss[s+i];
-    }
-}
-void file_insert(char *name,char *pre,lg** root)    //文件插入
-{
-    lg *p,*q,*cur=NULL;
-    p=(lg*)malloc(sizeof(lg));
-    strcpy(p-&gt;name,name);
-    p-&gt;child_file=NULL;
-    p-&gt;child_head=NULL;
-    p-&gt;next=NULL;
-    q=(*root)-&gt;child_file;
-    if(q==NULL)
-    {
-        (*root)-&gt;child_file=p;
-        return ;
-    }
-    for(;q!=NULL;cur=q,q=q-&gt;next)
-    {
-        if(cur==NULL)
-        {
-            if(zd_strcmp(p-&gt;name,q-&gt;name)==0)return ;
-            if(zd_strcmp(p-&gt;name,q-&gt;name)&lt;0)
-            {
-                (*root)-&gt;child_file=p;
-                p-&gt;next=q;
-                return ;
-            }
-        }
-        else
-        {
-            if(zd_strcmp(p-&gt;name,q-&gt;name)==0)return ;
-            if(zd_strcmp(p-&gt;name,cur-&gt;name)&gt;0&amp;&amp;zd_strcmp(p-&gt;name,q-&gt;name)&lt;0)
-            {
-                cur-&gt;next=p;
-                p-&gt;next=q;
-                return ;
-            }
-        }
-    }
-    cur-&gt;next=p;
-    p-&gt;next=NULL;
-    return ;
-}
-lg* tree_insert(char *name,char *pre,lg* root)        //目录插入
-{
-    lg* p,*cur=NULL,*q;
-    p=(lg*)malloc(sizeof(lg));
-    strcpy(p-&gt;name,name);
-    p-&gt;child_head=NULL;
-    p-&gt;child_file=NULL;
-    p-&gt;next=NULL;
-    q=root-&gt;child_head;
-    if(q==NULL)
-    {
-        root-&gt;child_head=p;
-        return p;
-    }
-    for(;q!=NULL;cur=q,q=q-&gt;next)
-    {
-        if(cur==NULL)
-        {
-            if(zd_strcmp(p-&gt;name,q-&gt;name)==0)
-            {
-                return q;
-            }
-            if(zd_strcmp(p-&gt;name,q-&gt;name)&lt;0)
-            {
-                root-&gt;child_head=p;
-                p-&gt;next=q;
-                return p;
-            }
-        }
-        else
-        {
-            if(zd_strcmp(p-&gt;name,q-&gt;name)==0)return q;
-            if(zd_strcmp(p-&gt;name,cur-&gt;name)&gt;0&amp;&amp;zd_strcmp(p-&gt;name,q-&gt;name)&lt;0)
-            {
-                cur-&gt;next=p;
-                p-&gt;next=q;
-                return p;
-            }
-        }
-    }
-    cur-&gt;next=p;
-    p-&gt;next=NULL;
-    return p;
-}
-void BL(lg* root,int num)        //遍历输出
-{
-    lg *p,*q;
+        <h1 id="整合Mybatis"><a href="#整合Mybatis" class="headerlink" title="整合Mybatis"></a>整合Mybatis</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><font color=red>1. 导入相关jar包</font>
 
-    if(root!=NULL){
-    for(int i=0;i&lt;num;i++)
-        printf(&quot;  &quot;);
-    printf(&quot;%s\n&quot;,root-&gt;name);
-    BL(root-&gt;child_head,num+1);
-    BL(root-&gt;child_file,num+1);
-    BL(root-&gt;next,num);
-    }
+<p>junit</p>
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;junit&lt;/groupId&gt;
+   &lt;artifactId&gt;junit&lt;/artifactId&gt;
+   &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>mybatis</p>
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+   &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+   &lt;version&gt;3.5.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>mysql-connector-java</p>
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;mysql&lt;/groupId&gt;
+   &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+   &lt;version&gt;5.1.47&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>spring相关</p>
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+   &lt;version&gt;5.1.10.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+   &lt;version&gt;5.1.10.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>aspectJ AOP 织入器</p>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver --&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.aspectj&lt;/groupId&gt;
+   &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;
+   &lt;version&gt;1.9.4&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>mybatis-spring整合包 【重点】</p>
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+   &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+   &lt;version&gt;2.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>配置Maven静态资源过滤问题！</p>
+<pre><code>&lt;build&gt;
+   &lt;resources&gt;
+       &lt;resource&gt;
+           &lt;directory&gt;src/main/java&lt;/directory&gt;
+           &lt;includes&gt;
+               &lt;include&gt;**/*.properties&lt;/include&gt;
+               &lt;include&gt;**/*.xml&lt;/include&gt;
+           &lt;/includes&gt;
+           &lt;filtering&gt;true&lt;/filtering&gt;
+       &lt;/resource&gt;
+   &lt;/resources&gt;
+&lt;/build&gt;
+</code></pre><font color=red>2.编写配置文件</font>
+
+<font color=red>3.代码实现</font>
+
+<h2 id="回忆Mybatis"><a href="#回忆Mybatis" class="headerlink" title="回忆Mybatis"></a>回忆Mybatis</h2><p><strong>编写pojo实体类</strong></p>
+<pre><code class="lang-java">public class User {
+   private String username;   //姓名
+   private String password;   //密码
 }
-int main()
-{
-    int n,len;
-    char l[300],name[300],pre_name[300];
-    lg *root;
-    root=(lg*)malloc(sizeof(lg));
-    strcpy(root-&gt;name,&quot;root&quot;);
-    root-&gt;child_head=NULL;
-    root-&gt;next=NULL;
-    scanf(&quot;%d&quot;,&amp;n);
-    while(n--)
-    {
-        scanf(&quot;%s&quot;,l);
-        len=strlen(l);
-        int start=0,end=0;
-        lg *gg;
-        gg=root;
-        strcpy(pre_name,&quot;root&quot;);
-        for(int i=0;i&lt;len;i++)
-        {
-            if(i==len-1)
-            {
-                memset(name,0,sizeof(name));
-                if(l[i]==&#39;\\&#39;){
-                    end=i-1;
-                    get_name(&amp;name,start,end,l);
-                    gg=tree_insert(name,pre_name,gg);
-                }
-                else{ end=i;
-                get_name(&amp;name,start,end,l);
-                file_insert(name,pre_name,&amp;gg);}
-                memset(pre_name,0,sizeof(pre_name));
-            }
-            else if(l[i]==&#39;\\&#39;)
-            {
-                memset(name,0,sizeof(name));
-                end=i-1;
-                get_name(&amp;name,start,end,l);
-                gg=tree_insert(name,pre_name,gg);
-                strcpy(pre_name,name);
-                start=i+1;
-            }
-        }
-    }
-    BL(root,0);
-    return 0;
-}
-/*
-7
-b
-c\
-ab\cd
-a\bc
-ab\d
-a\d\a
-a\d\z\
-*/
 </code></pre>
+<p><strong>实现mybatis的配置文件</strong></p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+       PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+       &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+
+   &lt;typeAliases&gt;
+       &lt;package name=&quot;com.lg.pojo&quot;/&gt;
+   &lt;/typeAliases&gt;
+
+   &lt;environments default=&quot;development&quot;&gt;
+       &lt;environment id=&quot;development&quot;&gt;
+            &lt;transactionManager type=&quot;JDBC&quot;/&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot;/&gt;
+                &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/books?serverTimezone=GMT%2B8&quot;/&gt;
+                &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+                &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+   &lt;/environments&gt;
+
+   &lt;mappers&gt;
+       &lt;package name=&quot;com.lg.dao&quot;/&gt;
+   &lt;/mappers&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p><strong>UserDao接口编写</strong></p>
+<pre><code class="lang-java">public interface UserMapper {
+   public List&lt;User&gt; selectUser();
+}
+</code></pre>
+<p><strong>接口对应的Mapper映射文件</strong></p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+       PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+       &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.lg.dao.UserMapper&quot;&gt;
+
+   &lt;select id=&quot;selectUser&quot; resultType=&quot;User&quot;&gt;
+    select * from user
+   &lt;/select&gt;
+
+&lt;/mapper&gt;
+</code></pre>
+<p><strong>测试类</strong></p>
+<pre><code class="lang-java">@Test
+public void selectUser() throws IOException {
+
+   String resource = &quot;mybatis-config.xml&quot;;
+   InputStream inputStream = Resources.getResourceAsStream(resource);
+   SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+   SqlSession sqlSession = sqlSessionFactory.openSession();
+
+   UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+   List&lt;User&gt; userList = mapper.selectUser();
+   for (User user: userList){
+       System.out.println(user);
+  }
+
+   sqlSession.close();
+}
+</code></pre>
+<h2 id="Mybatis-Spring学习"><a href="#Mybatis-Spring学习" class="headerlink" title="Mybatis-Spring学习"></a>Mybatis-Spring学习</h2><p>引入Spring之前需要了解mybatis-spring包中的一些重要类；</p>
+<p><img src="mybatis-spring.png" alt=""></p>
+<p>官方文档：<a href="http://mybatis.org/spring/zh/index.html" target="_blank" rel="noopener">http://mybatis.org/spring/zh/index.html</a></p>
+<p><strong>什么是 MyBatis-Spring？</strong></p>
+<p>MyBatis-Spring 会帮助你将 MyBatis 代码无缝地整合到 Spring 中。</p>
+<p><strong>知识基础</strong></p>
+<p>在开始使用 MyBatis-Spring 之前，你需要先熟悉 Spring 和 MyBatis 这两个框架和有关它们的术语。这很重要</p>
+<p>MyBatis-Spring 需要以下版本：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">MyBatis-Spring</th>
+<th style="text-align:left">MyBatis</th>
+<th style="text-align:left">Spring 框架</th>
+<th>Spring Batch</th>
+<th style="text-align:left">Java</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">2.0</td>
+<td style="text-align:left">3.5+</td>
+<td style="text-align:left">5.0+</td>
+<td>4.0+</td>
+<td style="text-align:left">Java 8+</td>
+</tr>
+<tr>
+<td style="text-align:left">1.3</td>
+<td style="text-align:left">3.4+</td>
+<td style="text-align:left">3.2.2+</td>
+<td>2.1+</td>
+<td style="text-align:left">Java 6+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果使用 Maven 作为构建工具，仅需要在 pom.xml 中加入以下代码即可：</p>
+<pre><code class="lang-xml">&lt;dependency&gt;
+   &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+   &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+   &lt;version&gt;2.0.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>要和 Spring 一起使用 MyBatis，需要在 Spring 应用上下文中定义至少两样东西：一个 SqlSessionFactory 和至少一个数据映射器类。</p>
+<p>在 MyBatis-Spring 中，可使用SqlSessionFactoryBean来创建 SqlSessionFactory。要配置这个工厂 bean，只需要把下面代码放在 Spring 的 XML 配置文件中：</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+ &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>注意：SqlSessionFactory需要一个 DataSource（数据源）。这可以是任意的 DataSource，只需要和配置其它 Spring 数据库连接一样配置它就可以了。</p>
+<p>在基础的 MyBatis 用法中，是通过 SqlSessionFactoryBuilder 来创建 SqlSessionFactory 的。而在 MyBatis-Spring 中，则使用 SqlSessionFactoryBean 来创建。</p>
+<p>在 MyBatis 中，你可以使用 SqlSessionFactory 来创建 SqlSession。一旦你获得一个 session 之后，你可以使用它来执行映射了的语句，提交或回滚连接，最后，当不再需要它的时候，你可以关闭 session。</p>
+<p>SqlSessionFactory有一个唯一的必要属性：用于 JDBC 的 DataSource。这可以是任意的 DataSource 对象，它的配置方法和其它 Spring 数据库连接是一样的。</p>
+<p>一个常用的属性是 configLocation，它用来指定 MyBatis 的 XML 配置文件路径。它在需要修改 MyBatis 的基础配置非常有用。通常，基础配置指的是 &lt; settings&gt; 或 &lt; typeAliases&gt;元素。</p>
+<p>需要注意的是，这个配置文件并不需要是一个完整的 MyBatis 配置。确切地说，任何环境配置（<environments>），数据源（<DataSource>）和 MyBatis 的事务管理器（<transactionManager>）都会被忽略。SqlSessionFactoryBean 会创建它自有的 MyBatis 环境配置（Environment），并按要求设置自定义环境的值。</p>
+<p>SqlSessionTemplate 是 MyBatis-Spring 的核心。作为 SqlSession 的一个实现，这意味着可以使用它无缝代替你代码中已经在使用的 SqlSession。</p>
+<p>模板可以参与到 Spring 的事务管理中，并且由于其是线程安全的，可以供多个映射器类使用，你应该总是用 SqlSessionTemplate 来替换 MyBatis 默认的 DefaultSqlSession 实现。在同一应用程序中的不同类之间混杂使用可能会引起数据一致性的问题。</p>
+<p>可以使用 SqlSessionFactory 作为构造方法的参数来创建 SqlSessionTemplate 对象。</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;sqlSession&quot; class=&quot;org.mybatis.spring.SqlSessionTemplate&quot;&gt;
+ &lt;constructor-arg index=&quot;0&quot; ref=&quot;sqlSessionFactory&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>现在，这个 bean 就可以直接注入到你的 DAO bean 中了。你需要在你的 bean 中添加一个 SqlSession 属性，就像下面这样：</p>
+<pre><code class="lang-java">public class UserDaoImpl implements UserDao {
+
+ private SqlSession sqlSession;
+
+ public void setSqlSession(SqlSession sqlSession) {
+   this.sqlSession = sqlSession;
+}
+
+ public List&lt;User&gt; searchUser() {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        return mapper.searchUser();
+    }
+}
+</code></pre>
+<p>按下面这样，注入 SqlSessionTemplate：</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;userDao&quot; class=&quot;org.mybatis.spring.sample.dao.UserDaoImpl&quot;&gt;
+ &lt;property name=&quot;sqlSession&quot; ref=&quot;sqlSession&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+<h2 id="整合实现一"><a href="#整合实现一" class="headerlink" title="整合实现一"></a>整合实现一</h2><p>1、引入Spring配置文件beans.xml</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+</code></pre>
+<p>2、配置数据源替换mybaits的数据源</p>
+<pre><code class="lang-xml">&lt;!--配置数据源：数据源有非常多，可以使用第三方的，也可使使用Spring的--&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;org.springframework.jdbc.datasource.DriverManagerDataSource&quot;&gt;
+   &lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot;/&gt;
+        &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/books?serverTimezone=GMT%2B8&quot;/&gt;
+        &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p><img src="DriverManagerDataSource.png" alt=""></p>
+<p><img src="DriverManagerClassName.png" alt=""></p>
+<p><img src="DataSource.png" alt=""></p>
+<p>3、配置SqlSessionFactory，关联MyBatis</p>
+<pre><code class="lang-xml">&lt;!--配置SqlSessionFactory--&gt;
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+   &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+   &lt;!--关联Mybatis--&gt;
+   &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
+   &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:com/lg/dao/*.xml&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p><img src="SqlSessionFactoryBean.png" alt=""></p>
+<p><img src="Location.png" alt=""></p>
+<p>4、注册sqlSessionTemplate，关联sqlSessionFactory；</p>
+<pre><code class="lang-xml">&lt;!--注册sqlSessionTemplate , 关联sqlSessionFactory--&gt;
+&lt;bean id=&quot;sqlSession&quot; class=&quot;org.mybatis.spring.SqlSessionTemplate&quot;&gt;
+   &lt;!--利用构造器注入--&gt;
+   &lt;constructor-arg index=&quot;0&quot; ref=&quot;sqlSessionFactory&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p><img src="SqlSessionTemplate.png" alt=""></p>
+<p>5、增加Dao接口的实现类；私有化sqlSessionTemplate</p>
+<pre><code class="lang-java">public class UserMapperImpl implements UserMapper{
+
+    private SqlSessionTemplate sqlSession;
+
+    public void setSqlSession(SqlSessionTemplate sqlSession) {
+        this.sqlSession = sqlSession;
+    }
+
+    public List&lt;User&gt; searchUser() {
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        return mapper.searchUser();
+    }
+}
+</code></pre>
+<p>6、注册bean实现</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;UserMapper&quot; class=&quot;com.lg.dao.UserDaoImpl&quot;&gt;
+   &lt;property name=&quot;sqlSession&quot; ref=&quot;sqlSession&quot;/&gt;
+&lt;/bean&gt;
+</code></pre>
+<p>7、测试</p>
+<pre><code class="lang-java">   @Test
+   public void test2(){
+       ApplicationContext context = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+       UserMapper mapper = (UserMapper) context.getBean(&quot;UserMapper&quot;);
+       List&lt;User&gt; user = mapper.searchUser();
+       System.out.println(user);
+  }
+</code></pre>
+<p>结果成功输出！现在我们的Mybatis配置文件的状态！都可以被Spring整合！</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+       PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+       &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+   &lt;typeAliases&gt;
+       &lt;package name=&quot;com.lg.pojo&quot;/&gt;
+   &lt;/typeAliases&gt;
+&lt;/configuration&gt;
+</code></pre>
+<h2 id="整合实现二"><a href="#整合实现二" class="headerlink" title="整合实现二"></a>整合实现二</h2><p>mybatis-spring1.2.3版以上的才有这个 .</p>
+<p>官方文档截图 :</p>
+<p>dao继承Support类 , 直接利用 getSqlSession() 获得 , 然后直接注入SqlSessionFactory . 比起方式1 , 不需要管理SqlSessionTemplate , 而且对事务的支持更加友好 . 可跟踪源码查看</p>
+<p><img src="整合2.png" alt=""></p>
+<p>测试：</p>
+<ol>
+<li><p>将我们上面写的UserDaoImpl修改一下</p>
+<pre><code class="lang-java">public class UserDaoImpl extends SqlSessionDaoSupport implements UserMapper {
+   public List&lt;User&gt; searchUser() {
+       UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
+       return mapper.searchUser();
+  }
+}
+</code></pre>
+</li>
+<li><p>修改bean的配置</p>
+<pre><code class="lang-xml">&lt;bean id=&quot;userDao&quot; class=&quot;com.lg.dao.UserDaoImpl&quot;&gt;
+   &lt;property name=&quot;sqlSessionFactory&quot; ref=&quot;sqlSessionFactory&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+</li>
+<li><p>测试</p>
+<pre><code class="lang-java">@Test
+public void test2(){
+   ApplicationContext context = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+   UserMapper mapper = (UserMapper) context.getBean(&quot;userMapper&quot;);
+   List&lt;User&gt; user = mapper.searchUser();
+   System.out.println(user);
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong><font color=blue>总结 : 整合到spring以后可以完全不要mybatis的配置文件，除了这些方式可以实现整合之外，我们还可以使用注解来实现，这个等我们后面学习SpringBoot的时候还会测试整合！</font></strong></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
