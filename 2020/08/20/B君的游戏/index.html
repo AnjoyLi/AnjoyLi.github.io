@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>三分 | Hexo</title>
-  <meta name="keywords" content=" 三分 , 寒假训练 ">
-  <meta name="description" content="三分 | Hexo">
+  <title>B君的游戏 | Hexo</title>
+  <meta name="keywords" content=" 博弈论 ">
+  <meta name="description" content="B君的游戏 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="标签">
@@ -578,9 +578,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-三分" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-B君的游戏" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">三分</h1>
+        <h1 class="article-title">B君的游戏</h1>
     
     <div class="article-meta">
         
@@ -590,7 +590,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="算法">算法</a>
+            <a  data-rel="题目">题目</a>
             
         </span>
         
@@ -598,16 +598,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color3">三分</a>
-            
-            <a class="color5">寒假训练</a>
+            <a class="color4">博弈论</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-09 18:43:19'>2020-06-11 16:44</time>
+            Created At : <time class="date" title='Updated At: 2020-08-20 23:24:04'>2020-08-20 23:06</time>
         
     </div>
     <div class="article-meta">
@@ -640,7 +638,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目"><span class="toc-text">题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#题目-B君的游戏"><span class="toc-text">题目-B君的游戏</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#题解"><span class="toc-text">题解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ac代码"><span class="toc-text">ac代码</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -656,81 +654,60 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="https://img-blog.csdnimg.cn/20200216164530774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzg3MTg4NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>根据题目，在一个二维坐标中，我们要输入N个点坐标，而在x轴（-10000，10000）这个区间存在无数个点，我们假设它为x1,x2,x3…这些点中，每个点到我们输入的N个点的距离存在一个最大值，我们要在这些最大值中找到最小的那一个然后输出。<br>那么，思路是什么呢？<br>既然存在这样一个点，那么我们就要找到它所在的那个区间。<strong>但是，这里要注意了，是最小值，有最值，而且是最小值，那么就可以用三分法</strong>，那为什么不用二分法呢？<strong>因为二分法是对与单调区间的</strong>，（这在高中大家接触二分法的时候举得例子就是单调函数吧，我记得好像是单调且端点异号。）<strong>而三分法是针对有峰值的函数的</strong>。显然，在本题中，用三分法是更加方便快捷的。其实，二分法也可以用，就是对分下来的每一个区间进行再次二分。我觉得要用到递归好像。二分法比较复杂一点。后面我掌握后一定会及时向大家分享的。<br>下面，我们就来介绍一下三分法的解题步骤：<br>1.首先，我们要将先分为两半，然后在对其中的一变进行再分两半，总体就是2：1：1的形式。这里，我们用mid表示一半，用midmid表示一半的一半。</p>
-<pre><code class="lang-cpp">double check(double x){
-    double max=0;
-    for(int i=0;i&lt;n;i++){
-        double temp=sqrt(a[i].y*a[i].y+(a[i].x-x)*(a[i].x-x));
-        if(temp&gt;max)  max=temp;
-    }
-    return max;
-}
-</code></pre>
-<p>我们就是将在x轴坐标的某个点，到所有的N个点的最大值求出并且返回。</p>
-<pre><code class="lang-cpp">double thsearch(double l,double r)
-{
-    double mid,midmid;
-    for(int i=0;i&lt;100;i++){
-        mid=l+(r-l)/2;
-        midmid=mid+(r-mid)/2;
-        if(check(mid)&gt;check(midmid))l=mid;
-        else r=midmid;
-    }
-    return mid;
-}
-</code></pre>
-<p>我们先搞清楚这个循环，对于这个循环有人可能会问了？<strong>为什么是100</strong>，其他可不可以，答案是：可以，我们先讲讲这个原理，每一次循环，都将剩余的区间进行了又一次的三分，这都是2的负次幂级的下降。所以，大家可以想想，<strong>2的-100次幂再乘以区间长度的值应该是足够精确的了</strong>。其实也可以50，30等。但博主试了一下，好像3也是可以过的，emmm，这就要看测试数据本身了，我们为了保险起见，还是将值设大一点。<br>然后，对于循环语句块，首先，<strong>mid我们代表的是区间中点，而midmid有代表的是区间中点的中点</strong>。那这里可能又有人要问了，为什么将midmid放在中点左边呢？其实，你要想，也可以放在中点的右边，只是将代码进行一些细微的修改罢了，更有甚者，还可以两边都来个for循环，emmm，只是，没有必要！</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="lang-cpp">#include&lt;bits/stdc++.h&gt;
-using namespace std;
-typedef long long ll;
-const double pi=acos(-1),eps=1e-10;
-const int inf=0x3f3f3f3f;
-const int mod=1e9+7;
-int n;
-struct node{
-    int x,y;
-}lg[100010];
+        <h1 id="题目-B君的游戏"><a href="#题目-B君的游戏" class="headerlink" title="题目-B君的游戏"></a>题目-B君的游戏</h1><p>题目链接：<a href="http://www.51nod.com/Challenge/Problem.html#problemId=1714" target="_blank" rel="noopener">http://www.51nod.com/Challenge/Problem.html#problemId=1714</a></p>
+<p><img src="B君的游戏.png" alt=""></p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>典型的<code>Nim</code>游戏，需要求<code>SG</code>函数，打表暴力。</p>
+<h2 id="ac代码"><a href="#ac代码" class="headerlink" title="ac代码"></a>ac代码</h2><pre><code class="lang-cpp">#include &lt;cstdio&gt;
 
-bool cmp(node a,node b)
-{
-    return a.x&lt;b.x;
-}
-double check(double x)
-{
-    double maxx=0;
-    for(int i=0;i&lt;n;i++){
-        double tmp=sqrt((lg[i].x-x)*(lg[i].x-x)+lg[i].y*lg[i].y);
-        //cout&lt;&lt;tmp&lt;&lt;endl;
-        if(tmp&gt;maxx)maxx=tmp;
-    }
-    return maxx;
-}
-double thsearch(double l,double r)
-{
-    double mid,midmid;
-    for(int i=0;i&lt;100;i++){
-        mid=l+(r-l)/2;
-        midmid=mid+(r-mid)/2;
-        if(check(mid)&gt;check(midmid))l=mid;
-        else r=midmid;
-    }
-    return mid;
-}
+typedef unsigned long long ull;
+
+const int MAX_DIG = 64;
+
+int sg[] = {0, 1, 2, 4, 8, 16, 32, 64, 128, 255, 256, 512,
+    1024, 2048, 3855, 4096, 8192, 13107, 16384, 21845,
+    27306, 32768, 38506, 65536, 71576, 92115, 101470,
+    131072, 138406, 172589, 240014, 262144, 272069,
+    380556, 524288, 536169, 679601, 847140, 1048576,
+    1072054, 1258879, 1397519, 2005450, 2097152, 2121415,
+    2496892, 2738813, 3993667, 4194304, 4241896, 4617503,
+    5821704, 7559873, 8388608, 8439273, 8861366, 11119275,
+    11973252, 13280789, 16777216, 16844349, 17102035,
+    19984054, 21979742, 23734709};
 
 int main()
 {
-    cin&gt;&gt;n;
-    for(int i=0;i&lt;n;i++)cin&gt;&gt;lg[i].x&gt;&gt;lg[i].y;
-    //sort(lg,lg+n,cmp);
-    //double l=lg[0].x,r=lg[n-1].x;
-    double max=thsearch(-10000,10000);
-    printf(&quot;%.4f\n&quot;,check(max));
+    int n;
 
+    while (scanf(&quot;%d&quot;, &amp;n) == 1)
+    {
+        ull ans = 0, a;
+        for (int i = 0; i &lt; n; i++)
+        {
+            scanf(&quot;%llu\n&quot;, &amp;a);
+            int h = 0;
+            ull d = 1;
+            for (int i = 0; i &lt; MAX_DIG; i++)
+            {
+                //  判断二进制位有几个1
+                if ((d &lt;&lt; i) &amp; a)
+                {
+                    h++;
+                }
+            }
+            ans ^= sg[h];
+        }
+        if (ans == 0)
+        {
+            puts(&quot;L&quot;);
+        }
+        else
+        {
+            puts(&quot;B&quot;);
+        }
+    }
     return 0;
 }
 </code></pre>
-<p>CSDN博客：<a href="https://blog.csdn.net/weixin_43871885/article/details/104344932" target="_blank" rel="noopener" title="CSDN博客">https://blog.csdn.net/weixin_43871885/article/details/104344932</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
