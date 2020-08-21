@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>博弈论 | Hexo</title>
-  <meta name="keywords" content=" 博弈论 ">
-  <meta name="description" content="博弈论 | Hexo">
+  <title>声明式事务 | Hexo</title>
+  <meta name="keywords" content=" Spring ">
+  <meta name="description" content="声明式事务 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章分类">
@@ -586,9 +586,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-博弈论" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-声明式事务" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">博弈论</h1>
+        <h1 class="article-title">声明式事务</h1>
     
     <div class="article-meta">
         
@@ -598,7 +598,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="数论">数论</a>
+            <a  data-rel="SSM框架">SSM框架</a> > 
+            
+            <a  data-rel="SSM框架&lt;---&gt;Spring">Spring</a>
             
         </span>
         
@@ -606,14 +608,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">博弈论</a>
+            <a class="color2">Spring</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-20 23:45:17'>2020-08-16 23:18</time>
+            Created At : <time class="date" title='Updated At: 2020-08-21 21:30:28'>2020-08-21 21:18</time>
         
     </div>
     <div class="article-meta">
@@ -646,7 +648,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#博弈论"><span class="toc-text">博弈论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bash-Game"><span class="toc-text">Bash Game</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子"><span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NIm-Game"><span class="toc-text">NIm Game</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分析-1"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子-1"><span class="toc-text">例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SG函数"><span class="toc-text">SG函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解题模型："><span class="toc-text">解题模型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板一：打表"><span class="toc-text">模板一：打表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板二：DFS"><span class="toc-text">模板二：DFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例子（打表）"><span class="toc-text">例子（打表）</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#声明式事务"><span class="toc-text">声明式事务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾事务"><span class="toc-text">回顾事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring中的事务管理"><span class="toc-text">Spring中的事务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考"><span class="toc-text">思考</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -662,99 +664,175 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h2 id="Bash-Game"><a href="#Bash-Game" class="headerlink" title="Bash Game"></a>Bash Game</h2><p><strong>巴什博弈</strong>：只有一堆n个物品，两个人轮流从这堆物品中取物，规定每次至少取一个，最多取m个。最后取光者得胜。</p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>先剖析题意——每次可以取1~m个，那存在如下几种情况：</p>
+        <h1 id="声明式事务"><a href="#声明式事务" class="headerlink" title="声明式事务"></a>声明式事务</h1><h2 id="回顾事务"><a href="#回顾事务" class="headerlink" title="回顾事务"></a>回顾事务</h2><ul>
+<li>事务在项目开发过程非常重要，涉及到数据的一致性的问题，不容马虎！</li>
+<li>事务管理是企业级应用程序开发中必备技术，用来确保数据的完整性和一致性。</li>
+</ul>
+<font color=red>事务就是把一系列的动作当成一个独立的工作单元，这些动作要么全部完成，要么全部不起作用。</font>
+
+<p><strong>事务四个属性ACID</strong></p>
 <ol>
-<li>n%（m+1）==0，此时，无论先手取几个，后手都可以取i个使每轮是m+1个，最终先手必输。</li>
-<li>n%（m+1）!=0，此时先手先取n%（m+1）个，后手取k个，先手再取l个使k+l=m+1，最后一次即为先手取得。</li>
-</ol>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p><a href="https://lgnbovo.github.io/2020/08/16/Bash游戏">51Nod—1066 Bash游戏</a></p>
-<h2 id="NIm-Game"><a href="#NIm-Game" class="headerlink" title="NIm Game"></a>NIm Game</h2><p><strong>Nim Game</strong>：m堆n个物品，两人轮流取，每次取某堆中不少于1个，最后取完者胜</p>
-<h3 id="分析-1"><a href="#分析-1" class="headerlink" title="分析"></a>分析</h3><font face='黑体'>所有物品数目二进制异或   为0，则先手必输<br> 所有物品数目二进制异或不为0，则后手必输<br>
-从另一个角度思考这个问题，如果物品数量随机，那么每个数目的每一位上1或0概率相同，<br>
-如果有奇数个堆，那么1的个数为偶数或者奇数的概率相同，<br>
-如果有偶数个堆，那么1的个数为偶数的概率略大1/(m+1)，<br>
-也就是说异或结果的每一位为0或1的概率几乎差不多，而先手必输要求异或结果每一位都为0，其实输的概率很小</font>
-
-<h3 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h3><p><a href="https://lgnbovo.github.io/2020/08/18/Nim游戏/">51Nod—1069 Nim游戏</a></p>
-<h2 id="SG函数"><a href="#SG函数" class="headerlink" title="SG函数"></a>SG函数</h2><font color=green face='黑体'>当我们面对由n个游戏组合成的一个游戏时，只需对于每个游戏找出求它的每个局面的SG值的方法，就可以把这些SG值全部看成Nim的石子堆，然后依照找Nim的必胜策略的方法来找这个游戏的必胜策略了！（Nim其实就是n个从一堆中拿石子的游戏求SG的变型，总SG=n个sg的异或）。（very important）</font>
-
-<h3 id="解题模型："><a href="#解题模型：" class="headerlink" title="解题模型："></a>解题模型：</h3><ol>
-<li>把原游戏分解成多个独立的子游戏，则原游戏的SG函数值是它的所有子游戏的SG函数值的异或。</li>
-</ol>
-<p>​    即<strong>sg(G)=sg(G1)^sg(G2)^…^sg(Gn)。</strong></p>
-<ol>
-<li><p>分别考虑没一个子游戏，计算其SG值。</p>
-<p>SG值的计算方法：（<em>重点</em>）</p>
+<li><p>原子性（atomicity）</p>
 </li>
-<li><p>可选步数为1~m的连续整数，直接取模即可，SG(x) = x % (m+1);</p>
+<li><ul>
+<li>事务是原子性操作，由一系列动作组成，事务的原子性确保动作要么全部完成，要么完全不起作用</li>
+</ul>
 </li>
-<li><p>可选步数为任意步，SG(x) = x;</p>
+<li><p>一致性（consistency）</p>
 </li>
-<li><p>可选步数为一系列不连续的数，用模板计算。</p>
+<li><ul>
+<li>一旦所有事务动作完成，事务就要被提交。数据和资源处于一种满足业务规则的一致性状态中</li>
+</ul>
+</li>
+<li><p>隔离性（isolation）</p>
+</li>
+<li><ul>
+<li>可能多个事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏</li>
+</ul>
+</li>
+<li><p>持久性（durability）</p>
+</li>
+<li><ul>
+<li>事务一旦完成，无论系统发生什么错误，结果都不会受到影响。通常情况下，事务的结果被写到持久化存储器中</li>
+</ul>
 </li>
 </ol>
-<h3 id="模板一：打表"><a href="#模板一：打表" class="headerlink" title="模板一：打表"></a>模板一：打表</h3><pre><code class="lang-cpp">const int MAX_DIG = 64;
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>给userDao接口新增两个方法，删除和增加用户；</p>
+<pre><code class="lang-java">//添加一个用户
+int addUser(User user);
 
-//  SG打表
-//  f[]:可以取走的石子个数
-//  sg[]:0~n的SG函数值
-//  hash[]:mex{}
-int f[MAX_DIG];
-int sg[MAX_DIG];
-int hash[MAX_DIG];
+//根据id删除用户
+int deleteUser(String name);
+</code></pre>
+<p>mapper文件，我们故意把 deletes 写错，测试！</p>
+<pre><code class="lang-xml">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.lg.pojo.User&quot;&gt;
+insert into user (username,password) values (#{username},#{password})
+&lt;/insert&gt;
 
-void getSG(int n)
-{
-    memset(sg, 0, sizeof(sg));
-    for (int i = 1; i &lt;= n; i++){
-        memset(hash, 0, sizeof(hash));
-        for (int j = 1; f[j] &lt;= i; j++){
-            hash[sg[i - f[j]]] = 1;
-        }
-        for (int j = 0; j &lt;= n; j++){    //  求mes{}中未出现的最小的非负整数
-            if (hash[j] == 0){
-                sg[i] = j;
-                break;
-            }
-        }
-    }
+&lt;delete id=&quot;deleteUser&quot; parameterType=&quot;int&quot;&gt;
+deletes from user where username = #{username}
+&lt;/delete&gt;
+</code></pre>
+<p>编写接口的实现类，在实现类中，我们去操作一波</p>
+<pre><code class="lang-java">public class UserDaoImpl extends SqlSessionDaoSupport implements UserMapper {
+
+   //增加一些操作
+   public List&lt;User&gt; selectUser() {
+       User user = new User(&quot;小明&quot;,&quot;123456&quot;);
+       UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
+       mapper.addUser(user);
+       mapper.deleteUser(&quot;小明&quot;);
+       return mapper.selectUser();
+  }
+
+   //新增
+   public int addUser(User user) {
+       UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
+       return mapper.addUser(user);
+  }
+   //删除
+   public int deleteUser(int id) {
+       UserMapper mapper = getSqlSession().getMapper(UserMapper.class);
+       return mapper.deleteUser(id);
+  }
+
 }
 </code></pre>
-<h3 id="模板二：DFS"><a href="#模板二：DFS" class="headerlink" title="模板二：DFS"></a>模板二：DFS</h3><pre><code class="lang-cpp">const int MAX_DIG = 64;
-
-//  DFS
-//  注意 S数组要按从小到大排序 SG函数要初始化为-1 对于每个集合只需初始化1遍
-//  n是集合s的大小 S[i]是定义的特殊取法规则的数组
-int s[MAX_DIG];
-int sg[MAX_DIG * 100];
-int n;
-
-int SG_dfs(int x)
-{
-    if (sg[x] != -1){
-        return sg[x];
-    }
-    bool vis[MAX_DIG];
-    memset(vis, 0, sizeof(vis));
-    for (int i = 0; i &lt; n; i++){
-        if (x &gt;= s[i]){
-            SG_dfs(x - s[i]);
-            vis[sg[x - s[i]]] = 1;
-        }
-    }
-    int e;
-    for (int i = 0; ; i++){
-        if (!vis[i]){
-            e = i;
-            break;
-        }
-    }
-    return sg[x] = e;
+<p>测试</p>
+<pre><code class="lang-java">@Test
+public void test2(){
+   ApplicationContext context = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+   UserMapper mapper = (UserMapper) context.getBean(&quot;userDao&quot;);
+   List&lt;User&gt; user = mapper.selectUser();
+   System.out.println(user);
 }
 </code></pre>
-<p><strong>一般DFS只在打表解决不了的情况下用，首选打表预处理。</strong></p>
-<h3 id="例子（打表）"><a href="#例子（打表）" class="headerlink" title="例子（打表）"></a>例子（打表）</h3><p><a href="https://lgnbovo.github.io/2020/08/20/B君的游戏/">51Nod—1714 B君的游戏</a></p>
+<p>报错：sql异常，delete写错了</p>
+<p>结果 ：插入成功！</p>
+<p>没有进行事务的管理；我们想让他们都成功才成功，有一个失败，就都失败，我们就应该需要<strong>事务！</strong></p>
+<p>以前都需要自己手动管理事务，十分麻烦！</p>
+<p>但是Spring给我们提供了事务管理，我们只需要配置即可；</p>
+<h2 id="Spring中的事务管理"><a href="#Spring中的事务管理" class="headerlink" title="Spring中的事务管理"></a>Spring中的事务管理</h2><p>Spring在不同的事务管理API之上定义了一个抽象层，使得开发人员不必了解底层的事务管理API就可以使用Spring的事务管理机制。Spring支持编程式事务管理和声明式的事务管理。</p>
+<p><strong>编程式事务管理</strong></p>
+<ul>
+<li>将事务管理代码嵌到业务方法中来控制事务的提交和回滚</li>
+<li>缺点：必须在每个事务操作业务逻辑中包含额外的事务管理代码</li>
+</ul>
+<p><strong>声明式事务管理</strong></p>
+<ul>
+<li>一般情况下比编程式事务好用。</li>
+<li>将事务管理代码从业务方法中分离出来，以声明的方式来实现事务管理。</li>
+<li>将事务管理作为横切关注点，通过aop方法模块化。Spring中通过Spring AOP框架支持声明式事务管理。</li>
+</ul>
+<p><strong>使用Spring管理事务，注意头文件的约束导入 : tx</strong></p>
+<pre><code class="lang-xml">xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd&quot;&gt;
+</code></pre>
+<p><strong>事务管理器</strong></p>
+<ul>
+<li>无论使用Spring的哪种事务管理策略（编程式或者声明式）事务管理器都是必须的。</li>
+<li>就是 Spring的核心事务管理抽象，管理封装了一组独立于技术的方法。</li>
+</ul>
+<p><strong>JDBC事务</strong></p>
+<pre><code class="lang-xml">&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+       &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot; /&gt;
+&lt;/bean&gt;
+</code></pre>
+<p><strong>配置好事务管理器后我们需要去配置事务的通知</strong></p>
+<pre><code class="lang-xml">&lt;!--配置事务通知--&gt;
+&lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;
+   &lt;tx:attributes&gt;
+       &lt;!--配置哪些方法使用什么样的事务,配置事务的传播特性--&gt;
+       &lt;tx:method name=&quot;add&quot; propagation=&quot;REQUIRED&quot;/&gt;
+       &lt;tx:method name=&quot;delete&quot; propagation=&quot;REQUIRED&quot;/&gt;
+       &lt;tx:method name=&quot;update&quot; propagation=&quot;REQUIRED&quot;/&gt;
+       &lt;tx:method name=&quot;search*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+       &lt;tx:method name=&quot;get&quot; read-only=&quot;true&quot;/&gt;
+       &lt;tx:method name=&quot;*&quot; propagation=&quot;REQUIRED&quot;/&gt;
+   &lt;/tx:attributes&gt;
+&lt;/tx:advice&gt;
+</code></pre>
+<font color=green>**spring事务传播特性：**</font>
+
+<p>事务传播行为就是多个事务方法相互调用时，事务如何在这些方法间传播。spring支持7种事务传播行为：</p>
+<ul>
+<li>propagation_requierd：如果当前没有事务，就新建一个事务，如果已存在一个事务中，加入到这个事务中，这是最常见的选择。</li>
+<li>propagation_supports：支持当前事务，如果没有当前事务，就以非事务方法执行。</li>
+<li>propagation_mandatory：使用当前事务，如果没有当前事务，就抛出异常。</li>
+<li>propagation_required_new：新建事务，如果当前存在事务，把当前事务挂起。</li>
+<li>propagation_not_supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。</li>
+<li>propagation_never：以非事务方式执行操作，如果当前事务存在则抛出异常。</li>
+<li>propagation_nested：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与propagation_required类似的操作</li>
+</ul>
+<p>Spring 默认的事务传播行为是 PROPAGATION_REQUIRED，它适合于绝大多数的情况。</p>
+<p>假设 ServiveX#methodX() 都工作在事务环境下（即都被 Spring 事务增强了），假设程序中存在如下的调用链：Service1#method1()-&gt;Service2#method2()-&gt;Service3#method3()，那么这 3 个服务类的 3 个方法通过 Spring 的事务传播机制都工作在同一个事务中。</p>
+<p>就好比，我们刚才的几个方法存在调用，所以会被放在一组事务当中！</p>
+<font color=green>**配置AOP**</font>
+
+<p>导入aop的头文件！</p>
+<pre><code class="lang-xml">&lt;!--配置aop织入事务--&gt;
+&lt;aop:config&gt;
+   &lt;aop:pointcut id=&quot;txPointcut&quot; expression=&quot;execution(* com.lg.dao.*.*(..))&quot;/&gt;
+   &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;txPointcut&quot;/&gt;
+&lt;/aop:config&gt;
+</code></pre>
+<p><strong>进行测试</strong></p>
+<p>删掉刚才插入的数据，再次测试！</p>
+<pre><code class="lang-java">@Test
+public void test2(){
+   ApplicationContext context = new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
+   UserMapper mapper = (UserMapper) context.getBean(&quot;userDao&quot;);
+   List&lt;User&gt; user = mapper.selectUser();
+   System.out.println(user);
+}
+</code></pre>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>为什么需要配置事务？</p>
+<ul>
+<li>如果不配置，就需要我们手动提交控制事务；</li>
+<li>事务在项目开发过程非常重要，涉及到数据的一致性的问题，不容马虎！</li>
+</ul>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
