@@ -537,19 +537,19 @@
             <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
         </a>
         
-        <a  class="All 算法 "
-           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
-           data-tag="寒假训练,动态规划"
-           data-author="" >
-            <span class="post-title" title="算概率">算概率</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
         <a  class="All 数据结构 "
            href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
            data-tag="树,oj作业"
            data-author="" >
             <span class="post-title" title="目录树">目录树</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
+           data-tag="寒假训练,动态规划"
+           data-author="" >
+            <span class="post-title" title="算概率">算概率</span>
             <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
         </a>
         
@@ -615,7 +615,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-21 21:30:28'>2020-08-21 21:18</time>
+            Created At : <time class="date" title='Updated At: 2020-08-21 21:34:38'>2020-08-21 21:18</time>
         
     </div>
     <div class="article-meta">
@@ -672,27 +672,19 @@
 
 <p><strong>事务四个属性ACID</strong></p>
 <ol>
-<li><p>原子性（atomicity）</p>
-</li>
-<li><ul>
+<li>原子性（atomicity）<ul>
 <li>事务是原子性操作，由一系列动作组成，事务的原子性确保动作要么全部完成，要么完全不起作用</li>
 </ul>
 </li>
-<li><p>一致性（consistency）</p>
-</li>
-<li><ul>
+<li>一致性（consistency）<ul>
 <li>一旦所有事务动作完成，事务就要被提交。数据和资源处于一种满足业务规则的一致性状态中</li>
 </ul>
 </li>
-<li><p>隔离性（isolation）</p>
-</li>
-<li><ul>
+<li>隔离性（isolation）<ul>
 <li>可能多个事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏</li>
 </ul>
 </li>
-<li><p>持久性（durability）</p>
-</li>
-<li><ul>
+<li>持久性（durability）<ul>
 <li>事务一旦完成，无论系统发生什么错误，结果都不会受到影响。通常情况下，事务的结果被写到持久化存储器中</li>
 </ul>
 </li>
@@ -702,7 +694,7 @@
 int addUser(User user);
 
 //根据id删除用户
-int deleteUser(String name);
+int deleteUser(String username);
 </code></pre>
 <p>mapper文件，我们故意把 deletes 写错，测试！</p>
 <pre><code class="lang-xml">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.lg.pojo.User&quot;&gt;
