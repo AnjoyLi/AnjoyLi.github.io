@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>使用注解开发Spring | Hexo</title>
-  <meta name="keywords" content=" Spring ">
-  <meta name="description" content="使用注解开发Spring | Hexo">
+  <title>第一个MVC程序 | Hexo</title>
+  <meta name="keywords" content=" SpringMVC ">
+  <meta name="description" content="第一个MVC程序 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="文章分类">
@@ -614,9 +614,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-使用注解开发Spring" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-第一个MVC程序" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">使用注解开发Spring</h1>
+        <h1 class="article-title">第一个MVC程序</h1>
     
     <div class="article-meta">
         
@@ -628,7 +628,7 @@
             
             <a  data-rel="SSM框架">SSM框架</a> > 
             
-            <a  data-rel="SSM框架&lt;---&gt;Spring">Spring</a>
+            <a  data-rel="SSM框架&lt;---&gt;SpringMVC">SpringMVC</a>
             
         </span>
         
@@ -636,14 +636,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">Spring</a>
+            <a class="color5">SpringMVC</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-17 18:46:18'>2020-08-17 18:26</time>
+            Created At : <time class="date" title='Updated At: 2020-08-25 18:11:42'>2020-08-25 17:39</time>
         
     </div>
     <div class="article-meta">
@@ -676,7 +676,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用注解开发"><span class="toc-text">使用注解开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bean的实现"><span class="toc-text">Bean的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#属性注入"><span class="toc-text">属性注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#衍生注解"><span class="toc-text">衍生注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动装配注解"><span class="toc-text">自动装配注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基于Java类进行配置"><span class="toc-text">基于Java类进行配置</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hello-SpringMVC"><span class="toc-text">Hello SpringMVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置版"><span class="toc-text">配置版</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解版（主要）"><span class="toc-text">注解版（主要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -692,151 +692,319 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="使用注解开发"><a href="#使用注解开发" class="headerlink" title="使用注解开发"></a>使用注解开发</h1><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>在配置文件当中，要引入一个context约束</p>
+        <h1 id="Hello-SpringMVC"><a href="#Hello-SpringMVC" class="headerlink" title="Hello SpringMVC"></a>Hello SpringMVC</h1><h2 id="配置版"><a href="#配置版" class="headerlink" title="配置版"></a>配置版</h2><ol>
+<li><p>新建一个Moudle ， springmvc-02-hello ， 添加web的支持！</p>
+</li>
+<li><p>确定导入了SpringMVC 的依赖！</p>
+</li>
+<li><p>配置web.xml  ， 注册DispatcherServlet</p>
+<pre><code class="lang-xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+        version=&quot;4.0&quot;&gt;
+
+   &lt;!--1.注册DispatcherServlet--&gt;
+   &lt;servlet&gt;
+       &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+       &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+       &lt;!--关联一个springmvc的配置文件:【servlet-name】-servlet.xml--&gt;
+       &lt;init-param&gt;
+           &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+           &lt;param-value&gt;classpath:springmvc-servlet.xml&lt;/param-value&gt;
+       &lt;/init-param&gt;
+       &lt;!--启动级别-1--&gt;
+       &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+   &lt;/servlet&gt;
+
+   &lt;!--/ 匹配所有的请求；（不包括.jsp）--&gt;
+   &lt;!--/* 匹配所有的请求；（包括.jsp）--&gt;
+   &lt;servlet-mapping&gt;
+       &lt;servlet-name&gt;springmvc&lt;/servlet-name&gt;
+       &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;
+</code></pre>
+</li>
+<li><p>编写SpringMVC 的 配置文件！名称：springmvc-servlet.xml  : [servletname]-servlet.xml</p>
+<p>说明，这里的名称要求是按照官方来的</p>
 <pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-      xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+       http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
 
 &lt;/beans&gt;
 </code></pre>
-<h2 id="Bean的实现"><a href="#Bean的实现" class="headerlink" title="Bean的实现"></a>Bean的实现</h2><p>我们之前都是使用 bean 的标签进行bean注入，但是实际开发中，我们一般都会使用注解！</p>
-<p>1、配置扫描哪些包下的注解</p>
-<pre><code class="lang-xml">&lt;!--指定注解扫描包--&gt;
-&lt;context:component-scan base-package=&quot;com.lg.pojo&quot;/&gt;
+</li>
+<li><p>添加 处理映射器</p>
+<pre><code class="lang-xml">&lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;/&gt;
 </code></pre>
-<p>2、在指定包下编写类，增加注解</p>
-<pre><code class="lang-java">@Component(&quot;user&quot;)
-// 相当于配置文件中 &lt;bean id=&quot;user&quot; class=&quot;当前注解的类&quot;/&gt;
-public class User {
-   public String name = &quot;lg&quot;;
-}
+</li>
+<li><p>添加 处理器适配器</p>
+<pre><code class="lang-xml">&lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;/&gt;
 </code></pre>
-<p>3、测试</p>
-<pre><code class="lang-java">@Test
-public void test(){
-   ApplicationContext applicationContext =
-       new ClassPathXmlApplicationContext(&quot;beans.xml&quot;);
-   User user = (User) applicationContext.getBean(&quot;user&quot;);
-   System.out.println(user.name);
-}
+</li>
+<li><p>添加 视图解析器</p>
+<pre><code class="lang-xml">&lt;!--视图解析器:DispatcherServlet给他的ModelAndView--&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;InternalResourceViewResolver&quot;&gt;
+   &lt;!--前缀--&gt;
+   &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+   &lt;!--后缀--&gt;
+   &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+&lt;/bean&gt;
 </code></pre>
-<h2 id="属性注入"><a href="#属性注入" class="headerlink" title="属性注入"></a>属性注入</h2><p>使用注解注入属性</p>
-<p>1、可以不用提供set方法，直接在直接名上添加@value(“值”)</p>
-<pre><code class="lang-java">@Component(&quot;user&quot;)
-// 相当于配置文件中 &lt;bean id=&quot;user&quot; class=&quot;当前注解的类&quot;/&gt;
-public class User {
-   @Value(&quot;lg&quot;)
-   // 相当于配置文件中 &lt;property name=&quot;name&quot; value=&quot;lg&quot;/&gt;
-   public String name;
-}
-</code></pre>
-<p>2、如果提供了set方法，在set方法上添加@value(“值”);</p>
-<pre><code class="lang-java">@Component(&quot;user&quot;)
-public class User {
+</li>
+<li><p>编写我们要操作业务Controller ，要么实现Controller接口，要么增加注解；需要返回一个ModelAndView，装数据，封视图；</p>
+<pre><code class="lang-java">import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
-   public String name;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-   @Value(&quot;lg&quot;)
-   public void setName(String name) {
-       this.name = name;
-  }
-}
-</code></pre>
-<h2 id="衍生注解"><a href="#衍生注解" class="headerlink" title="衍生注解"></a>衍生注解</h2><p>这些注解，就是替代了在配置文件当中配置步骤而已！更加的方便快捷！</p>
-<p><strong>@Component三个衍生注解</strong></p>
-<p>为了更好的进行分层，Spring可以使用其它三个注解，功能一样，目前使用哪一个功能都一样。</p>
-<ul>
-<li>@Controller：web层</li>
-<li>@Service：service层</li>
-<li>@Repository：dao层</li>
-</ul>
-<p>写上这些注解，就相当于将这个类交给Spring管理装配了！</p>
-<h2 id="自动装配注解"><a href="#自动装配注解" class="headerlink" title="自动装配注解"></a>自动装配注解</h2><p><a href="https://lgnbovo.github.io/2020/08/16/自动装配/">自动装配</a></p>
-<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>@scope</p>
-<ul>
-<li>singleton：默认的，Spring会采用单例模式创建这个对象。关闭工厂 ，所有的对象都会销毁。</li>
-<li>prototype：多例模式。关闭工厂 ，所有的对象不会销毁。内部的垃圾回收机制会回收</li>
-</ul>
-<pre><code class="lang-java">@Controller(&quot;user&quot;)
-@Scope(&quot;prototype&quot;)
-public class User {
-   @Value(&quot;lg&quot;)
-   public String name;
-}
-</code></pre>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p><strong>XML与注解比较</strong></p>
-<ul>
-<li>XML可以适用任何场景 ，结构清晰，维护方便</li>
-<li>注解不是自己提供的类使用不了，开发简单方便</li>
-</ul>
-<p><strong>xml与注解整合开发</strong> ：推荐最佳实践</p>
-<ul>
-<li>xml管理Bean</li>
-<li>注解完成属性注入</li>
-<li>使用过程中， 可以不用扫描，扫描是为了类上的注解</li>
-</ul>
-<pre><code class="lang-xml">&lt;context:annotation-config/&gt;
-</code></pre>
-<p>作用：</p>
-<ul>
-<li>进行注解驱动注册，从而使注解生效</li>
-<li>用于激活那些已经在spring容器里注册过的bean上面的注解，也就是显示的向Spring注册</li>
-<li>如果不扫描包，就需要手动配置bean</li>
-<li>如果不加注解驱动，则注入的值为null！</li>
-</ul>
-<h2 id="基于Java类进行配置"><a href="#基于Java类进行配置" class="headerlink" title="基于Java类进行配置"></a>基于Java类进行配置</h2><p>JavaConfig 原来是 Spring 的一个子项目，它通过 Java 类的方式提供 Bean 的定义信息，在 Spring4 的版本， JavaConfig 已正式成为 Spring4 的核心功能 。</p>
-<p>测试：</p>
-<p>1、编写一个实体类，Dog</p>
-<pre><code class="lang-java">@Component  //将这个类标注为Spring的一个组件，放到容器中！
-public class Dog {
-   public String name = &quot;dog&quot;;
-}
-</code></pre>
-<p>2、新建一个config配置包，编写一个MyConfig配置类</p>
-<pre><code class="lang-java">@Configuration  //代表这是一个配置类
-public class MyConfig {
+//注意：这里我们先导入Controller接口
+public class HelloController implements Controller {
 
-   @Bean //通过方法注册一个bean，这里的返回值就Bean的类型，方法名就是bean的id！
-   public Dog dog(){
-       return new Dog();
+   public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+       //ModelAndView 模型和视图
+       ModelAndView mv = new ModelAndView();
+
+       //封装对象，放在ModelAndView中。Model
+       mv.addObject(&quot;msg&quot;,&quot;HelloSpringMVC!&quot;);
+       //封装要跳转的视图，放在ModelAndView中
+       mv.setViewName(&quot;hello&quot;); //: /WEB-INF/jsp/hello.jsp
+       return mv;
   }
 
 }
 </code></pre>
-<p>3、测试</p>
-<pre><code class="lang-java">@Test
-public void test2(){
-   ApplicationContext applicationContext =
-           new AnnotationConfigApplicationContext(MyConfig.class);
-   Dog dog = (Dog) applicationContext.getBean(&quot;dog&quot;);
-   System.out.println(dog.name);
-}
+</li>
+<li><p>将自己的类交给SpringIOC容器，注册bean</p>
+<pre><code class="lang-xml">&lt;!--Handler--&gt;
+&lt;bean id=&quot;/hello&quot; class=&quot;com.lg.controller.HelloController&quot;/&gt;
 </code></pre>
-<p>4、成功输出结果！</p>
-<p><strong>导入其他配置如何做呢？</strong></p>
-<p>1、我们再编写一个配置类！</p>
-<pre><code class="lang-java">@Configuration  //代表这是一个配置类
-public class MyConfig2 {
-}
+</li>
+<li><p>写要跳转的jsp页面，显示ModelandView存放的数据，以及我们的正常页面；</p>
+<pre><code class="lang-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;lg&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+${msg}
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
-<p>2、在之前的配置类中我们来选择导入这个配置类</p>
-<pre><code class="lang-java">@Configuration
-@Import(MyConfig2.class)  //导入合并其他配置类，类似于配置文件中的 inculde 标签
-public class MyConfig {
+</li>
+<li><p>配置Tomcat 启动测试！</p>
+<p><img src="测试1.png" alt=""></p>
+</li>
+</ol>
+<p><strong>可能遇到的问题：访问出现404，排查步骤：</strong></p>
+<ol>
+<li><p>查看控制台输出，看一下是不是缺少了什么jar包。</p>
+</li>
+<li><p>如果jar包存在，显示无法输出，就在IDEA的项目发布中，添加lib依赖！</p>
+</li>
+<li><p>重启Tomcat 即可解决！</p>
+</li>
+<li><p>如图：</p>
+<p><img src="404.png" alt=""></p>
+</li>
+</ol>
+<h2 id="注解版（主要）"><a href="#注解版（主要）" class="headerlink" title="注解版（主要）"></a><font color=red>注解版（主要）</font></h2><ol>
+<li><p><strong>新建一个Moudle，springmvc-03-hello-annotation 。添加web支持！</strong></p>
+</li>
+<li><p>由于Maven可能存在资源过滤的问题，我们将配置完善</p>
+<pre><code class="lang-xml">&lt;build&gt;
+   &lt;resources&gt;
+       &lt;resource&gt;
+           &lt;directory&gt;src/main/java&lt;/directory&gt;
+           &lt;includes&gt;
+               &lt;include&gt;**/*.properties&lt;/include&gt;
+               &lt;include&gt;**/*.xml&lt;/include&gt;
+           &lt;/includes&gt;
+           &lt;filtering&gt;false&lt;/filtering&gt;
+       &lt;/resource&gt;
+       &lt;resource&gt;
+           &lt;directory&gt;src/main/resources&lt;/directory&gt;
+           &lt;includes&gt;
+               &lt;include&gt;**/*.properties&lt;/include&gt;
+               &lt;include&gt;**/*.xml&lt;/include&gt;
+           &lt;/includes&gt;
+           &lt;filtering&gt;false&lt;/filtering&gt;
+       &lt;/resource&gt;
+   &lt;/resources&gt;
+&lt;/build&gt;
+</code></pre>
+</li>
+<li><p>在pom.xml文件引入相关的依赖：主要有Spring框架核心库、Spring MVC、servlet , JSTL等。我们在父依赖中已经引入了！</p>
+</li>
+<li><p><strong>配置web.xml</strong></p>
+<p>注意点：</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+        version=&quot;4.0&quot;&gt;
 
-   @Bean
-   public Dog dog(){
-       return new Dog();
+   &lt;!--1.注册servlet--&gt;
+   &lt;servlet&gt;
+       &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+       &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+       &lt;!--通过初始化参数指定SpringMVC配置文件的位置，进行关联--&gt;
+       &lt;init-param&gt;
+           &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+           &lt;param-value&gt;classpath:springmvc-servlet.xml&lt;/param-value&gt;
+       &lt;/init-param&gt;
+       &lt;!-- 启动顺序，数字越小，启动越早 --&gt;
+       &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+   &lt;/servlet&gt;
+
+   &lt;!--所有请求都会被springmvc拦截 --&gt;
+   &lt;servlet-mapping&gt;
+       &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+       &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+
+&lt;/web-app&gt;
+</code></pre>
+<p><strong>/ 和 /* 的区别：</strong>&lt; url-pattern &gt; / &lt;/ url-pattern &gt; 不会匹配到.jsp， 只针对我们编写的请求；即：.jsp 不会进入spring的 DispatcherServlet类 。&lt; url-pattern &gt; /<em> &lt;/ url-pattern &gt; 会匹配 </em>.jsp，会出现返回 jsp视图 时再次进入spring的DispatcherServlet 类，导致找不到对应的controller所以报404错。</p>
+<ol>
+<li><ul>
+<li>注意web.xml版本问题，要最新版！</li>
+</ul>
+</li>
+<li><ul>
+<li>注册DispatcherServlet</li>
+<li>关联SpringMVC的配置文件</li>
+<li>启动级别为1</li>
+<li>映射路径为 / 【不要用/*，会404】</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p><strong>添加Spring MVC配置文件</strong></p>
+<p>在resource目录下添加springmvc-servlet.xml配置文件，配置的形式与Spring容器配置基本类似，为了支持基于注解的IOC，设置了自动扫描包的功能，具体配置信息如下：</p>
+</li>
+<li><pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+      xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+      xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+
+   &lt;!-- 自动扫描包，让指定包下的注解生效,由IOC容器统一管理 --&gt;
+   &lt;context:component-scan base-package=&quot;com.lg.controller&quot;/&gt;
+   &lt;!-- 让Spring MVC不处理静态资源 --&gt;
+   &lt;mvc:default-servlet-handler /&gt;
+   &lt;!--
+   支持mvc注解驱动
+       在spring中一般采用@RequestMapping注解来完成映射关系
+       要想使@RequestMapping注解生效
+       必须向上下文中注册DefaultAnnotationHandlerMapping
+       和一个AnnotationMethodHandlerAdapter实例
+       这两个实例分别在类级别和方法级别处理。
+       而annotation-driven配置帮助我们自动完成上述两个实例的注入。
+    --&gt;
+   &lt;mvc:annotation-driven /&gt;
+
+   &lt;!-- 视图解析器 --&gt;
+   &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;
+         id=&quot;internalResourceViewResolver&quot;&gt;
+       &lt;!-- 前缀 --&gt;
+       &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
+       &lt;!-- 后缀 --&gt;
+       &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+   &lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre>
+</li>
+<li><p>在视图解析器中我们把所有的视图都存放在/WEB-INF/目录下，这样可以保证视图安全，因为这个目录下的文件，客户端不能直接访问。</p>
+</li>
+<li><ul>
+<li>让IOC的注解生效</li>
+<li>静态资源过滤 ：HTML . JS . CSS . 图片 ， 视频 …..</li>
+<li>MVC的注解驱动</li>
+<li>配置视图解析器</li>
+</ul>
+</li>
+<li><p><strong>创建Controller</strong></p>
+</li>
+<li><p>编写一个Java控制类：com.lg.controller.HelloController , 注意编码规范</p>
+</li>
+<li><pre><code class="lang-java">package com.lg.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping(&quot;/HelloController&quot;)
+public class HelloController {
+
+   //真实访问地址 : 项目名/HelloController/hello
+   @RequestMapping(&quot;/hello&quot;)
+   public String sayHello(Model model){
+       //向模型中添加属性msg与值，可以在JSP页面中取出并渲染
+       model.addAttribute(&quot;msg&quot;,&quot;hello,SpringMVC&quot;);
+       //web-inf/jsp/hello.jsp
+       return &quot;hello&quot;;
   }
-
 }
 </code></pre>
-<p>关于这种Java类的配置方式，之后的SpringBoot 和 SpringCloud中还会大量看到，需要知道这些注解的作用即可！</p>
+</li>
+<li><ul>
+<li>@Controller是为了让Spring IOC容器初始化时自动扫描到；</li>
+<li>@RequestMapping是为了映射请求路径，这里因为类与方法上都有映射所以访问时应该是/HelloController/hello；</li>
+<li>方法中声明Model类型的参数是为了把Action中的数据带到视图中；</li>
+<li>方法返回的结果是视图的名称hello，加上配置文件中的前后缀变成WEB-INF/jsp/<strong>hello</strong>.jsp。</li>
+</ul>
+</li>
+<li><p><strong>创建视图层</strong></p>
+</li>
+<li><p>在WEB-INF/ jsp目录中创建hello.jsp ， 视图可以直接取出并展示从Controller带回的信息；</p>
+</li>
+<li><p>可以通过EL表示取出Model中存放的值，或者对象；</p>
+</li>
+<li><pre><code class="lang-jsp">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;title&gt;SpringMVC&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+${msg}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+<li><p><strong>配置Tomcat运行</strong></p>
+<p>配置Tomcat ，  开启服务器 ， 访问 对应的请求路径！</p>
+<p><img src="测试2.png" alt=""></p>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>实现步骤其实非常的简单：</p>
+<ol>
+<li>新建一个web项目</li>
+<li>导入相关jar包</li>
+<li>编写web.xml , 注册DispatcherServlet</li>
+<li>编写springmvc配置文件</li>
+<li>接下来就是去创建对应的控制类 , controller</li>
+<li>最后完善前端视图和controller之间的对应</li>
+<li>测试运行调试.</li>
+</ol>
+<font color=red>使用springMVC必须配置的三大件：<br><b>处理器映射器、处理器适配器、视图解析器</b><br>通常，只需要<b>手动配置视图解析器</b>，而<b>处理器映射器</b>和<b>处理器适配器</b>只需要开启<b>注解驱动</b>即可，而省去了大段的xml配置</font>
+
+<p>原理：</p>
+<p><img src="原理.png" alt=""></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
