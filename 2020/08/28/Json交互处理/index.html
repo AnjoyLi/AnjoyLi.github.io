@@ -7,12 +7,12 @@
   <meta name="description" content="Json交互处理 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://lgnbovo.github.io/tags/index.html">
+<meta property="og:title" content="文章分类">
+<meta property="og:url" content="http://lgnbovo.github.io/categories/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-12T04:55:51.000Z">
-<meta property="article:modified_time" content="2020-06-12T04:56:50.741Z">
+<meta property="article:published_time" content="2020-06-12T04:50:42.000Z">
+<meta property="article:modified_time" content="2020-06-12T04:53:45.435Z">
 <meta property="article:author" content="lggg">
 <meta name="twitter:card" content="summary">
 
@@ -659,7 +659,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-29 00:24:57'>2020-08-28 17:57</time>
+            Created At : <time class="date" title='Updated At: 2020-08-29 00:32:48'>2020-08-28 17:57</time>
         
     </div>
     <div class="article-meta">
@@ -720,7 +720,7 @@
 <li>花括号保存对象</li>
 <li>方括号保存数组</li>
 </ul>
-<pre><code class="lang-json">{&quot;name&quot;: &quot;QinJiang&quot;}
+<pre><code class="lang-json">{&quot;name&quot;: &quot;lg&quot;}
 {&quot;age&quot;: &quot;3&quot;}
 {&quot;sex&quot;: &quot;男&quot;}
 </code></pre>
@@ -865,7 +865,7 @@ public class User {
 public class UserController {
 
    @RequestMapping(&quot;/json1&quot;)
-   @ResponseBody
+   @ResponseBody //跳过视图解析器即返回jsp文件名
    public String json1() throws JsonProcessingException {
        //创建一个jackson的对象映射器，用来解析数据
        ObjectMapper mapper = new ObjectMapper();
