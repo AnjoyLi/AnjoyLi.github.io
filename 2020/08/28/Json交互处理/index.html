@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>逆元 | Hexo</title>
-  <meta name="keywords" content=" 扩展欧几里得 , 逆元 , 费马小定理 ">
-  <meta name="description" content="逆元 | Hexo">
+  <title>Json交互处理 | Hexo</title>
+  <meta name="keywords" content=" SpringMVC ">
+  <meta name="description" content="Json交互处理 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="标签">
@@ -630,9 +630,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-逆元" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Json交互处理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">逆元</h1>
+        <h1 class="article-title">Json交互处理</h1>
     
     <div class="article-meta">
         
@@ -642,7 +642,9 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="数论">数论</a>
+            <a  data-rel="SSM框架">SSM框架</a> > 
+            
+            <a  data-rel="SSM框架&lt;---&gt;SpringMVC">SpringMVC</a>
             
         </span>
         
@@ -650,18 +652,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">扩展欧几里得</a>
-            
-            <a class="color3">逆元</a>
-            
-            <a class="color1">费马小定理</a>
+            <a class="color5">SpringMVC</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-08-14 22:28:34'>2020-08-14 21:04</time>
+            Created At : <time class="date" title='Updated At: 2020-08-29 00:24:57'>2020-08-28 17:57</time>
         
     </div>
     <div class="article-meta">
@@ -694,7 +692,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#逆元"><span class="toc-text">逆元</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题引入"><span class="toc-text">问题引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逆元的性质"><span class="toc-text">逆元的性质</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逆元的求解"><span class="toc-text">逆元的求解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展欧几里得算法"><span class="toc-text">扩展欧几里得算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#费马小定理"><span class="toc-text">费马小定理</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Json"><span class="toc-text">Json</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是JSON？"><span class="toc-text">什么是JSON？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller返回JSON数据"><span class="toc-text">Controller返回JSON数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码优化"><span class="toc-text">代码优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试集合输出"><span class="toc-text">测试集合输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出时间对象"><span class="toc-text">输出时间对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽取为工具类"><span class="toc-text">抽取为工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FastJson"><span class="toc-text">FastJson</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -710,80 +708,399 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="逆元"><a href="#逆元" class="headerlink" title="逆元"></a>逆元</h1><h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><p>对于取余运算，有以下一些性质：</p>
-<script type="math/tex; mode=display">
-(a+b)\%p=(a\%p+b\%p)\%p \\
-(a-b)\%p=(a\%p-b\%p)\%p \\
-(a\times b)\%p=(a\%p\times b\%p)\%p \\
-a^b\%p=((a\%p)^b)\%p</script><p>唯独<strong>除法</strong>是不满足的：</p>
-<script type="math/tex; mode=display">
-(\frac{a}{b})\%p \neq (\frac{a\%p}{b\%p})\%p</script><p>证明：</p>
-<script type="math/tex; mode=display">
-设a=k_0p+a',b=k_1p+b',k_0,k_1\in Z \\
-(\frac{a\%p}{b\%p})=(\frac{a'}{b'})= \frac{(a-k_0p)}{(b-k_1p)} \\
-\frac{(a-k_0p)}{(b-k_1p)} \neq \frac{a}{b}</script><p>而对于一些题目，我们必须在中间过程中进行求余，否则数字太大，电脑存不下，那如果这个算式中出现除法，我们就需要<strong>逆元</strong>了，<strong>将除法运算转换为乘法运算</strong>。</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><script type="math/tex; mode=display">
-若a \cdot c≡1(mod \ b),且a与b互质，就定义c为a的逆元，记作a^{-1}。也可以叫做c为a在mod\ p意义下的倒数。 \\
-所以\frac{a}{b}(mod\ p),就可以求出b(mod\ p)下的逆元，然后乘上a ，再mod\ p,就是这个分数的值了</script><p>除法取余的情况下，就是乘上这个数的逆元。即：</p>
-<script type="math/tex; mode=display">
-(\frac{a}{b})\% p=(a\times b^{-1})\% p=((a\% p)\times(b^{-1}\% p))\%p</script><p>这样就把除法取余，装换成了乘法取余。</p>
-<h2 id="逆元的性质"><a href="#逆元的性质" class="headerlink" title="逆元的性质"></a>逆元的性质</h2><ul>
-<li><p>唯一性</p>
-<p>给定一个数a，若存在模p下的逆元c，c一定唯一。</p>
-</li>
-<li><p>自反性</p>
-<p>c是a的逆元，a也是c的逆元。</p>
-</li>
+        <h1 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h1><h2 id="什么是JSON？"><a href="#什么是JSON？" class="headerlink" title="什么是JSON？"></a>什么是JSON？</h2><ul>
+<li>JSON(JavaScript Object Notation, JS 对象标记) 是一种轻量级的数据交换格式，目前使用特别广泛。</li>
+<li>采用完全独立于编程语言的<strong>文本格式</strong>来存储和表示数据。</li>
+<li>简洁和清晰的层次结构使得 JSON 成为理想的数据交换语言。</li>
+<li>易于人阅读和编写，同时也易于机器解析和生成，并有效地提升网络传输效率。</li>
 </ul>
-<h1 id="逆元的求解"><a href="#逆元的求解" class="headerlink" title="逆元的求解"></a>逆元的求解</h1><h2 id="扩展欧几里得算法"><a href="#扩展欧几里得算法" class="headerlink" title="扩展欧几里得算法"></a>扩展欧几里得算法</h2><script type="math/tex; mode=display">
-a\cdot a^{-1} ≡ 1(mod\ b)</script><p><strong>模数可以不为质数，满足gcd（a,b)=1即可</strong></p>
+<p>在 JavaScript 语言中，一切都是对象。因此，任何JavaScript 支持的类型都可以通过 JSON 来表示，例如字符串、数字、对象、数组等。看看他的要求和语法格式：</p>
 <ul>
-<li><p>定义</p>
-<script type="math/tex; mode=display">
-给定两个整数a与b，必存在有整数x与y使得ax+by=gcd(a,b)</script></li>
-<li><p>代码模板</p>
-<pre><code class="lang-cpp">ll exgcd(ll a,ll b,ll &amp;x,ll &amp;y)
-{
-    if(!b){
-        x=1;y=0;
-        return a;
-    }
-    ll d=exgcd(b,a%b,x,y);
-    ll t=x;
-    x=y;
-    y=t-(a/b)*y;
-    return d;
+<li>对象表示为键值对，数据由逗号分隔</li>
+<li>花括号保存对象</li>
+<li>方括号保存数组</li>
+</ul>
+<pre><code class="lang-json">{&quot;name&quot;: &quot;QinJiang&quot;}
+{&quot;age&quot;: &quot;3&quot;}
+{&quot;sex&quot;: &quot;男&quot;}
+</code></pre>
+<p>JSON 是 JavaScript 对象的字符串表示法，它使用文本表示一个 JS 对象的信息，本质是一个字符串。</p>
+<pre><code class="lang-javascript">var obj = {a: &#39;Hello&#39;, b: &#39;World&#39;}; //这是一个对象，注意键名也是可以使用引号包裹的
+var json = &#39;{&quot;a&quot;: &quot;Hello&quot;, &quot;b&quot;: &quot;World&quot;}&#39;; //这是一个 JSON 字符串，本质是一个字符串
+</code></pre>
+<p><strong>代码测试</strong></p>
+<p>1、新建一个module ，添加web的支持</p>
+<p>2、在web目录下新建一个 json-1.html ， 编写测试内容</p>
+<pre><code class="lang-jsp">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+   &lt;meta charset=&quot;UTF-8&quot;&gt;
+   &lt;title&gt;JSON_秦疆&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+   //编写一个js的对象
+   var user = {
+       name:&quot;lg&quot;,
+       age:3,
+       sex:&quot;男&quot;
+  };
+   //将js对象转换成json字符串
+   var str = JSON.stringify(user);
+   console.log(str);
+
+   //将json字符串转换为js对象
+   var user2 = JSON.parse(str);
+   console.log(user2.age,user2.name,user2.sex);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>3、在IDEA中使用浏览器打开，查看控制台输出！</p>
+<p><img src="测试1.png" alt=""></p>
+<h2 id="Controller返回JSON数据"><a href="#Controller返回JSON数据" class="headerlink" title="Controller返回JSON数据"></a>Controller返回JSON数据</h2><p>Jackson应该是目前比较好的json解析工具了</p>
+<p>当然工具不止这一个，比如还有阿里巴巴的 fastjson 等等。</p>
+<p>我们这里使用Jackson，使用它需要导入它的jar包；</p>
+<pre><code class="lang-xml">&lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core --&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+   &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+   &lt;version&gt;2.9.10.1&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>配置SpringMVC需要的配置</p>
+<p>web.xml</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+        version=&quot;4.0&quot;&gt;
+
+   &lt;!--1.注册servlet--&gt;
+   &lt;servlet&gt;
+       &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+       &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+       &lt;!--通过初始化参数指定SpringMVC配置文件的位置，进行关联--&gt;
+       &lt;init-param&gt;
+           &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+           &lt;param-value&gt;classpath:springmvc-servlet.xml&lt;/param-value&gt;
+       &lt;/init-param&gt;
+       &lt;!-- 启动顺序，数字越小，启动越早 --&gt;
+       &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+   &lt;/servlet&gt;
+
+   &lt;!--所有请求都会被springmvc拦截 --&gt;
+   &lt;servlet-mapping&gt;
+       &lt;servlet-name&gt;SpringMVC&lt;/servlet-name&gt;
+       &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+   &lt;/servlet-mapping&gt;
+
+   &lt;filter&gt;
+       &lt;filter-name&gt;encoding&lt;/filter-name&gt;
+       &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+       &lt;init-param&gt;
+           &lt;param-name&gt;encoding&lt;/param-name&gt;
+           &lt;param-value&gt;utf-8&lt;/param-value&gt;
+       &lt;/init-param&gt;
+   &lt;/filter&gt;
+   &lt;filter-mapping&gt;
+       &lt;filter-name&gt;encoding&lt;/filter-name&gt;
+       &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+   &lt;/filter-mapping&gt;
+
+&lt;/web-app&gt;
+</code></pre>
+<p>springmvc-servlet.xml</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+      xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+      xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+      xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+      xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+
+   &lt;!-- 自动扫描指定的包，下面所有注解类交给IOC容器管理 --&gt;
+   &lt;context:component-scan base-package=&quot;com.lg.controller&quot;/&gt;
+
+   &lt;!-- 视图解析器 --&gt;
+   &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;
+         id=&quot;internalResourceViewResolver&quot;&gt;
+       &lt;!-- 前缀 --&gt;
+       &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
+       &lt;!-- 后缀 --&gt;
+       &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+   &lt;/bean&gt;
+
+&lt;/beans&gt;
+</code></pre>
+<p>我们随便编写一个User的实体类，然后我们去编写我们的测试Controller；</p>
+<pre><code class="lang-java">package com.lg.pojo;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+//需要导入lombok
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+
+   private String name;
+   private int age;
+   private String sex;
+
 }
 </code></pre>
-<p>即（取非负——a&lt;b）逆元为x：</p>
-<pre><code class="lang-cpp">cout&lt;&lt;(x%b+b)%b&lt;&lt;endl;
-</code></pre>
-</li>
-</ul>
-<h2 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h2><p><strong>只适用于模数为质数的情况，如果模数不是质数，可以变换一下，用欧拉定理。</strong></p>
-<p>如果p是一个质数（一般为1e9+7），且a不是p的倍数则有：</p>
-<script type="math/tex; mode=display">
-a^{p-1}≡1(mod\ p)</script><p>根据同余除法定理，两边同除以a：</p>
-<script type="math/tex; mode=display">
-a^{p-2}≡a^{-1}(mod\ p)</script><p>所以：</p>
-<script type="math/tex; mode=display">
-a^{-1}=a^{p-2}(mod\ p)</script><p>p是素数,所以a肯定就无法被p整除啊，所以最后就得出a^(p-2)为x的逆元。</p>
-<ul>
-<li><p>代码模板：</p>
-<pre><code class="lang-cpp">ll quickpow(ll a,ll b){
-    ll res=1;
-    while(b){
-        if(b&amp;1)
-            res=res*a%p;
-        a=a*a%p;
-        b&gt;&gt;=1;
-    }
-    return res;
+<p>这里我们需要两个新东西，一个是@ResponseBody，一个是ObjectMapper对象，我们看下具体的用法</p>
+<p>编写一个Controller；</p>
+<pre><code class="lang-java">@Controller
+public class UserController {
+
+   @RequestMapping(&quot;/json1&quot;)
+   @ResponseBody
+   public String json1() throws JsonProcessingException {
+       //创建一个jackson的对象映射器，用来解析数据
+       ObjectMapper mapper = new ObjectMapper();
+       //创建一个对象
+       User user = new User(&quot;lg1号&quot;, 3, &quot;男&quot;);
+       //将我们的对象解析成为json格式
+       String str = mapper.writeValueAsString(user);
+       //由于@ResponseBody注解，这里会将str转成json格式返回；十分方便
+       return str;
+  }
+
 }
 </code></pre>
-<p>res即为所求逆元。</p>
-</li>
+<p>配置Tomcat ， 启动测试一下！</p>
+<p><a href="http://localhost:8080/json1" target="_blank" rel="noopener">http://localhost:8080/json1</a></p>
+<p><img src="测试2-1.png" alt=""></p>
+<p>发现出现了乱码问题，需要设置一下他的编码格式为utf-8，以及它返回的类型；</p>
+<p>通过@RequestMaping的produces属性来实现，修改下代码</p>
+<pre><code class="lang-java">//produces:指定响应体返回类型和编码
+@RequestMapping(value = &quot;/json1&quot;,produces = &quot;application/json;charset=utf-8&quot;)
+</code></pre>
+<p>再次测试， <a href="http://localhost:8080/json1" target="_blank" rel="noopener">http://localhost:8080/json1</a> ， 乱码问题OK！</p>
+<p><img src="测试2.png" alt=""></p>
+<font color=red>【注意：使用json记得处理乱码问题】</font>
+
+
+
+<h2 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h2><p><strong>乱码统一解决</strong></p>
+<p>上一种方法比较麻烦，如果项目中有许多请求则每一个都要添加，可以通过Spring配置统一指定，这样就不用每次都去处理了！</p>
+<p>我们可以在springmvc的配置文件上添加一段消息StringHttpMessageConverter转换配置！</p>
+<pre><code class="lang-xml">&lt;mvc:annotation-driven&gt;
+   &lt;mvc:message-converters register-defaults=&quot;true&quot;&gt;
+       &lt;bean class=&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;&gt;
+           &lt;constructor-arg value=&quot;UTF-8&quot;/&gt;
+       &lt;/bean&gt;
+       &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;
+           &lt;property name=&quot;objectMapper&quot;&gt;
+               &lt;bean class=&quot;org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean&quot;&gt;
+                   &lt;property name=&quot;failOnEmptyBeans&quot; value=&quot;false&quot;/&gt;
+               &lt;/bean&gt;
+           &lt;/property&gt;
+       &lt;/bean&gt;
+   &lt;/mvc:message-converters&gt;
+&lt;/mvc:annotation-driven&gt;
+</code></pre>
+<p><strong>返回json字符串统一解决</strong></p>
+<p>在类上直接使用 <strong>@RestController</strong> ，这样子，里面所有的方法都只会返回 json 字符串了，不用再每一个都添加@ResponseBody ！在前后端分离开发中，一般都使用 @RestController ，十分便捷！</p>
+<pre><code class="lang-java">@RestController
+public class UserController {
+
+   //produces:指定响应体返回类型和编码
+   @RequestMapping(value = &quot;/json1&quot;)
+   public String json1() throws JsonProcessingException {
+       //创建一个jackson的对象映射器，用来解析数据
+       ObjectMapper mapper = new ObjectMapper();
+       //创建一个对象
+       User user = new User(&quot;lg1号&quot;, 3, &quot;男&quot;);
+       //将我们的对象解析成为json格式
+       String str = mapper.writeValueAsString(user);
+       //由于@ResponseBody注解，这里会将str转成json格式返回；十分方便
+       return str;
+  }
+
+}
+</code></pre>
+<p>启动tomcat测试，结果都正常输出！</p>
+<h2 id="测试集合输出"><a href="#测试集合输出" class="headerlink" title="测试集合输出"></a>测试集合输出</h2><p>增加一个新的方法</p>
+<pre><code class="lang-java">@RequestMapping(&quot;/json2&quot;)
+public String json2() throws JsonProcessingException {
+
+   //创建一个jackson的对象映射器，用来解析数据
+   ObjectMapper mapper = new ObjectMapper();
+   //创建一个对象
+   User user1 = new User(&quot;lg1号&quot;, 3, &quot;男&quot;);
+   User user2 = new User(&quot;lg2号&quot;, 3, &quot;男&quot;);
+   User user3 = new User(&quot;lg3号&quot;, 3, &quot;男&quot;);
+   User user4 = new User(&quot;lg4号&quot;, 3, &quot;男&quot;);
+   List&lt;User&gt; list = new ArrayList&lt;User&gt;();
+   list.add(user1);
+   list.add(user2);
+   list.add(user3);
+   list.add(user4);
+
+   //将我们的对象解析成为json格式
+   String str = mapper.writeValueAsString(list);
+   return str;
+}
+</code></pre>
+<p>运行结果 : 十分完美，没有任何问题！</p>
+<p><img src="测试3.png" alt=""></p>
+<h2 id="输出时间对象"><a href="#输出时间对象" class="headerlink" title="输出时间对象"></a>输出时间对象</h2><p>增加一个新的方法</p>
+<pre><code class="lang-java">@RequestMapping(&quot;/json3&quot;)
+public String json3() throws JsonProcessingException {
+
+   ObjectMapper mapper = new ObjectMapper();
+
+   //创建时间一个对象，java.util.Date
+   Date date = new Date();
+   //将我们的对象解析成为json格式
+   String str = mapper.writeValueAsString(date);
+   return str;
+}
+</code></pre>
+<p>运行结果 :</p>
+<p><img src="测试3-1.png" alt=""></p>
+<ul>
+<li>默认日期格式会变成一个数字，是1970年1月1日到当前日期的毫秒数！</li>
+<li>Jackson 默认是会把时间转成timestamps形式</li>
 </ul>
+<p><strong>解决方案：取消timestamps形式 ， 自定义时间格式</strong></p>
+<pre><code class="lang-java">@RequestMapping(&quot;/json4&quot;)
+public String json4() throws JsonProcessingException {
+
+   ObjectMapper mapper = new ObjectMapper();
+
+   //不使用时间戳的方式
+   mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+   //自定义日期格式对象
+   SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+   //指定日期格式
+   mapper.setDateFormat(sdf);
+
+   Date date = new Date();
+   String str = mapper.writeValueAsString(date);
+
+   return str;
+}
+</code></pre>
+<p>运行结果 : 成功的输出了时间！</p>
+<p><img src="测试4.png" alt=""></p>
+<h2 id="抽取为工具类"><a href="#抽取为工具类" class="headerlink" title="抽取为工具类"></a>抽取为工具类</h2><p><strong>如果要经常使用的话，这样是比较麻烦的，我们可以将这些代码封装到一个工具类中；我们去编写下</strong></p>
+<pre><code class="lang-java">import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+import java.text.SimpleDateFormat;
+
+public class JsonUtils {
+
+   public static String getJson(Object object) {
+       return getJson(object,&quot;yyyy-MM-dd HH:mm:ss&quot;);
+  }
+
+   public static String getJson(Object object,String dateFormat) {
+       ObjectMapper mapper = new ObjectMapper();
+       //不使用时间差的方式
+       mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+       //自定义日期格式对象
+       SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+       //指定日期格式
+       mapper.setDateFormat(sdf);
+       try {
+           return mapper.writeValueAsString(object);
+      } catch (JsonProcessingException e) {
+           e.printStackTrace();
+      }
+       return null;
+  }
+}
+</code></pre>
+<p>我们使用工具类，代码就更加简洁了！</p>
+<pre><code class="lang-java">@RequestMapping(&quot;/json5&quot;)
+public String json5() throws JsonProcessingException {
+   Date date = new Date();
+   String json = JsonUtils.getJson(date);
+   return json;
+}
+</code></pre>
+<h2 id="FastJson"><a href="#FastJson" class="headerlink" title="FastJson"></a>FastJson</h2><p>fastjson.jar是阿里开发的一款专门用于Java开发的包，可以方便的实现json对象与JavaBean对象的转换，实现JavaBean对象与json字符串的转换，实现json对象与json字符串的转换。实现json的转换方法很多，最后的实现结果都是一样的。</p>
+<p>fastjson 的 pom依赖！</p>
+<pre><code class="lang-xml">&lt;dependency&gt;
+   &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+   &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+   &lt;version&gt;1.2.60&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>fastjson 三个主要的类：</p>
+<p><strong>JSONObject  代表 json 对象</strong> </p>
+<ul>
+<li>JSONObject实现了Map接口, 猜想 JSONObject底层操作是由Map实现的。</li>
+<li>JSONObject对应json对象，通过各种形式的get()方法可以获取json对象中的数据，也可利用诸如size()，isEmpty()等方法获取”键：值”对的个数和判断是否为空。其本质是通过实现Map接口并调用接口中的方法完成的。</li>
+</ul>
+<p><strong>JSONArray  代表 json 对象数组</strong></p>
+<ul>
+<li>内部是有List接口中的方法来完成操作的。</li>
+</ul>
+<p><strong>JSON代表 JSONObject和JSONArray的转化</strong></p>
+<ul>
+<li>JSON类源码分析与使用</li>
+<li>仔细观察这些方法，主要是实现json对象，json对象数组，javabean对象，json字符串之间的相互转化。</li>
+</ul>
+<p><strong>代码测试，我们新建一个FastJsonDemo 类</strong></p>
+<pre><code class="lang-java">import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.lg.pojo.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FastJsonDemo {
+   public static void main(String[] args) {
+       //创建一个对象
+       User user1 = new User(&quot;lg1号&quot;, 3, &quot;男&quot;);
+       User user2 = new User(&quot;lg2号&quot;, 3, &quot;男&quot;);
+       User user3 = new User(&quot;lg3号&quot;, 3, &quot;男&quot;);
+       User user4 = new User(&quot;lg4号&quot;, 3, &quot;男&quot;);
+       List&lt;User&gt; list = new ArrayList&lt;User&gt;();
+       list.add(user1);
+       list.add(user2);
+       list.add(user3);
+       list.add(user4);
+
+       System.out.println(&quot;*******Java对象 转 JSON字符串*******&quot;);
+       String str1 = JSON.toJSONString(list);
+       System.out.println(&quot;JSON.toJSONString(list)==&gt;&quot;+str1);
+       String str2 = JSON.toJSONString(user1);
+       System.out.println(&quot;JSON.toJSONString(user1)==&gt;&quot;+str2);
+
+       System.out.println(&quot;\n****** JSON字符串 转 Java对象*******&quot;);
+       User jp_user1=JSON.parseObject(str2,User.class);
+       System.out.println(&quot;JSON.parseObject(str2,User.class)==&gt;&quot;+jp_user1);
+
+       System.out.println(&quot;\n****** Java对象 转 JSON对象 ******&quot;);
+       JSONObject jsonObject1 = (JSONObject) JSON.toJSON(user2);
+       System.out.println(&quot;(JSONObject) JSON.toJSON(user2)==&gt;&quot;+jsonObject1.getString(&quot;name&quot;));
+
+       System.out.println(&quot;\n****** JSON对象 转 Java对象 ******&quot;);
+       User to_java_user = JSON.toJavaObject(jsonObject1, User.class);
+       System.out.println(&quot;JSON.toJavaObject(jsonObject1, User.class)==&gt;&quot;+to_java_user);
+  }
+}
+</code></pre>
+<p><strong>测试结果</strong></p>
+<p><img src="测试5.png" alt=""></p>
+<p>这种工具类，只需要掌握使用就好了，在使用的时候在根据具体的业务去找对应的实现。和以前的commons-io那种工具包一样，拿来用就好了！</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
@@ -821,46 +1138,6 @@ a^{-1}=a^{p-2}(mod\ p)</script><p>p是素数,所以a肯定就无法被p整除啊
 
 
 
-    
-        <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-    });
-</script>
-<!-- 给MathJax元素添加has-jax class -->
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<!-- 通过连接CDN加载MathJax的js代码 -->
-<script type="text/javascript" async
-        src="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<input type="hidden" id="MathJax-js"
-        value="//cdn.jsdelivr.net/npm/mathjax@2.7.8/unpacked/MathJax.js?config=TeX-MML-AM_CHTML">
-</input>
     
 
 
