@@ -679,7 +679,7 @@
     </div>
     <div class="article-meta">
         
-            Created At : <time class="date" title='Updated At: 2020-09-02 21:08:05'>2020-09-02 20:42</time>
+            Created At : <time class="date" title='Updated At: 2020-09-07 16:06:14'>2020-09-02 20:42</time>
         
     </div>
     <div class="article-meta">
@@ -904,7 +904,7 @@ jdbc.password=123456
 
 &lt;/configuration&gt;
 </code></pre>
-<p>4、编写数据库对应的实体类 com.kuang.pojo.Books</p>
+<p>4、编写数据库对应的实体类 com.lg.pojo.Books</p>
 <p>使用lombok插件！</p>
 <pre><code class="lang-java">package com.lg.pojo;
 
@@ -1241,7 +1241,7 @@ public class BookController {
 }
 </code></pre>
 <p>2、编写首页 <strong>index.jsp</strong></p>
-<pre><code class="lang-jsp">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot; %&gt;
+<pre><code class="lang-html">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot; pageEncoding=&quot;UTF-8&quot; %&gt;
 &lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1272,7 +1272,7 @@ public class BookController {
 &lt;/html&gt;
 </code></pre>
 <p>3、书籍列表页面 <strong>allbook.jsp</strong></p>
-<pre><code class="lang-jsp">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+<pre><code class="lang-html">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
 &lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -1347,7 +1347,7 @@ public String addPaper(Books books) {
 }
 </code></pre>
 <p>5、添加书籍页面：<strong>addBook.jsp</strong></p>
-<pre><code class="lang-jsp">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+<pre><code class="lang-html">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
 &lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 
 &lt;html&gt;
@@ -1397,7 +1397,7 @@ public String updateBook(Model model, Books book) {
 }
 </code></pre>
 <p>7、修改书籍页面  <strong>updateBook.jsp</strong></p>
-<pre><code class="lang-jsp">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+<pre><code class="lang-html">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
 &lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
 &lt;html&gt;
 &lt;head&gt;
