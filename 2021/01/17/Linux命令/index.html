@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Linux命令 | Hexo</title>
+  <meta name="keywords" content=" Linux , 基础命令 ">
+  <meta name="description" content="Linux命令 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="文章分类">
+<meta property="og:url" content="http://lgnbovo.github.io/categories/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-12T04:50:42.000Z">
+<meta property="article:modified_time" content="2020-06-12T04:53:45.435Z">
+<meta property="article:author" content="lggg">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+</div>
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>lggg</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/lgnbOVO" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="csdn" href="https://blog.csdn.net/weixin_43871885" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-csdn"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:1589631311@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1589631311&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=504459049" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active" data-rel="All">All<small>(38)</small></div></li>
+    
+        
+            
+            <li><div data-rel="SSM框架"><i class="fold iconfont icon-right"></i>SSM框架<small>(22)</small></div>
+                
+                    <ul class="sub hide">
+                        
+                        <li><div data-rel="SSM框架<--->Mybatis">Mybatis<small>(7)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SSM框架<--->Spring">Spring<small>(9)</small></div>
+                            
+                        </li>
+                            
+                        <li><div data-rel="SSM框架<--->SpringMVC">SpringMVC<small>(6)</small></div>
+                            
+                        </li>
+                            
+                    </ul>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="面向对象">面向对象<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="算法">算法<small>(5)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据结构">数据结构<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="题目">题目<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数论">数论<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+        
+    
+        
+            
+            <li><div data-rel="开发技能">开发技能<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据库">数据库<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="38">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" />
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>BF与SPFA</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>c++面向对象</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>dijistar</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mybatis</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Mysql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Neo4j</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>oj作业</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Sp			ringMVC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Spring</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>三分</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>关系数据库</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>动态规划</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>区间dp</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>博弈论</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>图论</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>基础命令</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>寒假训练</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>平衡二叉树</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>扩展欧几里得</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件读取</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>斐波那契</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>树</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>费马小定理</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>逆元</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>链表</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>非关系数据库</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="All 开发技能 "
+           href="/2021/01/17/Linux%E5%91%BD%E4%BB%A4/"
+           data-tag="Linux,基础命令"
+           data-author="" >
+            <span class="post-title" title="Linux命令">Linux命令</span>
+            <span class="post-date" title="2021-01-17 21:43:58">2021/01/17</span>
+        </a>
+        
+        <a  class="All 数据库 "
+           href="/2020/12/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/"
+           data-tag="关系数据库,非关系数据库,Mysql,Neo4j"
+           data-author="" >
+            <span class="post-title" title="数据库总结">数据库总结</span>
+            <span class="post-date" title="2020-12-10 19:53:40">2020/12/10</span>
+        </a>
+        
+        <a  class="All SSM框架 SpringMVC "
+           href="/2020/09/02/%E6%95%B4%E5%90%88SSM%E6%A1%86%E6%9E%B6/"
+           data-tag="Sp			ringMVC"
+           data-author="" >
+            <span class="post-title" title="整合SSM框架">整合SSM框架</span>
+            <span class="post-date" title="2020-09-02 20:42:46">2020/09/02</span>
+        </a>
+        
+        <a  class="All SSM框架 SpringMVC "
+           href="/2020/08/28/Json%E4%BA%A4%E4%BA%92%E5%A4%84%E7%90%86/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="Json交互处理">Json交互处理</span>
+            <span class="post-date" title="2020-08-28 17:57:44">2020/08/28</span>
+        </a>
+        
+        <a  class="All SSM框架 SpringMVC "
+           href="/2020/08/28/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%8F%8A%E8%B7%B3%E8%BD%AC/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="数据处理及跳转">数据处理及跳转</span>
+            <span class="post-date" title="2020-08-28 17:36:38">2020/08/28</span>
+        </a>
+        
+        <a  class="All SSM框架 SpringMVC "
+           href="/2020/08/27/RestFul%E5%92%8C%E6%8E%A7%E5%88%B6%E5%99%A8/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="RestFul和控制器">RestFul和控制器</span>
+            <span class="post-date" title="2020-08-27 22:42:03">2020/08/27</span>
+        </a>
+        
+        <a  class="All SSM框架 SpringMVC "
+           href="/2020/08/25/%E7%AC%AC%E4%B8%80%E4%B8%AAMVC%E7%A8%8B%E5%BA%8F/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="第一个MVC程序">第一个MVC程序</span>
+            <span class="post-date" title="2020-08-25 17:39:22">2020/08/25</span>
+        </a>
+        
+        <a  class="All SSM框架 SpringMVC "
+           href="/2020/08/23/%E4%BB%80%E4%B9%88%E6%98%AFSpringMVC/"
+           data-tag="SpringMVC"
+           data-author="" >
+            <span class="post-title" title="什么是SpringMVC">什么是SpringMVC</span>
+            <span class="post-date" title="2020-08-23 17:23:35">2020/08/23</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/21/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="声明式事务">声明式事务</span>
+            <span class="post-date" title="2020-08-21 21:18:00">2020/08/21</span>
+        </a>
+        
+        <a  class="All 题目 "
+           href="/2020/08/20/B%E5%90%9B%E7%9A%84%E6%B8%B8%E6%88%8F/"
+           data-tag="博弈论"
+           data-author="" >
+            <span class="post-title" title="B君的游戏">B君的游戏</span>
+            <span class="post-date" title="2020-08-20 23:06:17">2020/08/20</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/20/%E6%95%B4%E5%90%88Mybatis/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="整合Mybatis">整合Mybatis</span>
+            <span class="post-date" title="2020-08-20 18:45:37">2020/08/20</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/19/AOP/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="AOP">AOP</span>
+            <span class="post-date" title="2020-08-19 22:17:41">2020/08/19</span>
+        </a>
+        
+        <a  class="All 题目 "
+           href="/2020/08/18/Nim%E6%B8%B8%E6%88%8F/"
+           data-tag="博弈论"
+           data-author="" >
+            <span class="post-title" title="Nim游戏">Nim游戏</span>
+            <span class="post-date" title="2020-08-18 22:39:45">2020/08/18</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="静态/动态代理">静态/动态代理</span>
+            <span class="post-date" title="2020-08-18 21:06:05">2020/08/18</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/17/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Spring/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="使用注解开发Spring">使用注解开发Spring</span>
+            <span class="post-date" title="2020-08-17 18:26:22">2020/08/17</span>
+        </a>
+        
+        <a  class="All 数论 "
+           href="/2020/08/16/%E5%8D%9A%E5%BC%88%E8%AE%BA/"
+           data-tag="博弈论"
+           data-author="" >
+            <span class="post-title" title="博弈论">博弈论</span>
+            <span class="post-date" title="2020-08-16 23:18:15">2020/08/16</span>
+        </a>
+        
+        <a  class="All 题目 "
+           href="/2020/08/16/Bash%E6%B8%B8%E6%88%8F/"
+           data-tag="博弈论"
+           data-author="" >
+            <span class="post-title" title="Bash游戏">Bash游戏</span>
+            <span class="post-date" title="2020-08-16 23:07:21">2020/08/16</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/16/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="自动装配">自动装配</span>
+            <span class="post-date" title="2020-08-16 17:44:00">2020/08/16</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/15/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%88DI%EF%BC%89/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="依赖注入（DI）">依赖注入（DI）</span>
+            <span class="post-date" title="2020-08-15 17:41:44">2020/08/15</span>
+        </a>
+        
+        <a  class="All 数论 "
+           href="/2020/08/14/%E9%80%86%E5%85%83/"
+           data-tag="扩展欧几里得,逆元,费马小定理"
+           data-author="" >
+            <span class="post-title" title="逆元">逆元</span>
+            <span class="post-date" title="2020-08-14 21:04:18">2020/08/14</span>
+        </a>
+        
+        <a  class="All 数论 "
+           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
+           data-tag="斐波那契"
+           data-author="" >
+            <span class="post-title" title="斐波那契">斐波那契</span>
+            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="快速上手Spring">快速上手Spring</span>
+            <span class="post-date" title="2020-08-12 21:26:34">2020/08/12</span>
+        </a>
+        
+        <a  class="All SSM框架 Spring "
+           href="/2020/08/11/%E6%A6%82%E8%BF%B0%E5%8F%8AIOC%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/"
+           data-tag="Spring"
+           data-author="" >
+            <span class="post-title" title="概述及IOC理论推导">概述及IOC理论推导</span>
+            <span class="post-date" title="2020-08-11 22:41:10">2020/08/11</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/08/08/%E7%BC%93%E5%AD%98/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="缓存">缓存</span>
+            <span class="post-date" title="2020-08-08 23:08:25">2020/08/08</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/08/06/%E5%8A%A8%E6%80%81SQL/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="动态SQL">动态SQL</span>
+            <span class="post-date" title="2020-08-06 19:10:57">2020/08/06</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/08/04/%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%A4%84%E7%90%86/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="一对多和多对一的处理">一对多和多对一的处理</span>
+            <span class="post-date" title="2020-08-04 23:44:27">2020/08/04</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/08/03/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Mybatis/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="使用注解开发Myabatis">使用注解开发Myabatis</span>
+            <span class="post-date" title="2020-08-03 18:01:48">2020/08/03</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/07/30/ResultMap%E5%8F%8A%E5%88%86%E9%A1%B5/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="ResultMap及分页">ResultMap及分页</span>
+            <span class="post-date" title="2020-07-30 17:53:17">2020/07/30</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/07/28/CRUD%E6%93%8D%E4%BD%9C%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="CRUD操作及配置解析">CRUD操作及配置解析</span>
+            <span class="post-date" title="2020-07-28 16:56:14">2020/07/28</span>
+        </a>
+        
+        <a  class="All SSM框架 Mybatis "
+           href="/2020/07/27/Mybatis/"
+           data-tag="Mybatis"
+           data-author="" >
+            <span class="post-title" title="MyBatis">MyBatis</span>
+            <span class="post-date" title="2020-07-27 17:34:47">2020/07/27</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/25/%E5%90%88%E5%B9%B6%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/"
+           data-tag="动态规划,区间dp"
+           data-author="" >
+            <span class="post-title" title="合并回文子串">合并回文子串</span>
+            <span class="post-date" title="2020-06-25 18:39:00">2020/06/25</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/Bellman-Ford%E4%B8%8ESPFA/"
+           data-tag="图论,BF与SPFA"
+           data-author="" >
+            <span class="post-title" title="Bellman-Ford与SPFA">Bellman-Ford与SPFA</span>
+            <span class="post-date" title="2020-06-12 14:25:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 面向对象 "
+           href="/2020/06/12/c++%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"
+           data-tag="链表,文件读取,c++面向对象"
+           data-author="" >
+            <span class="post-title" title="学生信息管理系统">学生信息管理系统</span>
+            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
+           data-tag="树,平衡二叉树"
+           data-author="" >
+            <span class="post-title" title="平衡二叉树的基本操作">平衡二叉树的基本操作</span>
+            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 数据结构 "
+           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
+           data-tag="树,oj作业"
+           data-author="" >
+            <span class="post-title" title="目录树">目录树</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
+           data-tag="寒假训练,动态规划"
+           data-author="" >
+            <span class="post-title" title="算概率">算概率</span>
+            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/12/dijstra/"
+           data-tag="图论,dijistar"
+           data-author="" >
+            <span class="post-title" title="dijistar">dijistar</span>
+            <span class="post-date" title="2020-06-12 12:58:42">2020/06/12</span>
+        </a>
+        
+        <a  class="All 算法 "
+           href="/2020/06/11/%E4%B8%89%E5%88%86/"
+           data-tag="三分,寒假训练"
+           data-author="" >
+            <span class="post-title" title="三分">三分</span>
+            <span class="post-date" title="2020-06-11 16:44:50">2020/06/11</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-Linux命令" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">Linux命令</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="开发技能">开发技能</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">Linux</a>
+            
+            <a class="color5">基础命令</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2021-01-17 21:47:58'>2021-01-17 21:43</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                Comment:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux常用命令总结"><span class="toc-text">Linux常用命令总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令与示例"><span class="toc-text">常用命令与示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-文件基本操作命令"><span class="toc-text">一.文件基本操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ls"><span class="toc-text">ls</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pwd"><span class="toc-text">pwd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mkdir"><span class="toc-text">mkdir</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cd"><span class="toc-text">cd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#touch"><span class="toc-text">touch</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cp"><span class="toc-text">cp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mv"><span class="toc-text">mv</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rmdir"><span class="toc-text">rmdir</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rm"><span class="toc-text">rm</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cat"><span class="toc-text">cat</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#more和less"><span class="toc-text">more和less</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#head"><span class="toc-text">head</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tail"><span class="toc-text">tail</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-文件属性操作命令"><span class="toc-text">二.文件属性操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#chown"><span class="toc-text">chown</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chgrp"><span class="toc-text">chgrp</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chmod"><span class="toc-text">chmod</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-查找命令"><span class="toc-text">三.查找命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#whichi"><span class="toc-text">whichi</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#whereis"><span class="toc-text">whereis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#find"><span class="toc-text">find</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-文件内容操作命令"><span class="toc-text">四.文件内容操作命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#grep"><span class="toc-text">grep</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#wc"><span class="toc-text">wc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sort"><span class="toc-text">sort</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#diff"><span class="toc-text">diff</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cut"><span class="toc-text">cut</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五-压缩与打包命令"><span class="toc-text">五.压缩与打包命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tar"><span class="toc-text">tar</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六-网卡配置命令"><span class="toc-text">六.网卡配置命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七-rpm命令"><span class="toc-text">七.rpm命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八-其他安装命令"><span class="toc-text">八.其他安装命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#九-查看进程命令"><span class="toc-text">九.查看进程命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ps"><span class="toc-text">ps</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pstree"><span class="toc-text">pstree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#top"><span class="toc-text">top</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#kill"><span class="toc-text">kill</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充（遇到则更新）"><span class="toc-text">补充（遇到则更新）</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-5 i,
+    .toc-level-5 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux常用命令总结"><a href="#Linux常用命令总结" class="headerlink" title="Linux常用命令总结"></a>Linux常用命令总结</h1><h2 id="Linux的目录结构"><a href="#Linux的目录结构" class="headerlink" title="Linux的目录结构"></a>Linux的目录结构</h2><p><img src="linux目录结构.png" alt="linux目录结构"></p>
+<h2 id="常用命令与示例"><a href="#常用命令与示例" class="headerlink" title="常用命令与示例"></a>常用命令与示例</h2><ul>
+<li><p>Linux<font color=red>命令及其参数</font>是严格<font color=red>区分大小</font></p>
+</li>
+<li><p>Linux<font color=red>文件名</font>严格<font color=red>区分大小写</font></p>
+</li>
+</ul>
+<h3 id="一-文件基本操作命令"><a href="#一-文件基本操作命令" class="headerlink" title="一.文件基本操作命令"></a>一.文件基本操作命令</h3><h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><ol>
+<li><p><strong>查看清单</strong></p>
+<pre><code class="lang-shell">ls
+</code></pre>
+<p>显示指定目录中的文件清单(不指定则默认为当前目录)</p>
+</li>
+<li><p><strong>显示隐含文件</strong></p>
+<pre><code class="lang-shell">ls -a
+</code></pre>
+<p>说明：若文件名<font color=red><strong>以“.”开头，则认为是隐含的</strong></font>，进而普通的ls命令不显示以“.”开头的文件；所以要完全显示某目录下的文件清单，必须加上-a参数才行。</p>
+</li>
+<li><p><strong>长格式输出</strong></p>
+<pre><code class="lang-shell">ls -l(及ll)
+</code></pre>
+<font color=red>长格式输出内容如下</font>:
+
+<font color=red>**文件权限    连接数    属主    属组    大小    日期    时间    文件名**</font>
+
+<p>Linux文件有<strong>三种典型的权限</strong>，即<strong>r</strong>读权限、<strong>w</strong>写权限和<strong>x</strong>执行权限。在长格式输出中在文件类型的后面有<strong>9列权限位</strong>，实际上这是针对不同用户而设定的:777</p>
+<p><strong>属主的权限</strong>     <strong>属组的权限</strong>     <strong>其他用户的权限</strong></p>
+<pre><code>   rwx                 rwx                     rwx
+</code></pre></li>
+<li><p><strong>递归显示</strong></p>
+<pre><code class="lang-shell">ls -R
+</code></pre>
+<p><strong>递归</strong>显示指定目录下的文件清单，即会显示指定目录分支内各子目录中的文件清单。</p>
+</li>
+</ol>
+<h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h4><p>显示<strong>当前目录路径</strong></p>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><ol>
+<li><p><strong>创建目录</strong></p>
+<pre><code class="lang-shell">mkdir dirname
+</code></pre>
+<p>在当前目录下创建目录名为dirname的目录</p>
+</li>
+<li><p><strong>创建多级目录</strong></p>
+<pre><code class="lang-shell">mkdir -p a/b/c
+</code></pre>
+<p><strong>参数-p功能</strong>是如果要创建的目录的父目录不存在，则先创建其父目录，再创建该目录； 如果指定的目录存在，则不影响原目录，也不会报错。在本示例中会连续创建a目录、a/b目录、a/b/c目录。</p>
+</li>
+</ol>
+<h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><p><strong>切换工作目录</strong></p>
+<p><strong>不带参数的cd命令直接将当前的工作目录切换为该用户的主目录</strong>（即~）。主目录又称为家目录，在/home下为用户创建一个用其用户名同名的目录，并将该目录的所有权划归给该用户所有。</p>
+<h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h4><pre><code class="lang-shell">touch file
+</code></pre>
+<ul>
+<li><strong>如果file不存在</strong>，则创建一个大小为0字节名为file的空文件。</li>
+<li><strong>如果file已存在</strong>，则将改变file的最后修改时间。</li>
+</ul>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><ol>
+<li><p><strong>复制文件</strong></p>
+<pre><code class="lang-shell">cp dir1/* dir2
+</code></pre>
+<p>将dir1目录下的所有文件复制到目录dir2中。</p>
+</li>
+<li><p><strong>复制目录</strong></p>
+<pre><code class="lang-shell">cp -R dir1 dir2
+</code></pre>
+<p>增加了<strong>参数-R</strong>，就能将目录dir1下面的所有子目录和文件都复制到目录dir2中。</p>
+</li>
+</ol>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><ol>
+<li><p><strong>移动</strong></p>
+<pre><code class="lang-shell">mv fd dir
+</code></pre>
+<p><strong>如果dir存在且是个目录</strong>，则将文件(或目录)fd<strong>移动</strong>到目录dir中。</p>
+</li>
+<li><p><strong>改名</strong></p>
+<pre><code class="lang-shell">mv fd fd1
+</code></pre>
+<p>将文件（或目录）fd<strong>改名</strong>为fd1。</p>
+</li>
+</ol>
+<h4 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h4><p><strong>删除指定的空目录</strong></p>
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><ol>
+<li><p><strong>删除指定的文件file</strong></p>
+<pre><code class="lang-shell">rm file
+</code></pre>
+</li>
+<li><p><strong>删除目录</strong></p>
+<pre><code class="lang-shell">rm -rf dir
+</code></pre>
+<p>参数<strong>-r</strong>是<strong>递归</strong>的意思，即可以删除非空目录；参数<strong>-f</strong>是<strong>强制</strong>的意思。</p>
+</li>
+</ol>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><ol>
+<li><p><strong>显示文件内容</strong></p>
+<pre><code class="lang-shell">cat file
+</code></pre>
+<p><strong>显示指定文件file内容</strong></p>
+</li>
+<li><p><strong>创建简短文本文件</strong></p>
+<pre><code class="lang-shell">cat &gt; file
+输入的内容，例如：hello,world
+按ctrl+d结束输入
+</code></pre>
+<p>利用<strong>输出重定向符</strong>“&gt;”来<strong>创建</strong>简短的<strong>文本文件</strong>myfile2。</p>
+</li>
+</ol>
+<h4 id="more和less"><a href="#more和less" class="headerlink" title="more和less"></a>more和less</h4><ol>
+<li><p><strong>more显示</strong></p>
+<pre><code class="lang-shell">more file
+</code></pre>
+<p><strong>分屏显示</strong>指定文件httpd.conf的内容，非常适合显示超过一屏的文本文件。每按一下空格键，向后翻一屏；每按一次回车键，向后翻一行。</p>
+</li>
+<li><p><strong>less显示</strong></p>
+<pre><code class="lang-shell">less file
+</code></pre>
+<p>less与more功能很相似，只不过<strong>less功能更强大</strong>，支持PageUp键向前翻屏，及PageDown向后翻屏。</p>
+</li>
+</ol>
+<h4 id="head"><a href="#head" class="headerlink" title="head"></a>head</h4><ol>
+<li><p><strong>默认显示头</strong></p>
+<pre><code class="lang-shell">head file
+</code></pre>
+<p>默认<strong>显示文件的头10行</strong>的内容。</p>
+</li>
+<li><p><strong>参数显示头</strong></p>
+<pre><code class="lang-shell">head -n 99 file
+</code></pre>
+<p>参数-n设置显示指定行数，如上显示file的头99行内容。</p>
+</li>
+</ol>
+<h4 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h4><ol>
+<li><p><strong>默认显示尾</strong></p>
+<pre><code class="lang-shell">tail file
+</code></pre>
+<p>默认<strong>显示文件的尾10行</strong>的内容。</p>
+</li>
+<li><p><strong>参数显示尾</strong></p>
+<pre><code class="lang-shell">tail -n 99 file
+</code></pre>
+<p>参数-n设置显示指定行数，如上显示file的尾99行内容。</p>
+</li>
+</ol>
+<h3 id="二-文件属性操作命令"><a href="#二-文件属性操作命令" class="headerlink" title="二.文件属性操作命令"></a>二.文件属性操作命令</h3><h4 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h4><ol>
+<li><p><strong>改属主</strong></p>
+<pre><code class="lang-shell">chown user1 file
+</code></pre>
+<p>将指定文件file的<strong>属主</strong>（所有者）改为user1。</p>
+</li>
+<li><p><strong>递归改属主</strong></p>
+<pre><code class="lang-shell">chown -R user1 dir
+</code></pre>
+<p><strong>参数-R</strong>，表示<strong>递归</strong>，即可以深入到指定目录中的每一层，将所有子目录和文件的属主（所有者）改为指定的用户；本例中会将dir目录中所有子目录和文件的属主设定为user1。</p>
+</li>
+</ol>
+<h4 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h4><ol>
+<li><p><strong>改属组</strong></p>
+<pre><code class="lang-shell">chgrp group file
+</code></pre>
+<p>将指定文件hello.txt的<strong>属组</strong>改为group。</p>
+</li>
+<li><p><strong>递归改属组</strong></p>
+<pre><code class="lang-sh">chgrp -R group dir
+</code></pre>
+<p><strong>参数-R</strong>，表示<strong>递归</strong>，即可以深入到指定目录中的每一层，将所有子目录和文件的属组改为指定的组；本例中会将dir目录中所有子目录和文件的属组设定为group。</p>
+</li>
+</ol>
+<h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><ol>
+<li><p>chmod u+x file</p>
+<p>为文件file的属主增加执行权限。</p>
+</li>
+<li><p>chmod g-w,o=x file</p>
+<p>将文件file的属组去掉写权限，同时将其他用户设置为只有执行权限，而文件属主的权限不变。</p>
+<p>注：<strong>u针对属主、g针对属组、o针对其他用户、a针对所有用户；</strong></p>
+<p><strong>=表示赋予（设置）指定权限，要注意它会覆盖原权限，+表示在原有权限的基础上增加指定权限，-表示在原有权限的基础上去掉指定权限；</strong></p>
+</li>
+<li><p>chmod 764 file</p>
+<p>将文件file的权限设置为：</p>
+<p>属主拥有全部权限；</p>
+<p>属组拥有读写权限；</p>
+<p>其他用户拥有只读权限。</p>
+<p>注：<strong>(读权限)r=4,(写权限)w=2,(执行权限)x=1</strong></p>
+</li>
+</ol>
+<h3 id="三-查找命令"><a href="#三-查找命令" class="headerlink" title="三.查找命令"></a>三.查找命令</h3><h4 id="whichi"><a href="#whichi" class="headerlink" title="whichi"></a>whichi</h4><p>显示命令的绝对路径。</p>
+<p>注：<strong>该命令只能在命令搜索路径指定的目录中去查找<font color=red>命令</font>或<font color=red>程序</font>。</strong></p>
+<h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p><strong>查询指定<font color=red>命令</font>所在目录以及帮助文档所在目录。</strong></p>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><ol>
+<li><p><strong>按文件名查找</strong></p>
+<pre><code class="lang-shell">find / -name &quot;filename&quot;
+</code></pre>
+<p><strong>参数-name</strong>指明按文件名进行查找，即从/目录开始查找以filename开头的所有文件。</p>
+</li>
+<li><p><strong>按文件大小查找</strong></p>
+<pre><code class="lang-shell">find /etc -size 8
+</code></pre>
+<p>从/etc下开始查找大小为8块的文件，此处默认512字节为1块。若认为块大小为1k，则应写为8k。</p>
+<p>其它可以使用的单位有c（字节）、w（双字节）、M（兆字节）和G（吉字节）。</p>
+</li>
+<li><p><strong>按文件类型查找</strong></p>
+<pre><code class="lang-shell">find /var -type d -print
+</code></pre>
+<p>从/var目录下开始查找<strong>类型为目录</strong>的文件，其中参数-print是显示到屏幕上的意思，经常省略。</p>
+</li>
+<li><p><strong>按文件修改的时间查找</strong></p>
+<pre><code class="lang-shell">find . -cmin -5
+</code></pre>
+<p>从当前目录下查找5分钟之内修改过的文件。</p>
+<p>如果把“<strong>-5</strong>”改为 “<strong>+5</strong>”，则表示查找5分钟以前修改过的文件。不带“+”或“-”，则认为整5分钟。 如果把时间单位改为天，则使用参数“-ctime”。</p>
+</li>
+<li><p><strong>按文件的权限查找</strong></p>
+<pre><code class="lang-shell">find dir -perm 755
+</code></pre>
+<p>查找dir目录下的权限恰为755的文件。</p>
+<p>如果为+755，查找dir目录下的满足755中任何一种权限的文件，即符合任何一个指定的权限位即可;</p>
+<p>如果为-755，查找dir目录下的权限至少满足755的文件，即指定的所有权限位必须符合才算满足查询条件。</p>
+</li>
+</ol>
+<h3 id="四-文件内容操作命令"><a href="#四-文件内容操作命令" class="headerlink" title="四.文件内容操作命令"></a>四.文件内容操作命令</h3><h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><ol>
+<li><p><strong>查找含指定行</strong></p>
+<pre><code class="lang-shell">grep &quot;lg&quot; file
+</code></pre>
+<p><strong>在指定的文件中查找包含特定的字符串的行</strong></p>
+<p>在file文件中查找包含字符串”lg”的行。</p>
+<pre><code class="lang-shell">grep &quot;lg&quot; dir/*.conf
+</code></pre>
+<p>查找dir目录下扩展名为conf的文件包含lg的行。</p>
+</li>
+<li><p><strong>查找不含指定行</strong></p>
+<pre><code class="lang-shell">grep -v &quot;lg&quot; file
+</code></pre>
+<p>查找file文件中<strong>不</strong>包含字符串“lg”的行。</p>
+</li>
+</ol>
+<h4 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h4><ol>
+<li><p><strong>统计</strong></p>
+<pre><code class="lang-shell">wc file
+</code></pre>
+<p><strong>统计出文件file的行数，单词数，字符数。</strong></p>
+</li>
+<li><p><strong>参数使用</strong></p>
+<pre><code class="lang-shell">wc -l file
+</code></pre>
+<p>参数<strong>-l</strong>的功能可统计出指定文件的行数。另外，利用参数<strong>-w</strong>统计单词，利用<strong>-c</strong>统计字符数。</p>
+</li>
+</ol>
+<h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><ol>
+<li><p><strong>按正序输出</strong></p>
+<pre><code class="lang-shell">sort  file
+</code></pre>
+<p>将指定文件以行为单位按<strong>正序</strong>输出。</p>
+</li>
+<li><p><strong>按逆序输出</strong></p>
+<pre><code class="lang-shell">sort -r file
+</code></pre>
+<p>将指定文件以行为单位按<strong>逆序</strong>输出。</p>
+</li>
+</ol>
+<h4 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h4><ol>
+<li><p><strong>比较文件</strong></p>
+<pre><code class="lang-shell">diff file1 file2
+</code></pre>
+<p>比较文件file1与file2是否相同，将<strong>不同</strong>之处输出到屏幕上。</p>
+</li>
+</ol>
+<h4 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h4><p>cut命令是一个文本提取工具，它以<strong>行</strong>为单位，将每行看作一条记录，而字段之间的<strong>分隔符</strong>可以灵活地<strong>定义</strong>。</p>
+<ol>
+<li><p><strong>按特定的分隔符提取指定的字段</strong></p>
+<pre><code class="lang-shell">cut -d: -f1 file
+</code></pre>
+<p><strong>参数-d</strong>用来定义字段之间的分隔符，<strong>参数-f</strong>指定提取第几个字段；本例为提取file文件中以“：”为分隔符的第1个字段。</p>
+</li>
+</ol>
+<h3 id="五-压缩与打包命令"><a href="#五-压缩与打包命令" class="headerlink" title="五.压缩与打包命令"></a>五.压缩与打包命令</h3><h4 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h4><ol>
+<li><p><strong>打包（备份）</strong></p>
+<pre><code class="lang-shell">tar -cvf pac.tar dir
+</code></pre>
+<ul>
+<li>参数<strong>-c</strong>的功能是打包（创建），</li>
+<li>参数<strong>-v</strong>是显示处理过程，</li>
+<li>参数<strong>-f</strong>是用来指定文档名；</li>
+</ul>
+<p>本例的功能是：将目录dir打包为一个名为pac.tar的文档。</p>
+</li>
+<li><p><strong>打包（备份）并压缩</strong></p>
+<pre><code class="lang-shell">tar -zcvf pac.tar.gz dir
+</code></pre>
+<ul>
+<li><p>其中参数<strong>-z</strong>是调用gzip命令来压缩，扩展名为<strong>gz</strong>，</p>
+</li>
+<li><p>参数<strong>-Z</strong>是调用compress命令来压缩，扩展名为Z，</p>
+</li>
+<li><p>参数<strong>-j</strong>是调用bzip2命令来压缩，扩展名为<strong>bz2</strong>。</p>
+</li>
+</ul>
+<p>将目录dir<strong>打包并压缩</strong>为一个名为pac.tar.gz的文档。</p>
+</li>
+</ol>
+<h3 id="六-网卡配置命令"><a href="#六-网卡配置命令" class="headerlink" title="六.网卡配置命令"></a>六.网卡配置命令</h3><ol>
+<li><p><strong>显示接口（网卡）配置参数</strong></p>
+<pre><code class="lang-shell">ifconfig
+</code></pre>
+<p>显示网卡参数的配置情况，包括<strong>IP地址、子网掩码、广播地址</strong>等。</p>
+</li>
+<li><p><strong>设置接口（网卡）配置参数</strong></p>
+<pre><code class="lang-shell">ifconfig  eth0  10.22.1.103  netmask  255.255.255.0
+</code></pre>
+<p>设置网卡eth0的IP地址为10.22.1.103、掩码为255.255.255.0。</p>
+<p>注：eth<strong>0</strong>是系统中<strong>第1块</strong>以太网卡的名称，eth<strong>1</strong>是系统中<strong>第2块</strong>以太网卡的名称，以此类推。lo是环回测试网卡的名称。</p>
+</li>
+<li><p><strong>禁用某块网卡</strong></p>
+<pre><code class="lang-shell">ifconfig  eth0  down
+</code></pre>
+<p>禁用网卡eth0。</p>
+<p>注：此时再用不带参数的ifconfig命令是不能显示eth0的信息的，需要加上参数<strong>“<em>*</em></strong>*-a*<strong>**</strong>*”*<em>*</em>才可显示被禁用的网卡信息。</p>
+</li>
+<li><p><strong>激活某块网卡</strong></p>
+<pre><code class="lang-shell">ifconfig  eth0  up
+</code></pre>
+<p><strong>激活</strong>网卡eth0。</p>
+<p>例：配置无线网卡</p>
+</li>
+</ol>
+<h3 id="七-rpm命令"><a href="#七-rpm命令" class="headerlink" title="七.rpm命令"></a>七.rpm命令</h3><ol>
+<li><p><strong>查询系统中安装的软件包</strong></p>
+<pre><code class="lang-shell">rpm -qa
+</code></pre>
+<p>查询系统中安装的软件包列表，其中参数<strong>-q</strong>的功能是“查询”，参数<strong>-a</strong>的功能是“所有的”。</p>
+</li>
+<li><p><strong>查询软件包中文件清单</strong></p>
+<pre><code class="lang-shell">rpm  -ql  php
+</code></pre>
+<p>查询已安装的软件包php中的文件列表，其中参数<strong>-l</strong>的功能是“列出指定软件包中的文件”。</p>
+</li>
+<li><p><strong>卸载指定的软件包</strong></p>
+<pre><code class="lang-shell">rpm  -e  php
+</code></pre>
+<p>卸载已安装的软件包php，参数-e的功能是“卸载”。</p>
+<p>注：请注意执行上述命令时，采用的身份是不同的，<strong>普通用户只能执行查询</strong>操作。</p>
+</li>
+<li><p><strong>安装软件包</strong></p>
+<pre><code class="lang-shell">rpm  -ivh  php-4.3.9-3.1-i386.rpm
+</code></pre>
+<p>安装软件包php，</p>
+<ul>
+<li>参数<strong>-i</strong>的功能是“安装”，</li>
+<li>参数<strong>-v</strong>的功能是“显示处理过程”，</li>
+<li>参数<strong>-h</strong>的功能是显示“#”来表示进度。</li>
+</ul>
+</li>
+<li><p><strong>强制安装软件包</strong></p>
+<pre><code class="lang-shell">rpm  -ivh  --force  php-4.3.9-3.1-i386.rpm
+</code></pre>
+<p><strong>强制</strong>安装软件包php，参数<strong>—force</strong>表示强制的意思。</p>
+<p>注：如果要安装的软件的版本<strong>比较低或该软件包在系统中已存在</strong>，系统会给出提示并拒绝安装，此时可以加上参数—force来进行强制安装。</p>
+</li>
+<li><p><strong>忽略关系安装软件包</strong></p>
+<pre><code class="lang-shell">rpm  -ivh  --nodeps  php-4.3.9-3.1-i386.rpm
+</code></pre>
+<p>安装软件包php时忽略与其它软件包的依赖关系，参数<strong><em>\</em>—nodeps**</strong>表示<strong>忽略依赖关系</strong>。</p>
+<p>注：在安装或卸载软件时经常会遇到提示“该软件包与某某软件包存在依赖关系”，只有加上参数<strong>—nodeps</strong>忽略掉依赖关系才能进行安装或卸载。</p>
+</li>
+<li><p><strong>卸载</strong></p>
+<pre><code class="lang-shell">rpm -q &lt;关键字&gt; #查询到rpm包的名字
+rpm -e &lt;包名&gt; #删除特定rpm包
+rpm -e --nodeps &lt;包的名字&gt; #不检查依赖，直接删除rpm包
+</code></pre>
+</li>
+<li><p><strong>示例</strong></p>
+<pre><code class="lang-shell">rpm -ivh package.rpm 安装一个rpm包 
+rpm -ivh --nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告 
+rpm -U package.rpm 更新一个rpm包但不改变其配置文件 
+rpm -F package.rpm 更新一个确定已经安装的rpm包 
+rpm -e package_name.rpm 删除一个rpm包 
+rpm -qa 显示系统中所有已经安装的rpm包 
+rpm -qa | grep httpd 显示所有名称中包含 &quot;httpd&quot; 字样的rpm包 
+rpm -qi package_name 获取一个已安装包的特殊信息 
+rpm -qg &quot;System Environment/Daemons&quot; 显示一个组件的rpm包 
+rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表 
+rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表 
+rpm -q package_name --whatrequires 显示与一个rpm包存在依赖关系的列表 
+rpm -q package_name --whatprovides 显示一个rpm包所占的体积 
+rpm -q package_name --scripts 显示在安装/删除期间所执行的脚本l 
+rpm -q package_name --changelog 显示一个rpm包的修改历史 
+rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供 
+rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表 
+rpm --import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书 
+rpm --checksig package.rpm 确认一个rpm包的完整性 
+rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性 
+rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间 
+rpm -Va 检查系统中所有已安装的rpm包- 小心使用 
+rpm -Vp package.rpm 确认一个rpm包还未安装 
+rpm2cpio package.rpm | cpio --extract --make-directories *bin* 从一个rpm包运行可执行文件 
+rpm -ivh /usr/src/redhat/RPMS/`arch`/package.rpm 从一个rpm源码安装一个构建好的包 
+rpmbuild --rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包
+</code></pre>
+</li>
+</ol>
+<h3 id="八-其他安装命令"><a href="#八-其他安装命令" class="headerlink" title="八.其他安装命令"></a>八.其他安装命令</h3><ol>
+<li><p><strong>yum(软件包升级器)</strong></p>
+<pre><code class="lang-shell">yum install package_name 下载并安装一个rpm包 
+yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系 
+yum update package_name.rpm 更新当前系统中所有安装的rpm包 
+yum update package_name 更新一个rpm包 
+yum remove package_name 删除一个rpm包 
+yum list 列出当前系统中安装的所有包 
+yum search package_name 在rpm仓库中搜寻软件包 
+yum clean packages 清理rpm缓存删除下载的包 
+yum clean headers 删除所有头文件 
+yum clean all 删除所有缓存的包和头文件
+</code></pre>
+</li>
+<li><p><strong>apt(软件工具)</strong></p>
+<pre><code class="lang-shell">apt-get install package_name 安装/更新一个 deb 包 
+apt-cdrom install package_name 从光盘安装/更新一个 deb 包 
+apt-get update 升级列表中的软件包 
+apt-get upgrade 升级所有已安装的软件 
+apt-get remove package_name 从系统删除一个deb包 
+apt-get check 确认依赖的软件仓库正确 
+apt-get clean 从下载的软件包中清理缓存 
+apt-cache search searched-package 返回包含所要搜索字符串的软件包名称
+</code></pre>
+</li>
+</ol>
+<h3 id="九-查看进程命令"><a href="#九-查看进程命令" class="headerlink" title="九.查看进程命令"></a>九.查看进程命令</h3><h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><ol>
+<li><p>不带参数</p>
+<pre><code class="lang-shell">ps
+</code></pre>
+<p>查询在当前控制台上运行的进程。</p>
+</li>
+<li><p><strong>查看所有进程</strong></p>
+<pre><code class="lang-shell">ps -aux
+</code></pre>
+<p>查询系统中所有运行的进程，包括后台进程，其中参数<strong>a</strong>是所有进程，参数<strong>x</strong>包括不占用控制台的进程，参数<strong>u</strong>显示用户。</p>
+</li>
+<li><p><strong>查看所有进程</strong></p>
+<pre><code class="lang-shell">ps -ef
+</code></pre>
+<p>查询系统中所有运行的进程，包括后台进程，而且可以显示出每个进程的父进程号。</p>
+</li>
+</ol>
+<h4 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h4><ol>
+<li><p><strong>树状格式显示进程列表</strong></p>
+<pre><code class="lang-shell">pstree
+</code></pre>
+<p>以<strong>树状格式</strong>显示系统的进程列表。</p>
+</li>
+<li><p><strong>带进程号的树状格式显示进程列表</strong></p>
+<pre><code class="lang-shell">pstree  -p
+</code></pre>
+<p>以树状格式显示系统的进程列表，并标识出每个进程的<strong>进程号</strong>。 </p>
+</li>
+</ol>
+<h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><pre><code class="lang-shell">top
+</code></pre>
+<p><strong>动态地</strong>显示系统中的进程。</p>
+<h4 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h4><ol>
+<li><p><strong>杀死指定进程</strong></p>
+<pre><code class="lang-shell">kill 8080
+</code></pre>
+<p>kill命令可以杀掉一个进程，当然普通用户只能杀掉自己的进程。</p>
+<p>注：上述命令中8080是进程号；一般在执行kill命令之前，先用ps或pstree来查询一下将要被杀掉的进程的进程号。</p>
+</li>
+<li><p><strong>强制杀掉指定进程</strong></p>
+<pre><code class="lang-shell"> kill  -9  8080
+</code></pre>
+<p>强制终止8080号进程的运行，其中参数<strong>-9</strong>代表强制的意思。</p>
+<p>注：实际上kill命令是向该进程发送信号，该进程接到信号后决定是否停止运行，有些守护进程必须要收到参数9才终止运行。</p>
+</li>
+</ol>
+<h3 id="补充（遇到则更新）"><a href="#补充（遇到则更新）" class="headerlink" title="补充（遇到则更新）"></a>补充（遇到则更新）</h3><p>查看Linux<strong>内存</strong>情况</p>
+<pre><code class="lang-shell">free -m
+</code></pre>
+<p><strong>查看防火墙状态</strong></p>
+<pre><code class="lang-shell">systemctl status firewalld
+service  iptables status
+</code></pre>
+<p><strong>暂时关闭防火墙</strong></p>
+<pre><code class="lang-shell">systemctl stop firewalld
+service  iptables stop
+</code></pre>
+<p><strong>永久关闭防火墙</strong></p>
+<pre><code class="lang-shell">systemctl disable firewalld
+chkconfig iptables off
+</code></pre>
+<p><strong>重启防火墙</strong></p>
+<pre><code class="lang-shell">systemctl enable firewalld
+service iptables restart
+</code></pre>
+<p><strong>永久关闭后重启</strong></p>
+<pre><code class="lang-shell">chkconfig iptables on
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
+
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '410d459a0c015c3e40b4',
+            clientSecret: 'b63c9ed9b7e7648d64a9efabc5908a3b29bf87c3',
+            repo: 'lgnbOvO.github.io',
+            owner: 'lgnbOvO',
+            admin: ['lgnbOvO'],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: 'true',
+            language: 'zh-CN',
+            perPage: parseInt('10',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    OvO
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 557px;
+    }
+    .nav.fullscreen {
+        margin-left: -557px;
+    }
+    .nav-left {
+        width: 135px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
