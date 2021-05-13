@@ -509,7 +509,7 @@
 .nav-left {
   width: 120px;
   height: 100%;
-  background: #2a2935;
+  background: rgba(0,0,0,0.8);
   box-shadow: inset -15px 0 15px -15px #222;
   float: left;
   position: relative;
@@ -1248,7 +1248,7 @@
 }
 #post .pjax article {
   padding: 2.5em;
-  background: #fff;
+  background: rgba(255,250,250,0.9);
 /* Inline code */
 }
 #post .pjax article .article-entry>p:nth-child(1) {
