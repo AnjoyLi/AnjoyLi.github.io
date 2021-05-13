@@ -235,7 +235,7 @@
     <div></div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="40">
-
+<input type="hidden" id="yelog_site_word_count" value="70.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -773,6 +773,8 @@
         
     </div>
     <div class="article-meta">
+        
+        <span>Count:3.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -1319,7 +1321,7 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 </div>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-hijiki"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 <script src="/js/jquery.pjax.js?v=1.1.0" ></script>
 
 <script src="/js/script.js?v=1.1.0" ></script>
@@ -1439,13 +1441,13 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
     
     
     .nav {
-        width: 557px;
+        width: 582px;
     }
     .nav.fullscreen {
-        margin-left: -557px;
+        margin-left: -582px;
     }
     .nav-left {
-        width: 135px;
+        width: 160px;
     }
     
     
@@ -1500,8 +1502,30 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 
     /*列表样式*/
     
+    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
 
     /* 背景图样式 */
+    
+    #post {
+        background: url(/img/bg.jpeg);
+    }
     
     
 
