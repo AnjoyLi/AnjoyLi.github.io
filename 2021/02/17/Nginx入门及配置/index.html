@@ -1,851 +1,180 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="baidu-site-verification" content="code-zGBzPMbWmn" />
-  <meta name="msvalidate.01" content="D15BE26CC15ACB96EBF8B49B6965B030" />
-  <meta charset="utf-8">
-  <title>Nginx入门及配置 | Hexo</title>
-  <meta name="keywords" content=" Nginx ">
-  <meta name="description" content="Nginx入门及配置 | Hexo">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="ec641b5e93087699359cf5258cc417e0">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://lgnbovo.github.io/baidu_verify_code-zGBzPMbWmn.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ec641b5e93087699359cf5258cc417e0">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-10T02:06:19.225Z">
-<meta property="article:modified_time" content="2021-03-10T02:06:01.210Z">
-<meta property="article:author" content="lggg">
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nginx入门及配置 | ÃZoroのBlog</title><meta name="keywords" content="Nginx"><meta name="author" content="Ligo"><meta name="copyright" content="Ligo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="nginx介绍以及配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx入门及配置">
+<meta property="og:url" content="https://hexo.lggg.xyz/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="ÃZoroのBlog">
+<meta property="og:description" content="nginx介绍以及配置">
+<meta property="og:locale">
+<meta property="og:image" content="https://hexo.lggg.xyz/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/nginx.png">
+<meta property="article:published_time" content="2021-02-17T09:10:32.000Z">
+<meta property="article:modified_time" content="2021-09-11T17:41:22.030Z">
+<meta property="article:author" content="Ligo">
+<meta property="article:tag" content="Nginx">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="icon" href="/img/avatar.jpg">
-
-<link href="/css/style.css?v=1.1.0" rel="stylesheet">
-
-<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
-
-<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
-
-<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="/js/titleTip.js?v=1.1.0" ></script>
-
-<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
-<script>
-    hljs.initHighlightingOnLoad();
-</script>
-
-<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-
-
-
-<script src="/js/iconfont.js?v=1.1.0" ></script>
-
-<meta name="generator" content="Hexo 4.2.1"></head>
-<div style="display: none">
-  <input class="theme_disqus_on" value="false">
-  <input class="theme_preload_comment" value="">
-  <input class="theme_blog_path" value="">
-  <input id="theme_shortcut" value="true" />
-</div>
-
-
-<body>
-<aside class="nav">
-    <div class="nav-left">
-        <a href="/" class="avatar_target">
-    <img class="avatar" src="/img/avatar.jpg" />
-</a>
-<div class="author">
-    <span>lggg</span>
-</div>
-
-<div class="icon">
-    
-        
-        <a title="github" href="https://github.com/lgnbOVO" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-github"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="csdn" href="https://blog.csdn.net/weixin_43871885" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-csdn"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="email" href="mailto:1589631311@qq.com" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-email"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1589631311&site=qq&menu=yes" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-qq"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=504459049" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-neteasemusic"></use>
-                </svg>
-            
-        </a>
-        
-    
-</div>
-
-
-
-
-<ul>
-    <li><div class="all active" data-rel="All">All<small>(40)</small></div></li>
-    
-        
-            
-            <li><div data-rel="SSM框架"><i class="fold iconfont icon-right"></i>SSM框架<small>(22)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="SSM框架<--->Mybatis">Mybatis<small>(7)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="SSM框架<--->Spring">Spring<small>(9)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="SSM框架<--->SpringMVC">SpringMVC<small>(6)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="面向对象">面向对象<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="算法">算法<small>(5)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="数据结构">数据结构<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="题目">题目<small>(3)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="数论">数论<small>(3)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-        
-    
-        
-            
-        
-    
-        
-            
-        
-    
-        
-            
-            <li><div data-rel="开发工具">开发工具<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="开发技能">开发技能<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="数据库">数据库<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-</ul>
-<div class="left-bottom">
-    <div class="menus">
-    
-    
-    
-    
-    </div>
-    <div></div>
-</div>
-<input type="hidden" id="yelog_site_posts_number" value="40">
-<input type="hidden" id="yelog_site_word_count" value="70.9k">
-<div style="display: none">
-    <span id="busuanzi_value_site_uv"></span>
-    <span id="busuanzi_value_site_pv"></span>
-</div>
-
-    </div>
-    <div class="nav-right">
-        <div class="friends-area">
-    <div class="friends-title">
-        Links
-        <i class="iconfont icon-left"></i>
-    </div>
-    <div class="friends-content">
-        <ul>
-            
-        </ul>
-    </div>
-</div>
-        <div class="title-list">
-    <div class="right-top">
-        <div id="default-panel">
-            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
-            <div class="right-title">All</div>
-            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
-        </div>
-        <div id="search-panel">
-            <i class="iconfont icon-left" data-title="返回"></i>
-            <input id="local-search-input" />
-            <label class="border-line" for="input"></label>
-            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
-            <i class="iconfont icon-tag" data-title="标签"></i>
-        </div>
-        <div id="outline-panel" style="display: none">
-            <div class="right-title">大纲</div>
-            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
-        </div>
-    </div>
-
-    <div class="tags-list">
-    <input id="tag-search" />
-    <div class="tag-wrapper">
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>BF与SPFA</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>c++面向对象</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>dijistar</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Linux</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Mybatis</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>MyBatisPlus</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Mysql</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Neo4j</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Nginx</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>oj作业</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Sp			ringMVC</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Spring</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>三分</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>关系数据库</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>动态规划</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>区间dp</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>博弈论</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>图论</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>基础命令</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>寒假训练</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>平衡二叉树</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>扩展欧几里得</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>文件读取</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>斐波那契</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>树</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>费马小定理</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>逆元</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>链表</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>非关系数据库</a>
-            </li>
-        
-    </div>
-
-</div>
-
-    
-    <nav id="title-list-nav">
-        
-        <a  class="All 开发技能 "
-           href="/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/"
-           data-tag="Nginx"
-           data-author="" >
-            <span class="post-title" title="Nginx入门及配置">Nginx入门及配置</span>
-            <span class="post-date" title="2021-02-17 17:10:32">2021/02/17</span>
-        </a>
-        
-        <a  class="All 开发工具 "
-           href="/2021/02/09/MyBatisPlus/"
-           data-tag="MyBatisPlus"
-           data-author="" >
-            <span class="post-title" title="MyBatisPlus">MyBatisPlus</span>
-            <span class="post-date" title="2021-02-09 22:35:39">2021/02/09</span>
-        </a>
-        
-        <a  class="All 开发技能 "
-           href="/2021/01/17/Linux%E5%91%BD%E4%BB%A4/"
-           data-tag="Linux,基础命令"
-           data-author="" >
-            <span class="post-title" title="Linux命令">Linux命令</span>
-            <span class="post-date" title="2021-01-17 21:43:58">2021/01/17</span>
-        </a>
-        
-        <a  class="All 数据库 "
-           href="/2020/12/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/"
-           data-tag="关系数据库,非关系数据库,Mysql,Neo4j"
-           data-author="" >
-            <span class="post-title" title="数据库总结">数据库总结</span>
-            <span class="post-date" title="2020-12-10 19:53:40">2020/12/10</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/09/02/%E6%95%B4%E5%90%88SSM%E6%A1%86%E6%9E%B6/"
-           data-tag="Sp			ringMVC"
-           data-author="" >
-            <span class="post-title" title="整合SSM框架">整合SSM框架</span>
-            <span class="post-date" title="2020-09-02 20:42:46">2020/09/02</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/28/Json%E4%BA%A4%E4%BA%92%E5%A4%84%E7%90%86/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="Json交互处理">Json交互处理</span>
-            <span class="post-date" title="2020-08-28 17:57:44">2020/08/28</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/28/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%8F%8A%E8%B7%B3%E8%BD%AC/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="数据处理及跳转">数据处理及跳转</span>
-            <span class="post-date" title="2020-08-28 17:36:38">2020/08/28</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/27/RestFul%E5%92%8C%E6%8E%A7%E5%88%B6%E5%99%A8/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="RestFul和控制器">RestFul和控制器</span>
-            <span class="post-date" title="2020-08-27 22:42:03">2020/08/27</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/25/%E7%AC%AC%E4%B8%80%E4%B8%AAMVC%E7%A8%8B%E5%BA%8F/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="第一个MVC程序">第一个MVC程序</span>
-            <span class="post-date" title="2020-08-25 17:39:22">2020/08/25</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/23/%E4%BB%80%E4%B9%88%E6%98%AFSpringMVC/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="什么是SpringMVC">什么是SpringMVC</span>
-            <span class="post-date" title="2020-08-23 17:23:35">2020/08/23</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/21/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="声明式事务">声明式事务</span>
-            <span class="post-date" title="2020-08-21 21:18:00">2020/08/21</span>
-        </a>
-        
-        <a  class="All 题目 "
-           href="/2020/08/20/B%E5%90%9B%E7%9A%84%E6%B8%B8%E6%88%8F/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="B君的游戏">B君的游戏</span>
-            <span class="post-date" title="2020-08-20 23:06:17">2020/08/20</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/20/%E6%95%B4%E5%90%88Mybatis/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="整合Mybatis">整合Mybatis</span>
-            <span class="post-date" title="2020-08-20 18:45:37">2020/08/20</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/19/AOP/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="AOP">AOP</span>
-            <span class="post-date" title="2020-08-19 22:17:41">2020/08/19</span>
-        </a>
-        
-        <a  class="All 题目 "
-           href="/2020/08/18/Nim%E6%B8%B8%E6%88%8F/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="Nim游戏">Nim游戏</span>
-            <span class="post-date" title="2020-08-18 22:39:45">2020/08/18</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="静态/动态代理">静态/动态代理</span>
-            <span class="post-date" title="2020-08-18 21:06:05">2020/08/18</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/17/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Spring/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="使用注解开发Spring">使用注解开发Spring</span>
-            <span class="post-date" title="2020-08-17 18:26:22">2020/08/17</span>
-        </a>
-        
-        <a  class="All 数论 "
-           href="/2020/08/16/%E5%8D%9A%E5%BC%88%E8%AE%BA/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="博弈论">博弈论</span>
-            <span class="post-date" title="2020-08-16 23:18:15">2020/08/16</span>
-        </a>
-        
-        <a  class="All 题目 "
-           href="/2020/08/16/Bash%E6%B8%B8%E6%88%8F/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="Bash游戏">Bash游戏</span>
-            <span class="post-date" title="2020-08-16 23:07:21">2020/08/16</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/16/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="自动装配">自动装配</span>
-            <span class="post-date" title="2020-08-16 17:44:00">2020/08/16</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/15/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%88DI%EF%BC%89/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="依赖注入（DI）">依赖注入（DI）</span>
-            <span class="post-date" title="2020-08-15 17:41:44">2020/08/15</span>
-        </a>
-        
-        <a  class="All 数论 "
-           href="/2020/08/14/%E9%80%86%E5%85%83/"
-           data-tag="扩展欧几里得,逆元,费马小定理"
-           data-author="" >
-            <span class="post-title" title="逆元">逆元</span>
-            <span class="post-date" title="2020-08-14 21:04:18">2020/08/14</span>
-        </a>
-        
-        <a  class="All 数论 "
-           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
-           data-tag="斐波那契"
-           data-author="" >
-            <span class="post-title" title="斐波那契">斐波那契</span>
-            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="快速上手Spring">快速上手Spring</span>
-            <span class="post-date" title="2020-08-12 21:26:34">2020/08/12</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/11/%E6%A6%82%E8%BF%B0%E5%8F%8AIOC%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="概述及IOC理论推导">概述及IOC理论推导</span>
-            <span class="post-date" title="2020-08-11 22:41:10">2020/08/11</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/08/%E7%BC%93%E5%AD%98/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="缓存">缓存</span>
-            <span class="post-date" title="2020-08-08 23:08:25">2020/08/08</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/06/%E5%8A%A8%E6%80%81SQL/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="动态SQL">动态SQL</span>
-            <span class="post-date" title="2020-08-06 19:10:57">2020/08/06</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/04/%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%A4%84%E7%90%86/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="一对多和多对一的处理">一对多和多对一的处理</span>
-            <span class="post-date" title="2020-08-04 23:44:27">2020/08/04</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/03/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Mybatis/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="使用注解开发Myabatis">使用注解开发Myabatis</span>
-            <span class="post-date" title="2020-08-03 18:01:48">2020/08/03</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/07/30/ResultMap%E5%8F%8A%E5%88%86%E9%A1%B5/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="ResultMap及分页">ResultMap及分页</span>
-            <span class="post-date" title="2020-07-30 17:53:17">2020/07/30</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/07/28/CRUD%E6%93%8D%E4%BD%9C%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="CRUD操作及配置解析">CRUD操作及配置解析</span>
-            <span class="post-date" title="2020-07-28 16:56:14">2020/07/28</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/07/27/Mybatis/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="MyBatis">MyBatis</span>
-            <span class="post-date" title="2020-07-27 17:34:47">2020/07/27</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/25/%E5%90%88%E5%B9%B6%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/"
-           data-tag="动态规划,区间dp"
-           data-author="" >
-            <span class="post-title" title="合并回文子串">合并回文子串</span>
-            <span class="post-date" title="2020-06-25 18:39:00">2020/06/25</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/12/Bellman-Ford%E4%B8%8ESPFA/"
-           data-tag="图论,BF与SPFA"
-           data-author="" >
-            <span class="post-title" title="Bellman-Ford与SPFA">Bellman-Ford与SPFA</span>
-            <span class="post-date" title="2020-06-12 14:25:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 面向对象 "
-           href="/2020/06/12/c++%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"
-           data-tag="链表,文件读取,c++面向对象"
-           data-author="" >
-            <span class="post-title" title="学生信息管理系统">学生信息管理系统</span>
-            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
-           data-tag="树,平衡二叉树"
-           data-author="" >
-            <span class="post-title" title="平衡二叉树的基本操作">平衡二叉树的基本操作</span>
-            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
-           data-tag="寒假训练,动态规划"
-           data-author="" >
-            <span class="post-title" title="算概率">算概率</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/12/dijstra/"
-           data-tag="图论,dijistar"
-           data-author="" >
-            <span class="post-title" title="dijistar">dijistar</span>
-            <span class="post-date" title="2020-06-12 12:58:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/11/%E4%B8%89%E5%88%86/"
-           data-tag="三分,寒假训练"
-           data-author="" >
-            <span class="post-title" title="三分">三分</span>
-            <span class="post-date" title="2020-06-11 16:44:50">2020/06/11</span>
-        </a>
-        
-        <div id="no-item-tips">
-
-        </div>
-    </nav>
-    <div id="outline-list">
-    </div>
-</div>
-    </div>
-    <div class="hide-list">
-        <div class="semicircle" data-title="切换全屏 快捷键 s">
-            <div class="brackets first"><</div>
-            <div class="brackets">&gt;</div>
-        </div>
-    </div>
-</aside>
-<div id="post">
-    <div class="pjax">
-        <article id="post-Nginx入门及配置" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">Nginx入门及配置</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="开发技能">开发技能</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color1">Nginx</a>
-            
-        </span>
-        
-    </div>
-    <div class="article-meta">
-        
-            Created At : <time class="date" title='Updated At: 2021-02-17 18:17:01'>2021-02-17 17:10</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>Count:3.1k</span>
-        
-        
-        <span id="busuanzi_container_page_pv">
-            Views 👀 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-        <span class="top-comment" title="跳转至评论区">
-            <a href="#comments">
-                Comment:<span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </a>
-        </span>
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx"><span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#入门"><span class="toc-text">入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Nginx"><span class="toc-text">什么是Nginx?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx作用"><span class="toc-text">Nginx作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Http代理"><span class="toc-text">Http代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#负载均衡"><span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动静分离"><span class="toc-text">动静分离</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件"><span class="toc-text">配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx-conf配置文件详解"><span class="toc-text">nginx.conf配置文件详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用于调试、定位问题的配置参数"><span class="toc-text">用于调试、定位问题的配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正常运行必备的配置参数"><span class="toc-text">正常运行必备的配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化性能的配置参数"><span class="toc-text">优化性能的配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件相关配置"><span class="toc-text">事件相关配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fastcgi相关配置参数"><span class="toc-text">Fastcgi相关配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常需要调整的参数"><span class="toc-text">常需要调整的参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx作为web服务器时使用的配置"><span class="toc-text">nginx作为web服务器时使用的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#访问控制"><span class="toc-text">访问控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启状态界面"><span class="toc-text">开启状态界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反向代理与负载均衡"><span class="toc-text">反向代理与负载均衡</span></a></li></ol></li></ol></li></ol>
-    
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
+<meta name="twitter:image" content="https://hexo.lggg.xyz/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/nginx.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.lggg.xyz/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/img/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/img/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/pwa/16.png"/><link rel="mask-icon" href="/img/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Ligo","link":"Link: ","source":"Source: ÃZoroのBlog","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
     }
-    .toc-level-5 i,
-    .toc-level-5 ol {
-        display: none !important;
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Nginx入门及配置',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-12 01:41:22'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
     }
-</style>
-</div>
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><h3 id="什么是Nginx"><a href="#什么是Nginx" class="headerlink" title="什么是Nginx?"></a>什么是Nginx?</h3><p><code>Nginx</code> (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日。2011年6月1日，nginx 1.0.4发布。</p>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">40</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">12</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/nginx.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ÃZoroのBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Nginx入门及配置</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-02-17T09:10:32.000Z" title="Created 2021-02-17 17:10:32">2021-02-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-09-11T17:41:22.030Z" title="Updated 2021-09-12 01:41:22">2021-09-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E8%83%BD/">开发技能</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>10min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Nginx入门及配置"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><h2 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h2><h3 id="什么是Nginx"><a href="#什么是Nginx" class="headerlink" title="什么是Nginx?"></a>什么是Nginx?</h3><p><code>Nginx</code> (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日。2011年6月1日，nginx 1.0.4发布。</p>
 <p>其特点是占有<font color = red>内存少，并发能力强</font>，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。在全球活跃的网站中有12.18%的使用比率，大约为2220万个网站。</p>
 <p>Nginx 是一个安装非常的简单、配置文件非常简洁（还能够支持perl语法）、Bug非常少的服务。Nginx 启动特别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够不间断服务的情况下进行软件版本的升级。</p>
 <p>Nginx代码完全用C语言从头写成。官方数据测试表明能够支持高达 50,000 个并发连接数的响应。</p>
 <h3 id="Nginx作用"><a href="#Nginx作用" class="headerlink" title="Nginx作用"></a>Nginx作用</h3><h4 id="Http代理"><a href="#Http代理" class="headerlink" title="Http代理"></a>Http代理</h4><blockquote>
 <p>正向代理</p>
 </blockquote>
-<p><img src="正向代理.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="正向代理.png" alt=""></p>
 <blockquote>
 <p>反向代理</p>
 </blockquote>
-<p><img src="反向代理.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="反向代理.png" alt=""></p>
 <h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>Nginx提供的负载均衡策略有2种：<font color = red>内置策略和扩展策略</font>。内置策略为轮询，加权轮询，Ip hash。扩展策略，就天马行空，只有你想不到的没有他做不到的。</p>
 <blockquote>
 <p>轮询</p>
 </blockquote>
-<p><img src="负载均衡-轮询.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="负载均衡-轮询.png" alt=""></p>
 <blockquote>
 <p>加权轮询</p>
 </blockquote>
-<p><img src="负载均衡-加权轮询.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="负载均衡-加权轮询.png" alt=""></p>
 <blockquote>
 <p>Ip hash</p>
 </blockquote>
 <p>对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。</p>
-<p><img src="负载均衡-Iphash.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="负载均衡-Iphash.png" alt=""></p>
 <h4 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h4><p>在软件开发中，有些请求是需要后台处理的，有些请求是不需要经过后台处理的（如：css、html、jpg、js等等文件），这些不需要经过后台处理的文件称为<font color = red>静态文件</font>。让动态网站里的动态网页<font color = red>根据一定规则把不变的资源和经常变的资源区分开来</font>，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作。<font color = red>提高资源响应的速度</font>。</p>
-<p><img src="动静分离.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="动静分离.png" alt=""></p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ul>
 <li><p>主配置文件：/…/nginx/conf/nginx.conf</p>
 </li>
@@ -915,93 +244,26 @@
 </ul>
 </li>
 </ul>
-<h3 id="用于调试、定位问题的配置参数"><a href="#用于调试、定位问题的配置参数" class="headerlink" title="用于调试、定位问题的配置参数"></a>用于调试、定位问题的配置参数</h3><pre><code class="lang-shell">daemon {on|off}; //是否已守护进程运行进程nginx，调试时应设置为off
-master_process {on|off}; //是否以master/worker模型来运行nginx，调试时可以设置为off
-error_log 位置1 级别2; //配置错误日志（位置与级别有以下选项，点击脚注）
-</code></pre>
-<h3 id="正常运行必备的配置参数"><a href="#正常运行必备的配置参数" class="headerlink" title="正常运行必备的配置参数"></a>正常运行必备的配置参数</h3><pre><code class="lang-shell">user USERNSME {GROUPNAME}; //指定运行worker进程的用户和组；
-pid /path/to/pid_file; //指定nginx守护进程的pid文件
-worker_rlimit_nofile NUMBER; //设置所有worker进程最大可以打开的文件数，默认为1024；
-worker_rlimit_core SIZE; //指明所有worker进程所能够使用的总体的最大核心文件大小，保持默认即可
-</code></pre>
-<h3 id="优化性能的配置参数"><a href="#优化性能的配置参数" class="headerlink" title="优化性能的配置参数"></a>优化性能的配置参数</h3><pre><code class="lang-shell">worker_processse N; //启动N个worker进程，这里的N为了避免上下文切换，通常设置为cpu总核数-1或等于总t核数
-worker_cpu_affinity CPUMASK3 [CPUMASK…]; //将进程绑定到某个CPU中，避免频繁刷新缓存
-time_resolution INTERVAL; //计时器解析度。降低此值，可减少gettimeofday()系统调用的次数
-worker_priority NUMBER; //指明worker进程的NICE值（优先级）
-</code></pre>
+<h3 id="用于调试、定位问题的配置参数"><a href="#用于调试、定位问题的配置参数" class="headerlink" title="用于调试、定位问题的配置参数"></a>用于调试、定位问题的配置参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">daemon &#123;on|off&#125;; //是否已守护进程运行进程nginx，调试时应设置为off</span><br><span class="line">master_process &#123;on|off&#125;; //是否以master/worker模型来运行nginx，调试时可以设置为off</span><br><span class="line">error_log 位置1 级别2; //配置错误日志（位置与级别有以下选项，点击脚注）</span><br></pre></td></tr></table></figure>
+<h3 id="正常运行必备的配置参数"><a href="#正常运行必备的配置参数" class="headerlink" title="正常运行必备的配置参数"></a>正常运行必备的配置参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user USERNSME &#123;GROUPNAME&#125;; //指定运行worker进程的用户和组；</span><br><span class="line">pid /path/to/pid_file; //指定nginx守护进程的pid文件</span><br><span class="line">worker_rlimit_nofile NUMBER; //设置所有worker进程最大可以打开的文件数，默认为1024；</span><br><span class="line">worker_rlimit_core SIZE; //指明所有worker进程所能够使用的总体的最大核心文件大小，保持默认即可</span><br></pre></td></tr></table></figure>
+<h3 id="优化性能的配置参数"><a href="#优化性能的配置参数" class="headerlink" title="优化性能的配置参数"></a>优化性能的配置参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker_processse N; //启动N个worker进程，这里的N为了避免上下文切换，通常设置为cpu总核数-1或等于总t核数</span><br><span class="line">worker_cpu_affinity CPUMASK3 [CPUMASK…]; //将进程绑定到某个CPU中，避免频繁刷新缓存</span><br><span class="line">time_resolution INTERVAL; //计时器解析度。降低此值，可减少gettimeofday()系统调用的次数</span><br><span class="line">worker_priority NUMBER; //指明worker进程的NICE值（优先级）</span><br></pre></td></tr></table></figure>
 <h3 id="事件相关配置"><a href="#事件相关配置" class="headerlink" title="事件相关配置"></a>事件相关配置</h3><p><strong>注：event{}段中的配置参数</strong></p>
-<pre><code class="lang-shell">use epoll; //多路复用I/O中的一种方式，仅用于linux2.6以上内核，大大提升nginx性能
-accept_mutex {on|off}; //master调度用户请求至各worker进程时使用的负载均衡锁，“on”表示能让多个worker轮流地、序列化地去响应新请求
-lock_file FILE; //accept_nutex用到的互斥锁锁文件路径
-use [epoll | rtsig | select | poll]; //指明使用的事件模型，建议让nginx自行选择
-worker_connections #; //每个进程能够接受的最大连接数
-multi_accept on; //尽可能多的接受请求
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">use epoll; //多路复用I/O中的一种方式，仅用于linux2.6以上内核，大大提升nginx性能</span><br><span class="line">accept_mutex &#123;on|off&#125;; //master调度用户请求至各worker进程时使用的负载均衡锁，“on”表示能让多个worker轮流地、序列化地去响应新请求</span><br><span class="line">lock_file FILE; //accept_nutex用到的互斥锁锁文件路径</span><br><span class="line">use [epoll | rtsig | select | poll]; //指明使用的事件模型，建议让nginx自行选择</span><br><span class="line">worker_connections #; //每个进程能够接受的最大连接数</span><br><span class="line">multi_accept on; //尽可能多的接受请求</span><br></pre></td></tr></table></figure>
 <h3 id="Fastcgi相关配置参数"><a href="#Fastcgi相关配置参数" class="headerlink" title="Fastcgi相关配置参数"></a>Fastcgi相关配置参数</h3><ul>
 <li>LNMP：php要启用fpm模型</li>
 <li>配置示例如下：</li>
 </ul>
-<pre><code class="lang-shell">location ~ \.php$ {
- root html;
- fastcgi_pass 127.0.0.1:9000;          //定义反向代理
- fastcgi_index index.php;
- fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name;
- include fastcgi_params;
-}
-
-注：当LNMP架构分台部署，“/scripts”需换成php的目录
-</code></pre>
-<h3 id="常需要调整的参数"><a href="#常需要调整的参数" class="headerlink" title="常需要调整的参数"></a>常需要调整的参数</h3><pre><code class="lang-shell">worker_processes NUMBER //启动NUMBER个worker进程
-worker_cpu_affinity CPUMASK3 //绑定CPU核心数
-worker_connections NUMBER //绑定的CPU核心每个最大连接数
-worker_priorty NUMBER //调整nice值
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location ~ \.php$ &#123;</span><br><span class="line"> root html;</span><br><span class="line"> fastcgi_pass 127.0.0.1:9000;          //定义反向代理</span><br><span class="line"> fastcgi_index index.php;</span><br><span class="line"> fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name;</span><br><span class="line"> include fastcgi_params;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">注：当LNMP架构分台部署，“/scripts”需换成php的目录</span><br></pre></td></tr></table></figure>
+<h3 id="常需要调整的参数"><a href="#常需要调整的参数" class="headerlink" title="常需要调整的参数"></a>常需要调整的参数</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">worker_processes NUMBER //启动NUMBER个worker进程</span><br><span class="line">worker_cpu_affinity CPUMASK3 //绑定CPU核心数</span><br><span class="line">worker_connections NUMBER //绑定的CPU核心每个最大连接数</span><br><span class="line">worker_priorty NUMBER //调整nice值</span><br></pre></td></tr></table></figure>
 <h3 id="nginx作为web服务器时使用的配置"><a href="#nginx作为web服务器时使用的配置" class="headerlink" title="nginx作为web服务器时使用的配置"></a>nginx作为web服务器时使用的配置</h3><p><strong>注：http{}段配置的参数</strong></p>
 <ul>
 <li><p>http{}段：由ngx_http_core_module模块引入</p>
 </li>
 <li><p>http配置主要包含四个区块，结构如下：</p>
-<pre><code class="lang-shell">http {            ## 协议级别
- include mime.types;
- default_type application/octet-stream;
- keepalive_timeout 65;
- gzip on;
- sendfile on;        ##指定nginx是否调用sendfile函数（zero copy）来输出文件，对于普通应用必须设为on；
-                     ##如果用来进行下载等应用磁盘I/O重负载应用，可设置为OFF，以平衡磁盘与网络I/O处理速度，降低系统的uptime
- autoindex on;        ##开启目录列表访问，适合下载服务器，默认关闭
-     upstream {              ##负载均衡配置
-    ...
-    }
-     server {              ##服务器级别，每一个server类似于httpd中的一个&lt;VirtualHost,通俗来说就是一个网站&gt;
-         listen80;
-         server_name localhost;
-        location / {           ##请求级别，类似与httpd中的&lt;Location&gt;，用于定义URL与本地文件系统的映射关系
-             root html;
-             index index.html index.htm;
-         }
-     }
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">http &#123;            ## 协议级别</span><br><span class="line"> include mime.types;</span><br><span class="line"> default_type application/octet-stream;</span><br><span class="line"> keepalive_timeout 65;</span><br><span class="line"> gzip on;</span><br><span class="line"> sendfile on;		##指定nginx是否调用sendfile函数（zero copy）来输出文件，对于普通应用必须设为on；</span><br><span class="line"> 					##如果用来进行下载等应用磁盘I/O重负载应用，可设置为OFF，以平衡磁盘与网络I/O处理速度，降低系统的uptime</span><br><span class="line"> autoindex on;		##开启目录列表访问，适合下载服务器，默认关闭</span><br><span class="line"> 	upstream &#123;              ##负载均衡配置</span><br><span class="line">	...</span><br><span class="line">	&#125;</span><br><span class="line"> 	server &#123;              ##服务器级别，每一个server类似于httpd中的一个&lt;VirtualHost,通俗来说就是一个网站&gt;</span><br><span class="line"> 		listen80;</span><br><span class="line">	 	server_name localhost;</span><br><span class="line">		location / &#123;           ##请求级别，类似与httpd中的&lt;Location&gt;，用于定义URL与本地文件系统的映射关系</span><br><span class="line">		 	root html;</span><br><span class="line">		 	index index.html index.htm;</span><br><span class="line">	 	&#125;</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>http{}段配置指令：<br>1）server{}：定义一个虚拟主机，示例如下：</p>
-<pre><code class="lang-shell">server {
-     listen 80;
-     server_name www.idfsoft.com;
-     root &quot;/vhosts/web&quot;;
-}
-
-注：
-listen指定监听的地址和端口写法：
-        listen ADDRESS[:PORT];
-        listen PORT;
-server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以用正则表达式或通配符
-当有多个server时，匹配顺序如下：
-        1.先做精确匹配检查；
-        2.左侧通配符匹配检查，如*.idfsoft.com
-        3.右侧通配符匹配检查，如mail.*
-        4.正则表达式匹配检查，如~ ^.*\.idfsoft\.com$
-        5.default_server
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> 	listen 80;</span><br><span class="line"> 	server_name www.idfsoft.com;</span><br><span class="line"> 	root &quot;/vhosts/web&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">注：</span><br><span class="line">listen指定监听的地址和端口写法：</span><br><span class="line">		listen ADDRESS[:PORT];</span><br><span class="line">		listen PORT;</span><br><span class="line">server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以用正则表达式或通配符</span><br><span class="line">当有多个server时，匹配顺序如下：</span><br><span class="line">		1.先做精确匹配检查；</span><br><span class="line">		2.左侧通配符匹配检查，如*.idfsoft.com</span><br><span class="line">		3.右侧通配符匹配检查，如mail.*</span><br><span class="line">		4.正则表达式匹配检查，如~ ^.*\.idfsoft\.com$</span><br><span class="line">		5.default_server</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>2）location区段，通过指定模式来与客户端请求的URI相匹配</p>
@@ -1009,8 +271,7 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 <li><p>功能：允许根据用户请求的URI来匹配定义的各location，匹配到时，此请求将被响应的location配置快中的配置所处理，例如做访问控制等功能</p>
 </li>
 <li><p>语法：如下</p>
-<pre><code class="lang-properties">location [修饰符] pattern {…}
-</code></pre>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">location</span> <span class="string">[修饰符] pattern &#123;…&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>常用的修饰符说明：</p>
 </li>
@@ -1049,13 +310,7 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 </div>
 <ol>
 <li><p>没有修饰符表示必须以指定模式开始，如：</p>
-<pre><code class="lang-shell">server {
-     server_name www.baibai.com;
-     location /abc {
-     ......
-     }
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> 	server_name www.baibai.com;</span><br><span class="line"> 	location /abc &#123;</span><br><span class="line"> 	......</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么如下内容可以就可以正确匹配：</p>
 <ul>
 <li>www.baibai.com/abc</li>
@@ -1064,13 +319,7 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 </ul>
 </li>
 <li><p>=：表示必须与指定的模式<strong>精确匹配</strong>，如：</p>
-<pre><code class="lang-shell">server {
-     server_name www.baibai.com;
-     location = /abc {
-     ......
-     }
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> 	server_name www.baibai.com;</span><br><span class="line"> 	location = /abc &#123;</span><br><span class="line"> 	......</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么如下内容可正确匹配：</p>
 <ul>
 <li>www.baibai.com/abc</li>
@@ -1083,13 +332,7 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 </ul>
 </li>
 <li><p>~：表示指定的正则表达式要区<strong>分大小写</strong>，如：</p>
-<pre><code class="lang-shell">server {
-     server_name www.baibai.com;
-     location ~ ^/abc$ {
-     ......
-     }
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> 	server_name www.baibai.com;</span><br><span class="line"> 	location ~ ^/abc$ &#123;</span><br><span class="line"> 	......</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么如下内容可以正确匹配：</p>
 <ul>
 <li>www.baibai.com/abc</li>
@@ -1103,13 +346,7 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 </ul>
 </li>
 <li><p>~*：表示指定的正则表达式不区分大小写，如：</p>
-<pre><code class="lang-shell">server {
-     server_name www.baibai.com;
-     location ~* ^/abc$ {
-     ......
-     }
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> 	server_name www.baibai.com;</span><br><span class="line"> 	location ~* ^/abc$ &#123;</span><br><span class="line"> 	......</span><br><span class="line"> 	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>那么如下内容就可以正确匹配：</p>
 <ul>
 <li>www.baibai.com/abc</li>
@@ -1138,27 +375,16 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 <p><strong>注：用于location段，可以用主机地址表示，也可用网段表示，必须一起用</strong><br><code>allow</code>：设定允许那台或那些主机访问，多个参数间用空格隔开<br><code>deny</code>：设定禁止那台或那些主机访问，多个参数间用空格隔开</p>
 </blockquote>
 <p>例如：</p>
-<pre><code class="lang-shell">location / {
-    root   html;
-    index  index.php index.html index.htm;
-    allow  192.168.91.129/32;
-    deny   all;
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    root   html;</span><br><span class="line">    index  index.php index.html index.htm;</span><br><span class="line">    allow  192.168.91.129/32;</span><br><span class="line">    deny   all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="开启状态界面"><a href="#开启状态界面" class="headerlink" title="开启状态界面"></a>开启状态界面</h3><blockquote>
 <p>stub_status {on|off};</p>
 </blockquote>
 <ul>
 <li><p>配置如下：</p>
-<pre><code class="lang-shell">location /status {        ##URI不唯一
-     stub_status on；
-     allow 192.168.91.129/32;        ##允许查看的地址
-     deny all;
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /status &#123;		##URI不唯一</span><br><span class="line"> 	stub_status on；</span><br><span class="line"> 	allow 192.168.91.129/32;		##允许查看的地址</span><br><span class="line"> 	deny all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>访问状态页面方式：<a href="http://服务器IP/status" target="_blank" rel="noopener">http://服务器IP/status</a></p>
-<p><img src="状态页面.png" alt=""></p>
+<li><p>访问状态页面方式：<a target="_blank" rel="noopener" href="http://服务器IP/status">http://服务器IP/status</a></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="状态页面.png" alt=""></p>
 </li>
 <li><p>状态页面信息详解，如下表：</p>
 </li>
@@ -1214,356 +440,46 @@ server_name NAME1 [NAME2...];     ##后面可以跟多个主机，名称可以�
 </blockquote>
 </li>
 <li><p>nginx通过upstream模块来实现简单的负载均衡，<strong>upstream</strong>需要定义在<strong>http段</strong>内，访问<strong>静态资源</strong>在location \ {}段中；访问<strong>动态资源</strong>在location ~ /(.*.php) {} 中或者其他定义动态location中，如：</p>
-<pre><code class="lang-shell">http {
-    upstream NAME {            ##NAME，集群名字，必须与location中的NAME保持一致
-        server 192.168.91.129:80;
-        server 192.168.91.130:80;
-    }
-    server {
-        listen       80;
-        server_name  www.baibai.com;
-        location / {        ##动态资源访问location ~ /(.*\.php) { 段中
-            root   html;
-               index  index.html index.htm;
-               proxy_pass   http://NAME;        ##与upstream中保持一致
-        }
-    }
-}
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    upstream NAME &#123;			##NAME，集群名字，必须与location中的NAME保持一致</span><br><span class="line">        server 192.168.91.129:80;</span><br><span class="line">        server 192.168.91.130:80;</span><br><span class="line">    &#125;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  www.baibai.com;</span><br><span class="line">	    location / &#123;		##动态资源访问location ~ /(.*\.php) &#123; 段中</span><br><span class="line">            root   html;</span><br><span class="line">           	index  index.html index.htm;</span><br><span class="line">           	proxy_pass   http://NAME;		##与upstream中保持一致</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在upstream段内，定义一个服务器列表，默认的方式是轮询，如果要确定<strong>同一个访问者</strong>发出的请求总是<strong>由同一个后端服务器来处理</strong>，可以设置<strong>ip_hash</strong>，如：</p>
-<pre><code class="lang-shell">upstream NAME {
-     ip_hash;
-     server 192.168.91.129:80 weight=5;
-    server 192.168.91.130:80 weight=5;
-}
-
-注：upstream用于http{}段
-注：设置weight的值会将服务器的处理量增加，表示192.168.91.129被访问5次将后再将其他访问请求交给192.168.91.130
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">upstream NAME &#123;</span><br><span class="line"> 	ip_hash;</span><br><span class="line"> 	server 192.168.91.129:80 weight=5;</span><br><span class="line">	server 192.168.91.130:80 weight=5;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">注：upstream用于http&#123;&#125;段</span><br><span class="line">注：设置weight的值会将服务器的处理量增加，表示192.168.91.129被访问5次将后再将其他访问请求交给192.168.91.130</span><br></pre></td></tr></table></figure>
 <p>注意：这个方法本质还是<strong>轮询</strong>，而且由于客户端的IP地址可能是不断变化的，比如动态IP，翻墙等，因此ip_hash并不能完全保证同一个客户端总是由同一个服务器来处理。</p>
 </li>
 </ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ligo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://hexo.lggg.xyz/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/">https://hexo.lggg.xyz/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nginx/">Nginx</a></div><div class="post_share"><div class="social-share" data-image="/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/nginx.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/02/09/MyBatisPlus/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/2021/02/09/MyBatisPlus/MybatisPlus.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">MyBatisPlus</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81MzQzNS8yOTkwOQ=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx"><span class="toc-number">1.</span> <span class="toc-text">Nginx</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A5%E9%97%A8"><span class="toc-number">1.1.</span> <span class="toc-text">入门</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNginx"><span class="toc-number">1.1.1.</span> <span class="toc-text">什么是Nginx?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx%E4%BD%9C%E7%94%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">Nginx作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Http%E4%BB%A3%E7%90%86"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Http代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">动静分离</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx-conf%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.2.1.</span> <span class="toc-text">nginx.conf配置文件详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E4%BA%8E%E8%B0%83%E8%AF%95%E3%80%81%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">用于调试、定位问题的配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%B8%B8%E8%BF%90%E8%A1%8C%E5%BF%85%E5%A4%87%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.3.</span> <span class="toc-text">正常运行必备的配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E6%80%A7%E8%83%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.4.</span> <span class="toc-text">优化性能的配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.5.</span> <span class="toc-text">事件相关配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fastcgi%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.6.</span> <span class="toc-text">Fastcgi相关配置参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E9%9C%80%E8%A6%81%E8%B0%83%E6%95%B4%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">1.2.7.</span> <span class="toc-text">常需要调整的参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx%E4%BD%9C%E4%B8%BAweb%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%97%B6%E4%BD%BF%E7%94%A8%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.8.</span> <span class="toc-text">nginx作为web服务器时使用的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="toc-number">1.2.9.</span> <span class="toc-text">访问控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E7%8A%B6%E6%80%81%E7%95%8C%E9%9D%A2"><span class="toc-number">1.2.10.</span> <span class="toc-text">开启状态界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">1.2.11.</span> <span class="toc-text">反向代理与负载均衡</span></a></li></ol></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/nginx.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ligo</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
 
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
-    </div>
-</article>
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
 
-
-<p>
-    <a  class="dashang" onclick="dashangToggle()">💰</a>
-</p>
-
-
-
-
-    <div id="comments">
-    <!-- 来必力City版安装代码 -->
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzQzNS8yOTkwOQ==">
-        <script type="text/javascript">
-			(function(d, s) {
-				var j, e = d.getElementsByTagName(s)[0];
-
-				if (typeof LivereTower === 'function') { return; }
-
-				j = d.createElement(s);
-				window.livereOptions = {
-					eagerLoading: true,
-					scrollEventTargetSelector: '#post'
-                }
-				j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-				j.async = true;
-				e.parentNode.insertBefore(j, e);
-			})(document, 'script');
-        </script>
-        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-    </div>
-    <!-- City版安装代码已完成 -->
-</div>
-
-
-
-
-    
-
-
-
-
-    </div>
-    <div class="copyright">
-        <p class="footer-entry">
-    OvO
-</p>
-<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
-
-    </div>
-    <div class="full-toc">
-        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
-<a class="" id="rocket" ></a>
-
-    </div>
-</div>
-
-<div class="hide_box" onclick="dashangToggle()"></div>
-<div class="shang_box">
-    <a class="shang_close"  onclick="dashangToggle()">×</a>
-    <div class="shang_tit">
-        <p>Help us with donation</p>
-    </div>
-    <div class="shang_payimg">
-        <div class="pay_img">
-            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
-            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
-        </div>
-    </div>
-    <div class="shang_payselect">
-        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
-    </div>
-</div>
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
-
-<script src="/js/script.js?v=1.1.0" ></script>
-<script>
-    var img_resize = 'default';
-    function initArticle() {
-        /*渲染对应的表格样式*/
-        
-            $("#post .pjax table").addClass("green_title");
-        
-
-        /*渲染打赏样式*/
-        
-        $("input[name=pay]").on("click", function () {
-            if($("input[name=pay]:checked").val()=="weixin"){
-                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
-            } else {
-                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
-            }
-        })
-        
-
-        /*高亮代码块行号*/
-        
-        $('pre code').each(function(){
-            var lines = $(this).text().trim().split('\n').length, widther='';
-            if (lines>99) {
-                widther = 'widther'
-            }
-            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
-            $(this).addClass('has-numbering ' + widther)
-                    .parent()
-                    .append($numbering);
-            for(var i=1;i<=lines;i++){
-                $numbering.append($('<li/>').text(i));
-            }
-        });
-        
-
-        /*访问数量*/
-        
-        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
-        
-
-        /*代码高亮，行号对齐*/
-        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
-
-        
-        
-        /* 渲染*/
-        function HTMLDecode(text) {
-            var temp = document.createElement("div");
-            temp.innerHTML = text;
-            var output = temp.innerText || temp.textContent;
-            temp = null;
-            return output;
-        }
-        if (window.mermaid){
-            window.mermaid = null
-        }
-        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
-            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
-            if (window.mermaid) {
-                mermaid.initialize(mermaidOptions)
-                mermaid.contentLoaded()
-            }
-        })
-        
-    }
-
-    /*打赏页面隐藏与展示*/
-    
-    function dashangToggle() {
-        $(".shang_box").fadeToggle();
-        $(".hide_box").fadeToggle();
-    }
-    
-
-</script>
-
-<!--加入行号的高亮代码块样式-->
-
-<style>
-    pre{
-        position: relative;
-        margin-bottom: 24px;
-        border-radius: 10px;
-        border: 1px solid #e2dede;
-        background: #FFF;
-        overflow: hidden;
-    }
-    code.has-numbering{
-        margin-left: 30px;
-    }
-    code.has-numbering.widther{
-        margin-left: 35px;
-    }
-    .pre-numbering{
-        margin: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        padding: 0.5em 3px 0.7em 5px;
-        border-right: 1px solid #C3CCD0;
-        text-align: right;
-        color: #AAA;
-        background-color: ;
-    }
-    .pre-numbering.widther {
-        width: 35px;
-    }
-</style>
-
-<!--自定义样式设置-->
-<style>
-    
-    
-    .nav {
-        width: 582px;
-    }
-    .nav.fullscreen {
-        margin-left: -582px;
-    }
-    .nav-left {
-        width: 160px;
-    }
-    
-    
-    @media screen and (max-width: 1468px) {
-        .nav {
-            width: 492px;
-        }
-        .nav.fullscreen {
-            margin-left: -492px;
-        }
-        .nav-left {
-            width: 100px;
-        }
-    }
-    
-    
-    @media screen and (max-width: 1024px) {
-        .nav {
-            width: 492px;
-            margin-left: -492px
-        }
-        .nav.fullscreen {
-            margin-left: 0;
-        }
-    }
-    
-    @media screen and (max-width: 426px) {
-        .nav {
-            width: 100%;
-        }
-        .nav-left {
-            width: 100%;
-        }
-    }
-    
-    
-    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
-        color: #383636;
-    }
-    
-    
-    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
-        color: #5e5e5f;
-    }
-    
-    
-    .nav-right nav a.hover, #local-search-result a.hover{
-        background-color: #e2e0e0;
-    }
-    
-    
-
-    /*列表样式*/
-    
-    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
-        border: #e2dede solid 1px;
-        border-radius: 10px;
-        padding: 10px 32px 10px 56px;
-    }
-    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
-        margin-bottom: auto;
-        margin-left: auto;
-    }
-    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
-        margin-bottom: auto;
-        margin-left: auto;
-    }
-    
-
-    /* 背景图样式 */
-    
-    #post {
-        background: url(/img/bg.jpeg);
-    }
-    
-    
-
-
-    /*引用块样式*/
-    
-
-    /*文章列表背景图*/
-    
-    .nav-right:before {
-        content: ' ';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.3;
-        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
-        background-repeat: no-repeat;
-        background-position: 50% 0;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        -moz-background-size: cover;
-        -webkit-background-size: cover;
-        background-size: cover;
-    }
-    
-
-    
-</style>
-
-
-
-
-
-
-
-</html>
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

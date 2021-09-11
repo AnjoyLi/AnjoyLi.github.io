@@ -1,833 +1,160 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="baidu-site-verification" content="code-zGBzPMbWmn" />
-  <meta name="msvalidate.01" content="D15BE26CC15ACB96EBF8B49B6965B030" />
-  <meta charset="utf-8">
-  <title>静态/动态代理 | Hexo</title>
-  <meta name="keywords" content=" Spring ">
-  <meta name="description" content="静态/动态代理 | Hexo">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="ec641b5e93087699359cf5258cc417e0">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://lgnbovo.github.io/baidu_verify_code-zGBzPMbWmn.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ec641b5e93087699359cf5258cc417e0">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-10T02:06:19.225Z">
-<meta property="article:modified_time" content="2021-03-10T02:06:01.210Z">
-<meta property="article:author" content="lggg">
+<!DOCTYPE html><html lang="zh" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>静态/动态代理 | ÃZoroのBlog</title><meta name="keywords" content="Spring"><meta name="author" content="Ligo"><meta name="copyright" content="Ligo"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="代理模式AOP的底层机制就是动态代理！ 代理模式：  静态代理 动态代理  学习aop之前 ,先了解一下代理模式！  静态代理静态代理角色分析  抽象角色 : 一般使用接口或者抽象类来实现  真实角色 : 被代理的角色  代理角色 : 代理真实角色 ; 代理真实角色后 , 一般会做一些附属的操作 .  客户  :  使用代理角色来进行一些操作 .   代码实现 Rent . java 即抽象角色">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态&#x2F;动态代理">
+<meta property="og:url" content="https://hexo.lggg.xyz/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:site_name" content="ÃZoroのBlog">
+<meta property="og:description" content="代理模式AOP的底层机制就是动态代理！ 代理模式：  静态代理 动态代理  学习aop之前 ,先了解一下代理模式！  静态代理静态代理角色分析  抽象角色 : 一般使用接口或者抽象类来实现  真实角色 : 被代理的角色  代理角色 : 代理真实角色 ; 代理真实角色后 , 一般会做一些附属的操作 .  客户  :  使用代理角色来进行一些操作 .   代码实现 Rent . java 即抽象角色">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2020-08-18T13:06:05.000Z">
+<meta property="article:modified_time" content="2020-08-18T13:43:25.700Z">
+<meta property="article:author" content="Ligo">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
-
-
-<link rel="icon" href="/img/avatar.jpg">
-
-<link href="/css/style.css?v=1.1.0" rel="stylesheet">
-
-<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
-
-<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
-
-<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="/js/titleTip.js?v=1.1.0" ></script>
-
-<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
-<script>
-    hljs.initHighlightingOnLoad();
-</script>
-
-<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
-
-
-
-<script src="/js/iconfont.js?v=1.1.0" ></script>
-
-<meta name="generator" content="Hexo 4.2.1"></head>
-<div style="display: none">
-  <input class="theme_disqus_on" value="false">
-  <input class="theme_preload_comment" value="">
-  <input class="theme_blog_path" value="">
-  <input id="theme_shortcut" value="true" />
-</div>
-
-
-<body>
-<aside class="nav">
-    <div class="nav-left">
-        <a href="/" class="avatar_target">
-    <img class="avatar" src="/img/avatar.jpg" />
-</a>
-<div class="author">
-    <span>lggg</span>
-</div>
-
-<div class="icon">
-    
-        
-        <a title="github" href="https://github.com/lgnbOVO" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-github"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="csdn" href="https://blog.csdn.net/weixin_43871885" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-csdn"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="email" href="mailto:1589631311@qq.com" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-email"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1589631311&site=qq&menu=yes" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-qq"></use>
-                </svg>
-            
-        </a>
-        
-    
-        
-        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=504459049" target="_blank">
-            
-                <svg class="iconfont-svg" aria-hidden="true">
-                    <use xlink:href="#icon-neteasemusic"></use>
-                </svg>
-            
-        </a>
-        
-    
-</div>
-
-
-
-
-<ul>
-    <li><div class="all active" data-rel="All">All<small>(40)</small></div></li>
-    
-        
-            
-            <li><div data-rel="SSM框架"><i class="fold iconfont icon-right"></i>SSM框架<small>(22)</small></div>
-                
-                    <ul class="sub hide">
-                        
-                        <li><div data-rel="SSM框架<--->Mybatis">Mybatis<small>(7)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="SSM框架<--->Spring">Spring<small>(9)</small></div>
-                            
-                        </li>
-                            
-                        <li><div data-rel="SSM框架<--->SpringMVC">SpringMVC<small>(6)</small></div>
-                            
-                        </li>
-                            
-                    </ul>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="面向对象">面向对象<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="算法">算法<small>(5)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="数据结构">数据结构<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="题目">题目<small>(3)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="数论">数论<small>(3)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-        
-    
-        
-            
-        
-    
-        
-            
-        
-    
-        
-            
-            <li><div data-rel="开发工具">开发工具<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="开发技能">开发技能<small>(2)</small></div>
-                
-            </li>
-            
-        
-    
-        
-            
-            <li><div data-rel="数据库">数据库<small>(1)</small></div>
-                
-            </li>
-            
-        
-    
-</ul>
-<div class="left-bottom">
-    <div class="menus">
-    
-    
-    
-    
-    </div>
-    <div></div>
-</div>
-<input type="hidden" id="yelog_site_posts_number" value="40">
-<input type="hidden" id="yelog_site_word_count" value="70.9k">
-<div style="display: none">
-    <span id="busuanzi_value_site_uv"></span>
-    <span id="busuanzi_value_site_pv"></span>
-</div>
-
-    </div>
-    <div class="nav-right">
-        <div class="friends-area">
-    <div class="friends-title">
-        Links
-        <i class="iconfont icon-left"></i>
-    </div>
-    <div class="friends-content">
-        <ul>
-            
-        </ul>
-    </div>
-</div>
-        <div class="title-list">
-    <div class="right-top">
-        <div id="default-panel">
-            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
-            <div class="right-title">All</div>
-            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
-        </div>
-        <div id="search-panel">
-            <i class="iconfont icon-left" data-title="返回"></i>
-            <input id="local-search-input" />
-            <label class="border-line" for="input"></label>
-            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
-            <i class="iconfont icon-tag" data-title="标签"></i>
-        </div>
-        <div id="outline-panel" style="display: none">
-            <div class="right-title">大纲</div>
-            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
-        </div>
-    </div>
-
-    <div class="tags-list">
-    <input id="tag-search" />
-    <div class="tag-wrapper">
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>BF与SPFA</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>c++面向对象</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>dijistar</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Linux</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Mybatis</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>MyBatisPlus</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Mysql</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Neo4j</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Nginx</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>oj作业</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Sp			ringMVC</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>Spring</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>SpringMVC</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>三分</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>关系数据库</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>动态规划</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>区间dp</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>博弈论</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>图论</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>基础命令</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>寒假训练</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>平衡二叉树</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>扩展欧几里得</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>文件读取</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>斐波那契</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>树</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>费马小定理</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>逆元</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>链表</a>
-            </li>
-        
-            <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>非关系数据库</a>
-            </li>
-        
-    </div>
-
-</div>
-
-    
-    <nav id="title-list-nav">
-        
-        <a  class="All 开发技能 "
-           href="/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/"
-           data-tag="Nginx"
-           data-author="" >
-            <span class="post-title" title="Nginx入门及配置">Nginx入门及配置</span>
-            <span class="post-date" title="2021-02-17 17:10:32">2021/02/17</span>
-        </a>
-        
-        <a  class="All 开发工具 "
-           href="/2021/02/09/MyBatisPlus/"
-           data-tag="MyBatisPlus"
-           data-author="" >
-            <span class="post-title" title="MyBatisPlus">MyBatisPlus</span>
-            <span class="post-date" title="2021-02-09 22:35:39">2021/02/09</span>
-        </a>
-        
-        <a  class="All 开发技能 "
-           href="/2021/01/17/Linux%E5%91%BD%E4%BB%A4/"
-           data-tag="Linux,基础命令"
-           data-author="" >
-            <span class="post-title" title="Linux命令">Linux命令</span>
-            <span class="post-date" title="2021-01-17 21:43:58">2021/01/17</span>
-        </a>
-        
-        <a  class="All 数据库 "
-           href="/2020/12/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%BB%E7%BB%93/"
-           data-tag="关系数据库,非关系数据库,Mysql,Neo4j"
-           data-author="" >
-            <span class="post-title" title="数据库总结">数据库总结</span>
-            <span class="post-date" title="2020-12-10 19:53:40">2020/12/10</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/09/02/%E6%95%B4%E5%90%88SSM%E6%A1%86%E6%9E%B6/"
-           data-tag="Sp			ringMVC"
-           data-author="" >
-            <span class="post-title" title="整合SSM框架">整合SSM框架</span>
-            <span class="post-date" title="2020-09-02 20:42:46">2020/09/02</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/28/Json%E4%BA%A4%E4%BA%92%E5%A4%84%E7%90%86/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="Json交互处理">Json交互处理</span>
-            <span class="post-date" title="2020-08-28 17:57:44">2020/08/28</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/28/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%8F%8A%E8%B7%B3%E8%BD%AC/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="数据处理及跳转">数据处理及跳转</span>
-            <span class="post-date" title="2020-08-28 17:36:38">2020/08/28</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/27/RestFul%E5%92%8C%E6%8E%A7%E5%88%B6%E5%99%A8/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="RestFul和控制器">RestFul和控制器</span>
-            <span class="post-date" title="2020-08-27 22:42:03">2020/08/27</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/25/%E7%AC%AC%E4%B8%80%E4%B8%AAMVC%E7%A8%8B%E5%BA%8F/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="第一个MVC程序">第一个MVC程序</span>
-            <span class="post-date" title="2020-08-25 17:39:22">2020/08/25</span>
-        </a>
-        
-        <a  class="All SSM框架 SpringMVC "
-           href="/2020/08/23/%E4%BB%80%E4%B9%88%E6%98%AFSpringMVC/"
-           data-tag="SpringMVC"
-           data-author="" >
-            <span class="post-title" title="什么是SpringMVC">什么是SpringMVC</span>
-            <span class="post-date" title="2020-08-23 17:23:35">2020/08/23</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/21/%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="声明式事务">声明式事务</span>
-            <span class="post-date" title="2020-08-21 21:18:00">2020/08/21</span>
-        </a>
-        
-        <a  class="All 题目 "
-           href="/2020/08/20/B%E5%90%9B%E7%9A%84%E6%B8%B8%E6%88%8F/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="B君的游戏">B君的游戏</span>
-            <span class="post-date" title="2020-08-20 23:06:17">2020/08/20</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/20/%E6%95%B4%E5%90%88Mybatis/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="整合Mybatis">整合Mybatis</span>
-            <span class="post-date" title="2020-08-20 18:45:37">2020/08/20</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/19/AOP/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="AOP">AOP</span>
-            <span class="post-date" title="2020-08-19 22:17:41">2020/08/19</span>
-        </a>
-        
-        <a  class="All 题目 "
-           href="/2020/08/18/Nim%E6%B8%B8%E6%88%8F/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="Nim游戏">Nim游戏</span>
-            <span class="post-date" title="2020-08-18 22:39:45">2020/08/18</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="静态/动态代理">静态/动态代理</span>
-            <span class="post-date" title="2020-08-18 21:06:05">2020/08/18</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/17/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Spring/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="使用注解开发Spring">使用注解开发Spring</span>
-            <span class="post-date" title="2020-08-17 18:26:22">2020/08/17</span>
-        </a>
-        
-        <a  class="All 数论 "
-           href="/2020/08/16/%E5%8D%9A%E5%BC%88%E8%AE%BA/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="博弈论">博弈论</span>
-            <span class="post-date" title="2020-08-16 23:18:15">2020/08/16</span>
-        </a>
-        
-        <a  class="All 题目 "
-           href="/2020/08/16/Bash%E6%B8%B8%E6%88%8F/"
-           data-tag="博弈论"
-           data-author="" >
-            <span class="post-title" title="Bash游戏">Bash游戏</span>
-            <span class="post-date" title="2020-08-16 23:07:21">2020/08/16</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/16/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="自动装配">自动装配</span>
-            <span class="post-date" title="2020-08-16 17:44:00">2020/08/16</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/15/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%88DI%EF%BC%89/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="依赖注入（DI）">依赖注入（DI）</span>
-            <span class="post-date" title="2020-08-15 17:41:44">2020/08/15</span>
-        </a>
-        
-        <a  class="All 数论 "
-           href="/2020/08/14/%E9%80%86%E5%85%83/"
-           data-tag="扩展欧几里得,逆元,费马小定理"
-           data-author="" >
-            <span class="post-title" title="逆元">逆元</span>
-            <span class="post-date" title="2020-08-14 21:04:18">2020/08/14</span>
-        </a>
-        
-        <a  class="All 数论 "
-           href="/2020/08/13/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91/"
-           data-tag="斐波那契"
-           data-author="" >
-            <span class="post-title" title="斐波那契">斐波那契</span>
-            <span class="post-date" title="2020-08-13 17:35:36">2020/08/13</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/12/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BSpring/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="快速上手Spring">快速上手Spring</span>
-            <span class="post-date" title="2020-08-12 21:26:34">2020/08/12</span>
-        </a>
-        
-        <a  class="All SSM框架 Spring "
-           href="/2020/08/11/%E6%A6%82%E8%BF%B0%E5%8F%8AIOC%E7%90%86%E8%AE%BA%E6%8E%A8%E5%AF%BC/"
-           data-tag="Spring"
-           data-author="" >
-            <span class="post-title" title="概述及IOC理论推导">概述及IOC理论推导</span>
-            <span class="post-date" title="2020-08-11 22:41:10">2020/08/11</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/08/%E7%BC%93%E5%AD%98/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="缓存">缓存</span>
-            <span class="post-date" title="2020-08-08 23:08:25">2020/08/08</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/06/%E5%8A%A8%E6%80%81SQL/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="动态SQL">动态SQL</span>
-            <span class="post-date" title="2020-08-06 19:10:57">2020/08/06</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/04/%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%92%8C%E5%A4%9A%E5%AF%B9%E4%B8%80%E7%9A%84%E5%A4%84%E7%90%86/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="一对多和多对一的处理">一对多和多对一的处理</span>
-            <span class="post-date" title="2020-08-04 23:44:27">2020/08/04</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/08/03/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Mybatis/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="使用注解开发Myabatis">使用注解开发Myabatis</span>
-            <span class="post-date" title="2020-08-03 18:01:48">2020/08/03</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/07/30/ResultMap%E5%8F%8A%E5%88%86%E9%A1%B5/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="ResultMap及分页">ResultMap及分页</span>
-            <span class="post-date" title="2020-07-30 17:53:17">2020/07/30</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/07/28/CRUD%E6%93%8D%E4%BD%9C%E5%8F%8A%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="CRUD操作及配置解析">CRUD操作及配置解析</span>
-            <span class="post-date" title="2020-07-28 16:56:14">2020/07/28</span>
-        </a>
-        
-        <a  class="All SSM框架 Mybatis "
-           href="/2020/07/27/Mybatis/"
-           data-tag="Mybatis"
-           data-author="" >
-            <span class="post-title" title="MyBatis">MyBatis</span>
-            <span class="post-date" title="2020-07-27 17:34:47">2020/07/27</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/25/%E5%90%88%E5%B9%B6%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/"
-           data-tag="动态规划,区间dp"
-           data-author="" >
-            <span class="post-title" title="合并回文子串">合并回文子串</span>
-            <span class="post-date" title="2020-06-25 18:39:00">2020/06/25</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/12/Bellman-Ford%E4%B8%8ESPFA/"
-           data-tag="图论,BF与SPFA"
-           data-author="" >
-            <span class="post-title" title="Bellman-Ford与SPFA">Bellman-Ford与SPFA</span>
-            <span class="post-date" title="2020-06-12 14:25:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 面向对象 "
-           href="/2020/06/12/c++%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/"
-           data-tag="链表,文件读取,c++面向对象"
-           data-author="" >
-            <span class="post-title" title="学生信息管理系统">学生信息管理系统</span>
-            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%A0%91%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"
-           data-tag="树,平衡二叉树"
-           data-author="" >
-            <span class="post-title" title="平衡二叉树的基本操作">平衡二叉树的基本操作</span>
-            <span class="post-date" title="2020-06-12 14:16:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 数据结构 "
-           href="/2020/06/12/%E7%9B%AE%E5%BD%95%E6%A0%91/"
-           data-tag="树,oj作业"
-           data-author="" >
-            <span class="post-title" title="目录树">目录树</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/12/%E7%AE%97%E6%A6%82%E7%8E%87/"
-           data-tag="寒假训练,动态规划"
-           data-author="" >
-            <span class="post-title" title="算概率">算概率</span>
-            <span class="post-date" title="2020-06-12 14:08:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/12/dijstra/"
-           data-tag="图论,dijistar"
-           data-author="" >
-            <span class="post-title" title="dijistar">dijistar</span>
-            <span class="post-date" title="2020-06-12 12:58:42">2020/06/12</span>
-        </a>
-        
-        <a  class="All 算法 "
-           href="/2020/06/11/%E4%B8%89%E5%88%86/"
-           data-tag="三分,寒假训练"
-           data-author="" >
-            <span class="post-title" title="三分">三分</span>
-            <span class="post-date" title="2020-06-11 16:44:50">2020/06/11</span>
-        </a>
-        
-        <div id="no-item-tips">
-
-        </div>
-    </nav>
-    <div id="outline-list">
-    </div>
-</div>
-    </div>
-    <div class="hide-list">
-        <div class="semicircle" data-title="切换全屏 快捷键 s">
-            <div class="brackets first"><</div>
-            <div class="brackets">&gt;</div>
-        </div>
-    </div>
-</aside>
-<div id="post">
-    <div class="pjax">
-        <article id="post-静态-动态代理" class="article article-type-post" itemscope itemprop="blogPost">
-    
-        <h1 class="article-title">静态/动态代理</h1>
-    
-    <div class="article-meta">
-        
-        
-        
-        <span class="book">
-            <i class="iconfont icon-category"></i>
-            
-            
-            <a  data-rel="SSM框架">SSM框架</a> > 
-            
-            <a  data-rel="SSM框架&lt;---&gt;Spring">Spring</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            <i class="iconfont icon-tag"></i>
-            
-            <a class="color2">Spring</a>
-            
-        </span>
-        
-    </div>
-    <div class="article-meta">
-        
-            Created At : <time class="date" title='Updated At: 2020-08-18 21:43:25'>2020-08-18 21:06</time>
-        
-    </div>
-    <div class="article-meta">
-        
-        <span>Count:2k</span>
-        
-        
-        <span id="busuanzi_container_page_pv">
-            Views 👀 :<span id="busuanzi_value_page_pv">
-                <span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </span>
-        </span>
-        
-        
-        <span class="top-comment" title="跳转至评论区">
-            <a href="#comments">
-                Comment:<span class="count-comment">
-                    <span class="spinner">
-                      <div class="cube1"></div>
-                      <div class="cube2"></div>
-                    </span>
-                </span>
-            </a>
-        </span>
-        
-    </div>
-    
-    <div class="toc-ref">
-    
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#代理模式"><span class="toc-text">代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#静态代理"><span class="toc-text">静态代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#静态代理再理解"><span class="toc-text">静态代理再理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理"><span class="toc-text">动态代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#深化理解"><span class="toc-text">深化理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态代理的好处"><span class="toc-text">动态代理的好处</span></a></li></ol></li></ol>
-    
-<style>
-    .left-col .switch-btn,
-    .left-col .switch-area {
-        display: none;
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://hexo.lggg.xyz/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/img/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/img/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/pwa/16.png"/><link rel="mask-icon" href="/img/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Ligo","link":"Link: ","source":"Source: ÃZoroのBlog","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
     }
-    .toc-level-5 i,
-    .toc-level-5 ol {
-        display: none !important;
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '静态/动态代理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-08-18 21:43:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
     }
-</style>
-</div>
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>AOP的底层机制就是动态代理！</p>
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">40</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">30</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">12</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ÃZoroのBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">静态/动态代理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-08-18T13:06:05.000Z" title="Created 2020-08-18 21:06:05">2020-08-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-08-18T13:43:25.700Z" title="Updated 2020-08-18 21:43:25">2020-08-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/SSM%E6%A1%86%E6%9E%B6/">SSM框架</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/SSM%E6%A1%86%E6%9E%B6/Spring/">Spring</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>7min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="静态/动态代理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><p>AOP的底层机制就是动态代理！</p>
 <p>代理模式：</p>
 <ul>
 <li>静态代理</li>
 <li>动态代理</li>
 </ul>
 <p>学习aop之前 ,先了解一下代理模式！</p>
-<p><img src="代理模式.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="代理模式.png" alt=""></p>
 <h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><p><strong>静态代理角色分析</strong></p>
 <ul>
 <li><p>抽象角色 : 一般使用接口或者抽象类来实现</p>
@@ -841,59 +168,13 @@
 </ul>
 <p><strong>代码实现</strong></p>
 <p>Rent . java 即抽象角色</p>
-<pre><code class="lang-java">//抽象角色：租房
-public interface Rent {
-   public void rent();
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象角色：租房</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Host . java 即真实角色</p>
-<pre><code class="lang-java">//真实角色: 房东，房东要出租房子
-public class Host implements Rent{
-   public void rent() {
-       System.out.println(&quot;房屋出租&quot;);
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//真实角色: 房东，房东要出租房子</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Host</span> <span class="keyword">implements</span> <span class="title">Rent</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;房屋出租&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Proxy . java 即代理角色</p>
-<pre><code class="lang-java">//代理角色：中介
-public class Proxy implements Rent {
-
-   private Host host;
-   public Proxy() { }
-   public Proxy(Host host) {
-       this.host = host;
-  }
-
-   //租房
-   public void rent(){
-       seeHouse();
-       host.rent();
-       fare();
-  }
-   //看房
-   public void seeHouse(){
-       System.out.println(&quot;带房客看房&quot;);
-  }
-   //收中介费
-   public void fare(){
-       System.out.println(&quot;收中介费&quot;);
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代理角色：中介</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> Host host;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(Host host)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.host = host;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//租房</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span></span>&#123;</span><br><span class="line">       seeHouse();</span><br><span class="line">       host.rent();</span><br><span class="line">       fare();</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="comment">//看房</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seeHouse</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;带房客看房&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="comment">//收中介费</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fare</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;收中介费&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Client . java 即客户</p>
-<pre><code class="lang-java">//客户类，一般客户都会去找代理！
-public class Client {
-   public static void main(String[] args) {
-       //房东要租房
-       Host host = new Host();
-       //中介帮助房东
-       Proxy proxy = new Proxy(host);
-
-       //你去找中介！
-       proxy.rent();
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//客户类，一般客户都会去找代理！</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//房东要租房</span></span><br><span class="line">       Host host = <span class="keyword">new</span> Host();</span><br><span class="line">       <span class="comment">//中介帮助房东</span></span><br><span class="line">       Proxy proxy = <span class="keyword">new</span> Proxy(host);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//你去找中介！</span></span><br><span class="line">       proxy.rent();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>分析：在这个过程中，你直接接触的就是中介，就如同现实生活中的样子，你看不到房东，但是你依旧租到了房东的房子通过代理，这就是所谓的代理模式，程序源自于生活，所以学编程的人，一般能够更加抽象的看待生活中发生的事情。</p>
 <p><strong>静态代理的好处:</strong></p>
 <ul>
@@ -908,93 +189,22 @@ public class Client {
 <p>想要静态代理的好处，又不想要静态代理的缺点，所以 , 就有了动态代理 !</p>
 <h2 id="静态代理再理解"><a href="#静态代理再理解" class="headerlink" title="静态代理再理解"></a>静态代理再理解</h2><p>步骤：</p>
 <p>1、创建一个抽象角色，比如咋们平时做的用户业务，抽象起来就是增删改查！</p>
-<pre><code class="lang-java">//抽象角色：增删改查业务
-public interface UserService {
-   void add();
-   void delete();
-   void update();
-   void query();
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象角色：增删改查业务</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">query</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>2、我们需要一个真实对象来完成这些增删改查操作</p>
-<pre><code class="lang-java">//真实对象，完成增删改查操作的人
-public class UserServiceImpl implements UserService {
-
-   public void add() {
-       System.out.println(&quot;增加了一个用户&quot;);
-  }
-
-   public void delete() {
-       System.out.println(&quot;删除了一个用户&quot;);
-  }
-
-   public void update() {
-       System.out.println(&quot;更新了一个用户&quot;);
-  }
-
-   public void query() {
-       System.out.println(&quot;查询了一个用户&quot;);
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//真实对象，完成增删改查操作的人</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;增加了一个用户&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;删除了一个用户&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;更新了一个用户&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;查询了一个用户&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>3、需求来了，现在我们需要增加一个日志功能，怎么实现！</p>
 <ul>
 <li>思路1 ：在实现类上增加代码 【麻烦！】</li>
 <li>思路2：使用代理来做，能够不改变原来的业务情况下，实现此功能就是最好的了！</li>
 </ul>
 <p>4、设置一个代理类来处理日志！代理角色</p>
-<pre><code class="lang-java">//代理角色，在这里面增加日志的实现
-public class UserServiceProxy implements UserService {
-   private UserServiceImpl userService;
-
-   public void setUserService(UserServiceImpl userService) {
-       this.userService = userService;
-  }
-
-   public void add() {
-       log(&quot;add&quot;);
-       userService.add();
-  }
-
-   public void delete() {
-       log(&quot;delete&quot;);
-       userService.delete();
-  }
-
-   public void update() {
-       log(&quot;update&quot;);
-       userService.update();
-  }
-
-   public void query() {
-       log(&quot;query&quot;);
-       userService.query();
-  }
-
-   public void log(String msg){
-       System.out.println(&quot;执行了&quot;+msg+&quot;方法&quot;);
-  }
-
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//代理角色，在这里面增加日志的实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceProxy</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> UserServiceImpl userService;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserService</span><span class="params">(UserServiceImpl userService)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.userService = userService;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       log(<span class="string">&quot;add&quot;</span>);</span><br><span class="line">       userService.add();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       log(<span class="string">&quot;delete&quot;</span>);</span><br><span class="line">       userService.delete();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       log(<span class="string">&quot;update&quot;</span>);</span><br><span class="line">       userService.update();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">query</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       log(<span class="string">&quot;query&quot;</span>);</span><br><span class="line">       userService.query();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;执行了&quot;</span>+msg+<span class="string">&quot;方法&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5、测试访问类：</p>
-<pre><code class="lang-java">public class Client {
-   public static void main(String[] args) {
-       //真实业务
-       UserServiceImpl userService = new UserServiceImpl();
-       //代理类
-       UserServiceProxy proxy = new UserServiceProxy();
-       //使用代理类实现日志功能！
-       proxy.setUserService(userService);
-
-       proxy.add();
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//真实业务</span></span><br><span class="line">       UserServiceImpl userService = <span class="keyword">new</span> UserServiceImpl();</span><br><span class="line">       <span class="comment">//代理类</span></span><br><span class="line">       UserServiceProxy proxy = <span class="keyword">new</span> UserServiceProxy();</span><br><span class="line">       <span class="comment">//使用代理类实现日志功能！</span></span><br><span class="line">       proxy.setUserService(userService);</span><br><span class="line"></span><br><span class="line">       proxy.add();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <font color=blue>在不改变原来的代码的情况下，实现了对原有功能的增强，这是AOP中最核心的思想</font>
 
 <p>AOP：纵向开发，横向开发</p>
-<p><img src="Aop.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="Aop.png" alt=""></p>
 <h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><ul>
 <li><p>动态代理的角色和静态代理的一样 .</p>
 </li>
@@ -1013,134 +223,29 @@ public class UserServiceProxy implements UserService {
 <p><strong>JDK的动态代理需要了解两个类</strong></p>
 <p>核心 : InvocationHandler   和   Proxy  ， 打开JDK帮助文档看看</p>
 <p>【InvocationHandler：调用处理程序】</p>
-<p><img src="InvocationHandler.png" alt=""></p>
-<pre><code class="lang-java">Object invoke(Object proxy, 方法 method, Object[] args)；
-//参数
-//proxy - 调用该方法的代理实例
-//method -所述方法对应于调用代理实例上的接口方法的实例。方法对象的声明类将是该方法声明的接口，它可以是代理类继承该方法的代理接口的超级接口。
-//args -包含的方法调用传递代理实例的参数值的对象的阵列，或null如果接口方法没有参数。原始类型的参数包含在适当的原始包装器类的实例中，例如java.lang.Integer或java.lang.Boolean 。
-</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="InvocationHandler.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy, 方法 method, Object[] args)</span>；</span></span><br><span class="line"><span class="function"><span class="comment">//参数</span></span></span><br><span class="line"><span class="function"><span class="comment">//proxy - 调用该方法的代理实例</span></span></span><br><span class="line"><span class="function"><span class="comment">//method -所述方法对应于调用代理实例上的接口方法的实例。方法对象的声明类将是该方法声明的接口，它可以是代理类继承该方法的代理接口的超级接口。</span></span></span><br><span class="line"><span class="function"><span class="comment">//args -包含的方法调用传递代理实例的参数值的对象的阵列，或null如果接口方法没有参数。原始类型的参数包含在适当的原始包装器类的实例中，例如java.lang.Integer或java.lang.Boolean 。</span></span></span><br></pre></td></tr></table></figure>
 <p>【Proxy  : 代理】</p>
-<p><img src="Proxy.png" alt=""></p>
-<p><img src="Proxy2.png" alt=""></p>
-<p><img src="Proxy3.png" alt=""></p>
-<pre><code class="lang-java">//生成代理类
-public Object getProxy(){
-   return Proxy.newProxyInstance(this.getClass().getClassLoader(),
-                                 rent.getClass().getInterfaces(),this);
-}
-</code></pre>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="Proxy.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="Proxy2.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="Proxy3.png" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生成代理类</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),</span><br><span class="line">                                 rent.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>代码实现</strong> </p>
 <p>抽象角色和真实角色和之前的一样！</p>
 <p>Rent . java 即抽象角色</p>
-<pre><code class="lang-java">//抽象角色：租房
-public interface Rent {
-   public void rent();
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象角色：租房</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Rent</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Host . java 即真实角色</p>
-<pre><code class="lang-java">//真实角色: 房东，房东要出租房子
-public class Host implements Rent{
-   public void rent() {
-       System.out.println(&quot;房屋出租&quot;);
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//真实角色: 房东，房东要出租房子</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Host</span> <span class="keyword">implements</span> <span class="title">Rent</span></span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rent</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;房屋出租&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>ProxyInvocationHandler. java 即代理角色</p>
-<pre><code class="lang-java">public class ProxyInvocationHandler implements InvocationHandler {
-   private Rent rent;
-
-   public void setRent(Rent rent) {
-       this.rent = rent;
-  }
-
-   //生成代理类，重点是第二个参数，获取要代理的抽象角色！之前都是一个角色，现在可以代理一类角色
-   public Object getProxy(){
-       return Proxy.newProxyInstance(this.getClass().getClassLoader(),
-               rent.getClass().getInterfaces(),this);
-  }
-
-   // proxy : 代理类 method : 代理类的调用处理程序的方法对象.
-   // 处理代理实例上的方法调用并返回结果
-   @Override
-   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-       seeHouse();
-       //核心：本质利用反射实现！
-       Object result = method.invoke(rent, args);
-       fare();
-       return result;
-  }
-
-   //看房
-   public void seeHouse(){
-       System.out.println(&quot;带房客看房&quot;);
-  }
-   //收中介费
-   public void fare(){
-       System.out.println(&quot;收中介费&quot;);
-  }
-
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Rent rent;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRent</span><span class="params">(Rent rent)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.rent = rent;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//生成代理类，重点是第二个参数，获取要代理的抽象角色！之前都是一个角色，现在可以代理一类角色</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),</span><br><span class="line">               rent.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// proxy : 代理类 method : 代理类的调用处理程序的方法对象.</span></span><br><span class="line">   <span class="comment">// 处理代理实例上的方法调用并返回结果</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">       seeHouse();</span><br><span class="line">       <span class="comment">//核心：本质利用反射实现！</span></span><br><span class="line">       Object result = method.invoke(rent, args);</span><br><span class="line">       fare();</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//看房</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">seeHouse</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;带房客看房&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="comment">//收中介费</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">fare</span><span class="params">()</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;收中介费&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Client . java</p>
-<pre><code class="lang-java">//租客
-public class Client {
-
-   public static void main(String[] args) {
-       //真实角色
-       Host host = new Host();
-       //代理实例的调用处理程序
-       ProxyInvocationHandler pih = new ProxyInvocationHandler();
-       pih.setRent(host); //将真实角色放置进去！
-       Rent proxy = (Rent)pih.getProxy(); //动态生成对应的代理类！
-       proxy.rent();
-  }
-
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//租客</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//真实角色</span></span><br><span class="line">       Host host = <span class="keyword">new</span> Host();</span><br><span class="line">       <span class="comment">//代理实例的调用处理程序</span></span><br><span class="line">       ProxyInvocationHandler pih = <span class="keyword">new</span> ProxyInvocationHandler();</span><br><span class="line">       pih.setRent(host); <span class="comment">//将真实角色放置进去！</span></span><br><span class="line">       Rent proxy = (Rent)pih.getProxy(); <span class="comment">//动态生成对应的代理类！</span></span><br><span class="line">       proxy.rent();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>核心：<strong>一个动态代理 , 一般代理某一类业务 , 一个动态代理可以代理多个类，代理的是接口！</strong></p>
 <h2 id="深化理解"><a href="#深化理解" class="headerlink" title="深化理解"></a>深化理解</h2><p>使用动态代理实现代理我们后面写的UserService！</p>
 <p>也可以编写一个通用的动态代理实现的类！所有的代理对象设置为Object即可！</p>
-<pre><code class="lang-java">public class ProxyInvocationHandler implements InvocationHandler {
-   private Object target;
-
-   public void setTarget(Object target) {
-       this.target = target;
-  }
-
-   //生成代理类
-   public Object getProxy(){
-       return Proxy.newProxyInstance(this.getClass().getClassLoader(),
-               target.getClass().getInterfaces(),this);
-  }
-
-   // proxy : 代理类
-   // method : 代理类的调用处理程序的方法对象.
-   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-       log(method.getName());
-       Object result = method.invoke(target, args);
-       return result;
-  }
-
-   public void log(String methodName){
-       System.out.println(&quot;执行了&quot;+methodName+&quot;方法&quot;);
-  }
-
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProxyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> Object target;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTarget</span><span class="params">(Object target)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.target = target;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//生成代理类</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">getProxy</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> Proxy.newProxyInstance(<span class="keyword">this</span>.getClass().getClassLoader(),</span><br><span class="line">               target.getClass().getInterfaces(),<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// proxy : 代理类</span></span><br><span class="line">   <span class="comment">// method : 代理类的调用处理程序的方法对象.</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">       log(method.getName());</span><br><span class="line">       Object result = method.invoke(target, args);</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(String methodName)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="string">&quot;执行了&quot;</span>+methodName+<span class="string">&quot;方法&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>测试！</p>
-<pre><code class="lang-java">public class Test {
-   public static void main(String[] args) {
-       //真实对象
-       UserServiceImpl userService = new UserServiceImpl();
-       //代理对象的调用处理程序
-       ProxyInvocationHandler pih = new ProxyInvocationHandler();
-       pih.setTarget(userService); //设置要代理的对象
-       UserService proxy = (UserService)pih.getProxy(); //动态生成代理类！
-       proxy.delete();
-  }
-}
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//真实对象</span></span><br><span class="line">       UserServiceImpl userService = <span class="keyword">new</span> UserServiceImpl();</span><br><span class="line">       <span class="comment">//代理对象的调用处理程序</span></span><br><span class="line">       ProxyInvocationHandler pih = <span class="keyword">new</span> ProxyInvocationHandler();</span><br><span class="line">       pih.setTarget(userService); <span class="comment">//设置要代理的对象</span></span><br><span class="line">       UserService proxy = (UserService)pih.getProxy(); <span class="comment">//动态生成代理类！</span></span><br><span class="line">       proxy.delete();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>测试，增删改查，查看结果！</p>
 <h2 id="动态代理的好处"><a href="#动态代理的好处" class="headerlink" title="动态代理的好处"></a><font color=red>动态代理的好处</font></h2><p>静态代理有的它都有，静态代理没有的，它也有！</p>
 <ul>
@@ -1150,326 +255,39 @@ public class Client {
 <li>一个动态代理 , 一般代理某一类业务</li>
 <li>一个动态代理可以代理多个类，代理的是接口！</li>
 </ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Ligo</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://hexo.lggg.xyz/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/">https://hexo.lggg.xyz/2020/08/18/%E9%9D%99%E6%80%81-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spring/">Spring</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/08/18/Nim%E6%B8%B8%E6%88%8F/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Nim游戏</div></div></a></div><div class="next-post pull-right"><a href="/2020/08/17/%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91Spring/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">使用注解开发Spring</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2020/08/19/AOP/" title="AOP"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-19</div><div class="title">AOP</div></div></a></div><div><a href="/2020/08/17/使用注解开发Spring/" title="使用注解开发Spring"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-17</div><div class="title">使用注解开发Spring</div></div></a></div><div><a href="/2020/08/15/依赖注入（DI）/" title="依赖注入（DI）"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-15</div><div class="title">依赖注入（DI）</div></div></a></div><div><a href="/2020/08/21/声明式事务/" title="声明式事务"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-21</div><div class="title">声明式事务</div></div></a></div><div><a href="/2020/08/12/快速上手Spring/" title="快速上手Spring"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-12</div><div class="title">快速上手Spring</div></div></a></div><div><a href="/2020/08/20/整合Mybatis/" title="整合Mybatis"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-08-20</div><div class="title">整合Mybatis</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81MzQzNS8yOTkwOQ=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">代理模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">1.1.</span> <span class="toc-text">静态代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E4%BB%A3%E7%90%86%E5%86%8D%E7%90%86%E8%A7%A3"><span class="toc-number">1.2.</span> <span class="toc-text">静态代理再理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">动态代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B7%B1%E5%8C%96%E7%90%86%E8%A7%A3"><span class="toc-number">1.4.</span> <span class="toc-text">深化理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%9A%84%E5%A5%BD%E5%A4%84"><span class="toc-number">1.5.</span> <span class="toc-text">动态代理的好处</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Ligo</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
 
-      
-       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1589631311@qq.com </span>
-    </div>
-</article>
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
 
-
-<p>
-    <a  class="dashang" onclick="dashangToggle()">💰</a>
-</p>
-
-
-
-
-    <div id="comments">
-    <!-- 来必力City版安装代码 -->
-    <div id="lv-container" data-id="city" data-uid="MTAyMC81MzQzNS8yOTkwOQ==">
-        <script type="text/javascript">
-			(function(d, s) {
-				var j, e = d.getElementsByTagName(s)[0];
-
-				if (typeof LivereTower === 'function') { return; }
-
-				j = d.createElement(s);
-				window.livereOptions = {
-					eagerLoading: true,
-					scrollEventTargetSelector: '#post'
-                }
-				j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-				j.async = true;
-				e.parentNode.insertBefore(j, e);
-			})(document, 'script');
-        </script>
-        <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-    </div>
-    <!-- City版安装代码已完成 -->
-</div>
-
-
-
-
-    
-
-
-
-
-    </div>
-    <div class="copyright">
-        <p class="footer-entry">
-    OvO
-</p>
-<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
-
-    </div>
-    <div class="full-toc">
-        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
-<a class="" id="rocket" ></a>
-
-    </div>
-</div>
-
-<div class="hide_box" onclick="dashangToggle()"></div>
-<div class="shang_box">
-    <a class="shang_close"  onclick="dashangToggle()">×</a>
-    <div class="shang_tit">
-        <p>Help us with donation</p>
-    </div>
-    <div class="shang_payimg">
-        <div class="pay_img">
-            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
-            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
-        </div>
-    </div>
-    <div class="shang_payselect">
-        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
-    </div>
-</div>
-
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
-<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
-
-<script src="/js/script.js?v=1.1.0" ></script>
-<script>
-    var img_resize = 'default';
-    function initArticle() {
-        /*渲染对应的表格样式*/
-        
-            $("#post .pjax table").addClass("green_title");
-        
-
-        /*渲染打赏样式*/
-        
-        $("input[name=pay]").on("click", function () {
-            if($("input[name=pay]:checked").val()=="weixin"){
-                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
-            } else {
-                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
-            }
-        })
-        
-
-        /*高亮代码块行号*/
-        
-        $('pre code').each(function(){
-            var lines = $(this).text().trim().split('\n').length, widther='';
-            if (lines>99) {
-                widther = 'widther'
-            }
-            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
-            $(this).addClass('has-numbering ' + widther)
-                    .parent()
-                    .append($numbering);
-            for(var i=1;i<=lines;i++){
-                $numbering.append($('<li/>').text(i));
-            }
-        });
-        
-
-        /*访问数量*/
-        
-        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
-        
-
-        /*代码高亮，行号对齐*/
-        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
-
-        
-        
-        /* 渲染*/
-        function HTMLDecode(text) {
-            var temp = document.createElement("div");
-            temp.innerHTML = text;
-            var output = temp.innerText || temp.textContent;
-            temp = null;
-            return output;
-        }
-        if (window.mermaid){
-            window.mermaid = null
-        }
-        $.getScript("//cdn.jsdelivr.net/npm/mermaid@8.4.2/dist/mermaid.min.js", function () {
-            var mermaidOptions = JSON.parse(HTMLDecode("{&#34;theme&#34;:&#34;default&#34;,&#34;startOnLoad&#34;:true,&#34;flowchart&#34;:{&#34;useMaxWidth&#34;:false,&#34;htmlLabels&#34;:true}}"))
-            if (window.mermaid) {
-                mermaid.initialize(mermaidOptions)
-                mermaid.contentLoaded()
-            }
-        })
-        
-    }
-
-    /*打赏页面隐藏与展示*/
-    
-    function dashangToggle() {
-        $(".shang_box").fadeToggle();
-        $(".hide_box").fadeToggle();
-    }
-    
-
-</script>
-
-<!--加入行号的高亮代码块样式-->
-
-<style>
-    pre{
-        position: relative;
-        margin-bottom: 24px;
-        border-radius: 10px;
-        border: 1px solid #e2dede;
-        background: #FFF;
-        overflow: hidden;
-    }
-    code.has-numbering{
-        margin-left: 30px;
-    }
-    code.has-numbering.widther{
-        margin-left: 35px;
-    }
-    .pre-numbering{
-        margin: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        padding: 0.5em 3px 0.7em 5px;
-        border-right: 1px solid #C3CCD0;
-        text-align: right;
-        color: #AAA;
-        background-color: ;
-    }
-    .pre-numbering.widther {
-        width: 35px;
-    }
-</style>
-
-<!--自定义样式设置-->
-<style>
-    
-    
-    .nav {
-        width: 582px;
-    }
-    .nav.fullscreen {
-        margin-left: -582px;
-    }
-    .nav-left {
-        width: 160px;
-    }
-    
-    
-    @media screen and (max-width: 1468px) {
-        .nav {
-            width: 492px;
-        }
-        .nav.fullscreen {
-            margin-left: -492px;
-        }
-        .nav-left {
-            width: 100px;
-        }
-    }
-    
-    
-    @media screen and (max-width: 1024px) {
-        .nav {
-            width: 492px;
-            margin-left: -492px
-        }
-        .nav.fullscreen {
-            margin-left: 0;
-        }
-    }
-    
-    @media screen and (max-width: 426px) {
-        .nav {
-            width: 100%;
-        }
-        .nav-left {
-            width: 100%;
-        }
-    }
-    
-    
-    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
-        color: #383636;
-    }
-    
-    
-    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
-        color: #5e5e5f;
-    }
-    
-    
-    .nav-right nav a.hover, #local-search-result a.hover{
-        background-color: #e2e0e0;
-    }
-    
-    
-
-    /*列表样式*/
-    
-    #post .pjax article .article-entry>ol, #post .pjax article .article-entry>ul, #post .pjax article>ol, #post .pjax article>ul{
-        border: #e2dede solid 1px;
-        border-radius: 10px;
-        padding: 10px 32px 10px 56px;
-    }
-    #post .pjax article .article-entry li>ol, #post .pjax article .article-entry li>ul,#post .pjax article li>ol, #post .pjax article li>ul{
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    #post .pjax article .article-entry>ol>li, #post .pjax article .article-entry>ul>li,#post .pjax article>ol>li, #post .pjax article>ul>li{
-        margin-bottom: auto;
-        margin-left: auto;
-    }
-    #post .pjax article .article-entry li>ol>li, #post .pjax article .article-entry li>ul>li,#post .pjax article li>ol>li, #post .pjax article li>ul>li{
-        margin-bottom: auto;
-        margin-left: auto;
-    }
-    
-
-    /* 背景图样式 */
-    
-    #post {
-        background: url(/img/bg.jpeg);
-    }
-    
-    
-
-
-    /*引用块样式*/
-    
-
-    /*文章列表背景图*/
-    
-    .nav-right:before {
-        content: ' ';
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0.3;
-        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
-        background-repeat: no-repeat;
-        background-position: 50% 0;
-        -ms-background-size: cover;
-        -o-background-size: cover;
-        -moz-background-size: cover;
-        -webkit-background-size: cover;
-        background-size: cover;
-    }
-    
-
-    
-</style>
-
-
-
-
-
-
-
-</html>
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":250,"height":500},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
