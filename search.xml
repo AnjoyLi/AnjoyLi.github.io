@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>baymax</title>
+      <link href="/2021/09/13/baymax/"/>
+      <url>/2021/09/13/baymax/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Baymax机器人使用说明"><a href="#Baymax机器人使用说明" class="headerlink" title="Baymax机器人使用说明"></a>Baymax机器人使用说明</h1><p><code>Baymax</code>是一个事件响应型机器人，可响应群聊消息、好友私信消息，由<a href="https://github.com/mamoe/mirai">mirai</a>强力驱动，自动化消息处理部分由python语言完成。</p><h1 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h1><p>bot的功能分为响应、定时、广播等<br>指令格式：<code>[ ]</code>为可选参数，<code>&lt; &gt;</code>为必选参数，<code>|</code>为或逻辑，<code>@</code>为在群内at特定的人<br><strong>注：以上指示符实际使用不需要包含！</strong></p><h2 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h2><p>一些网络用语缩写的可能解释</p><ul><li><p>指令</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;缩写&gt; yyds</span><br><span class="line"><span class="string">&#x27;缩写\s*[A-Za-z0-9]+&#x27;</span></span><br></pre></td></tr></table></figure></li></ul><p><img src="缩写.png" alt=""></p><h2 id="B站视频解析"><a href="#B站视频解析" class="headerlink" title="B站视频解析"></a>B站视频解析</h2><p>用于解析关于<a href="https://www.bilibili.com/">B站</a>的特定消息</p><div class="table-container"><table><thead><tr><th style="text-align:left">类型</th><th style="text-align:left">解析内容</th></tr></thead><tbody><tr><td style="text-align:left">b23短链接（<del>小程序分享</del>/客户端分享）</td><td style="text-align:left">进一步解析以下重定向的内容</td></tr><tr><td style="text-align:left">av/bv号/视频链接/视频分享卡片</td><td style="text-align:left">标题、封面、UP主、TAG、合作成员、简介、互动数据等</td></tr><tr><td style="text-align:left"><del>用户空间链接/UID:xxx</del></td><td style="text-align:left"><del>用户头像、昵称、等级、性别、粉丝数等</del></td></tr><tr><td style="text-align:left"><del>直播链接</del></td><td style="text-align:left"><del>尚未完工</del></td></tr><tr><td style="text-align:left"><del>动态链接</del></td><td style="text-align:left"><del>尚未完工</del></td></tr><tr><td style="text-align:left"><del>专栏链接/cv号</del></td><td style="text-align:left"><del>尚未完工</del></td></tr><tr><td style="text-align:left"><del>音频链接/au号</del></td><td style="text-align:left"><del>尚未完工</del></td></tr><tr><td style="text-align:left"><del>ep/ss/md号/番剧/影视链接</del></td><td style="text-align:left"><del>尚未完工</del></td></tr></tbody></table></div><p><img src="B站解析.png" alt=""></p><h2 id="B站热榜"><a href="#B站热榜" class="headerlink" title="B站热榜"></a>B站热榜</h2><p>按照分区来获取B站热榜数据(前50)</p><ul><li><p>命令</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;bilihot&gt; &lt;region&gt;</span><br><span class="line"><span class="string">&#x27;bilihot\s*[0-9]+&#x27;</span></span><br></pre></td></tr></table></figure></li></ul><p>获取B站分区对应的code</p><ul><li><p>命令</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;bili region&gt;</span><br><span class="line"><span class="string">&#x27;bili\s*region&#x27;</span></span><br></pre></td></tr></table></figure><p><img src="B站分区.png" alt=""></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 捣鼓捣鼓 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> qqbot </tag>
+            
+            <tag> python </tag>
+            
+            <tag> 帮助文档 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Nginx入门及配置</title>
       <link href="/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/"/>
       <url>/2021/02/17/Nginx%E5%85%A5%E9%97%A8%E5%8F%8A%E9%85%8D%E7%BD%AE/</url>
