@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>初尝树莓派 | AnjoyのBlog</title><meta name="keywords" content="硬件,装机"><meta name="author" content="Anjoy"><meta name="copyright" content="Anjoy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="初尝树莓派说明  因为疫情封校期间时间过于充裕，于是乎选择吃个树莓派来丰富一下自己。作为一个第一次接触硬件的小白，选择树莓派的原因是社区资源较丰富，遇到bug能在网上找到思路。 准备（小白的贫穷装机   64GB micro sd卡 读卡器 树莓派4B 4G 手机充电器（15w） 5寸触控屏 3000MA UPS锂电池 风扇 摄像头 …  选择树莓派系统镜像，烧录下载镜像我选择的是ubuntu20">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初尝树莓派">
+<meta property="og:url" content="https://blog.anjoy.top/2022/05/01/%E5%88%9D%E5%B0%9D%E6%A0%91%E8%8E%93%E6%B4%BE/index.html">
+<meta property="og:site_name" content="AnjoyのBlog">
+<meta property="og:description" content="初尝树莓派说明  因为疫情封校期间时间过于充裕，于是乎选择吃个树莓派来丰富一下自己。作为一个第一次接触硬件的小白，选择树莓派的原因是社区资源较丰富，遇到bug能在网上找到思路。 准备（小白的贫穷装机   64GB micro sd卡 读卡器 树莓派4B 4G 手机充电器（15w） 5寸触控屏 3000MA UPS锂电池 风扇 摄像头 …  选择树莓派系统镜像，烧录下载镜像我选择的是ubuntu20">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/01/Qc8LB3t2E4CWyje.jpg">
+<meta property="article:published_time" content="2022-05-01T05:30:48.000Z">
+<meta property="article:modified_time" content="2022-05-04T14:41:56.833Z">
+<meta property="article:author" content="Anjoy">
+<meta property="article:tag" content="硬件">
+<meta property="article:tag" content="装机">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/01/Qc8LB3t2E4CWyje.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://blog.anjoy.top/2022/05/01/%E5%88%9D%E5%B0%9D%E6%A0%91%E8%8E%93%E6%B4%BE/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/img/pwa/manifest.json"/><link rel="apple-touch-icon" sizes="180x180" href="/img/pwa/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/pwa/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/pwa/16.png"/><link rel="mask-icon" href="/img/pwa/safari-pinned-tab.svg" color="#5bbad5"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Anjoy","link":"链接: ","source":"来源: AnjoyのBlog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '初尝树莓派',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-04 22:41:56'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta itemprop="name" content="Baymax的使用说明"/><meta itemprop="image" content="https://blog.anjoy.top/img/back.jpg" /><meta name="description" itemprop="description" content="AnjoyのBlog" /><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">42</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> Album</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/05/01/Qc8LB3t2E4CWyje.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AnjoyのBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-images"></i><span> Album</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">初尝树莓派</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-01T05:30:48.000Z" title="发表于 2022-05-01 13:30:48">2022-05-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-04T14:41:56.833Z" title="更新于 2022-05-04 22:41:56">2022-05-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8D%A3%E9%BC%93%E6%8D%A3%E9%BC%93/">捣鼓捣鼓</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="初尝树莓派"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="初尝树莓派"><a href="#初尝树莓派" class="headerlink" title="初尝树莓派"></a>初尝树莓派</h1><div class="note blue icon flat"><i class="note-icon fas fa-bullhorn"></i><p>说明</p>
+</div>
+<p>因为疫情封校期间时间过于充裕，于是乎选择吃个树莓派来丰富一下自己。作为一个第一次接触硬件的小白，选择树莓派的原因是社区资源较丰富，遇到bug能在网上找到思路。</p>
+<div class="note green icon flat"><i class="note-icon fas fa-bullhorn"></i><p>准备（小白的贫穷装机</p>
+</div>
+<ul>
+<li>64GB micro sd卡</li>
+<li>读卡器</li>
+<li>树莓派4B 4G</li>
+<li>手机充电器（15w）</li>
+<li>5寸触控屏</li>
+<li>3000MA UPS锂电池</li>
+<li>风扇</li>
+<li>摄像头</li>
+<li>…</li>
+</ul>
+<h2 id="选择树莓派系统镜像，烧录"><a href="#选择树莓派系统镜像，烧录" class="headerlink" title="选择树莓派系统镜像，烧录"></a>选择树莓派系统镜像，烧录</h2><h3 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h3><p>我选择的是ubuntu20.04，至于原因(就是centos用腻了，一直想着试试Ubuntu)</p>
+<p>选择下载<a target="_blank" rel="noopener" href="http://cdimage.ubuntu.com/ubuntu/releases/20.04/release/">ubuntu官方镜像</a>，也可以直接在Raspberry Pi Imager中选择烧录顺便下载，但速度肯定是偏慢的了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="preinstall.png" alt=""></p>
+<h3 id="格式化SD卡，并烧录"><a href="#格式化SD卡，并烧录" class="headerlink" title="格式化SD卡，并烧录"></a>格式化SD卡，并烧录</h3><p>把准备好的SD卡插入读卡器，使用SD卡格式化工具PanasonicSD 格式化。</p>
+<p>在官网下载烧录软件<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a></p>
+<p>安装 Raspberry Pi Imager后，插入Mirco SD卡，在选择操作系统(Operating System) —&gt; 使用自定义镜像(Use custom) 选择刚才下载好的镜像文件，然后在 选择SD卡(CHOOSE SD CARD)中选择对应的 SD 卡，最后点击烧录(WRITE)。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="imager.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="imager2.png" alt=""></p>
+<h2 id="开启ssh和配置WIFI"><a href="#开启ssh和配置WIFI" class="headerlink" title="开启ssh和配置WIFI"></a>开启ssh和配置WIFI</h2><p><strong>背景：</strong>校内使用校园网，没有路由器和网线的情况下就用电脑开启热点，然后找到树莓派连接后的ip再进行ssh连接。</p>
+<p>没有HDMI线连接屏幕，触控屏也是再安装桌面的包后才有画面</p>
+<h3 id="开启ssh"><a href="#开启ssh" class="headerlink" title="开启ssh"></a>开启ssh</h3><p>再烧录好的SD卡中的system-boot分区根目录下，创建ssh文件<strong>(无内容无后缀)</strong></p>
+<h3 id="配置WIFI"><a href="#配置WIFI" class="headerlink" title="配置WIFI"></a>配置WIFI</h3><p>在根目录下有个network-config的文件，这个是烧录ubuntu后自带的网络配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">version: 2</span><br><span class="line">ethernets:</span><br><span class="line">	eth0:</span><br><span class="line">		dhcp4: true</span><br><span class="line">		optional: true</span><br><span class="line">wifis:</span><br><span class="line">	wlan0:</span><br><span class="line">		dhcp4: true</span><br><span class="line">		optional: true</span><br><span class="line">		access-points:</span><br><span class="line">			my_hotpot_name: #填开启的热点名</span><br><span class="line">				password: &quot;hotpot_passwd&quot; #密码</span><br></pre></td></tr></table></figure>
+<font color=red>注意：wifi名字中带有空格则需要加上引号</font>
+
+<p><strong>配置完成后，现在可以拔出SD卡，插入树莓派，然后正常上电开机了。</strong></p>
+<h2 id="使用配置"><a href="#使用配置" class="headerlink" title="使用配置"></a>使用配置</h2><p>在烧录好后，着手开始进行一些配置。</p>
+<h3 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h3><p>第一步先进性远程连接的配置，这样可以更方便敲代码（ctrl cv)。</p>
+<p>在学校没有路由器，于是用电脑开启热点连接，如图为win10移动热点的信息，可以查到树莓派的内网ip。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="hotpot.png" alt=""></p>
+<p>通过内网ip用xshell连接，输入用户名密码登录就可以远程操作终端了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="xshell.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="xshell2.png" alt=""></p>
+<h3 id="换国内源"><a href="#换国内源" class="headerlink" title="换国内源"></a>换国内源</h3><p>装好系统之后自带的源下载很慢，因此为了后续方便，第二步进行换源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<p>清华源如下，也可以自行搜索使用中科院阿里的源。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span><span class="bash"> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-updates main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span><span class="bash"> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-updates main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-backports main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span><span class="bash"> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-backports main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span><span class="bash"> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-security main restricted universe multiverse</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 预发布软件源，不建议启用</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-proposed main restricted universe multiverse</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu-ports/ focal-proposed main restricted universe multiverse</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>更新操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+<p>安装桌面环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ubuntu-desktop</span><br><span class="line">sudo apt install xrdp</span><br><span class="line"><span class="meta">#</span><span class="bash">重启</span></span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
+<p>可以连接触控屏查看或远程桌面（vnc,windows自带的也可）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="screen.jpg" alt=""></p>
+<h3 id="开启蓝牙"><a href="#开启蓝牙" class="headerlink" title="开启蓝牙"></a>开启蓝牙</h3><p>刚好有一个闲置的折叠蓝牙小键盘，于是用树莓派连接一下</p>
+<p>安装bluetoothctl</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install pi-bluetooth</span><br></pre></td></tr></table></figure>
+<p>输入命令，超时则重试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo hciattach /dev/ttyAMA0 bcm43xx 921600 noflow -</span><br></pre></td></tr></table></figure>
+<p>进入bluetoothctl</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo bluethctl</span><br></pre></td></tr></table></figure>
+<p>开启蓝牙</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">power on</span><br></pre></td></tr></table></figure>
+<p>可被发现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">discoverable on</span><br></pre></td></tr></table></figure>
+<p>搜索设备开启/关闭</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scan on/off</span><br></pre></td></tr></table></figure>
+<p>连接设备</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">首次配对 MAC地址</span></span><br><span class="line">pair [XX:XX:XX:XX:XX:XX]</span><br><span class="line"><span class="meta">#</span><span class="bash">重连</span></span><br><span class="line">connect [XX:XX:XX:XX:XX:XX]</span><br><span class="line"><span class="meta">#</span><span class="bash">信任</span></span><br><span class="line">trust [XX:XX:XX:XX:XX:XX]</span><br></pre></td></tr></table></figure>
+<p>也可直接从桌面版上开启链接（</p>
+<h3 id="更改wifi"><a href="#更改wifi" class="headerlink" title="更改wifi"></a>更改wifi</h3><p>从上面初始化修改network-config文件连接wifi后，登录桌面版打开WiFi会发现搜索不到其他WiFi，一开始以为是WiFi驱动的原因，但是可以连上电脑开启的热点，所以排除，最终判断是network-config文件的锅。</p>
+<p>修改WiFi配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/netplan/50-cloud-init.yaml</span><br></pre></td></tr></table></figure>
+<p>注释掉之前添加的即可</p>
+<h2 id="加UPS电源"><a href="#加UPS电源" class="headerlink" title="加UPS电源"></a>加UPS电源</h2><h2 id="自制小机箱"><a href="#自制小机箱" class="headerlink" title="自制小机箱"></a>自制小机箱</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="demo.gif" alt=""></p>
+<p>待续…</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Anjoy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.anjoy.top/2022/05/01/%E5%88%9D%E5%B0%9D%E6%A0%91%E8%8E%93%E6%B4%BE/">https://blog.anjoy.top/2022/05/01/%E5%88%9D%E5%B0%9D%E6%A0%91%E8%8E%93%E6%B4%BE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.anjoy.top" target="_blank">AnjoyのBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a><a class="post-meta__tags" href="/tags/%E8%A3%85%E6%9C%BA/">装机</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/05/01/Qc8LB3t2E4CWyje.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/09/13/baymax/"><img class="next-cover" src="https://i.loli.net/2021/09/14/9ATkrOIxv63iXM5.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">baymax</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81MzQzNS8yOTkwOQ=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E5%B0%9D%E6%A0%91%E8%8E%93%E6%B4%BE"><span class="toc-number">1.</span> <span class="toc-text">初尝树莓派</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%89%E6%8B%A9%E6%A0%91%E8%8E%93%E6%B4%BE%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%EF%BC%8C%E7%83%A7%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">选择树莓派系统镜像，烧录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E9%95%9C%E5%83%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">下载镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96SD%E5%8D%A1%EF%BC%8C%E5%B9%B6%E7%83%A7%E5%BD%95"><span class="toc-number">1.1.2.</span> <span class="toc-text">格式化SD卡，并烧录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%90%AFssh%E5%92%8C%E9%85%8D%E7%BD%AEWIFI"><span class="toc-number">1.2.</span> <span class="toc-text">开启ssh和配置WIFI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AFssh"><span class="toc-number">1.2.1.</span> <span class="toc-text">开启ssh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEWIFI"><span class="toc-number">1.2.2.</span> <span class="toc-text">配置WIFI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">使用配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.3.1.</span> <span class="toc-text">远程连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%A2%E5%9B%BD%E5%86%85%E6%BA%90"><span class="toc-number">1.3.2.</span> <span class="toc-text">换国内源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%90%AF%E8%93%9D%E7%89%99"><span class="toc-number">1.3.3.</span> <span class="toc-text">开启蓝牙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9wifi"><span class="toc-number">1.3.4.</span> <span class="toc-text">更改wifi</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0UPS%E7%94%B5%E6%BA%90"><span class="toc-number">1.4.</span> <span class="toc-text">加UPS电源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%88%B6%E5%B0%8F%E6%9C%BA%E7%AE%B1"><span class="toc-number">1.5.</span> <span class="toc-text">自制小机箱</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://s2.loli.net/2022/05/01/Qc8LB3t2E4CWyje.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Anjoy</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadLivere () {
+  if (typeof LivereTower === 'object') {
+    window.LivereTower.init()
+  }
+  else {
+    (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  }
+}
+
+if ('Livere' === 'Livere' || !false) {
+  if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+  else loadLivere()
+}
+else {
+  function loadOtherComment () {
+    loadLivere()
+  }
+}</script></div><canvas class="fireworks" mobile="true"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":130,"height":200},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
