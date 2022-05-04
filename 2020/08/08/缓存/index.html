@@ -180,7 +180,7 @@
 <p>4、测试</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testQueryUserById</span><span class="params">()</span></span>&#123;</span><br><span class="line">   SqlSession session = MybatisUtils.getSession();</span><br><span class="line">   UserMapper mapper = session.getMapper(UserMapper.class);</span><br><span class="line"></span><br><span class="line">   User user = mapper.queryUserById(<span class="number">1</span>);</span><br><span class="line">   System.out.println(user);</span><br><span class="line">   User user2 = mapper.queryUserById(<span class="number">1</span>);</span><br><span class="line">   System.out.println(user2);</span><br><span class="line">   System.out.println(user==user2);</span><br><span class="line"></span><br><span class="line">   session.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>5、结果分析</p>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="结果分析.jpg" alt="结果分析"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="结果分析.jpg" alt="结果分析"></p>
 <h3 id="一级缓存失效的四种情况"><a href="#一级缓存失效的四种情况" class="headerlink" title="一级缓存失效的四种情况"></a>一级缓存失效的四种情况</h3><p>一级缓存是SqlSession级别的缓存，是一直开启的，我们关闭不了它；</p>
 <p>一级缓存失效情况：没有使用到当前的一级缓存，效果就是，还需要再向数据库中发起一次查询请求！</p>
 <p>1、sqlSession不同</p>
@@ -233,8 +233,8 @@
 <li>查出的数据都会被默认先放在一级缓存中</li>
 <li>只有会话提交或者关闭以后，一级缓存中的数据才会转到二级缓存中</li>
 </ul>
-<h2 id="缓存原理图"><a href="#缓存原理图" class="headerlink" title="缓存原理图"></a>缓存原理图</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="缓存原理图.jpg" alt="缓存原理图"></p>
-<h2 id="EhCache"><a href="#EhCache" class="headerlink" title="EhCache"></a>EhCache</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="EnCache.jpg" alt="EnCache"></p>
+<h2 id="缓存原理图"><a href="#缓存原理图" class="headerlink" title="缓存原理图"></a>缓存原理图</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="缓存原理图.jpg" alt="缓存原理图"></p>
+<h2 id="EhCache"><a href="#EhCache" class="headerlink" title="EhCache"></a>EhCache</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="EnCache.jpg" alt="EnCache"></p>
 <p>第三方缓存实现—<strong>EhCache</strong></p>
 <p>Ehcache是一种广泛使用的java分布式缓存，用于通用缓存；</p>
 <p>要在应用程序中使用Ehcache，需要引入依赖的jar包</p>

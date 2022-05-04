@@ -196,7 +196,7 @@
 <p>2、后台编写对应的处理类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Encoding</span> </span>&#123;</span><br><span class="line">   <span class="meta">@RequestMapping(&quot;/e/t&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">(Model model,String name)</span></span>&#123;</span><br><span class="line">       model.addAttribute(<span class="string">&quot;msg&quot;</span>,name); <span class="comment">//获取表单提交的值</span></span><br><span class="line">       <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>; <span class="comment">//跳转到test页面显示输入的值</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>3、输入<strong>中文</strong>测试，发现<strong>乱码</strong></p>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="测试1.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="测试1.png" alt=""></p>
 <p>乱码问题是在我们开发中十分常见的问题</p>
 <p>以前乱码问题通过过滤器解决 , 而SpringMVC给我们提供了一个过滤器 , 可以在web.xml中配置 .</p>
 <p>修改了xml文件需要重启服务器！</p>

@@ -149,27 +149,27 @@
 <h3 id="Nginx作用"><a href="#Nginx作用" class="headerlink" title="Nginx作用"></a>Nginx作用</h3><h4 id="Http代理"><a href="#Http代理" class="headerlink" title="Http代理"></a>Http代理</h4><blockquote>
 <p>正向代理</p>
 </blockquote>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="正向代理.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="正向代理.png" alt=""></p>
 <blockquote>
 <p>反向代理</p>
 </blockquote>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="反向代理.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="反向代理.png" alt=""></p>
 <h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p>Nginx提供的负载均衡策略有2种：<font color = red>内置策略和扩展策略</font>。内置策略为轮询，加权轮询，Ip hash。扩展策略，就天马行空，只有你想不到的没有他做不到的。</p>
 <blockquote>
 <p>轮询</p>
 </blockquote>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="负载均衡-轮询.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="负载均衡-轮询.png" alt=""></p>
 <blockquote>
 <p>加权轮询</p>
 </blockquote>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="负载均衡-加权轮询.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="负载均衡-加权轮询.png" alt=""></p>
 <blockquote>
 <p>Ip hash</p>
 </blockquote>
 <p>对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。</p>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="负载均衡-Iphash.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="负载均衡-Iphash.png" alt=""></p>
 <h4 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h4><p>在软件开发中，有些请求是需要后台处理的，有些请求是不需要经过后台处理的（如：css、html、jpg、js等等文件），这些不需要经过后台处理的文件称为<font color = red>静态文件</font>。让动态网站里的动态网页<font color = red>根据一定规则把不变的资源和经常变的资源区分开来</font>，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作。<font color = red>提高资源响应的速度</font>。</p>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="动静分离.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="动静分离.png" alt=""></p>
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><ul>
 <li><p>主配置文件：/…/nginx/conf/nginx.conf</p>
 </li>
@@ -379,7 +379,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location /status &#123;		##URI不唯一</span><br><span class="line"> 	stub_status on；</span><br><span class="line"> 	allow 192.168.91.129/32;		##允许查看的地址</span><br><span class="line"> 	deny all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>访问状态页面方式：<a target="_blank" rel="noopener" href="http://服务器IP/status">http://服务器IP/status</a></p>
-<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="状态页面.png" alt=""></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="状态页面.png" alt=""></p>
 </li>
 <li><p>状态页面信息详解，如下表：</p>
 </li>
